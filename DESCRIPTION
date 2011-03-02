@@ -3,7 +3,7 @@ Package: RVAideMemoire
 Type: Package
 Title: Fonctions diverses accompagnant l'ouvrage 'Aide-memoire de
         statistique appliquee a la biologie'
-Version: 0.9
+Version: 0.9.1
 Date: 2011-03-02
 Author: Maxime Hervé
 Maintainer: Maxime Hervé <maxime.herve@laposte.net>
@@ -15,6 +15,6 @@ Description: Ce package contient des fonctions à buts diverses, plus ou
         disponible sur le CRAN.
 License: GPL-2
 LazyLoad: yes
-Packaged: 2011-03-12 17:17:07 UTC; Maxime
+Packaged: 2011-03-14 09:55:52 UTC; Maxime
 Repository: CRAN
-Date/Publication: 2011-03-14 08:37:54
+Date/Publication: 2011-03-14 10:29:00
