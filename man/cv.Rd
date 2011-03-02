@@ -1,31 +1,33 @@
 \name{cv}
 \alias{cv}
 \title{
-Coefficient of variation
+Coefficient de variation
 }
 \description{
-Compute the coefficient of variation of a vector.
+Renvoie le coefficient de variation d'une série de données.
 }
 \usage{
-cv(x, abs = TRUE, pc = TRUE)
+cv(var, abs = TRUE, pc = TRUE)
 }
 \arguments{
-  \item{x}{
-numeric vector.
+  \item{var}{
+série de données.
 }
   \item{abs}{
-logical. If \code{TRUE} the coefficient is expressed in absolute value.
+logique : coefficient exprimé en valeur absolue ou non.
 }
   \item{pc}{
-logical. If \code{TRUE} the coefficient is expressed in percentage.
+logique : coefficient exprimé en pourcentage ou non (donc en proportion).
 }
-}
-\details{
-The function deals with missing values.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé
 }
 \examples{
-cv(rnorm(30))
+# Coefficient par defaut
+serie<-sample(1:30,20)
+cv(serie)
+
+# Coefficient en proportion
+cv(serie,pc=FALSE)
 }

@@ -1,12 +1,14 @@
 bootstrap <-
-function(x,fun,nrep=1000,conf.level=0.95,...){
-  simul <- boot(x,fun,R=nrep,...)
-  estimate <- simul$t0
-  names(estimate) <- "original value"
-  interval <- .ci(simul$t,conf.level=conf.level)
-  attr(interval,"conf.level") <- conf.level
-  dname <- paste(deparse(substitute(x)),"\n",nrep," replicates",sep="")
-  result <- list(method="Bootstrap",data.name=dname,estimate=estimate,conf.level=conf.level,rep=nrep,conf.int=interval)
-  class(result) <- "htest"
-  return(result)
+function(vect,fun,rep=1000,conf.level=0.95,arr=4,...){
+  simul<-boot(vect,fun,rep,...)
+  tri<-sort(simul$t)
+  int<-(1-conf.level)/2
+  if(rep*int<1) {
+    int.inf<-ceiling(rep*int)
+  } else {
+    int.inf<-floor(rep*int)
+  }
+  int.sup<-ceiling(rep*(1-int))
+  cat(paste("Intervalle de confiance à",100*conf.level,"%\n",round(tri[int.inf],arr),round(tri[int.sup],arr),"\n"))
 }
+

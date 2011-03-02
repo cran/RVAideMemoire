@@ -1,53 +1,52 @@
 \name{bootstrap}
 \alias{bootstrap}
 \title{
-Bootstrap
+  Bootstrap
 }
 \description{
-Simplified version of the \code{\link[boot]{boot}} function.
+Version simplifiée de la fonction \code{boot()} du package boot.
 }
 \usage{
-bootstrap(x, fun, nrep = 1000, conf.level = 0.95, ...)
+bootstrap(vect, fun, rep = 1000, conf.level = 0.95, arr = 4, ...)
 }
 \arguments{
-  \item{x}{
-numeric vector.
+  \item{vect}{
+série de données à partir de laquelle réaliser le calcul.
 }
   \item{fun}{
-function to be used for computation (\code{function(x,i) ...(x[i])}).
+fonction réalisant le calcul souhaité. Doit être de la forme \code{function(x,i) ...(x[i])}.
 }
-  \item{nrep}{
-number of replicates.
+  \item{rep}{
+nombre de répétitions du bootstrap.
 }
   \item{conf.level}{
-confidence level for confidence interval.
+intervalle de confiance souhaité
+}
+  \item{arr}{
+nombre de décimales affichées de l'intervalle de confiance renvoyé.
 }
   \item{\dots}{
-additional arguments to \code{\link[boot]{boot}}. See help of this function.
+arguments additionnels passés à la fonction \code{boot()}. Voir l'aide de cette fonction.
 }
 }
 \details{
-See help of the \code{\link[boot]{boot}} function for more explanations.
-}
-\value{
-  \item{method}{the character string \code{"Bootstrap"}}
-  \item{data.name}{a character string giving the name of the data.}
-  \item{estimate}{the estimated original value}
-  \item{conf.level}{confidence level for confidence interval.}
-  \item{rep}{number of replicates.}
-  \item{conf.int}{limits of the confidence interval.}
+L'argument utilisé dans l'expression à calculer doit être le même que le premier déclaré à \code{function} (ici \code{x}).  Cet argument doit être suivi du second déclaré à \code{function()} placé entre crochets. Celui-ci est par défaut \code{i} (voir l'aide de la fonction \code{boot()}).
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé
 }
 \seealso{
 \code{\link[boot]{boot}}
 }
 \examples{
-# Confidence interval of a mean
-samp <- sample(1:50,10,replace=TRUE)
-bootstrap(samp,function(x,i) mean(x[i]))
+# Intervalle de confiance a 95 pc d'une moyenne sur petit echantillon
+ech<-sample(1:50,10,replace=TRUE)
+bootstrap(ech,function(x,i) mean(x[i]))
 
-# Confidence interval of the standard error of the mean
-bootstrap(samp,function(x,i) sd(x[i])/sqrt(length(x[i])))
+# La meme chose avec un intervalle de confiance a 99 pc
+bootstrap(ech,function(x,i) mean(x[i]),conf.level=0.99)
+
+# Un calcul (un peu) plux complexe, l'intervalle de confiance de l'erreur standard
+# de la moyenne
+bootstrap(ech,function(x,i) sd(x[i])/sqrt(length(x[i])))
 }

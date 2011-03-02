@@ -4,28 +4,23 @@
 Mode
 }
 \description{
-Compute the mode of a vector. The function makes the difference between continuous and discontinuous variables (which are made up of integers only).
+Renvoie le mode d'une série de données.
 }
 \usage{
-mod(x)
+mod(var)
 }
 \arguments{
-  \item{x}{
-numeric vector.
+  \item{var}{
+série de données.
 }
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé
 }
 \seealso{
 \code{\link{density}}
 }
 \examples{
-# Continuous variable
-x <- rnorm(100)
-mod(x)
-
-# Discontinuous variable
-y <- rpois(100,2)
-mod(y)
+serie<-sample(1:50,30)
+mod(serie)
 }

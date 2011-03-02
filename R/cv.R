@@ -1,8 +1,8 @@
 cv <-
-function(x,abs=TRUE,pc=TRUE) {
-  result <- sd(x,na.rm=TRUE)/mean(x,na.rm=TRUE)
-  if (abs==TRUE) {result <- abs(result)}
-  if (pc==TRUE) {result <- 100*result}
-  return(result)
+function(var,abs=TRUE,pc=TRUE) {
+  coeff<-sd(var,na.rm=TRUE)/mean(var,na.rm=TRUE)
+  if (abs==TRUE) {coeff<-abs(coeff)}
+  if (pc==TRUE) {coeff<-100*coeff}
+  coeff
 }
 

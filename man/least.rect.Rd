@@ -1,57 +1,52 @@
 \name{least.rect}
 \alias{least.rect}
-\alias{print.least.rect}
 \title{
-Least rectangles linear regression
+Regression lineaire simple au sens des moindres rectangles
 }
 \description{
-Fit a least rectangle linear regression, possibly for each level of a factor.
+Renvoie un résumé d'une régression linéaire simple au sens des moindres rectangles, à la manière du résumé renvoyé par \code{summary(lm())} pour une régression au sens des moindres carrés.
 }
 \usage{
-least.rect(formula, data, conf.level = 0.95, theo = 1)
+least.rect(x, y, conf.level = 0.95, theo = 1, coeff.arr = 4, p.arr = 4)
 }
 \arguments{
-  \item{formula}{
-a formula of the form \code{y ~ x}, where \code{y} and \code{x} give the y and x variable, respectively. The formula can also be \code{y ~ x | f} to fit a (separate) regression for each level of the factor \code{f}.
+  \item{x}{
+1ère variable de la régression.
 }
-  \item{data}{
-an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
+  \item{y}{
+2ème variable de la régression.
 }
   \item{conf.level}{
-confidence level.
+intervalle de confiance des paramètres de la droite de régression.
 }
   \item{theo}{
-theoretical value of the slope. If several regression are fitted, the same value is used for all comparisons of slope vs. theoretical value.
+valeur théorique pour le test de conformité du coefficient directeur de la droite de régression.
+}
+  \item{coeff.arr}{
+nombre de décimales affichées pour les coefficients et leur intervalle de confiance.
+}
+  \item{p.arr}{
+nombre de décimales affichées pour les \emph{p-values} des tests réalisés.
 }
 }
-\value{
-  \item{coefficients}{regression parameters.}
-  \item{residuals}{residuals.}
-  \item{fitted.values}{fitted values.}
-  \item{call}{the matched call.}
-  \item{model}{the model frame used.}
-  \item{conf.level}{confidence level.}
-  \item{conf.int}{confidence interval of regression parameters.}
-  \item{theo}{theoretical value of the slope.}
-  \item{comp}{data frame of results for equality of the slope(s) to the theoretical value.}
-  \item{corr}{data frame of results for significativity of the correlation coefficient(s).}
-  \item{multiple}{logical, \code{TRUE} if several regressions are fitted.}
+\details{
+Les noms \code{x} et \code{y} n'ont qu'une valeur graphique (\code{x} : variable destinée à être tracée en abscisses ; \code{y} : variable destinée à être tracée en ordonnées).  Ils ne font pas référence à une variable explicative et une à expliquer.
+
+La fonction renvoie : l'équation de la droite de régression, l'intervalle de confiance des paramètres de la droite (coefficient directeur et ordonnée à l'origine), le résultat du test de conformité du coefficient directeur avec une valeur théorique choisie et enfin le coefficient de corrélation linéaire entre les deux variables, son intervalle de confiance et le résultat du test de significativité.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé
 }
 \seealso{
-\code{\link[RVAideMemoire]{summary.least.rect}}
+\code{\link{cor.test}}
 }
 \examples{
-x <- 1:30+rnorm(30,0,3)
-y <- 1:30+rnorm(30,0,3)
-regression1 <- least.rect(y~x)
-summary(regression1)
+# Resume par defaut
+x<-1:30+rnorm(30,0,3)
+y<-1:30+rnorm(30,0,3)
+least.rect(x,y)
 
-x2 <- c(1:30,1:30)
-y2 <- c(1:30+rnorm(30,0,3),seq(10,22,12/29)+rnorm(30,0,3))
-fact <- gl(2,30,labels=LETTERS[1:2])
-regression2 <- least.rect(y2~x2|fact)
-summary(regression2)
+# Conformite du coefficient directeur avec la valeur 0.5
+# et intervalles de confiance a 99 pc
+least.rect(x,y,conf.level=0.99,theo=0.5)
 }

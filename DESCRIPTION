@@ -1,18 +1,20 @@
 Encoding: latin1
 Package: RVAideMemoire
 Type: Package
-Title: Diverse basic statistical and graphical functions
-Version: 0.9-32
-Date: 2014-03-04
+Title: Fonctions diverses accompagnant l'ouvrage 'Aide-memoire de
+        statistique appliquee a la biologie'
+Version: 0.9
+Date: 2011-03-02
 Author: Maxime Hervé
-Maintainer: Maxime Hervé <mx.herve@gmail.com>
-Imports: ade4, boot, car, lme4 (>= 1.0-4), MASS, mixOmics (>= 4.1),
-        multcomp, statmod
-Suggests: lsmeans, survival
-Description: This package contains diverse more or less complicated functions, written to simplify user's life: simplifications of existing functions, basic but not implemented tests, easy-to-use tools, bridges between functions of different packages... All functions are presented in the French book 'Aide-memoire de statistique appliquee a la biologie', written by the same author and available on CRAN.
+Maintainer: Maxime Hervé <maxime.herve@laposte.net>
+Depends: ade4, boot, gtools, mgcv, statmod
+Description: Ce package contient des fonctions à buts diverses, plus ou
+        moins complexes, écrites pour simplifier la vie des débutants
+        en R. Elles sont présentées dans l'ouvrage ''Aide-mémoire de
+        statistique appliquée à la biologie'' du même auteur,
+        disponible sur le CRAN.
 License: GPL-2
 LazyLoad: yes
-Packaged: 2014-03-04 19:49:59 UTC; Maxime
-NeedsCompilation: no
+Packaged: 2011-03-12 17:17:07 UTC; Maxime
 Repository: CRAN
-Date/Publication: 2014-03-04 21:28:39
+Date/Publication: 2011-03-14 08:37:54

@@ -1,68 +1,56 @@
 \name{cor.multcomp}
 \alias{cor.multcomp}
 \title{
-Comparison of several Pearson's linear correlation coefficients
+Comparaison de plusieurs coefficients de correlation lineaire de Pearson
 }
 \description{
-Perform comparisons of several Pearson's linear correlation coefficients.
-If no difference, the function returns the common correlation coefficient, its confidence interval and test for its equality to a given value.
-If difference is significative, the functions performs pairwise comparisons between coefficients.
+Réalise le test de comparaison de plusieurs coefficients de corrélation linéaire de Pearson.  S'il n'existe aucune différence significative, la fonction renvoie la valeur du coefficient de corrélation commun, son intervalle de confiance et réalise le test de conformité avec une valeur théorique choisie.  Dans le cas contraire, la fonction réalise toutes les comparaisons deux-à-deux possibles.
 }
 \usage{
-cor.multcomp(var1, var2, fact, alpha = 0.05, conf.level = 0.95, theo = 0,
-  p.method = "fdr")
+cor.multcomp(var1, var2, fact, alpha = 0.05, conf.level = 0.95, r.arr = 4, theo = 0, p.method = "fdr", p.arr = 4)
 }
 \arguments{
   \item{var1}{
-numeric vector (first variable).
+1ère variable à corréler.
 }
   \item{var2}{
-numeric vector (second variable).
+2ème variable à corréler.
 }
   \item{fact}{
-factor (groups).
+facteur définissant les groupes à comparer.
 }
   \item{alpha}{
-significance level.
+seuil de significativité du test global.
 }
   \item{conf.level}{
-confidence level.
+intervalle de confiance du coefficient de corrélation commun.
+}
+  \item{r.arr}{
+nombre de décimales affichées des coefficients de corrélation.
 }
   \item{theo}{
-theoretical coefficient.
+valeur théorique du test de conformité du coefficient de corrélation commun.
 }
   \item{p.method}{
-method for p-values correction. See help of\code{\link{p.adjust}}.
+méthode de correction des \emph{p-values} pour les comparaisons multiples. Voir l'aide de la fonction \code{p.adjust()}.
 }
+  \item{p.arr}{
+nombre de décimales affichées des \emph{p-values} des tests réalisés.
 }
-\value{
-  \item{method.test}{a character string giving the name of the global test computed.}
-  \item{data.name}{a character string giving the name(s) of the data.}
-  \item{statistic}{test statistics.}
-  \item{parameter}{test degrees of freedom.}
-  \item{p.value}{p-value for comparison of the coefficients.}
-  \item{null.value}{the value of the difference in coefficients under the null hypothesis, always 0.}
-  \item{alternative}{a character string describing the alternative hypothesis.}
-  \item{estimate}{the estimated correlation coefficients.}
-  \item{alpha}{significance level.}
-  \item{conf.level}{confidence level.}
-  \item{p.adjust.method}{method for p-values correction.}
-  \item{p.value.multcomp}{data frame of pairwise comparisons result.}
-  \item{common.name}{a character string explaining the elements of the table below.}
-  \item{common}{data frame of results if the coefficients are not significantly different (common coefficient).}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé
 }
 \seealso{
-\code{\link{cor.test}}
+\code{\link{cor.test}}, \code{\link[gtools]{combinations}}, \code{\link{p.adjust}}
 }
 \examples{
-var1 <- c(1:15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
-var2 <- c(-1:-15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
-fact <- gl(3,15,labels=LETTERS[1:3])
-cor.multcomp(var1,var2,fact)
+# Test par defaut
+var1<-c(1:15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
+var2<-c(-1:-15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
+facteur<-as.factor(rep(LETTERS[1:3],each=15))
+cor.multcomp(var1,var2,facteur)
 
-var3 <- c(1:15+rnorm(15,0,1),1:15+rnorm(15,0,3),1:15+rnorm(15,0,2))
-cor.multcomp(var1,var3,fact)
+# Correction des p-values avec la methode de Bonferroni
+cor.multcomp(var1,var2,facteur,p.method="bonferroni")
 }

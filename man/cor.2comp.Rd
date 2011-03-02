@@ -1,60 +1,58 @@
 \name{cor.2comp}
 \alias{cor.2comp}
 \title{
-Comparison of 2 Pearson's linear correlation coefficients
+Comparaison de 2 coefficients de correlation lineaire de Pearson
 }
 \description{
-Perform the test for equality of 2 Pearson's correlation coefficients. If the difference is not significative, the function returns the common coefficient, its confidence interval and performs the test for equality to a given value.
+Réalise le test de comparaison de 2 coefficients de corrélation linéaire de Pearson.  Si la différence n'est pas significative, la fonction renvoie la valeur du coefficient de corrélation commun, son intervalle de confiance et le résultat du test de conformité avec une valeur théorique choisie.
 }
 \usage{
-cor.2comp(var1, var2, var3, var4, alpha = 0.05, conf.level = 0.95, theo = 0)
+cor.2comp(var1, var2, var3, var4, alpha = 0.05, conf.level = 0.95, r.arr = 4, theo = 0, p.arr = 4)
 }
 \arguments{
   \item{var1}{
-numeric vector (first variable of the first correlation).
+1ère variable définissant la 1ère corrélation.
 }
   \item{var2}{
-numeric vector (second variable of the first correlation).
+2ème variable définissant la 1ère corrélation.
 }
   \item{var3}{
-numeric vector (first variable of the second correlation).
+1ère variable définissant la 2ème corrélation.
 }
   \item{var4}{
-numeric vector (second variable of the second correlation).
+2ème variable définissant la 2ème corrélation.
 }
   \item{alpha}{
-significance level.
+seuil de significativité du test de comparaison des 2 coefficients de corrélation.
 }
   \item{conf.level}{
-confidence level.
+intervalle de confiance du coefficient de corrélation commun.
+}
+  \item{r.arr}{
+nombre de décimales affichées des coefficients de corrélation.
 }
   \item{theo}{
-theoretical coefficient.
+valeur théorique pour le test de conformité du coefficient de corrélation commun.
 }
+  \item{p.arr}{
+nombre de décimales affichées des \emph{p-values} des tests réalisés.
 }
-\value{
-  \item{method.test}{a character string giving the name of the global test computed.}
-  \item{data.name}{a character string giving the name(s) of the data.}
-  \item{statistic}{test statistics.}
-  \item{p.value}{p-value for comparison of the 2 coefficients.}
-  \item{null.value}{the value of the difference in coefficients under the null hypothesis, always 0.}
-  \item{alternative}{a character string describing the alternative hypothesis.}
-  \item{estimate}{the estimated correlation coefficients.}
-  \item{alpha}{significance level.}
-  \item{conf.level}{confidence level.}
-  \item{common.name}{a character string explaining the elements of the table below.}
-  \item{common}{data frame of results if the coefficients are not significantly different (common coefficient).}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé
 }
 \seealso{
 \code{\link{cor.test}}
 }
 \examples{
-cor1.var1 <- 1:30+rnorm(30,0,2)
-cor1.var2 <- 1:30+rnorm(30,0,3)
-cor2.var1 <- (-1):-30+rnorm(30,0,2)
-cor2.var2 <- (-1):-30+rnorm(30,0,3)
+# Test par defaut
+cor1.var1<-1:30+rnorm(30,0,2)
+cor1.var2<-1:30+rnorm(30,0,3)
+cor2.var1<--1:-30+rnorm(30,0,2)
+cor2.var2<--1:-30+rnorm(30,0,3)
 cor.2comp(cor1.var1,cor1.var2,cor2.var1,cor2.var2)
+
+# Seuil de significativite a 3 pc et conformite du coefficient de correlation commun
+# avec la valeur 0.5
+ cor.2comp(cor1.var1,cor1.var2,cor2.var1,cor2.var2,alpha=0.03,theo=0.5)
 }

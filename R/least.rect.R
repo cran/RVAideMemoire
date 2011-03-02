@@ -1,104 +1,37 @@
 least.rect <-
-function(formula,data,conf.level=0.95,theo=1){
-  if (missing(formula)) {stop("missing formula")}
-  if (length(formula[[3]])==3) {
-    if (formula[[3]][[1]]!=as.name("|")) {
-	stop("incorrect formula")
-    } else {
-	formula[[3]][[1]] <- as.name("+")
-    }
-  }
-  m <- match.call()
-  m$formula <- formula
-  if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
-  m[[1]] <- as.name("model.frame")
-  m$conf.level <- m$theo <- NULL
-  mf <- na.omit(eval(m,parent.frame()))
-  dname <- names(mf)
-  lr <- function(x,y,conf.level=conf.level,theo=theo) {
-    corr <- cor.test(x,y,method="pearson",conf.level=conf.level)
-    r <- as.numeric(corr$estimate)
-    k <- qt((1+conf.level)/2,length(x)-2)^2*(1-r^2)/(length(x)-2)
-    b <- sd(y)/sd(x)*sign(cov(x,y))
-    b.ci1 <- b*sqrt(1+2*k-sqrt((1+2*k)^2-1))
-    b.ci2 <- b*sqrt(1+2*k+sqrt((1+2*k)^2-1))
-    b.inf <- min(b.ci1,b.ci2)
-    b.sup <- max(b.ci1,b.ci2)
-    a <- mean(y)-b*mean(x)
-    a.inf <- mean(y)-b.sup*mean(x)
-    a.sup <- mean(y)-b.inf*mean(x)
-    t.obs <- abs(b^2-theo^2)*sqrt(length(x)-2)/(2*b*theo*sqrt(1-r^2))
-    p <- min(pt(t.obs,length(x)-2),pt(t.obs,length(x)-2,lower.tail=FALSE))*2
-    conf.int <- matrix(c(a.inf,b.inf,a,b,a.sup,b.sup),nrow=2,dimnames=list(c("(Intercept)","x"),
-	c("inf","coeff","sup")))
-    conform <- data.frame("observed"=b,"theoretical"=theo,"Df"=length(x)-2,"t"=t.obs,"Pr(>|t|)"=p,
-	row.names=" ",check.names=FALSE)
-    p.corr <- as.numeric(corr$p.value)
-    corr.tab <- data.frame("inf"=as.numeric(corr$conf.int[1]),"r"=r,"sup"=as.numeric(corr$conf.int[2]),
-	"Df"=as.numeric(corr$parameter),"t"=as.numeric(corr$statistic),"Pr(>|t|)"=p.corr,row.names=" ",
-	check.names=FALSE)
-    coeffs <- c(a,b)
-    names(coeffs) <- c("(Intercept)","x")
-    fit <- a+b*x
-    names(fit) <- 1:length(x)
-    res <- -(b*x-y+a)/sqrt(1+b^2)
-    names(res) <- 1:length(x)
-    result <- list(coef=coeffs,res=res,fit=fit,conf.int=conf.int,comp=conform,corr=corr.tab)
-    return(result)
-  }
-  if (ncol(mf)==2) {
-    mod <- lr(mf[,2],mf[,1],conf.level=conf.level,theo=theo)
-    coef <- mod$coef
-    res <- mod$res
-    fit <- mod$fit
-    conf.int <- mod$conf.int
-    comp <- mod$comp
-    corr <- mod$corr
-    multiple <- FALSE
-  } else if (ncol(mf)==3) {
-    if (length(formula[[3]][[3]])!=1) {stop("incorrect formula")}
-    if (!is.factor(mf[,3])) {stop("incorrect factor")}
-    lev <- levels(droplevels(mf[,3]))
-    nlev <- length(lev)
-    coef <- data.frame("(Intercept)"=integer(nlev),x=integer(nlev),row.names=lev,check.names=FALSE)
-    colnames(coef)[2] <- dname[2]
-    res <- NULL
-    fit <- NULL
-    conf.int <- array(0,c(2,3,2),dimnames=list(lev,c("inf","coeff","sup"),c("(Intercept)",dname[2])))
-    comp <- data.frame(observed=integer(nlev),theoretical=rep(theo,nlev),Df=integer(nlev),t=integer(nlev),
-	"Pr(>|t|)"=integer(nlev),row.names=lev,check.names=FALSE)
-    corr <- data.frame(inf=integer(nlev),r=rep(theo,nlev),sup=integer(nlev),Df=integer(nlev),t=integer(nlev),
-	"Pr(>|t|)"=integer(nlev),row.names=lev,check.names=FALSE)
-    multiple <- TRUE
-    for (i in 1:nlev) {
-	tab <- subset(mf,as.numeric(mf[,3])==i)
-	mod <- lr(tab[,2],tab[,1],conf.level=conf.level,theo=theo)
-	coef[i,] <- mod$coef
-	res.temp <- mod$res
-	names(res.temp) <- rep(lev[i],length(res.temp))
-	res <- c(res,res.temp)
-	fit.temp <- mod$fit
-	names(fit.temp) <- rep(lev[i],length(fit.temp))
-	fit <- c(fit,fit.temp)
-	conf.int[i,,1] <- mod$conf.int[1,]
-	conf.int[i,,2] <- mod$conf.int[2,]
-	comp[i,] <- mod$comp[1,]
-	corr[i,] <- mod$corr[1,]
-    }
-    m <- match.call()
-  } else {stop("incorrect formula")}
-  m[[1]] <- as.name("least.rect")
-  result <- list(coefficients=coef,residuals=res,fitted.values=fit,call=m,model=mf,conf.level=conf.level,
-    conf.int=conf.int,theo=theo,comp=comp,corr=corr,multiple=multiple)
-  class(result) <- "least.rect"
-  return(result)
-}
-
-print.least.rect <- function(x,...) {
-  cat("\nCall:\n")
-  print(x$call)
-  cat("\nCoefficients:\n")
-  print(x$coefficients)
+function(x,y,conf.level=0.95,theo=1,coeff.arr=4,p.arr=4){
+  if (length(x)!=length(y)) {stop("Les deux vecteurs n'ont pas la même taille !")}
+  nul<-as.numeric(row.names(table(c(which(is.na(x)),which(is.na(y))))))
+  x.2<-if(length(nul)>0) {x[-nul]} else {x}
+  y.2<-if(length(nul)>0) {y[-nul]} else {y}
+  corr<-cor.test(x.2,y.2,method="pearson",conf.level=conf.level)
+  r<-as.numeric(corr$estimate)
+  k<-qt((1+conf.level)/2,length(x.2)-2)^2*(1-r^2)/(length(x.2)-2)
+  b<-sd(y.2)/sd(x.2)*sign(cov(x.2,y.2))
+  b.inf<-b*sqrt(1+2*k-sqrt((1+2*k)^2-1))
+  b.sup<-b*sqrt(1+2*k+sqrt((1+2*k)^2-1))
+  a<-mean(y.2)-b*mean(x.2)
+  a.inf<-mean(y.2)-b.sup*mean(x.2)
+  a.sup<-mean(y.2)-b.inf*mean(x.2)
+  t.obs<-abs(b^2-theo^2)*sqrt(length(x.2)-2)/(2*b*theo*sqrt(1-r^2))
+  p<-min(pt(t.obs,length(x.2)-2),pt(t.obs,length(x.2)-2,lower.tail=FALSE))*2
+  p<-round(p,p.arr)
+  if (p<0.000001) {p<-"< 10e-6"}
+  conf.int<-matrix(c(round(a.inf,coeff.arr),round(b.inf,coeff.arr),round(a,coeff.arr),round(b,coeff.arr),round(a.sup,coeff.arr),round(b.sup,coeff.arr)),nrow=2,dimnames=list(c("ordonnée à l'origine","coefficient directeur"),c("inf","coeff","sup")))
+  conform<-data.frame(round(b,coeff.arr),theo,length(x.2)-2,round(t.obs,3),p,row.names="")
+  names(conform)<-c("observé","théorique","ddl","t","p-value")
+  p.corr<-round(as.numeric(corr$p.value),p.arr)
+  if (p.corr<0.000001) {p.corr<-"< 10e-6"}
+  corr<-data.frame(round(as.numeric(corr$conf.int[1]),coeff.arr),round(r,coeff.arr),round(as.numeric(corr$conf.int[2]),coeff.arr),as.numeric(corr$parameter),round(as.numeric(corr$statistic),3),p.corr,row.names="")
+  names(corr)<-c("inf","r","sup","ddl","t","p-value")
+  cat("\n        Régression linéaire simple au sens des moindres rectangles\n\n")
+  cat(paste("Equation :",deparse(substitute(y)),"=",round(a,coeff.arr),"+",round(b,coeff.arr),deparse(substitute(x)),"\n\n"))
+  cat("Intervalles de confiance à",100*conf.level,"% :\n")
+  print(conf.int)
+  cat("\nConformité de la pente à la valeur théorique",theo,":\n")
+  print(conform)
+  cat("\nCoefficient de corrélation linéaire de Pearson\n(intervalle de confiance à",100*conf.level,"%) :\n")
+  print(corr)
   cat("\n")
 }
 
