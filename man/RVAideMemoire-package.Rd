@@ -12,7 +12,7 @@ Ce package contient des fonctions à buts diverses, plus ou moins complexes, écri
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9\cr
+Version: \tab 0.9.1\cr
 Date: \tab 2011-03-02\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
