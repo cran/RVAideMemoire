@@ -1,7 +1,7 @@
 logis.fit <-
 function(model,int=5,...) {
-   x<-model$model[,2]
-   y<-model$model[,1]
+   x<-model$model[,all.vars(model$call)[2]]
+   y<-model$model[,all.vars(model$call)[1]]
    cutr<-cut(x,int)
    probs<-as.vector(tapply(y,cutr,sum)/table(cutr))
    int.moy<-as.vector(tapply(x,cutr,mean))
@@ -12,3 +12,4 @@ function(model,int=5,...) {
    segments(int.moy-larg,probs-std.err,int.moy+larg,probs-std.err,...)
    segments(int.moy-larg,probs+std.err,int.moy+larg,probs+std.err,...)
 }
+

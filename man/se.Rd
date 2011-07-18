@@ -1,26 +1,25 @@
 \name{se}
 \alias{se}
 \title{
-Erreur standard de la moyenne
+Standard error of the mean
 }
 \description{
-Renvoie l'erreur standard de la moyenne d'une série de données.
+Compute the standard error of the mean of a vector.
 }
 \usage{
-se(var)
+se(x)
 }
 \arguments{
-  \item{var}{
-série de données.
+  \item{x}{
+numeric vector.
 }
 }
 \details{
-La fonction gère par défaut les données manquantes.
+The function deals with missing values.
 }
 \author{
-Maxime Hervé
+Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
-serie<-sample(1:50,30)
-se(serie)
+se(rnorm(30))
 }
