@@ -4,23 +4,22 @@
 Mode
 }
 \description{
-Renvoie le mode d'une série de données.
+Compute the mode of a vector.
 }
 \usage{
-mod(var)
+mod(x)
 }
 \arguments{
-  \item{var}{
-série de données.
+  \item{x}{
+numeric vector.
 }
 }
 \author{
-Maxime Hervé
+Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
 \code{\link{density}}
 }
 \examples{
-serie<-sample(1:50,30)
-mod(serie)
+mod(rnorm(100))
 }

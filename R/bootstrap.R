@@ -1,6 +1,6 @@
 bootstrap <-
-function(vect,fun,rep=1000,conf.level=0.95,arr=4,...){
-  simul<-boot(vect,fun,rep,...)
+function(x,fun,rep=1000,conf.level=0.95,...){
+  simul<-boot(x,fun,R=rep,...)
   tri<-sort(simul$t)
   int<-(1-conf.level)/2
   if(rep*int<1) {
@@ -9,6 +9,8 @@ function(vect,fun,rep=1000,conf.level=0.95,arr=4,...){
     int.inf<-floor(rep*int)
   }
   int.sup<-ceiling(rep*(1-int))
-  cat(paste("Intervalle de confiance à",100*conf.level,"%\n",round(tri[int.inf],arr),round(tri[int.sup],arr),"\n"))
+  result<-list(conf.level=conf.level,rep=rep,interval=c("Inf"=tri[int.inf],"Sup"=tri[int.sup]))
+  class(result)<-c("bootstrap","list")
+  return(result)
 }
 

@@ -1,36 +1,36 @@
 \name{logis.fit}
 \alias{logis.fit}
 \title{
-Ajustement graphique d'une regression logistique binaire simple aux donnees intitiales
+Graphical adujstment of a simple binary logistic regression to data
 }
 \description{
-Découpe les valeurs de la variable explicative en un certains nombre d'intervalles, et calcule la probabilité de réponse et son erreur standard pour chaque intervalle. Les points et barres d'erreurs correspondants sont ensuite ajoutés sur le graphe qui doit avoir été préalablement tracé.
+Cut the data in intervals, compute the response probability and its standard error for each interval and add the results to the regression curve. No test is performed but this permits to have a graphical idea of the adjustment of the model to the data.
 }
 \usage{
-logis.fit(model, int=5, ...)
+logis.fit(model, int = 5, ...)
 }
 \arguments{
   \item{model}{
-modèle de la régression, de la forme \code{glm(y~x,family=binomial)}.
+glm model.
 }
   \item{int}{
-nombre d'intervalles à créer (= nombre de points à tracer).
+number of intervals.
 }
   \item{\dots}{
-arguments additionnels passés aux fonctions \code{points()} et \code{segments()}. Voir l'aide de ces fonctions.
+other arguments. See help of the \code{points()} and \code{segments()} functions.
 }
 }
 \author{
-Maxime Hervé
+Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link{glm}}, \code{\link{points}}, \code{\link{segments}}
+\code{\link{glm}}
 }
 \examples{
 x<-1:50
-y<-c(rep(0,15),sample(0:1,20,replace=TRUE),rep(1,15))
-modele<-glm(y~x,family=binomial)
+y<-c(rep(0,18),sample(0:1,14,replace=TRUE),rep(1,18))
+model<-glm(y~x,family=binomial)
 plot(x,y)
-lines(x,modele$fitted.values)
-logis.fit(modele)
+lines(x,model$fitted)
+logis.fit(model)
 }

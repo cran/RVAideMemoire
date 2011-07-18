@@ -1,46 +1,42 @@
 \name{cramer.cor}
 \alias{cramer.cor}
 \title{
-Coefficient d'association de Cramer
+Cramer's association coefficient
 }
 \description{
-Renvoie le coefficient d'association de Cramer de deux variables qualitatives, ainsi que son intervalle de confiance.
+Compute the Cramer's association coefficient between 2 nomial variables, and its confidence interval (by bootstraping).
 }
 \usage{
-cramer.cor(var1, var2, rep = 1000, conf.level = 0.95, coeff.arr = 4)
+cramer.cor(var1, var2, rep = 1000, conf.level = 0.95)
 }
 \arguments{
   \item{var1}{
-1ère variable.
+factor (first variable).
 }
   \item{var2}{
-2ème variable.
+factor (second variable).
 }
   \item{rep}{
-nombre de répétitions du bootstrap pour le calcul de l'intervalle de confiance.
+number of replicates for bootstrap.
 }
   \item{conf.level}{
-intervalle de confiance du coefficient d'association.
-}
-  \item{coeff.arr}{
-nombre de décimales affichées du coefficient d'association et de son intervalle de confiance.
+confidence level.
 }
 }
-\details{
-L'intervalle de confiance est calculé à partir d'un bootstrap via la fonction \code{boot} du package boot.
+\value{
+  \item{conf.level}{confidence level.}
+  \item{rep}{number of replicates.}
+  \item{V}{Cramer's coefficient.}
+  \item{interval}{confidence interval.}
 }
 \author{
-Maxime Hervé
+Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link{chisq.test}}, \code{\link[boot]{boot}}
+\code{\link[boot]{boot}}
 }
 \examples{
-# Calcul par defaut
 var1<-sample(LETTERS[1:3],15,replace=TRUE)
 var2<-sample(letters[1:3],15,replace=TRUE)
 cramer.cor(var1,var2)
-
-# Bootstrap a 100 repetitions et intervalle de confiance a 99 pc
-cramer.cor(var1,var2,rep=100,conf.level=0.99)
 }

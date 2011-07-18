@@ -1,46 +1,42 @@
 \name{spearman.ci}
 \alias{spearman.ci}
 \title{
-Intervalle de confiance d'un coefficient de correlation lineaire de Spearman
+Confidence interval of a Spearman's rank correlation coefficient
 }
 \description{
-Renvoie l'intervalle de confiance d'un coefficient de corrélation linéaire de Spearman.
+Compute the confidence interval of a Spearman's rank correlation coefficient by bootstraping.
 }
 \usage{
-spearman.ci(var1, var2, rep = 1000, conf.level = 0.95, coeff.arr = 4)
+spearman.ci(var1, var2, rep = 1000, conf.level = 0.95)
 }
 \arguments{
   \item{var1}{
-1ère variable à corréler.
+numeric vector (first variable).
 }
   \item{var2}{
-2ème variable à corréler.
+nuermic verctor (second variable).
 }
   \item{rep}{
-nombre de répétitions du bootstrap.
+number of replicates for bootstrap.
 }
   \item{conf.level}{
-intervalle de confiance.
-}
-  \item{coeff.arr}{
-nombre de décimales affichées du coefficient de corrélation et de son intervalle de confiance.
+confidence level.
 }
 }
-\details{
-L'intervalle de confiance est calculé à partir d'un bootstrap via la fonction \code{boot} du package boot.
+\value{
+  \item{conf.level}{confidence level.}
+  \item{rep}{number of replicates.}
+  \item{coeff}{Spearman's rank correlation coefficient.}
+  \item{interval}{confidence interval.}
 }
 \author{
-Maxime Hervé
+Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
 \code{\link{cor.test}}, \code{\link[boot]{boot}}
 }
 \examples{
-# Intervalle de confiance par defaut
 var1<-sample(1:50,15,replace=TRUE)
 var2<-sample(1:50,15,replace=TRUE)
 spearman.ci(var1,var2)
-
-# Bootstrap a 100 repetitions et intervalle de confiance a 99 pc
-spearman.ci(var1,var2,rep=100,conf.level=0.99)
 }

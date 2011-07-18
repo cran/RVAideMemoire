@@ -1,0 +1,3 @@
+print.plotsurvivors <-
+function(x,...) {}
+

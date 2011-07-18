@@ -1,52 +1,56 @@
 \name{least.rect}
 \alias{least.rect}
 \title{
-Regression lineaire simple au sens des moindres rectangles
+Least rectangles linear regression
 }
 \description{
-Renvoie un résumé d'une régression linéaire simple au sens des moindres rectangles, à la manière du résumé renvoyé par \code{summary(lm())} pour une régression au sens des moindres carrés.
+Return information about a least rectangle linear regression : equation, confidence interval of parameters, equality of the slope to a given value and Pearson's linear correlation coefficient.
 }
 \usage{
-least.rect(x, y, conf.level = 0.95, theo = 1, coeff.arr = 4, p.arr = 4)
+least.rect(x, y, conf.level = 0.95, theo = 1)
 }
 \arguments{
   \item{x}{
-1ère variable de la régression.
+numeric vector (variable drawn in abscissa).
 }
   \item{y}{
-2ème variable de la régression.
+numeric vector (variable drawn in ordinate).
 }
   \item{conf.level}{
-intervalle de confiance des paramètres de la droite de régression.
+confidence level.
 }
   \item{theo}{
-valeur théorique pour le test de conformité du coefficient directeur de la droite de régression.
-}
-  \item{coeff.arr}{
-nombre de décimales affichées pour les coefficients et leur intervalle de confiance.
-}
-  \item{p.arr}{
-nombre de décimales affichées pour les \emph{p-values} des tests réalisés.
+theoretical value of the slope.
 }
 }
-\details{
-Les noms \code{x} et \code{y} n'ont qu'une valeur graphique (\code{x} : variable destinée à être tracée en abscisses ; \code{y} : variable destinée à être tracée en ordonnées).  Ils ne font pas référence à une variable explicative et une à expliquer.
-
-La fonction renvoie : l'équation de la droite de régression, l'intervalle de confiance des paramètres de la droite (coefficient directeur et ordonnée à l'origine), le résultat du test de conformité du coefficient directeur avec une valeur théorique choisie et enfin le coefficient de corrélation linéaire entre les deux variables, son intervalle de confiance et le résultat du test de significativité.
+\value{
+  \item{coefficients}{regression parameters.}
+  \item{x}{name of the x variable.}
+  \item{y}{name of the y variable.}
+  \item{residuals}{residuals.}
+  \item{fitted.values}{fitted values.}
+  \item{conf.level}{confidence level.}
+  \item{conf.int}{confidence interval of regression parameters.}
+  \item{slope.theo}{theoretical value of the slope.}
+  \item{df.comp}{degrees of freedom for equality of the slope to the theoretical value.}
+  \item{t.comp}{test statitics for equality of the slope to the theoretical value.}
+  \item{p.comp}{p-value for equality of the slope to the theoretical value.}
+  \item{model}{values of x and y variables.}
+  \item{comp}{data.frame of results for equality of the slope to the theoretical value.}
+  \item{r}{Pearson's linear correlation coefficient and confidence interval.}
+  \item{r.df}{degrees of freedom for significativity of the correlation coefficient.}
+  \item{r.t}{test statistics for significativity of the correlation coefficient.}
+  \item{r.p}{p-value for significativity of the correlation coefficient.}
+  \item{corr}{data.frame of results for significativity of the correlation coefficient.}
 }
 \author{
-Maxime Hervé
+Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
 \code{\link{cor.test}}
 }
 \examples{
-# Resume par defaut
 x<-1:30+rnorm(30,0,3)
 y<-1:30+rnorm(30,0,3)
 least.rect(x,y)
-
-# Conformite du coefficient directeur avec la valeur 0.5
-# et intervalles de confiance a 99 pc
-least.rect(x,y,conf.level=0.99,theo=0.5)
 }
