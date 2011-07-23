@@ -1,58 +1,60 @@
 \name{cor.2comp}
 \alias{cor.2comp}
 \title{
-Comparaison de 2 coefficients de correlation lineaire de Pearson
+Comparison of 2 Pearson's linear correlation coefficients
 }
 \description{
-Réalise le test de comparaison de 2 coefficients de corrélation linéaire de Pearson.  Si la différence n'est pas significative, la fonction renvoie la valeur du coefficient de corrélation commun, son intervalle de confiance et le résultat du test de conformité avec une valeur théorique choisie.
+Perform the test for equality of 2 Pearson's correlation coefficients. If difference is not significative, the function returns the common coefficient, its confidence interval and performs the test for equality to a given value.
 }
 \usage{
-cor.2comp(var1, var2, var3, var4, alpha = 0.05, conf.level = 0.95, r.arr = 4, theo = 0, p.arr = 4)
+cor.2comp(var1, var2, var3, var4, alpha = 0.05, conf.level = 0.95, theo = 0)
 }
 \arguments{
   \item{var1}{
-1ère variable définissant la 1ère corrélation.
+numeric vector (first variable of the first correlation).
 }
   \item{var2}{
-2ème variable définissant la 1ère corrélation.
+numeric vector (second variable of the first correlation).
 }
   \item{var3}{
-1ère variable définissant la 2ème corrélation.
+numeric vector (first variable of the second correlation).
 }
   \item{var4}{
-2ème variable définissant la 2ème corrélation.
+numeric vector (second variable of the second correlation).
 }
   \item{alpha}{
-seuil de significativité du test de comparaison des 2 coefficients de corrélation.
+significance level.
 }
   \item{conf.level}{
-intervalle de confiance du coefficient de corrélation commun.
-}
-  \item{r.arr}{
-nombre de décimales affichées des coefficients de corrélation.
+confidence level.
 }
   \item{theo}{
-valeur théorique pour le test de conformité du coefficient de corrélation commun.
+theoretical coefficient.
 }
-  \item{p.arr}{
-nombre de décimales affichées des \emph{p-values} des tests réalisés.
 }
+\value{
+  \item{conf.level}{confidence level.}
+  \item{alpha}{significance level.}
+  \item{coeffs}{observed Pearson's coefficients.}
+  \item{u.comp}{test statistics for comparison of the 2 coefficients.}
+  \item{p.com}{p-value for comparison of the 2 coefficients.}
+  \item{comp}{data.frame of results for comparison or the 2 coefficients.}
+  \item{r.comm}{common correlation coefficient.}
+  \item{r.theo}{theoretical coefficient.}
+  \item{u.comm}{test statistics for equality of the common coefficient to the theoretical value.}
+  \item{p.comm}{p-value for equality of the common coefficient to the theoretical value.}
+  \item{comm}{data.frame or results for equality of the common coefficient to the theoretical value.}
 }
 \author{
-Maxime Hervé
+Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
 \code{\link{cor.test}}
 }
 \examples{
-# Test par defaut
 cor1.var1<-1:30+rnorm(30,0,2)
 cor1.var2<-1:30+rnorm(30,0,3)
-cor2.var1<--1:-30+rnorm(30,0,2)
-cor2.var2<--1:-30+rnorm(30,0,3)
+cor2.var1<-(-1):-30+rnorm(30,0,2)
+cor2.var2<-(-1):-30+rnorm(30,0,3)
 cor.2comp(cor1.var1,cor1.var2,cor2.var1,cor2.var2)
-
-# Seuil de significativite a 3 pc et conformite du coefficient de correlation commun
-# avec la valeur 0.5
- cor.2comp(cor1.var1,cor1.var2,cor2.var1,cor2.var2,alpha=0.03,theo=0.5)
 }

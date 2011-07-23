@@ -11,7 +11,8 @@ function(dudi.obj,xax=1,yax=2,csub=2,possub="topleft",...){
   ncol<-(max(levels)%/%5)+1
   par(mfrow=n2mfrow(nvar))
   for(i in 1 :nvar) {
-    s.class(dudi.obj$li,oritab[,i],xax=xax,yax=yax,clab=1.5,sub=names(oritab[i]),csub=csub,possub=possub,col=rep(c('black','red','blue','green','orange'),ncol),cgrid=0,csta=0)
+    s.class(dudi.obj$li,oritab[,i],xax=xax,yax=yax,clab=1.5,sub=names(oritab[i]),csub=csub,possub=possub,
+	col=rep(c('black','red','blue','green','orange'),ncol),cgrid=0,csta=0)
   }
 }
 

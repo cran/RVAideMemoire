@@ -1,46 +1,40 @@
 \name{reg.ci}
 \alias{reg.ci}
 \title{
-Intervalles de confiance d'une regression lineaire simple au sens des moindres carres
+Confidence intervals of a simple linear regression
 }
 \description{
-Trace l'intervalle de confiance des moyennes conditionnelles ou des valeurs individuelles d'une régression au sens des moindres carrés.
+Compute and add to a graph the confidence interval of a simple regression line or of the individual values.
 }
 \usage{
-reg.ci(model, conf.level = 0.95, type = c("moy", "ind"), ...)
+reg.ci(model, conf.level = 0.95, type = c("mean", "ind"), ...)
 }
 \arguments{
   \item{model}{
-modèle de la régression, de la forme \code{lm(y~x)}.
+lm model.
 }
   \item{conf.level}{
-niveau de confiance souhaité.
+confidence level.
 }
   \item{type}{
-type d'intervalle de confiance souhaité (\code{"moy"} pour les moyennes conditionnelles, \code{"ind"} pour les valeurs individuelles).
+interval type : \code{"mean"} for the interval of the regression line (default), \code{"ind"} for the interval of the individual values.
 }
   \item{\dots}{
-autres arguments graphiques (couleur du trait, type de trait\dots).
+other agruments. See help of the \code{lines()} function.
 }
-}
-\details{
-L'intervalle de confiance tracé par défaut est celui des moyennes conditionelles.
 }
 \author{
-Maxime Hervé
+Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link{lm}}, \code{\link{predict}}, \code{\link{residuals}}, \code{\link{lines}}
+\code{\link{lm}}
 }
 \examples{
-# Intervalle de confiance des moyennes conditionnelles
 x<-1:50
 y<-1:50+rnorm(50,0,4)
 regression<-lm(y~x)
 plot(x,y)
 abline(regression)
-reg.ci(regression,type="moy",col="red")
-
-# Intervalle de confiance a 99 pc des valeurs individuelles
-reg.ci(regression,conf.level=0.99,type="ind",col="blue",lty=2)
+reg.ci(regression,type="mean",col="red")
+reg.ci(regression,type="ind",col="blue")
 }

@@ -1,33 +1,34 @@
 \name{cor.conf}
 \alias{cor.conf}
 \title{
-Conformite d'un coefficient de correlation lineaire de Pearson avec une valeur theorique
+Equality of a Pearson's linear correlation coefficient to a given value
 }
 \description{
-Réalise le test de conformité d'un coefficient de corrélation linéaire de Pearson avec une valeur théorique choisie.
+Perform a test for equality of a Pearson's linear correlation coefficient to a given value.
 }
 \usage{
-cor.conf(var1, var2, theo, r.arr = 4, p.arr = 4)
+cor.conf(var1, var2, theo)
 }
 \arguments{
   \item{var1}{
-1ère variable à corréler.
+numeric vector (first variable).
 }
   \item{var2}{
-2ème variable à corréler.
+numeric vector (second variable).
 }
   \item{theo}{
-valeur théorique.
+theoretical value.
 }
-  \item{r.arr}{
-nombre de décimales affichées des coefficients de corrélation.
 }
-  \item{p.arr}{
-nombre de décimales affichées de la \emph{p-value} du test.
-}
+\value{
+  \item{r.theo}{theoretical coefficient.}
+  \item{r.obs}{observed coefficient.}
+  \item{u}{test statistics.}
+  \item{p}{p-value.}
+  \item{conform}{data.frame of results.}
 }
 \author{
-Maxime Hervé
+Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
 \code{\link{cor.test}}
@@ -35,5 +36,5 @@ Maxime Hervé
 \examples{
 var1<-1:30+rnorm(30,0,4)
 var2<-1:30+rnorm(30,0,4)
-cor.conf(var1,var2,theo=0.8)
+cor.conf(var1,var2,theo=0.5)
 }

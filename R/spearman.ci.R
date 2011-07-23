@@ -1,6 +1,6 @@
 spearman.ci <-
-function(var1,var2,rep=1000,conf.level=0.95,coeff.arr=4){
-  if (length(var1)!=length(var2)) {stop("Les deux vecteurs n'ont pas la même taille !")}
+function(var1,var2,rep=1000,conf.level=0.95){
+  if (length(var1)!=length(var2)) {stop("'var1' and 'var2' lengths differ")}
   nul<-as.numeric(row.names(table(c(which(is.na(var1)),which(is.na(var2))))))
   var1.2<-if(length(nul)>0) {var1[-nul]} else {var1}
   var2.2<-if(length(nul)>0) {var2[-nul]} else {var2}
@@ -16,7 +16,10 @@ function(var1,var2,rep=1000,conf.level=0.95,coeff.arr=4){
     int.inf<-floor(rep*int)
   }
   int.sup<-ceiling(rep*(1-int))
-  cat(paste("Coefficient de corrélation linéaire de Spearman\nrho =",round(as.numeric(suppressWarnings(cor.test(var1,var2,method="spearman")$estimate)),coeff.arr),"\n\n"))
-  cat(paste("Intervalle de confiance à",100*conf.level,"%\n",round(tri[int.inf],coeff.arr),round(tri[int.sup],coeff.arr),"\n"))
+  result=list(conf.level=conf.level,rep=rep,
+    coeff=as.numeric(suppressWarnings(cor.test(var1,var2,method="spearman")$estimate)),
+    interval=c("Inf"=tri[int.inf],"Sup"=tri[int.sup]))
+  class(result)<-c("spearman.ci","list")
+  return(result)
 }
 

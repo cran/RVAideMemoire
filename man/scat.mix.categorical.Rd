@@ -1,53 +1,53 @@
 \name{scat.mix.categorical}
 \alias{scat.mix.categorical}
 \title{
-Representation des variables qualitatives en analyse mixte de Hill et Smith
+Representation of qualitative variables in Hill and Smith mix analysis
 }
 \description{
-Représente les variables qualitatives d'une analyse mixte de Hill et Smith à la manière d'une ACM.  La fonction est basée sur la fonction \code{s.class()} du package ade4.
+Represent qualitative variables of a Hill and Smith mix analysis as in MCA. The function is based on the \code{s.class()} function of ade4 package.
 }
 \usage{
 scat.mix.categorical(dudi.obj, xax = 1, yax = 2, csub = 2, possub = "topleft", ...)
 }
 \arguments{
   \item{dudi.obj}{
-objet contenant les résultats de l'analyse, classiquement obtenue \emph{via} la fonction \code{dudi.mix()} du package ade4.
+\code{dudi.mix} object.
 }
   \item{xax}{
-axe à représenter horizontalement.
+horizontal axis.
 }
   \item{yax}{
-axe à représenter verticalement.
+vertical axis.
 }
   \item{csub}{
-taille du titre de chaque graphe tracé (le titre étant le nom de la variable représentée).
+title size.
 }
   \item{possub}{
-position du titre des graphes tracés (parmi \code{"topleft"}, \code{"topright"}, \code{"bottomleft"} et \code{"bottomright"})
+title position (\code{"topleft"}, \code{"topright"}, \code{"bottomleft"} or \code{"bottomright"})
 }
   \item{\dots}{
-arguments additionnels passés à la fonction \code{s.class()}. Voir l'aide de cette fonction.
+additional arguments to \code{s.class()}. See help of this function.
 }
 }
 \references{
 Champely, S. 2005 Introduction à l'analyse multivariée (factorielle) sous R.
 }
 \author{
-Maxime Hervé, d'après Stéphane Champely
+Maxime Hervé <mx.herve@gmail.com>, based on a Stéphane Champely idea.
 }
 \seealso{
 \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{s.class}}
 }
 \examples{
-# Jeu de donnees bidon
+# Imaginary dataset
 age<-sample(15:60,50,replace=TRUE)
-sexe<-sample(c("M","F"),50,replace=TRUE)
-taille<-sample(155:190,50,replace=TRUE)
-cheveux<-sample(c("Blond","Brun","Roux"),50,replace=TRUE)
-yeux<-sample(c("Bleu","Vert","Marron"),50,replace=TRUE)
-poids<-sample(50:85,50,replace=TRUE)
-cote<-sample(c("Gaucher","Droitier"),50,replace=TRUE)
-tab<-data.frame(age,sexe,taille,poids,cote,yeux,cheveux)
+sex<-sample(c("M","F"),50,replace=TRUE)
+size<-sample(155:190,50,replace=TRUE)
+hair<-sample(c("Fair","Dark","Russet"),50,replace=TRUE)
+eyes<-sample(c("Blue","Green","Brown"),50,replace=TRUE)
+weight<-sample(50:85,50,replace=TRUE)
+hand<-sample(c("Left.handed","Right.handed"),50,replace=TRUE)
+tab<-data.frame(age,sex,size,weight,hand,eyes,hair)
 amix<-dudi.mix(tab,scannf=FALSE,nf=2)
 scat.mix.categorical(amix)
 }
