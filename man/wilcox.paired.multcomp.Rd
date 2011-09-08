@@ -24,7 +24,7 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
-  \item{datas}{variables name.}
+  \item{data}{variables name.}
   \item{p.method}{method for p-values correction.}
   \item{V}{test statistics.}
   \item{p.value}{corrected p-values.}

@@ -21,7 +21,7 @@ theoretical median.
 }
 }
 \value{
-  \item{datas}{variable(s) name.}
+  \item{data}{variable(s) name.}
   \item{mu}{theoretical median.}
   \item{p.value}{p-value of the test.}
 }

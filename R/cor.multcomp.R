@@ -19,7 +19,7 @@ function(var1,var2,fact,alpha=0.05,conf.level=0.95,theo=0,p.method="fdr"){
   }
   z.moy<-sum((n-3)*z)/sum(n-3)
   chi2.obs<-sum((n-3)*(z-z.moy)^2)
-  p<-min(pchisq(chi2.obs,nlevels(fact)-1),pchisq(chi2.obs,nlevels(fact)-1,lower.tail=FALSE))*2
+  p<-1-pchisq(chi2.obs,nlevels(fact)-1)
   tab<-data.frame(t(r),chi2.obs,p,psignif(p),row.names="")
   names(tab)<-c(levels(fact.2),"chi2","p.value","signif")
   result<-list(levels=nlevels(fact.2),conf.level=conf.level,alpha=alpha,coeffs=r,chi2.comp=chi2.obs,p.comp=p,comp=tab)
