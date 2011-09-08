@@ -9,7 +9,7 @@ function(x,y) {
   y.sup<-length(y2[y2>med])
   tab<-matrix(c(x.sup,y.sup,x.inf,y.inf),ncol=2,dimnames=list(c("x","y"),c("sup","inf")))
   test<-fisher.test(tab)
-  result<-list(datas=c(deparse(substitute(x)),deparse(substitute(y))),median=med,tab.cont=tab,
+  result<-list(data=c(deparse(substitute(x)),deparse(substitute(y))),median=med,tab.cont=tab,
     odds.ratio=as.numeric(test$estimate),p.value=as.numeric(test$p.value))
   class(result)<-c("fisher.medtest","list")
   return(result)

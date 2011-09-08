@@ -22,7 +22,7 @@ function(resp,fact,block,p.method="fdr") {
   }
   p.adj<-p.adjust(p,method=p.method)
   tab.comp<-data.frame("V"=V,"p.value"=p.adj,"signif"=psignif(p.adj),row.names=paste(comb[,1],"vs",comb[,2]))
-  result<-list(datas=datas,p.method=p.method,V=V,p.value=p.adj,comp=tab.comp)
+  result<-list(data=datas,p.method=p.method,V=V,p.value=p.adj,comp=tab.comp)
   class(result)<-c("wilcox.paired.multcomp","list")
   return(result)
 }

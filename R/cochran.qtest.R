@@ -16,9 +16,9 @@ function(resp,fact,block,alpha=0.05,p.method="fdr") {
   Xi.<-rowSums(tab)
   N<-sum(X.j)
   Q<-k*(k-1)*sum((X.j-N/k)^2)/sum(Xi.*(k-Xi.))
-  p<-min(pchisq(Q,k-1),pchisq(Q,k-1,lower.tail=FALSE))*2
+  p<-1-pchisq(Q,k-1)
   tab.test<-data.frame("Q"=Q,"df"=k-1,"p.value"=p,"signif"=psignif(p),row.names="")
-  result=list(datas=datas,alpha=alpha,Q=Q,p.value=p,tab.test=tab.test)
+  result=list(data=datas,alpha=alpha,Q=Q,p.value=p,tab.test=tab.test)
   if (p<alpha) {
     comb<-combinations(nlevels(fact),2,levels(fact))
     chi2<-integer(nrow(comb))

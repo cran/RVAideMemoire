@@ -3,17 +3,17 @@
 \alias{RVAideMemoire}
 \docType{package}
 \title{
-Diverse basic statistical and graphical functions accompanying the french book 'Aide-memoire de statistique appliquee a la biologie'
+Diverse basic statistical and graphical functions accompanying the French book 'Aide-memoire de statistique appliquee a la biologie'
 }
 \description{
-This package contains diverse more or less complicated functions, written to simplify beginners' life: simplifications of existing functions, basic but not implemented tests, easy-to-use tools... All functions are presented in the french book 'Aide-memoire de statistique appliquee a la biologie', written by the same author and available on CRAN.
+This package contains diverse more or less complicated functions, written to simplify beginners' life: simplifications of existing functions, basic but not implemented tests, easy-to-use tools... All functions are presented in the French book 'Aide-memoire de statistique appliquee a la biologie', written by the same author and available on CRAN.
 }
 \details{
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9-5\cr
-Date: \tab 2011-07-18\cr
+Version: \tab 0.9-6\cr
+Date: \tab 2011-09-08\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }

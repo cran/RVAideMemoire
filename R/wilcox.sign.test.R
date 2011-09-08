@@ -20,7 +20,7 @@ function(x,y,mu=NULL) {
     signs2<-na.omit(signs)
     p<-min(pbinom(length(signs2[signs2=="+"]),length(signs2),0.5),
 	pbinom(length(signs2[signs2=="+"]),length(signs2),0.5,lower.tail=FALSE))*2
-    result<-list(datas=datas,mu=mu,p.value=p)
+    result<-list(data=datas,mu=mu,p.value=p)
   } else {
     datas<-c(deparse(substitute(x)))
     if (any(is.na(x))) {x<-x[-which(is.na(x))]}
@@ -33,7 +33,7 @@ function(x,y,mu=NULL) {
     signs2<-na.omit(signs)
     p<-min(pbinom(length(signs2[signs2=="+"]),length(signs2),0.5),
 	pbinom(length(signs2[signs2=="+"]),length(signs2),0.5,lower.tail=FALSE))*2
-    result<-list(datas=datas,mu=mu,p.value=p)
+    result<-list(data=datas,mu=mu,p.value=p)
   }
   class(result)<-c("wilcox.sign.test","list")
   return(result)
