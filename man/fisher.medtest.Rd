@@ -18,7 +18,7 @@ numeric vector.
 }
 }
 \value{
-  \item{datas}{variables name.}
+  \item{data}{variables name.}
   \item{median}{median of the whole sample.}
   \item{tab.cont}{contingency table used to perform the test.}
   \item{odds.ratio}{test statistics.}

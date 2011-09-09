@@ -72,7 +72,7 @@ function(surv,fact,mat,strata=NULL,type=c("survreg","coxph"),distribution="expon
 	as.numeric(summary(model)$logtest[1])
     }
     p[i]<-if (type=="survreg") {
-	min(pchisq(test[i],1),pchisq(test[i],1,lower.tail=FALSE))*2
+	1-pchisq(test[i],1)
     } else {
 	as.numeric(summary(model)$logtest[3])
     }

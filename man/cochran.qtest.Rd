@@ -27,7 +27,7 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
-  \item{datas}{variables name.}
+  \item{data}{variables name.}
   \item{alpha}{significance level.}
   \item{Q}{test statistics.}
   \item{p.value}{p-value of the global test.}
