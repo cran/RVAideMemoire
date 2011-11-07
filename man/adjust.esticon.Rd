@@ -1,10 +1,10 @@
 \name{adjust.esticon}
 \alias{adjust.esticon}
 \title{
-'esticon' results with corrected p-values
+'esticon()' results with corrected p-values
 }
 \description{
-Return the results of the \code{esticon()} function (doBy package), except that p-values are corrected.
+Return the results of the \code{esticon()} function (package doBy), except that p-values are corrected.
 }
 \usage{
 adjust.esticon(model, matrix, p.method = "fdr", ...)

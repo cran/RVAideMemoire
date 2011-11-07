@@ -1,8 +1,16 @@
 reg.slpcomp <-
-function(var,covar,fact,conf.level=0.95,p.method="fdr"){
-  if (length(var)!=length(fact)) {stop("'var' and 'fact' lengths differ")}
-  if (length(var)!=length(covar)) {stop("'var' and 'covar' lengths differ")}
-  if (length(covar)!=length(fact)) {stop("'covar' and 'fact' lengths differ")}
+function(formula,data=NULL,conf.level=0.95,p.method="fdr"){
+  if (all.names(formula)[1]!="~" | all.names(formula)[3]!="|") {stop("incorrect 'formula'")}
+  variables<-all.vars(formula)
+  var<-if (is.null(data)) {get(variables[1],pos=environment(formula))}
+    else {get(variables[1],pos=get(deparse(substitute(data))))}
+  covar<-if (is.null(data)) {get(variables[2],pos=environment(formula))}
+    else {get(variables[2],pos=get(deparse(substitute(data))))}
+  fact<-if (is.null(data)) {get(variables[3],pos=environment(formula))}
+    else {get(variables[3],pos=get(deparse(substitute(data))))}
+  if (length(var)!=length(fact)) {stop(paste("'",variables[1],"' and '",variables[3],"' lengths differ",sep=""))}
+  if (length(var)!=length(covar)) {stop(paste("'",variables[1],"' and '",variables[2],"' lengths differ",sep=""))}
+  if (length(covar)!=length(fact)) {stop(paste("'",variables[2],"' and '",variables[3],"' lengths differ",sep=""))}
   if (is.character(fact) & !is.factor(fact)) {fact<-as.factor(fact)}
   nul<-as.numeric(row.names(table(c(which(is.na(var)),which(is.na(covar))))))
   var.2<-if(length(nul)>0) {var[-nul]} else {var}
@@ -34,7 +42,7 @@ function(var,covar,fact,conf.level=0.95,p.method="fdr"){
   p.adj<-p.adjust(p,method=p.method)
   tab.ci<-data.frame("inf"=dir-dir.ci,"coeff"=dir,"sup"=dir+dir.ci,row.names=levels(fact.2))
   tab.p<-data.frame("df"=ddl,"t"=t.obs,"p.value"=p.adj,"signif"=psignif(p.adj),row.names=paste(comb[,1],"vs",comb[,2]))
-  result<-list(conf.level=conf.level,coeffs=dir,coeffs.tab=tab.ci,p.method=p.method,df=ddl,t=t.obs,p.value=p.adj,
+  result<-list(data=variables,conf.level=conf.level,coeffs=dir,coeffs.tab=tab.ci,p.method=p.method,df=ddl,t=t.obs,p.value=p.adj,
     multcomp=tab.p)
   class(result)<-c("reg.slpcomp","list")
   return(result)

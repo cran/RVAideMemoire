@@ -1,4 +1,4 @@
-print.cramer.cor <-
+print.cramer.coeff <-
 function(x,...) {
   cat(paste("Cramer's association coefficient\nV =",round(x$V,5),"\n\n"))
   cat(paste(100*x$conf.level,"% confidence interval (",x$rep," replicates)\n",sep=""))

@@ -1,23 +1,23 @@
 \name{surv.multcomp}
 \alias{surv.multcomp}
 \title{
-Pairwise comparisons for survival analysis.
+Pairwise comparisons for survival analysis
 }
 \description{
-Perform pairwise comparisons between groups for equality of time to event. The function deals with coxph and survreg models.
+Perform pairwise comparisons between groups for equality of time to event. The function deals with \code{coxph} and \code{survreg} models.
 }
 \usage{
-surv.multcomp(surv, fact, mat, strata = NULL, type = c("survreg", "coxph"), distribution = "exponential", p.method = "fdr")
+surv.multcomp(formula, mat, data=NULL, strata = NULL, type = c("survreg", "coxph"), distribution = "exponential", p.method = "fdr")
 }
 \arguments{
-  \item{surv}{
-survival object. See help of the \code{Surv()} function.
-}
-  \item{fact}{
-factor (groups).
+  \item{formula}{
+a formula of the form \code{a ~ b}, where \code{a} is a \code{Surv()} object and \code{b} is a factor giving levels to be compared.
 }
   \item{mat}{
-matrix of comparisons (see help of the \code{esticon()} function in doBy package).
+matrix of comparisons (see help of the \code{esticon()} function in the package doBy).
+}
+  \item{data}{
+an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
 }
   \item{strata}{
 strata, if needed.
@@ -37,7 +37,7 @@ method for p-values correction. See help of the \code{p.adjust()} function.
   \item{statistics}{test statistics.}
   \item{p.method}{method for p-values correction.}
   \item{p.value}{corrected p-values.}
-  \item{comparisons}{data.frame of results.}
+  \item{comparisons}{data frame of results.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
@@ -51,9 +51,9 @@ groups<-factor(rep(LETTERS[1:3],each=20))
 model1<-coxph(Surv(death)~groups)
 model1
 mat<-matrix(c(1,-1,0,0,1,-1,2,-1,-1),ncol=3,byrow=TRUE,dimnames=list(1:3,levels(groups)))
-surv.multcomp(Surv(death),groups,mat,type="coxph")
+surv.multcomp(Surv(death)~groups,mat,type="coxph")
 
 model2<-survreg(Surv(death)~groups,dist="weibull")
 model2
-surv.multcomp(Surv(death),groups,mat,type="survreg",distribution="weibull")
+surv.multcomp(Surv(death)~groups,mat,type="survreg",distribution="weibull")
 }

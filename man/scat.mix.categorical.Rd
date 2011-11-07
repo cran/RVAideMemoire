@@ -4,7 +4,7 @@
 Representation of qualitative variables in Hill and Smith mix analysis
 }
 \description{
-Represent qualitative variables of a Hill and Smith mix analysis as in MCA. The function is based on the \code{s.class()} function of ade4 package.
+Represent qualitative variables of a Hill and Smith mix analysis as in MCA. The function is based on the \code{s.class()} function of the package ade4.
 }
 \usage{
 scat.mix.categorical(dudi.obj, xax = 1, yax = 2, csub = 2, possub = "topleft", ...)
@@ -23,7 +23,7 @@ vertical axis.
 title size.
 }
   \item{possub}{
-title position (\code{"topleft"}, \code{"topright"}, \code{"bottomleft"} or \code{"bottomright"})
+title position (\code{"topleft"}, \code{"topright"}, \code{"bottomleft"} or \code{"bottomright"}).
 }
   \item{\dots}{
 additional arguments to \code{s.class()}. See help of this function.

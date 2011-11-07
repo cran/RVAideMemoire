@@ -33,8 +33,7 @@ nameEx("chisq.exp")
 flush(stderr()); flush(stdout())
 
 ### Name: chisq.exp
-### Title: Expected counts for comparison of proportions to theoretical
-###   values
+### Title: Expected counts for comparison of proportions to given values
 ### Aliases: chisq.exp
 
 ### ** Examples
@@ -48,24 +47,40 @@ chisq.exp(tab.cont,p=p.theo)
 
 
 cleanEx()
-nameEx("chisq.gof.multcomp")
-### * chisq.gof.multcomp
+nameEx("chisq.multcomp")
+### * chisq.multcomp
 
 flush(stderr()); flush(stdout())
 
-### Name: chisq.gof.multcomp
-### Title: Pairwise comparisons after chi2 goodness-of-fit test
-### Aliases: chisq.gof.multcomp
+### Name: chisq.multcomp
+### Title: Pairwise comparisons after chi-squared goodness-of-fit test
+### Aliases: chisq.multcomp
 
 ### ** Examples
 
 counts<-c(5,15,23,8,14)
 chisq.test(counts)
-chisq.gof.multcomp(counts)
+chisq.multcomp(counts)
 
+
+
+cleanEx()
+nameEx("chisq.theo.multcomp")
+### * chisq.theo.multcomp
+
+flush(stderr()); flush(stdout())
+
+### Name: chisq.theo.multcomp
+### Title: Pairwise comparisons after chi-squared test for given
+###   probabilities
+### Aliases: chisq.theo.multcomp
+
+### ** Examples
+
+counts<-c(5,15,23,8,14)
 p.theo<-c(0.1,0.4,0.3,0.15,0.05)
 chisq.test(counts,p=p.theo)
-chisq.gof.multcomp(counts,p=p.theo)
+chisq.theo.multcomp(counts,p=p.theo)
 
 
 
@@ -84,7 +99,7 @@ flush(stderr()); flush(stdout())
 response<-c(0,1,1,0,0,1,0,1,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,0,1,1,0,0,1)
 factor<-factor(rep(LETTERS[1:3],10))
 block<-factor(rep(letters[1:10],each=3))
-cochran.qtest(response,factor,block)
+cochran.qtest(response~factor|block)
 
 
 
@@ -134,7 +149,7 @@ nameEx("cor.multcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: cor.multcomp
-### Title: Comparison of Pearson's linear correlation coefficients.
+### Title: Comparison of Pearson's linear correlation coefficients
 ### Aliases: cor.multcomp
 
 ### ** Examples
@@ -169,20 +184,20 @@ cox.resid(model,list(age=kidney$age,frail=kidney$frail))
 
 
 cleanEx()
-nameEx("cramer.cor")
-### * cramer.cor
+nameEx("cramer.coeff")
+### * cramer.coeff
 
 flush(stderr()); flush(stdout())
 
-### Name: cramer.cor
+### Name: cramer.coeff
 ### Title: Cramer's association coefficient
-### Aliases: cramer.cor
+### Aliases: cramer.coeff
 
 ### ** Examples
 
 var1<-sample(LETTERS[1:3],15,replace=TRUE)
 var2<-sample(letters[1:3],15,replace=TRUE)
-cramer.cor(var1,var2)
+cramer.coeff(var1,var2)
 
 
 
@@ -227,7 +242,7 @@ nameEx("fisher.multcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: fisher.multcomp
-### Title: Pairwise comparisons after a test for independece of 2
+### Title: Pairwise comparisons after a test for independence of 2
 ###   categorical variables
 ### Aliases: fisher.multcomp
 
@@ -254,7 +269,7 @@ flush(stderr()); flush(stdout())
 x<-1:30
 y<-1:30+rnorm(30,0,4)
 model1<-lm(y~x)
-model2<-least.rect(x,y)
+model2<-least.rect(y~x)
 ind.contrib(model1)
 ind.contrib(model2)
 
@@ -274,7 +289,7 @@ flush(stderr()); flush(stdout())
 
 x<-1:30+rnorm(30,0,3)
 y<-1:30+rnorm(30,0,3)
-least.rect(x,y)
+least.rect(y~x)
 
 
 
@@ -333,10 +348,10 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-covariable<-rep(1:30,3)
-variable<-c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
+x<-rep(1:30,3)
+y<-c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
 factor<-as.factor(rep(LETTERS[1:3],each=30))
-lr.multcomp(variable,covariable,factor)
+lr.multcomp(y~x|factor)
 
 
 
@@ -381,7 +396,7 @@ nameEx("prop.multcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: prop.multcomp
-### Title: Pairwise comparisons after a test of equal or given proportions
+### Title: Pairwise comparisons after a test for given proportions
 ### Aliases: prop.multcomp
 
 ### ** Examples
@@ -450,7 +465,7 @@ flush(stderr()); flush(stdout())
 covariable<-rep(1:30,3)
 variable<-c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
 factor<-as.factor(rep(LETTERS[1:3],each=30))
-reg.intcomp(variable,covariable,factor)
+reg.intcomp(variable~covariable|factor)
 
 
 
@@ -469,7 +484,7 @@ flush(stderr()); flush(stdout())
 covariable<-rep(1:30,3)
 variable<-c(seq(1,10,9/29)+rnorm(30,0,3),seq(1,30,1)+rnorm(30,0,3),seq(-1,-80,-79/29)+rnorm(30,0,3))
 factor<-factor(rep(LETTERS[1:3],each=30))
-reg.slpcomp(variable,covariable,factor)
+reg.slpcomp(variable~covariable|factor)
 
 
 
@@ -584,7 +599,7 @@ nameEx("surv.multcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: surv.multcomp
-### Title: Pairwise comparisons for survival analysis.
+### Title: Pairwise comparisons for survival analysis
 ### Aliases: surv.multcomp
 
 ### ** Examples
@@ -594,11 +609,11 @@ groups<-factor(rep(LETTERS[1:3],each=20))
 model1<-coxph(Surv(death)~groups)
 model1
 mat<-matrix(c(1,-1,0,0,1,-1,2,-1,-1),ncol=3,byrow=TRUE,dimnames=list(1:3,levels(groups)))
-surv.multcomp(Surv(death),groups,mat,type="coxph")
+surv.multcomp(Surv(death)~groups,mat,type="coxph")
 
 model2<-survreg(Surv(death)~groups,dist="weibull")
 model2
-surv.multcomp(Surv(death),groups,mat,type="survreg",distribution="weibull")
+surv.multcomp(Surv(death)~groups,mat,type="survreg",distribution="weibull")
 
 
 
@@ -618,28 +633,28 @@ response<-c(rnorm(10,0,3),rnorm(10,5,3),rnorm(10,8,2))
 factor<-factor(rep(LETTERS[1:3],each=10))
 block<-factor(rep(letters[1:10],3))
 friedman.test(response~factor|block)
-wilcox.paired.multcomp(response,factor,block)
+wilcox.paired.multcomp(response~factor|block)
 
 
 
 cleanEx()
-nameEx("wilcox.sign.test")
-### * wilcox.sign.test
+nameEx("wilcox.signtest")
+### * wilcox.signtest
 
 flush(stderr()); flush(stdout())
 
-### Name: wilcox.sign.test
+### Name: wilcox.signtest
 ### Title: Wilcoxon sign test
-### Aliases: wilcox.sign.test
+### Aliases: wilcox.signtest
 
 ### ** Examples
 
 x<-rnorm(7,3,1.5)
 y<-rnorm(7,5.5,2)
-wilcox.sign.test(x,y)
+wilcox.signtest(x,y)
 
 theo=4
-wilcox.sign.test(x,mu=theo)
+wilcox.signtest(x,mu=theo)
 
 
 

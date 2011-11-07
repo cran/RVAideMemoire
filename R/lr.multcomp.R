@@ -1,8 +1,16 @@
 lr.multcomp <-
-function(x,y,fact,conf.level=0.95) {
-  if (length(x)!=length(y)) {stop("'x' and 'y' lengths differ")}
-  if (length(x)!=length(fact)) {stop("'x' and 'fact' lengths differ")}
-  if (length(y)!=length(fact)) {stop("'y' and 'fact' lengths differ")}
+function(formula,data=NULL,conf.level=0.95) {
+  if (all.names(formula)[1]!="~" | all.names(formula)[3]!="|") {stop("incorrect 'formula'")}
+  variables<-all.vars(formula)
+  y<-if (is.null(data)) {get(variables[1],pos=environment(formula))}
+    else {get(variables[1],pos=get(deparse(substitute(data))))}
+  x<-if (is.null(data)) {get(variables[2],pos=environment(formula))}
+    else {get(variables[2],pos=get(deparse(substitute(data))))}
+  fact<-if (is.null(data)) {get(variables[3],pos=environment(formula))}
+    else {get(variables[3],pos=get(deparse(substitute(data))))}
+  if (length(x)!=length(y)) {stop(paste("'",variables[2],"' and '",variables[1],"' lengths differ",sep=""))}
+  if (length(x)!=length(fact)) {stop(paste("'",variables[2],"' and '",variables[3],"' lengths differ",sep=""))}
+  if (length(y)!=length(fact)) {stop(paste("'",variables[1],"' and '",variables[3],"' lengths differ",sep=""))}
   if (is.character(fact) & !is.factor(fact)) {fact<-factor(fact)}
   nul<-as.numeric(row.names(table(c(which(is.na(y)),which(is.na(x))))))
   y2<-if(length(nul)>0) {y[-nul]} else {y}
@@ -26,7 +34,7 @@ function(x,y,fact,conf.level=0.95) {
     intcpt[i,3]<-mean(y.temp)-slope[i,1]*mean(x.temp)
   }
   comb<-combinations(nlevels(fact2),2,levels(fact2))
-  comp<-data.frame("Slopes"=character(nrow(comb)),"Intercept"=character(nrow(comb)),
+  comp<-data.frame("Slopes"=character(nrow(comb)),"Intercepts"=character(nrow(comb)),
     row.names=paste(comb[,1],"vs",comb[,2]))
   class(comp[,1])<-class(comp[,2])<-"character"
   for (i in 1:nrow(comb)) {
@@ -43,7 +51,7 @@ function(x,y,fact,conf.level=0.95) {
 	if (intcpt[lev1,3]<intcpt[lev2,1]) {comp[i,2]<-"unequal"} else {comp[i,2]<-"equal"}
     } else {comp[i,2]<-"equal"}
   }
-  result<-list(conf.level=conf.level,n.reg=nlevels(fact2),intercepts=intcpt,slopes=slope,comp=comp)
+  result<-list(data=variables,conf.level=conf.level,n.reg=nlevels(fact2),intercepts=intcpt,slopes=slope,comp=comp)
   class(result)<-c("lr.multcomp","list")
   return(result)
 }
