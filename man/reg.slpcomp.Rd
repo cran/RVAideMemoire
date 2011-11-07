@@ -7,17 +7,14 @@ Comparison of simple linear regression slopes
 Test for equality of slopes of several simple regression lines. The function returns the confidence interval of each slope and perfoms pairwise comparisons.
 }
 \usage{
-reg.slpcomp(var, covar, fact, conf.level = 0.95, p.method = "fdr")
+reg.slpcomp(formula, data=NULL, conf.level = 0.95, p.method = "fdr")
 }
 \arguments{
-  \item{var}{
-numeric vector (response variable).
+  \item{formula}{
+a formula of the form \code{y ~ x | f}, where \code{y} and \code{x} give the dependent and independent variable, respectively, and \code{f} is a factor giving levels to be compared.
 }
-  \item{covar}{
-numeric vector (covariable).
-}
-  \item{fact}{
-factor (groups).
+  \item{data}{
+an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
 }
   \item{conf.level}{
 confidence level.
@@ -27,6 +24,7 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
+  \item{data}{variables name.}
   \item{conf.level}{confidence level.}
   \item{coeffs}{slope of each regression line.}
   \item{coeffs.tab}{slope and confidence interval of each regression line.}
@@ -34,7 +32,7 @@ method for p-values correction. See help of the \code{p.adjust()} function.
   \item{df}{degrees of freedom of each comparison.}
   \item{t}{test statistics.}
   \item{p.value}{corrected p-values.}
-  \item{multcomp}{data.frame of results.}
+  \item{multcomp}{data frame of results.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
@@ -46,5 +44,5 @@ Maxime Hervé <mx.herve@gmail.com>
 covariable<-rep(1:30,3)
 variable<-c(seq(1,10,9/29)+rnorm(30,0,3),seq(1,30,1)+rnorm(30,0,3),seq(-1,-80,-79/29)+rnorm(30,0,3))
 factor<-factor(rep(LETTERS[1:3],each=30))
-reg.slpcomp(variable,covariable,factor)
+reg.slpcomp(variable~covariable|factor)
 }

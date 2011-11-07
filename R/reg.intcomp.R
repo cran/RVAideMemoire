@@ -1,13 +1,22 @@
 reg.intcomp <-
-function(var,covar,fact,conf.level=0.95,theo=rep(0,nlevels(fact)),p.method="fdr"){
-  if (length(var)!=length(fact)) {stop("'var' and 'fact' lengths differ")}
-  if (length(var)!=length(covar)) {stop("'var' and 'covar' lengths differ")}
-  if (length(covar)!=length(fact)) {stop("'covar' and 'fact' lengths differ")}
+function(formula,data=NULL,conf.level=0.95,theo=0,p.method="fdr"){
+  if (all.names(formula)[1]!="~" | all.names(formula)[3]!="|") {stop("incorrect 'formula'")}
+  variables<-all.vars(formula)
+  var<-if (is.null(data)) {get(variables[1],pos=environment(formula))}
+    else {get(variables[1],pos=get(deparse(substitute(data))))}
+  covar<-if (is.null(data)) {get(variables[2],pos=environment(formula))}
+    else {get(variables[2],pos=get(deparse(substitute(data))))}
+  fact<-if (is.null(data)) {get(variables[3],pos=environment(formula))}
+    else {get(variables[3],pos=get(deparse(substitute(data))))}
+  if (length(var)!=length(fact)) {stop(paste("'",variables[1],"' and '",variables[3],"' lengths differ",sep=""))}
+  if (length(var)!=length(covar)) {stop(paste("'",variables[1],"' and '",variables[2],"' lengths differ",sep=""))}
+  if (length(covar)!=length(fact)) {stop(paste("'",variables[2],"' and '",variables[3],"' lengths differ",sep=""))}
   if (is.character(fact) & !is.factor(fact)) {fact<-as.factor(fact)}
   nul<-as.numeric(row.names(table(c(which(is.na(var)),which(is.na(covar))))))
   var.2<-if(length(nul)>0) {var[-nul]} else {var}
   covar.2<-if(length(nul)>0) {covar[-nul]} else {covar}
   fact.2<-if(length(nul)>0) {fact[-nul]} else {fact}
+  if (length(theo)==1) {theo<-rep(theo,nlevels(fact.2))}
   SPE<-integer(nlevels(fact.2))
   SCEx<-integer(nlevels(fact.2))
   SCEr<-integer(nlevels(fact.2))
@@ -31,7 +40,7 @@ function(var,covar,fact,conf.level=0.95,theo=rep(0,nlevels(fact)),p.method="fdr"
   dir.com<-sum(SPE)/sum(SCEx)
   dir.ci<-qt((1+conf.level)/2,length(var.2)-2*nlevels(fact.2))*sqrt(CMr/sum(SCEx))
   tab.dir<-data.frame("inf"=dir.com-dir.ci,"coeff"=dir.com,"sup"=dir.com+dir.ci,row.names="")
-  tab.ord.ci<-data.frame("inf"=ord-ord.ci,"coeff"=ord,"sup"=ord+ord.ci,"theoretical"=theo,"t"=t.obs,"p.value"=p,
+  tab.ord.ci<-data.frame("inf"=ord-ord.ci,"coeff"=ord,"sup"=ord+ord.ci,"theo"=theo,"t"=t.obs,"p.value"=p,
     "signif"=psignif(p),row.names=levels(fact.2))
   comb<-combinations(nlevels(fact.2),2,levels(fact.2))
   ddl<-integer(length(comb[,1]))
@@ -46,7 +55,7 @@ function(var,covar,fact,conf.level=0.95,theo=rep(0,nlevels(fact)),p.method="fdr"
   p.pair.adj<-p.adjust(p.pair,method=p.method)
   tab.p.pair<-data.frame("df"=ddl,"t"=t.obs.pair,"p.value"=p.pair.adj,"signif"=psignif(p.pair.adj),
     row.names=paste(comb[,1],"vs",comb[,2]))
-  result<-list(conf.level=conf.level,slope.comm=tab.dir,intercepts=ord,
+  result<-list(data=variables,conf.level=conf.level,slope.comm=tab.dir,intercepts=ord,
     intercepts.ci=data.frame("inf"=ord-ord.ci,"coeff"=ord,"sup"=ord+ord.ci),intercepts.theo=theo,intercepts.t=t.obs,
     intercepts.p=p,intercepts.tab=tab.ord.ci,p.method=p.method,df.multcomp=ddl,t.multcomp=t.obs.pair,
     p.multcomp=p.pair.adj,multcomp=tab.p.pair)

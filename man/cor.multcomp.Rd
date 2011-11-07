@@ -1,7 +1,7 @@
 \name{cor.multcomp}
 \alias{cor.multcomp}
 \title{
-Comparison of Pearson's linear correlation coefficients.
+Comparison of Pearson's linear correlation coefficients
 }
 \description{
 Perform comparisons of Pearson's linear correlation coefficients.
@@ -19,7 +19,7 @@ numeric vector (first variable).
 numeric vector (second variable).
 }
   \item{fact}{
-factor (gorups).
+factor (groups).
 }
   \item{alpha}{
 significance level.
@@ -35,22 +35,22 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
-  \item{levels}{number of levels of 'fact'.}
+  \item{levels}{number of levels of \code{fact}.}
   \item{conf.level}{confidence level.}
   \item{alpha}{significance level.}
   \item{coeffs}{observed correlation coefficients.}
   \item{chi2.comp}{test statistics for equality of all coefficients.}
-  \item{p.comp}{p-value fot equality of all coefficients.}
-  \item{comp}{data.frame of results for equality of all coefficients.}
+  \item{p.comp}{p-value for equality of all coefficients.}
+  \item{comp}{data frame of results for equality of all coefficients.}
   \item{r.comm}{common correlation coefficient.}
   \item{r.theo}{theoretical coefficient.}
   \item{u.comm}{test statistics for equality of the common coefficient to the theoretical value.}
   \item{p.comm}{p-value for equality of the common coefficient to the theoretical value.}
-  \item{comm}{data.frame for equality of the common coefficient to the theoretical value.}
+  \item{comm}{data frame for equality of the common coefficient to the theoretical value.}
   \item{p.method}{method for p-values correction.}
   \item{u.multcomp}{test statistics of pairwise comparisons.}
   \item{p.multcomp}{p-values of pairwise comparisons.}
-  \item{multcomp}{data.frame of results of pairwise comparisons.}
+  \item{multcomp}{data frame of results of pairwise comparisons.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

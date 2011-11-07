@@ -4,20 +4,23 @@
 Individual contributions in regression
 }
 \description{
-Compute difference in regression parameters when each individual is dropped, expressed in proportion of the whole regression coefficients. The function deals with "lm" and "least.rect" models.
+Compute difference in regression parameters when each individual is dropped, expressed in proportion of the whole regression coefficients. The function deals with \code{lm} and \code{least.rect} models.
 }
 \usage{
-ind.contrib(model, print.diff = FALSE, graph = TRUE)
+ind.contrib(model, print.diff = FALSE, graph = TRUE, warning=25)
 }
 \arguments{
   \item{model}{
-model (of class "lm" or "least.rect").
+model (of class \code{"lm"} or \code{"least.rect"}).
 }
   \item{print.diff}{
 logical. If \code{TRUE} results are printed.
 }
   \item{graph}{
 logical. If \code{TRUE} results are returned in a graphical way.
+}
+  \item{warning}{
+level of graphical warning.
 }
 }
 \value{
@@ -36,7 +39,7 @@ Maxime Hervé <mx.herve@gmail.com>
 x<-1:30
 y<-1:30+rnorm(30,0,4)
 model1<-lm(y~x)
-model2<-least.rect(x,y)
+model2<-least.rect(y~x)
 ind.contrib(model1)
 ind.contrib(model2)
 }

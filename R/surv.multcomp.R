@@ -1,8 +1,37 @@
 surv.multcomp <-
-function(surv,fact,mat,strata=NULL,type=c("survreg","coxph"),distribution="exponential",
+function(formula,mat,data=NULL,strata=NULL,type=c("survreg","coxph"),distribution="exponential",
  p.method="fdr") {
-  if (!is.Surv(surv)) {stop("'surv' is not a Surv() object")}
-  if (nrow(rbind(surv))!=length(fact)) {stop("'surv' and 'fact' lengths differ")}
+  if (all.names(formula)[1]!="~") {stop("incorrect 'formula'")}
+  if (length(all.names(formula))==3) {
+    variables<-all.vars(formula)
+    surv.temp<-if (is.null(data)) {get(variables[1],pos=environment(formula))}
+	else {get(variables[1],pos=get(deparse(substitute(data))))}
+    if (!is.Surv(surv.temp)) {
+	stop(paste("'",variables[1],"' is not a Surv() object",sep=""))
+	  } else {
+	surv<-surv.temp
+	fact<-if (is.null(data)) {get(variables[2],pos=environment(formula))}
+	  else {get(variables[2],pos=get(deparse(substitute(data))))}
+    }
+  } else if (length(all.names(formula))==4) {
+    variables<-c(paste("Surv(",all.vars(formula)[1],")",sep=""),all.vars(formula)[2])
+    surv.temp<-if (is.null(data)) {get(all.vars(formula)[1],pos=environment(formula))}
+	else {get(all.vars(formula)[1],pos=get(deparse(substitute(data))))}
+    surv<-Surv(surv.temp)
+    fact<-if (is.null(data)) {get(all.vars(formula)[2],pos=environment(formula))}
+	else {get(all.vars(formula)[2],pos=get(deparse(substitute(data))))}	
+  }  else if (length(all.names(formula))==5) {
+    variables.temp<-all.vars(formula)
+    variables<-c(paste("Surv(",variables.temp[1],",",variables.temp[2],")",sep=""),variables.temp[3])
+    surv.temp<-if (is.null(data)) {get(variables.temp[1],pos=environment(formula))}
+	else {get(variables.temp[1],pos=get(deparse(substitute(data))))}
+    status<-if (is.null(data)) {get(variables.temp[2],pos=environment(formula))}
+	else {get(variables.temp[2],pos=get(deparse(substitute(data))))}
+    surv<-Surv(surv.temp,status)
+    fact<-if (is.null(data)) {get(variables.temp[3],pos=environment(formula))}
+	else {get(variables.temp[3],pos=get(deparse(substitute(data))))}	
+  }
+  if (nrow(rbind(surv))!=length(fact)) {stop(paste("'",variables[1],"' and '",variables[2],"' lengths differ",sep=""))}
   if (!is.matrix(mat)) {stop("'mat' is not a \"matrix\" object")}
   if (!is.factor(fact)) {
     fact2<-as.factor(fact)
@@ -72,7 +101,7 @@ function(surv,fact,mat,strata=NULL,type=c("survreg","coxph"),distribution="expon
 	as.numeric(summary(model)$logtest[1])
     }
     p[i]<-if (type=="survreg") {
-	1-pchisq(test[i],1)
+	pchisq(test[i],1,lower.tail=FALSE)
     } else {
 	as.numeric(summary(model)$logtest[3])
     }
@@ -83,18 +112,18 @@ function(surv,fact,mat,strata=NULL,type=c("survreg","coxph"),distribution="expon
   comp<-data.frame("statistic"=test,"p.value"=p.adj,"signif"=psignif(p.adj),row.names=comparisons)
   model.txt<-if (!is.null(strata)) {
     if (type=="survreg") {
-	paste("model: survreg(",deparse(substitute(surv))," ~ ",deparse(substitute(fact))," + strata(",
+	paste("model: survreg(",variables[1]," ~ ",variables[2]," + strata(",
 	  deparse(substitute(strata)),"), dist=\"",distribution,"\")",sep="")
     } else {
-	paste("model: coxph(",deparse(substitute(surv))," ~ ",deparse(substitute(fact))," + strata(",
+	paste("model: coxph(",variables[1]," ~ ",variables[2]," + strata(",
 	  deparse(substitute(strata)),"))",sep="")
     }
   } else {
     if (type=="survreg") {
-	paste("model: survreg(",deparse(substitute(surv))," ~ ",deparse(substitute(fact)),", dist=\"",distribution,
+	paste("model: survreg(",variables[1]," ~ ",variables[2],", dist=\"",distribution,
 	  "\")",sep="")
     } else {
-	paste("model: coxph(",deparse(substitute(surv))," ~ ",deparse(substitute(fact)),")",sep="")
+	paste("model: coxph(",variables[1]," ~ ",variables[2],")",sep="")
     }  }
   result<-list(model=model.txt,statistics=test,p.method=p.method,p.value=p.adj,comparisons=comp)
   class(result)<-c("surv.multcomp","list")

@@ -1,13 +1,13 @@
-\name{cramer.cor}
-\alias{cramer.cor}
+\name{cramer.coeff}
+\alias{cramer.coeff}
 \title{
 Cramer's association coefficient
 }
 \description{
-Compute the Cramer's association coefficient between 2 nomial variables, and its confidence interval (by bootstraping).
+Compute the Cramer's association coefficient between 2 nominal variables, and its confidence interval (by bootstraping).
 }
 \usage{
-cramer.cor(var1, var2, rep = 1000, conf.level = 0.95)
+cramer.coeff(var1, var2, rep = 1000, conf.level = 0.95)
 }
 \arguments{
   \item{var1}{
@@ -38,5 +38,5 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 var1<-sample(LETTERS[1:3],15,replace=TRUE)
 var2<-sample(letters[1:3],15,replace=TRUE)
-cramer.cor(var1,var2)
+cramer.coeff(var1,var2)
 }

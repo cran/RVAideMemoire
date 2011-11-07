@@ -1,4 +1,4 @@
-cramer.cor <-
+cramer.coeff <-
 function(var1,var2,rep=1000,conf.level=0.95){
   if (length(var1)!=length(var2)) {stop("'var1' and 'var2' lengths differ")}
   if (!is.factor(var1)) {var1<-factor(var1)}
@@ -24,7 +24,7 @@ function(var1,var2,rep=1000,conf.level=0.95){
   }
   int.sup<-ceiling(lg.tri*(1-int))
   result=list(conf.level=conf.level,rep=rep,V=v,interval=c("Inf"=tri[int.inf],"Sup"=tri[int.sup]))
-  class(result)<-c("cramer.cor","list")
+  class(result)<-c("cramer.coeff","list")
   return(result)
 }
 

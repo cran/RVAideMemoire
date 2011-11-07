@@ -1,5 +1,5 @@
-\name{wilcox.sign.test}
-\alias{wilcox.sign.test}
+\name{wilcox.signtest}
+\alias{wilcox.signtest}
 \title{
 Wilcoxon sign test
 }
@@ -7,7 +7,7 @@ Wilcoxon sign test
 Perform a Wilcoxon sign test to compare medians of two small paired samples or one median to a given value.
 }
 \usage{
-wilcox.sign.test(x, y, mu = NULL)
+wilcox.signtest(x, y, mu = NULL)
 }
 \arguments{
   \item{x}{
@@ -34,8 +34,8 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 x<-rnorm(7,3,1.5)
 y<-rnorm(7,5.5,2)
-wilcox.sign.test(x,y)
+wilcox.signtest(x,y)
 
 theo=4
-wilcox.sign.test(x,mu=theo)
+wilcox.signtest(x,mu=theo)
 }

@@ -7,17 +7,14 @@ Common slope and comparison of simple linear regression intercepts
 Compute the common slope of parallel linear regression lines and test for equality of intercepts. The function returns the common slope and its confidence interval, the intercept of each regression line and its confidence interval, test for equality of each intercept to a given value and performs pairwise comparisons between intercepts.
 }
 \usage{
-reg.intcomp(var, covar, fact, conf.level = 0.95, theo = rep(0, nlevels(fact)), p.method = "fdr")
+reg.intcomp(formula, data=NULL, conf.level = 0.95, theo = 0, p.method = "fdr")
 }
 \arguments{
-  \item{var}{
-numeric vector (response variable).
+  \item{formula}{
+a formula of the form \code{y ~ x | f}, where \code{y} and \code{x} give the dependent and independent variable, respectively, and \code{f} is a factor giving levels to be compared.
 }
-  \item{covar}{
-numeric vector (covariable).
-}
-  \item{fact}{
-factor (groups).
+  \item{data}{
+an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
 }
   \item{conf.level}{
 confidence level.
@@ -30,6 +27,7 @@ method for p-values correction. See healp of the \code{p.adjust()} function.
 }
 }
 \value{
+  \item{data}{variables name.}
   \item{conf.level}{confidence level.}
   \item{slope.comm}{common slope and confidence interval.}
   \item{intercepts}{intercept of each regression line.}
@@ -37,12 +35,12 @@ method for p-values correction. See healp of the \code{p.adjust()} function.
   \item{intercepts.theo}{theoretical intercepts.}
   \item{intercepts.t}{test statistics for equality to theoretical values.}
   \item{intercepts.p}{corrected p-values for equality to theoretical values.}
-  \item{intercepts.tab}{data.frame of results of tests for equality to theoretical value.}
+  \item{intercepts.tab}{data frame of results of tests for equality to theoretical value.}
   \item{p.method}{method for p-values correction.}
   \item{df.multcomp}{degrees of freedom of pairwise comparisons.}
   \item{t.multcomp}{test statistics of pairwise comparisons.}
   \item{p.multcomp}{corrected p-values of pairwise comparisons.}
-  \item{multcomp}{data.frame of results of pairwise comparisons.}
+  \item{multcomp}{data frame of results of pairwise comparisons.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
@@ -54,5 +52,5 @@ Maxime Hervé <mx.herve@gmail.com>
 covariable<-rep(1:30,3)
 variable<-c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
 factor<-as.factor(rep(LETTERS[1:3],each=30))
-reg.intcomp(variable,covariable,factor)
+reg.intcomp(variable~covariable|factor)
 }

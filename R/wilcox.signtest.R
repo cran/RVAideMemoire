@@ -1,4 +1,4 @@
-wilcox.sign.test <-
+wilcox.signtest <-
 function(x,y,mu=NULL) {
   if (is.null(mu)) {
     if (length(x)!=length(y)) {stop("'x' and 'y' lengths differ")}
@@ -18,8 +18,7 @@ function(x,y,mu=NULL) {
 	  signs[i]<-NA}
     }
     signs2<-na.omit(signs)
-    p<-min(pbinom(length(signs2[signs2=="+"]),length(signs2),0.5),
-	pbinom(length(signs2[signs2=="+"]),length(signs2),0.5,lower.tail=FALSE))*2
+    p<-binom.test(length(signs2[signs2=="+"]),length(signs2),0.5)$p.value
     result<-list(data=datas,mu=mu,p.value=p)
   } else {
     datas<-c(deparse(substitute(x)))
@@ -31,11 +30,10 @@ function(x,y,mu=NULL) {
 	  signs[i]<-NA}
     }
     signs2<-na.omit(signs)
-    p<-min(pbinom(length(signs2[signs2=="+"]),length(signs2),0.5),
-	pbinom(length(signs2[signs2=="+"]),length(signs2),0.5,lower.tail=FALSE))*2
+    p<-binom.test(length(signs2[signs2=="+"]),length(signs2),0.5)$p.value
     result<-list(data=datas,mu=mu,p.value=p)
   }
-  class(result)<-c("wilcox.sign.test","list")
+  class(result)<-c("wilcox.signtest","list")
   return(result)
 }
 

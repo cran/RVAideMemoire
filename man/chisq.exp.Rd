@@ -1,10 +1,10 @@
 \name{chisq.exp}
 \alias{chisq.exp}
 \title{
-Expected counts for comparison of proportions to theoretical values
+Expected counts for comparison of proportions to given values
 }
 \description{
-Return expected counts before comparing proportions to theoretical values by chi2 test.
+Return expected counts before comparing proportions to given values by a chi-squared test.
 }
 \usage{
 chisq.exp(data, p, graph = FALSE)

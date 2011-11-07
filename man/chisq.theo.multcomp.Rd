@@ -1,17 +1,17 @@
-\name{chisq.gof.multcomp}
-\alias{chisq.gof.multcomp}
+\name{chisq.theo.multcomp}
+\alias{chisq.theo.multcomp}
 \title{
-Pairwise comparisons after chi2 goodness-of-fit test
+Pairwise comparisons after chi-squared test for given probabilities
 }
 \description{
-Perform pairwise comparisons after a global chi2 goodness-of-fit test.
+Perform pairwise comparisons after a global chi-squared test for given probabilities.
 }
 \usage{
-chisq.gof.multcomp(x, p = rep(1/length(x), length(x)), p.method = "fdr")
+chisq.theo.multcomp(x, p, p.method = "fdr")
 }
 \arguments{
   \item{x}{
-nuermic vector (counts).
+numeric vector (counts).
 }
   \item{p}{
 theoretical proportions.
@@ -26,7 +26,7 @@ method for p-values correction. See help of the \code{p.adjust()} function.
   \item{p.method}{method for p-values correction.}
   \item{chi2}{statistics of each test.}
   \item{p}{corrected p-values.}
-  \item{com}{data.frame of results.}
+  \item{com}{data frame of results.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
@@ -36,10 +36,7 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 counts<-c(5,15,23,8,14)
-chisq.test(counts)
-chisq.gof.multcomp(counts)
-
 p.theo<-c(0.1,0.4,0.3,0.15,0.05)
 chisq.test(counts,p=p.theo)
-chisq.gof.multcomp(counts,p=p.theo)
+chisq.theo.multcomp(counts,p=p.theo)
 }
