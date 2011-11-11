@@ -1,10 +1,10 @@
 \name{prop.multcomp}
 \alias{prop.multcomp}
 \title{
-Pairwise comparisons after a test of equal or given proportions
+Pairwise comparisons after a test for given proportions
 }
 \description{
-Perform pairwise comparisons after a global test of equal or given proportions, using exact binomial tests.
+Perform pairwise comparisons after a global test for given proportions, using exact binomial tests.
 }
 \usage{
 prop.multcomp(x, p, p.method = "fdr")
@@ -25,7 +25,7 @@ method for p-values correction. See help of the \code{p.adjust()} function.
   \item{expected}{expected proportions.}
   \item{p.method}{method for p-values correction.}
   \item{p.value}{corrected p-values.}
-  \item{comp}{data.frame or results.}
+  \item{comp}{data frame or results.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

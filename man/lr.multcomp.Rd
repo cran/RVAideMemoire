@@ -7,28 +7,26 @@ Comparison of simple linear least rectangles regression lines
 Compare confidence intervals of parameters of several simple linear least rectangles regression lines. No test is performed, the function just compares confidence intervals and return 'equal' or 'unequal'.
 }
 \usage{
-lr.multcomp(x, y, fact, conf.level = 0.95)
+lr.multcomp(formula, data=NULL, conf.level = 0.95)
 }
 \arguments{
-  \item{x}{
-numeric vector (variable drawn in abscissa).
+  \item{formula}{
+a formula of the form \code{y ~ x | f}, where \code{y} and \code{x} give the y and x variable, respectively, and \code{f} is a factor giving levels to be compared.
 }
-  \item{y}{
-numeric vector (variable drawn in ordinate).
-}
-  \item{fact}{
-factor (groups).
+  \item{data}{
+an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
 }
   \item{conf.level}{
 confidence level.
 }
 }
 \value{
+  \item{data}{variables name.}
   \item{conf.level}{confidence level.}
   \item{n.reg}{number of regression lines.}
   \item{intercepts}{intercept and confidence interval of each regression line.}
   \item{slopes}{slope and confidence interval of each regression lines.}
-  \item{comp}{data.frame of results.}
+  \item{comp}{data frame of results.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
@@ -37,8 +35,8 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link[RVAideMemoire]{least.rect}}
 }
 \examples{
-covariable<-rep(1:30,3)
-variable<-c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
+x<-rep(1:30,3)
+y<-c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
 factor<-as.factor(rep(LETTERS[1:3],each=30))
-lr.multcomp(variable,covariable,factor)
+lr.multcomp(y~x|factor)
 }

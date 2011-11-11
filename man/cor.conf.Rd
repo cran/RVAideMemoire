@@ -25,7 +25,7 @@ theoretical value.
   \item{r.obs}{observed coefficient.}
   \item{u}{test statistics.}
   \item{p}{p-value.}
-  \item{conform}{data.frame of results.}
+  \item{conform}{data frame of results.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

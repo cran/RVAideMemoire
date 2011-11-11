@@ -1,6 +1,12 @@
 least.rect <-
-function(x,y,conf.level=0.95,theo=1){
-  if (length(x)!=length(y)) {stop("'x' and 'y' lengths differ")}
+function(formula,data=NULL,conf.level=0.95,theo=1){
+  if (all.names(formula)[1]!="~") {stop("incorrect 'formula'")}
+  variables<-all.vars(formula)
+  y<-if (is.null(data)) {get(variables[1],pos=environment(formula))}
+    else {get(variables[1],pos=get(deparse(substitute(data))))}
+  x<-if (is.null(data)) {get(variables[2],pos=environment(formula))}
+    else {get(variables[2],pos=get(deparse(substitute(data))))}
+  if (length(x)!=length(y)) {stop(paste("'",variables[1],"' and '",variables[2],"' lengths differ",sep=""))}
   nul<-as.numeric(row.names(table(c(which(is.na(x)),which(is.na(y))))))
   x.2<-if(length(nul)>0) {x[-nul]} else {x}
   y.2<-if(length(nul)>0) {y[-nul]} else {y}
@@ -17,7 +23,7 @@ function(x,y,conf.level=0.95,theo=1){
   a.sup<-mean(y.2)-b.inf*mean(x.2)
   t.obs<-abs(b^2-theo^2)*sqrt(length(x.2)-2)/(2*b*theo*sqrt(1-r^2))
   p<-min(pt(t.obs,length(x.2)-2),pt(t.obs,length(x.2)-2,lower.tail=FALSE))*2
-  conf.int<-matrix(c(a.inf,b.inf,a,b,a.sup,b.sup),nrow=2,dimnames=list(c("(Intercept)",deparse(substitute(x))),
+  conf.int<-matrix(c(a.inf,b.inf,a,b,a.sup,b.sup),nrow=2,dimnames=list(c("(Intercept)",variables[2]),
     c("inf","coeff","sup")))
   conform<-data.frame("observed"=b,"theoretical"=theo,"df"=length(x.2)-2,"t"=t.obs,"p.value"=p,
     "signif"=psignif(p),row.names="")
@@ -26,12 +32,12 @@ function(x,y,conf.level=0.95,theo=1){
     "df"=as.numeric(corr$parameter),"t"=as.numeric(corr$statistic),"p.value"=p.corr,"signif"=psignif(p.corr),
     row.names="")
   coeffs<-c(a,b)
-  names(coeffs)<-c("(Intercept)",deparse(substitute(x)))
+  names(coeffs)<-c("(Intercept)",variables[2])
   fit<-a+b*x
   names(fit)<-1:length(x)
   res<-y-fit
   names(res)<-1:length(x)
-  result=list(coefficients=coeffs,x=deparse(substitute(x)),y=deparse(substitute(y)),residuals=res,fitted.values=fit,
+  result=list(coefficients=coeffs,x=variables[2],y=variables[1],residuals=res,fitted.values=fit,
     conf.level=conf.level,conf.int=conf.int,slope.theo=theo,df.comp=length(x.2)-2,t.comp=t.obs,p.comp=p,
     model=data.frame(y,x),comp=conform,r=c("inf"=as.numeric(corr$conf.int[1]),"r"=r,
     "sup"=as.numeric(corr$conf.int[2])),r.df=as.numeric(corr$parameter),r.t=as.numeric(corr$statistic),

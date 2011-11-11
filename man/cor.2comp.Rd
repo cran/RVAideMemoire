@@ -38,12 +38,12 @@ theoretical coefficient.
   \item{coeffs}{observed Pearson's coefficients.}
   \item{u.comp}{test statistics for comparison of the 2 coefficients.}
   \item{p.com}{p-value for comparison of the 2 coefficients.}
-  \item{comp}{data.frame of results for comparison or the 2 coefficients.}
+  \item{comp}{data frame of results for comparison or the 2 coefficients.}
   \item{r.comm}{common correlation coefficient.}
   \item{r.theo}{theoretical coefficient.}
   \item{u.comm}{test statistics for equality of the common coefficient to the theoretical value.}
   \item{p.comm}{p-value for equality of the common coefficient to the theoretical value.}
-  \item{comm}{data.frame or results for equality of the common coefficient to the theoretical value.}
+  \item{comm}{data frame or results for equality of the common coefficient to the theoretical value.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

@@ -4,7 +4,7 @@
 Bootstrap
 }
 \description{
-Simplified version of the \code{boot()} function (boot package).
+Simplified version of the \code{boot()} function (package boot).
 }
 \usage{
 bootstrap(x, fun, rep = 1000, conf.level = 0.95, ...)

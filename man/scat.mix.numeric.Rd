@@ -4,7 +4,7 @@
 Representation of numeric variables in Hill and Smith mix analysis
 }
 \description{
-Represent numeric variables of a Hill and Smith mix analysis as in PCA. The function is based on the \code{s.corcircle()} function of ade4 package.
+Represent numeric variables of a Hill and Smith mix analysis as in PCA. The function is based on the \code{s.corcircle()} function of the package ade4.
 }
 \usage{
 scat.mix.numeric(obj.dudi, xax = 1, yax = 2, ...)

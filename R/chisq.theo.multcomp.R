@@ -1,5 +1,6 @@
-chisq.gof.multcomp <-
-function(x,p=rep(1/length(x),length(x)),p.method="fdr") {
+chisq.theo.multcomp <-
+function(x,p,p.method="fdr") {
+  if (sum(p)!=1) {stop("sum of probabilities must be 1")}
   theo<-integer(length(x))
   chi2<-integer(length(x))
   pval<-integer(length(x))
@@ -12,7 +13,7 @@ function(x,p=rep(1/length(x),length(x)),p.method="fdr") {
   p.adj<-p.adjust(pval,method=p.method)
   comp<-data.frame("observed"=x,"expected"=theo,"chi2"=chi2,"p.value"=p.adj,"signif"=psignif(p.adj))
   result<-list(observed=x,expected=theo,p.method=p.method,chi2=chi2,p=p.adj,comp=comp)
-  class(result)<-c("chisq.gof.multcomp","list")
+  class(result)<-c("chisq.theo.multcomp","list")
   return(result)
 }
 

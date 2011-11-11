@@ -11,7 +11,7 @@ logis.fit(model, int = 5, ...)
 }
 \arguments{
   \item{model}{
-glm model.
+\code{glm} model.
 }
   \item{int}{
 number of intervals.

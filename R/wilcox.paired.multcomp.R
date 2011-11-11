@@ -1,9 +1,16 @@
 wilcox.paired.multcomp <-
-function(resp,fact,block,p.method="fdr") {
-  if (length(resp)!=length(fact)) {stop("'resp' and 'fact' lengths differ")}
-  if (length(resp)!=length(block)) {stop("'resp' and 'block' lengths differ")}
-  if (length(fact)!=length(block)) {stop("'fact' and 'block' lengths differ")}
-  datas<-c(deparse(substitute(resp)),deparse(substitute(fact)),deparse(substitute(block)))
+function(formula,data=NULL,p.method="fdr") {
+  if (all.names(formula)[1]!="~" | all.names(formula)[3]!="|") {stop("incorrect 'formula'")}
+  variables<-all.vars(formula)
+  resp<-if (is.null(data)) {get(variables[1],pos=environment(formula))}
+    else {get(variables[1],pos=get(deparse(substitute(data))))}
+  fact<-if (is.null(data)) {get(variables[2],pos=environment(formula))}
+    else {get(variables[2],pos=get(deparse(substitute(data))))}
+  block<-if (is.null(data)) {get(variables[3],pos=environment(formula))}
+    else {get(variables[3],pos=get(deparse(substitute(data))))}
+  if (length(resp)!=length(fact)) {stop(paste("'",variables[1],"' and '",variables[2],"' lengths differ",sep=""))}
+  if (length(resp)!=length(block)) {stop(paste("'",variables[1],"' and '",variables[3],"' lengths differ",sep=""))}
+  if (length(fact)!=length(block)) {stop(paste("'",variables[2],"' and '",variables[3],"' lengths differ",sep=""))}
   if (!is.factor(fact)) {fact<-factor(fact)}
   if (!is.factor(block)) {block<-factor(block)}
   comb<-combinations(nlevels(fact),2,levels(fact))
@@ -22,7 +29,7 @@ function(resp,fact,block,p.method="fdr") {
   }
   p.adj<-p.adjust(p,method=p.method)
   tab.comp<-data.frame("V"=V,"p.value"=p.adj,"signif"=psignif(p.adj),row.names=paste(comb[,1],"vs",comb[,2]))
-  result<-list(data=datas,p.method=p.method,V=V,p.value=p.adj,comp=tab.comp)
+  result<-list(data=variables,p.method=p.method,V=V,p.value=p.adj,comp=tab.comp)
   class(result)<-c("wilcox.paired.multcomp","list")
   return(result)
 }

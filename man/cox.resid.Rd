@@ -11,7 +11,7 @@ cox.resid(model, covar)
 }
 \arguments{
   \item{model}{
-coxph model.
+\code{coxph} model.
 }
   \item{covar}{
 list of covariables.
@@ -21,7 +21,7 @@ list of covariables.
 Fox, J. 2002 Cox Proportional-Hazards Regression for Survival Data.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com), based on a John Fox idea.
+Maxime Hervé <mx.herve@gmail.com>, based on a John Fox idea.
 }
 \seealso{
 \code{\link[survival]{coxph}}
