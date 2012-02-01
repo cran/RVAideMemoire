@@ -1,10 +1,10 @@
 \name{lr.multcomp}
 \alias{lr.multcomp}
 \title{
-Comparison of simple linear least rectangles regression lines
+Comparison of several simple linear least rectangles regression lines
 }
 \description{
-Compare confidence intervals of parameters of several simple linear least rectangles regression lines. No test is performed, the function just compares confidence intervals and return 'equal' or 'unequal'.
+Compare confidence intervals of parameters of several simple linear least rectangles regression lines. No test is performed, the function just compares confidence intervals and returns 'equal' or 'unequal'.
 }
 \usage{
 lr.multcomp(formula, data=NULL, conf.level = 0.95)
@@ -21,12 +21,13 @@ confidence level.
 }
 }
 \value{
-  \item{data}{variables name.}
+  \item{data.name}{a character string giving the name(s) of the data.}
   \item{conf.level}{confidence level.}
   \item{n.reg}{number of regression lines.}
   \item{intercepts}{intercept and confidence interval of each regression line.}
   \item{slopes}{slope and confidence interval of each regression lines.}
-  \item{comp}{data frame of results.}
+  \item{intercepts.comp}{table of results for intercepts.}
+  \item{slopes.comp}{table of results for slopes.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
@@ -35,8 +36,8 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link[RVAideMemoire]{least.rect}}
 }
 \examples{
-x<-rep(1:30,3)
-y<-c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
-factor<-as.factor(rep(LETTERS[1:3],each=30))
-lr.multcomp(y~x|factor)
+x <- rep(1:30,3)
+y <- c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
+fact <- as.factor(rep(LETTERS[1:3],each=30))
+lr.multcomp(y~x|fact)
 }

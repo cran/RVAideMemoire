@@ -1,7 +1,7 @@
 print.chisq.exp <-
 function(x,...) {
-  cat("Expected counts\n")
+  cat("\nExpected counts\n")
   print(x$mat)
-  cat(paste("\nCochran's rule :",x$cochran,"count(s) maximum can be < or = to 5\n"))
+  cat(paste("\nCochran's rule: maximum",x$cochran,"count(s) can be <= 5\n\n"))
 }
 

@@ -17,7 +17,7 @@ numeric vector (first variable).
 nuermic verctor (second variable).
 }
   \item{rep}{
-number of replicates for bootstrap.
+number of replicates for bootstraping.
 }
   \item{conf.level}{
 confidence level.
@@ -36,7 +36,7 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{cor.test}}, \code{\link[boot]{boot}}
 }
 \examples{
-var1<-sample(1:50,15,replace=TRUE)
-var2<-sample(1:50,15,replace=TRUE)
+var1 <- sample(1:50,15,replace=TRUE)
+var2 <- sample(1:50,15,replace=TRUE)
 spearman.ci(var1,var2)
 }

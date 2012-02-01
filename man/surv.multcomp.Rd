@@ -7,7 +7,7 @@ Pairwise comparisons for survival analysis
 Perform pairwise comparisons between groups for equality of time to event. The function deals with \code{coxph} and \code{survreg} models.
 }
 \usage{
-surv.multcomp(formula, mat, data=NULL, strata = NULL, type = c("survreg", "coxph"), distribution = "exponential", p.method = "fdr")
+surv.multcomp(formula, mat, data=NULL, strata = NULL, type = c("coxph", "survreg"), distribution = "exponential", p.method = "fdr")
 }
 \arguments{
   \item{formula}{
@@ -23,21 +23,25 @@ an optional data frame containing the variables in the formula \code{formula}. B
 strata, if needed.
 }
   \item{type}{
-model type: \code{"survreg"} or \code{"coxph"}.
+model type: \code{"coxph"} (default) or \code{"survreg"}.
 }
   \item{distribution}{
-distribution when a survreg model is used.
+distribution when a \code{"survreg"} model is used.
 }
   \item{p.method}{
 method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
+\details{
+When pairwise comparisons are based on a \code{"coxph"} model, a likelihood ratio test is used.
+When pairwise comparisons are based on a \code{"survreg"} model, a logrank test is used.
+}
 \value{
   \item{model}{model formula.}
-  \item{statistics}{test statistics.}
-  \item{p.method}{method for p-values correction.}
+  \item{statistic}{test statistics.}
+  \item{p.adjust.method}{method for p-values correction.}
   \item{p.value}{corrected p-values.}
-  \item{comparisons}{data frame of results.}
+  \item{comparisons}{table of results.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
@@ -46,14 +50,15 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link[survival]{survreg}}, \code{\link[survival]{coxph}}
 }
 \examples{
-death<-c(sample(8:15,20,replace=TRUE),sample(12:20,20,replace=TRUE),sample(18:22,20,replace=TRUE))
-groups<-factor(rep(LETTERS[1:3],each=20))
-model1<-coxph(Surv(death)~groups)
+death <- c(sample(8:15,20,replace=TRUE),sample(12:20,20,replace=TRUE),sample(18:22,20,replace=TRUE))
+groups <- factor(rep(LETTERS[1:3],each=20))
+model1 <- coxph(Surv(death)~groups)
 model1
-mat<-matrix(c(1,-1,0,0,1,-1,2,-1,-1),ncol=3,byrow=TRUE,dimnames=list(1:3,levels(groups)))
+mat <- matrix(c(1,-1,0,0,1,-1,2,-1,-1),ncol=3,byrow=TRUE,dimnames=list(1:3,levels(groups)))
+mat
 surv.multcomp(Surv(death)~groups,mat,type="coxph")
 
-model2<-survreg(Surv(death)~groups,dist="weibull")
+model2 <- survreg(Surv(death)~groups,dist="weibull")
 model2
 surv.multcomp(Surv(death)~groups,mat,type="survreg",distribution="weibull")
 }

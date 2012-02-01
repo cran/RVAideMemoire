@@ -36,10 +36,10 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{lm.influence}}, \code{\link[RVAideMemoire]{least.rect}}
 }
 \examples{
-x<-1:30
-y<-1:30+rnorm(30,0,4)
-model1<-lm(y~x)
-model2<-least.rect(y~x)
+x <- 1:30
+y <- 1:30+rnorm(30,0,4)
+model1 <- lm(y~x)
+model2 <- least.rect(y~x)
 ind.contrib(model1)
 ind.contrib(model2)
 }

@@ -17,7 +17,7 @@ reg.ci(model, conf.level = 0.95, type = c("mean", "ind"), ...)
 confidence level.
 }
   \item{type}{
-interval type : \code{"mean"} for the interval of the regression line (default), \code{"ind"} for the interval of individual values.
+interval type : \code{"mean"} for the interval of the regression line (default), \code{"ind"} for the interval of individual values (also called "prediction interval").
 }
   \item{\dots}{
 other agruments. See help of the \code{lines()} function.
@@ -30,9 +30,9 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{lm}}
 }
 \examples{
-x<-1:50
-y<-1:50+rnorm(50,0,4)
-regression<-lm(y~x)
+x <- 1:50
+y <- 1:50+rnorm(50,0,4)
+regression <- lm(y~x)
 plot(x,y)
 abline(regression)
 reg.ci(regression,type="mean",col="red")

@@ -4,7 +4,7 @@
 Representation of numeric variables in Hill and Smith mix analysis
 }
 \description{
-Represent numeric variables of a Hill and Smith mix analysis as in PCA. The function is based on the \code{s.corcircle()} function of the package ade4.
+Represent numeric variables of a Hill and Smith mix analysis as in PCA. The function is based on the \code{s.corcircle()} function of the ade4 package.
 }
 \usage{
 scat.mix.numeric(obj.dudi, xax = 1, yax = 2, ...)
@@ -33,15 +33,15 @@ Stéphane Champely
 \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{s.corcircle}}
 }
 \examples{
-# Imaginary dataset
-age<-sample(15:60,50,replace=TRUE)
-sex<-sample(c("M","F"),50,replace=TRUE)
-size<-sample(155:190,50,replace=TRUE)
-hair<-sample(c("Fair","Dark","Russet"),50,replace=TRUE)
-eyes<-sample(c("Blue","Green","Brown"),50,replace=TRUE)
-weight<-sample(50:85,50,replace=TRUE)
-hand<-sample(c("Left.handed","Right.handed"),50,replace=TRUE)
-tab<-data.frame(age,sex,size,weight,hand,eyes,hair)
-amix<-dudi.mix(tab,scannf=FALSE,nf=2)
+# Fictive dataset
+age <- sample(15:60,50,replace=TRUE)
+sex <- sample(c("M","F"),50,replace=TRUE)
+size <- sample(155:190,50,replace=TRUE)
+hair <- sample(c("Fair","Dark","Russet"),50,replace=TRUE)
+eyes <- sample(c("Blue","Green","Brown"),50,replace=TRUE)
+weight <- sample(50:85,50,replace=TRUE)
+hand <- sample(c("Left.handed","Right.handed"),50,replace=TRUE)
+tab <- data.frame(age,sex,size,weight,hand,eyes,hair)
+amix <- dudi.mix(tab,scannf=FALSE,nf=2)
 scat.mix.numeric(amix)
 }
