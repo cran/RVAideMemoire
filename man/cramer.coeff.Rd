@@ -17,7 +17,7 @@ factor (first variable).
 factor (second variable).
 }
   \item{rep}{
-number of replicates for bootstrap.
+number of replicates for bootstraping.
 }
   \item{conf.level}{
 confidence level.
@@ -26,7 +26,7 @@ confidence level.
 \value{
   \item{conf.level}{confidence level.}
   \item{rep}{number of replicates.}
-  \item{V}{Cramer's coefficient.}
+  \item{statistic}{Cramer's coefficient.}
   \item{interval}{confidence interval.}
 }
 \author{
@@ -36,7 +36,7 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link[boot]{boot}}
 }
 \examples{
-var1<-sample(LETTERS[1:3],15,replace=TRUE)
-var2<-sample(letters[1:3],15,replace=TRUE)
+var1 <- sample(LETTERS[1:3],15,replace=TRUE)
+var2 <- sample(letters[1:3],15,replace=TRUE)
 cramer.coeff(var1,var2)
 }

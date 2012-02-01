@@ -17,6 +17,11 @@ time to event.
 status (1: event observed, 0: event not observed).
 }
 }
+\value{
+  \item{n}{initial number of individuals.}
+  \item{time}{time of events.}
+  \item{alive}{number of survivors at each time.}
+}
 \author{
 Maxime Hervé <mx.herve@gmail.com>
 }

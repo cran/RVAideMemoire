@@ -42,7 +42,7 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 # Confidence interval of a mean
-samp<-sample(1:50,10,replace=TRUE)
+samp <- sample(1:50,10,replace=TRUE)
 bootstrap(samp,function(x,i) mean(x[i]))
 
 # Confidence interval of the standard error of the mean

@@ -2,38 +2,26 @@ wilcox.signtest <-
 function(x,y,mu=NULL) {
   if (is.null(mu)) {
     if (length(x)!=length(y)) {stop("'x' and 'y' lengths differ")}
-    datas<-c(deparse(substitute(x)),deparse(substitute(y)))
+    data.name <- paste("data: ",deparse(substitute(x))," and ",deparse(substitute(y)),sep="")
+    method <- "Comparison of 2 medians by Wilcoxon sign test"
     if (any(is.na(x))) {
-	y<-y[-which(is.na(x))]
-	x<-x[-which(is.na(x))]
+	y <- y[-which(is.na(x))]
+	x <- x[-which(is.na(x))]
     }
     if (any(is.na(y))) {
-	x<-x[-which(is.na(y))]
-	y<-y[-which(is.na(y))]
+	x <- x[-which(is.na(y))]
+	y <- y[-which(is.na(y))]
     }
-    signs<-integer(length(x))
-    for (i in 1:length(x)) {
-	if (x[i]<y[i]) {signs[i]<-"-"} else
-	if (x[i]>y[i]) {signs[i]<-"+"} else {
-	  signs[i]<-NA}
-    }
-    signs2<-na.omit(signs)
-    p<-binom.test(length(signs2[signs2=="+"]),length(signs2),0.5)$p.value
-    result<-list(data=datas,mu=mu,p.value=p)
+    signs <- x-y
+    p <- binom.test(length(signs[signs>0]),length(signs[signs!=0]),0.5)$p.value
   } else {
-    datas<-c(deparse(substitute(x)))
-    if (any(is.na(x))) {x<-x[-which(is.na(x))]}
-    signs<-integer(length(x))
-    for (i in 1:length(x)) {
-	if (x[i]<mu) {signs[i]<-"-"} else
-	if (x[i]>mu) {signs[i]<-"+"} else {
-	  signs[i]<-NA}
-    }
-    signs2<-na.omit(signs)
-    p<-binom.test(length(signs2[signs2=="+"]),length(signs2),0.5)$p.value
-    result<-list(data=datas,mu=mu,p.value=p)
+    data.name <- paste("data: ",deparse(substitute(x)),sep="")
+    method <- "Comparison of one median to a given value\n  by Wilcoxon sign test"
+    if (any(is.na(x))) {x <- x[-which(is.na(x))]}
+    signs <- x-mu
+    p <- binom.test(length(signs[signs>0]),length(signs[signs!=0]),0.5)$p.value
   }
-  class(result)<-c("wilcox.signtest","list")
+  result <- list(method=method,data.name=data.name,mu=mu,p.value=p)
+  class(result) <- c("wilcox.signtest","list")
   return(result)
 }
-

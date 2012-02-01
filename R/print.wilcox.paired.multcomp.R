@@ -1,8 +1,10 @@
 print.wilcox.paired.multcomp <-
 function (x,...) {
-  cat(paste("\nPairwise comparisons by Wilcoxon signed rank test\n  (correction: ",x$p.method,")\n\n",sep=""))
-  cat(paste(x$data[1],"~",x$data[2],", block =",x$data[3],"\n\n"))
-  print(x$comp,digits=5)
+  cat(paste("\nPairwise comparisons by ",x$method,"\n  (correction: ",x$p.adjust.method,")\n\n",sep=""))
+  cat(x$data.name,"\n")
+  if (x$permutations) {cat(paste(x$npermutations," permutations\n",sep=""))}
+  cat("\n")
+  print(x$comp,digits=5,na.print="-")
   cat("\n")
 }
 
