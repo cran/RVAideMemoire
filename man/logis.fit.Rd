@@ -4,7 +4,7 @@
 Graphical adujstment of a simple binary logistic regression to data
 }
 \description{
-Cut the data in intervals, compute the response probability and its standard error for each interval and add the results to the regression curve. No test is performed but this permits to have a graphical idea of the adjustment of the model to the data.
+Cut the data into intervals, compute the response probability and its standard error for each interval and add the results to the regression curve. No test is performed but this permits to have a graphical idea of the adjustment of the model to the data.
 }
 \usage{
 logis.fit(model, int = 5, ...)
@@ -27,9 +27,9 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{glm}}
 }
 \examples{
-x<-1:50
-y<-c(rep(0,18),sample(0:1,14,replace=TRUE),rep(1,18))
-model<-glm(y~x,family=binomial)
+x <- 1:50
+y <- c(rep(0,18),sample(0:1,14,replace=TRUE),rep(1,18))
+model <- glm(y~x,family=binomial)
 plot(x,y)
 lines(x,model$fitted)
 logis.fit(model)

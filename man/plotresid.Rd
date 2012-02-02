@@ -4,14 +4,17 @@
 Simple analysis of model residuals
 }
 \description{
-Plot residuals of a model against fitted values, a QQplot of residuals and perform a Shapiro-Wilk test on residuals. The function deals with \code{lm} (including \code{glm} and \code{glm.nb}) and \code{mer} models. Quantile residuals (function \code{qresiduals()},package statmod) are used for \code{glm.nb} models and for \code{glm} models with a poisson, quasipoisson, binomial or quasibinomial family.
+Plot residuals of a model against fitted values and a QQplot of these residuals. Optionally, a Shapiro-Wilk's test can be performed on residuals. The function deals with \code{lm} (including \code{glm} and \code{glm.nb}) and \code{mer} models. Quantile residuals (function \code{qresiduals()},package statmod) are used for \code{glm.nb} models and for \code{glm} models with a poisson, quasipoisson, binomial or quasibinomial family.
 }
 \usage{
-plotresid(model)
+plotresid(model, shapiro = FALSE)
 }
 \arguments{
   \item{model}{
 \code{lm} or \code{mer} model.
+}
+  \item{shapiro}{
+logical. If \code{TRUE} a Shapiro-Wilk's test is performed on residuals.
 }
 }
 \author{

@@ -5,9 +5,9 @@ function(x,...) {
   cat(100*x$conf.level,"% confidence interval\n",sep="")
   print(x$conf.int,digits=5)
   cat("\nEquality of the slope to",x$slope.theo,"\n")
-  print(x$comp,digits=5)
+  print(x$comp,digits=5,row.names=FALSE)
   cat("\nPearson's linear correlation coefficient\n(",100*x$conf.level,"% confidence interval)\n",sep="")
-  print(x$corr,digits=5)
+  print(x$corr,digits=5,row.names=FALSE)
   cat("\n")
 }
 

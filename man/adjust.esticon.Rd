@@ -25,7 +25,7 @@ other arguments. See help of the \code{esticon()} function.
 }
 \value{
   \item{tab.no.adjust}{results of the \code{esticon()} function.}
-  \item{p.method}{method for p-values correction.}
+  \item{p.adjust.method}{method for p-values correction.}
   \item{tab.adjust}{results with corrected p-values.}
 }
 \author{

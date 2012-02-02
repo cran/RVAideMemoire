@@ -21,7 +21,8 @@ theoretical median.
 }
 }
 \value{
-  \item{data}{variable(s) name.}
+  \item{method}{a character string indicating what type of test was performed.}
+  \item{data.name}{a character string giving the name(s) of the data.}
   \item{mu}{theoretical median.}
   \item{p.value}{p-value of the test.}
 }
@@ -32,10 +33,14 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{wilcox.test}}
 }
 \examples{
-x<-rnorm(7,3,1.5)
-y<-rnorm(7,5.5,2)
+set.seed(1706)
+x <- rnorm(7,3,1.5)
+
+# Comparison of 2 samples
+y <- rnorm(7,5.5,2)
 wilcox.signtest(x,y)
 
-theo=4
+# Comparison to a given value
+theo <- 4
 wilcox.signtest(x,mu=theo)
 }

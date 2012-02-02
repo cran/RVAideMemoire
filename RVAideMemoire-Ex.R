@@ -18,7 +18,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 # Confidence interval of a mean
-samp<-sample(1:50,10,replace=TRUE)
+samp <- sample(1:50,10,replace=TRUE)
 bootstrap(samp,function(x,i) mean(x[i]))
 
 # Confidence interval of the standard error of the mean
@@ -38,10 +38,10 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-proportions<-sample(c(0,1),60,replace=TRUE)
-populations<-sample(LETTERS[1:3],60,replace=TRUE)
-tab.cont<-table(populations,proportions)
-p.theo<-c(0.2,0.5,0.7)
+proportions <- sample(c(0,1),60,replace=TRUE)
+populations <- sample(LETTERS[1:3],60,replace=TRUE)
+tab.cont <- table(populations,proportions)
+p.theo <- c(0.2,0.5,0.7)
 chisq.exp(tab.cont,p=p.theo)
 
 
@@ -53,12 +53,12 @@ nameEx("chisq.multcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: chisq.multcomp
-### Title: Pairwise comparisons after chi-squared goodness-of-fit test
+### Title: Pairwise comparisons after a chi-squared goodness-of-fit test
 ### Aliases: chisq.multcomp
 
 ### ** Examples
 
-counts<-c(5,15,23,8,14)
+counts <- c(5,15,23,8,14)
 chisq.test(counts)
 chisq.multcomp(counts)
 
@@ -71,14 +71,14 @@ nameEx("chisq.theo.multcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: chisq.theo.multcomp
-### Title: Pairwise comparisons after chi-squared test for given
+### Title: Pairwise comparisons after a chi-squared test for given
 ###   probabilities
 ### Aliases: chisq.theo.multcomp
 
 ### ** Examples
 
-counts<-c(5,15,23,8,14)
-p.theo<-c(0.1,0.4,0.3,0.15,0.05)
+counts <- c(5,15,23,8,14)
+p.theo <- c(0.1,0.4,0.3,0.15,0.05)
 chisq.test(counts,p=p.theo)
 chisq.theo.multcomp(counts,p=p.theo)
 
@@ -91,15 +91,15 @@ nameEx("cochran.qtest")
 flush(stderr()); flush(stdout())
 
 ### Name: cochran.qtest
-### Title: Cochran Q test
+### Title: Cochran's Q test
 ### Aliases: cochran.qtest
 
 ### ** Examples
 
-response<-c(0,1,1,0,0,1,0,1,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,0,1,1,0,0,1)
-factor<-factor(rep(LETTERS[1:3],10))
-block<-factor(rep(letters[1:10],each=3))
-cochran.qtest(response~factor|block)
+response <- c(0,1,1,0,0,1,0,1,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,0,1,1,0,0,1)
+fact <- factor(rep(LETTERS[1:3],10))
+block <- factor(rep(letters[1:10],each=3))
+cochran.qtest(response~fact|block)
 
 
 
@@ -115,10 +115,10 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-cor1.var1<-1:30+rnorm(30,0,2)
-cor1.var2<-1:30+rnorm(30,0,3)
-cor2.var1<-(-1):-30+rnorm(30,0,2)
-cor2.var2<-(-1):-30+rnorm(30,0,3)
+cor1.var1 <- 1:30+rnorm(30,0,2)
+cor1.var2 <- 1:30+rnorm(30,0,3)
+cor2.var1 <- (-1):-30+rnorm(30,0,2)
+cor2.var2 <- (-1):-30+rnorm(30,0,3)
 cor.2comp(cor1.var1,cor1.var2,cor2.var1,cor2.var2)
 
 
@@ -136,8 +136,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-var1<-1:30+rnorm(30,0,4)
-var2<-1:30+rnorm(30,0,4)
+var1 <- 1:30+rnorm(30,0,4)
+var2 <- 1:30+rnorm(30,0,4)
 cor.conf(var1,var2,theo=0.5)
 
 
@@ -149,18 +149,18 @@ nameEx("cor.multcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: cor.multcomp
-### Title: Comparison of Pearson's linear correlation coefficients
+### Title: Comparison of several Pearson's linear correlation coefficients
 ### Aliases: cor.multcomp
 
 ### ** Examples
 
-var1<-c(1:15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
-var2<-c(-1:-15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
-factor<-factor(rep(LETTERS[1:3],each=15))
-cor.multcomp(var1,var2,factor)
+var1 <- c(1:15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
+var2 <- c(-1:-15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
+fact <- factor(rep(LETTERS[1:3],each=15))
+cor.multcomp(var1,var2,fact)
 
-var3<-c(1:15+rnorm(15,0,1),1:15+rnorm(15,0,3),1:15+rnorm(15,0,2))
-cor.multcomp(var1,var3,factor)
+var3 <- c(1:15+rnorm(15,0,1),1:15+rnorm(15,0,3),1:15+rnorm(15,0,2))
+cor.multcomp(var1,var3,fact)
 
 
 
@@ -171,14 +171,14 @@ nameEx("cox.resid")
 flush(stderr()); flush(stdout())
 
 ### Name: cox.resid
-### Title: Martingale residuals of Cox model
+### Title: Martingale residuals of a Cox model
 ### Aliases: cox.resid
 
 ### ** Examples
 
 # 'kidney' dataset in MASS package
 data(kidney)
-model<-coxph(Surv(time,status)~age+frail,data=kidney)
+model <- coxph(Surv(time,status)~age+frail,data=kidney)
 cox.resid(model,list(age=kidney$age,frail=kidney$frail))
 
 
@@ -195,8 +195,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-var1<-sample(LETTERS[1:3],15,replace=TRUE)
-var2<-sample(letters[1:3],15,replace=TRUE)
+var1 <- sample(LETTERS[1:3],15,replace=TRUE)
+var2 <- sample(letters[1:3],15,replace=TRUE)
 cramer.coeff(var1,var2)
 
 
@@ -218,24 +218,6 @@ cv(rnorm(30))
 
 
 cleanEx()
-nameEx("fisher.medtest")
-### * fisher.medtest
-
-flush(stderr()); flush(stdout())
-
-### Name: fisher.medtest
-### Title: Comparison of 2 medians by Fisher's exact test
-### Aliases: fisher.medtest
-
-### ** Examples
-
-x<-rnorm(4,3,1.5)
-y<-rnorm(4,5.5,2)
-fisher.medtest(x,y)
-
-
-
-cleanEx()
 nameEx("fisher.multcomp")
 ### * fisher.multcomp
 
@@ -248,7 +230,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-tab.cont<-as.table(matrix(c(25,10,12,6,15,14,9,16,9),ncol=3,dimnames=list(c("fair","dark","russet"),c("blue","brown","green"))))
+tab.cont <- as.table(matrix(c(25,10,12,6,15,14,9,16,9),ncol=3,dimnames=list(c("fair","dark","russet"),c("blue","brown","green"))))
 chisq.test(tab.cont)
 fisher.multcomp(tab.cont)
 
@@ -266,10 +248,10 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-x<-1:30
-y<-1:30+rnorm(30,0,4)
-model1<-lm(y~x)
-model2<-least.rect(y~x)
+x <- 1:30
+y <- 1:30+rnorm(30,0,4)
+model1 <- lm(y~x)
+model2 <- least.rect(y~x)
 ind.contrib(model1)
 ind.contrib(model2)
 
@@ -287,8 +269,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-x<-1:30+rnorm(30,0,3)
-y<-1:30+rnorm(30,0,3)
+x <- 1:30+rnorm(30,0,3)
+y <- 1:30+rnorm(30,0,3)
 least.rect(y~x)
 
 
@@ -306,9 +288,9 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-x<-1:50
-y<-c(rep(0,18),sample(0:1,14,replace=TRUE),rep(1,18))
-model<-glm(y~x,family=binomial)
+x <- 1:50
+y <- c(rep(0,18),sample(0:1,14,replace=TRUE),rep(1,18))
+model <- glm(y~x,family=binomial)
 plot(x,y)
 lines(x,model$fitted)
 logis.fit(model)
@@ -328,11 +310,11 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-x<-1:50
-y<-c(rep(0,18),sample(0:1,14,replace=TRUE),rep(1,18))
-model<-glm(y~x,family=binomial)
-y2<-logis.noise(model)
-# Then model2<-nls(y2~SSlogis(...))
+x <- 1:50
+y <- c(rep(0,18),sample(0:1,14,replace=TRUE),rep(1,18))
+model <- glm(y~x,family=binomial)
+y2 <- logis.noise(model)
+# Then model2 <- nls(y2~SSlogis(...))
 
 
 
@@ -343,15 +325,16 @@ nameEx("lr.multcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: lr.multcomp
-### Title: Comparison of simple linear least rectangles regression lines
+### Title: Comparison of several simple linear least rectangles regression
+###   lines
 ### Aliases: lr.multcomp
 
 ### ** Examples
 
-x<-rep(1:30,3)
-y<-c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
-factor<-as.factor(rep(LETTERS[1:3],each=30))
-lr.multcomp(y~x|factor)
+x <- rep(1:30,3)
+y <- c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
+fact <- as.factor(rep(LETTERS[1:3],each=30))
+lr.multcomp(y~x|fact)
 
 
 
@@ -368,6 +351,143 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 mod(rnorm(100))
+
+
+
+cleanEx()
+nameEx("perm.anova")
+### * perm.anova
+
+flush(stderr()); flush(stdout())
+
+### Name: perm.anova
+### Title: Permutational Analysis of Variance
+### Aliases: perm.anova perm.anova.1way perm.anova.2wayA perm.anova.2wayB
+###   perm.anova.2wayC perm.anova.2wayD
+
+### ** Examples
+
+set.seed(1203)
+response <- c(rnorm(12),rpois(12,0.5),rnorm(12,2,1))
+
+# 1 factor
+fact1 <- factor(rep(LETTERS[1:3],each=12))
+perm.anova(response~fact1)
+
+# 2 crossed fixed factors without interaction
+fact2 <- factor(rep(letters[1:3],12))
+perm.anova(response~fact1+fact2)
+
+# 2 crossed fixed factors with interaction
+perm.anova(response~fact1*fact2)
+
+# 2 nested fixed factors
+fact3 <- factor(rep(letters[1:6],each=6))
+perm.anova(response~fact1/fact2)
+
+# 1 fixed factor and 1 random factor (blocks)
+block <- factor(rep(rep(letters[1:3],each=4),3))
+perm.anova(response~fact1|fact2)
+
+
+
+cleanEx()
+nameEx("perm.bartlett.test")
+### * perm.bartlett.test
+
+flush(stderr()); flush(stdout())
+
+### Name: perm.bartlett.test
+### Title: Permutational Bartlett's test of homogeneity of variances
+### Aliases: perm.bartlett.test
+
+### ** Examples
+
+response <- c(rnorm(12),rpois(12,1),rnorm(12,2,1))
+fact <- factor(rep(LETTERS[1:3],each=12))
+perm.bartlett.test(response~fact)
+
+
+
+cleanEx()
+nameEx("perm.kruskal.test")
+### * perm.kruskal.test
+
+flush(stderr()); flush(stdout())
+
+### Name: perm.kruskal.test
+### Title: Permutational Kruskal-Wallis rank sum test
+### Aliases: perm.kruskal.test
+
+### ** Examples
+
+response <- c(rnorm(5),rpois(5,1),rnorm(5,5,3))
+fact <- factor(rep(LETTERS[1:3],each=5))
+perm.kruskal.test(response~fact)
+
+
+
+cleanEx()
+nameEx("perm.t.test")
+### * perm.t.test
+
+flush(stderr()); flush(stdout())
+
+### Name: perm.t.test
+### Title: Permutational Student's t-test
+### Aliases: perm.t.test
+
+### ** Examples
+
+response <- c(rnorm(5),rnorm(5,2,1))
+fact <- factor(rep(LETTERS[1:2],each=5))
+
+# Unpaired test
+perm.t.test(response~fact)
+
+# Paired test
+perm.t.test(response~fact,paired=TRUE)
+
+
+
+cleanEx()
+nameEx("perm.var.test")
+### * perm.var.test
+
+flush(stderr()); flush(stdout())
+
+### Name: perm.var.test
+### Title: Permutational F test to compare two variances
+### Aliases: perm.var.test
+
+### ** Examples
+
+response <- c(rpois(8,1),rpois(8,3))
+fact <- factor(rep(LETTERS[1:2],each=8))
+perm.var.test(response~fact)
+
+
+
+cleanEx()
+nameEx("perm.wilcox.test")
+### * perm.wilcox.test
+
+flush(stderr()); flush(stdout())
+
+### Name: perm.wilcox.test
+### Title: Permutational Wilcoxon rank sum and signed rank tests
+### Aliases: perm.wilcox.test
+
+### ** Examples
+
+response <- c(rnorm(5),rpois(5,4))
+fact <- factor(rep(LETTERS[1:2],each=5))
+
+# Unpaired test
+perm.wilcox.test(response~fact)
+
+# Paired test
+perm.wilcox.test(response~fact,paired=TRUE)
 
 
 
@@ -401,10 +521,10 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-proportions<-sample(c(0,1),60,replace=TRUE)
-populations<-sample(LETTERS[1:3],60,replace=TRUE)
-tab.cont<-table(populations,proportions)
-p.theo<-c(0.2,0.5,0.7)
+proportions <- sample(c(0,1),60,replace=TRUE)
+populations <- sample(LETTERS[1:3],60,replace=TRUE)
+tab.cont <- table(populations,proportions)
+p.theo <- c(0.2,0.5,0.7)
 prop.test(tab.cont,p=p.theo)
 prop.multcomp(tab.cont,p=p.theo)
 
@@ -422,7 +542,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-p<-c(0.005,0.02,0.0000001,0.35)
+p <- c(0.005,0.02,0.0000001,0.35)
 psignif(p)
 
 
@@ -439,9 +559,9 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-x<-1:50
-y<-1:50+rnorm(50,0,4)
-regression<-lm(y~x)
+x <- 1:50
+y <- 1:50+rnorm(50,0,4)
+regression <- lm(y~x)
 plot(x,y)
 abline(regression)
 reg.ci(regression,type="mean",col="red")
@@ -456,16 +576,16 @@ nameEx("reg.intcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: reg.intcomp
-### Title: Common slope and comparison of simple linear regression
+### Title: Common slope and comparison of several simple linear regression
 ###   intercepts
 ### Aliases: reg.intcomp
 
 ### ** Examples
 
-covariable<-rep(1:30,3)
-variable<-c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
-factor<-as.factor(rep(LETTERS[1:3],each=30))
-reg.intcomp(variable~covariable|factor)
+covariable <- rep(1:30,3)
+variable <- c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
+fact <- factor(rep(LETTERS[1:3],each=30))
+reg.intcomp(variable~covariable|fact)
 
 
 
@@ -476,15 +596,15 @@ nameEx("reg.slpcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: reg.slpcomp
-### Title: Comparison of simple linear regression slopes
+### Title: Comparison of several simple linear regression slopes
 ### Aliases: reg.slpcomp
 
 ### ** Examples
 
-covariable<-rep(1:30,3)
-variable<-c(seq(1,10,9/29)+rnorm(30,0,3),seq(1,30,1)+rnorm(30,0,3),seq(-1,-80,-79/29)+rnorm(30,0,3))
-factor<-factor(rep(LETTERS[1:3],each=30))
-reg.slpcomp(variable~covariable|factor)
+covariable <- rep(1:30,3)
+variable <- c(seq(1,10,9/29)+rnorm(30,0,3),seq(1,30,1)+rnorm(30,0,3),seq(-1,-80,-79/29)+rnorm(30,0,3))
+fact <- factor(rep(LETTERS[1:3],each=30))
+reg.slpcomp(variable~covariable|fact)
 
 
 
@@ -501,16 +621,16 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-# Imaginary dataset
-age<-sample(15:60,50,replace=TRUE)
-sex<-sample(c("M","F"),50,replace=TRUE)
-size<-sample(155:190,50,replace=TRUE)
-hair<-sample(c("Fair","Dark","Russet"),50,replace=TRUE)
-eyes<-sample(c("Blue","Green","Brown"),50,replace=TRUE)
-weight<-sample(50:85,50,replace=TRUE)
-hand<-sample(c("Left.handed","Right.handed"),50,replace=TRUE)
-tab<-data.frame(age,sex,size,weight,hand,eyes,hair)
-amix<-dudi.mix(tab,scannf=FALSE,nf=2)
+# Fictive dataset
+age <- sample(15:60,50,replace=TRUE)
+sex <- sample(c("M","F"),50,replace=TRUE)
+size <- sample(155:190,50,replace=TRUE)
+hair <- sample(c("Fair","Dark","Russet"),50,replace=TRUE)
+eyes <- sample(c("Blue","Green","Brown"),50,replace=TRUE)
+weight <- sample(50:85,50,replace=TRUE)
+hand <- sample(c("Left.handed","Right.handed"),50,replace=TRUE)
+tab <- data.frame(age,sex,size,weight,hand,eyes,hair)
+amix <- dudi.mix(tab,scannf=FALSE,nf=2)
 scat.mix.categorical(amix)
 
 
@@ -528,16 +648,16 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-# Imaginary dataset
-age<-sample(15:60,50,replace=TRUE)
-sex<-sample(c("M","F"),50,replace=TRUE)
-size<-sample(155:190,50,replace=TRUE)
-hair<-sample(c("Fair","Dark","Russet"),50,replace=TRUE)
-eyes<-sample(c("Blue","Green","Brown"),50,replace=TRUE)
-weight<-sample(50:85,50,replace=TRUE)
-hand<-sample(c("Left.handed","Right.handed"),50,replace=TRUE)
-tab<-data.frame(age,sex,size,weight,hand,eyes,hair)
-amix<-dudi.mix(tab,scannf=FALSE,nf=2)
+# Fictive dataset
+age <- sample(15:60,50,replace=TRUE)
+sex <- sample(c("M","F"),50,replace=TRUE)
+size <- sample(155:190,50,replace=TRUE)
+hair <- sample(c("Fair","Dark","Russet"),50,replace=TRUE)
+eyes <- sample(c("Blue","Green","Brown"),50,replace=TRUE)
+weight <- sample(50:85,50,replace=TRUE)
+hand <- sample(c("Left.handed","Right.handed"),50,replace=TRUE)
+tab <- data.frame(age,sex,size,weight,hand,eyes,hair)
+amix <- dudi.mix(tab,scannf=FALSE,nf=2)
 scat.mix.numeric(amix)
 
 
@@ -586,8 +706,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-var1<-sample(1:50,15,replace=TRUE)
-var2<-sample(1:50,15,replace=TRUE)
+var1 <- sample(1:50,15,replace=TRUE)
+var2 <- sample(1:50,15,replace=TRUE)
 spearman.ci(var1,var2)
 
 
@@ -604,14 +724,15 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-death<-c(sample(8:15,20,replace=TRUE),sample(12:20,20,replace=TRUE),sample(18:22,20,replace=TRUE))
-groups<-factor(rep(LETTERS[1:3],each=20))
-model1<-coxph(Surv(death)~groups)
+death <- c(sample(8:15,20,replace=TRUE),sample(12:20,20,replace=TRUE),sample(18:22,20,replace=TRUE))
+groups <- factor(rep(LETTERS[1:3],each=20))
+model1 <- coxph(Surv(death)~groups)
 model1
-mat<-matrix(c(1,-1,0,0,1,-1,2,-1,-1),ncol=3,byrow=TRUE,dimnames=list(1:3,levels(groups)))
+mat <- matrix(c(1,-1,0,0,1,-1,2,-1,-1),ncol=3,byrow=TRUE,dimnames=list(1:3,levels(groups)))
+mat
 surv.multcomp(Surv(death)~groups,mat,type="coxph")
 
-model2<-survreg(Surv(death)~groups,dist="weibull")
+model2 <- survreg(Surv(death)~groups,dist="weibull")
 model2
 surv.multcomp(Surv(death)~groups,mat,type="survreg",distribution="weibull")
 
@@ -624,16 +745,24 @@ nameEx("wilcox.paired.multcomp")
 flush(stderr()); flush(stdout())
 
 ### Name: wilcox.paired.multcomp
-### Title: Pairwise Wilcoxon signed rank sum test
+### Title: Non parametric pairwise comparisons for paired data
 ### Aliases: wilcox.paired.multcomp
 
 ### ** Examples
 
-response<-c(rnorm(10,0,3),rnorm(10,5,3),rnorm(10,8,2))
-factor<-factor(rep(LETTERS[1:3],each=10))
-block<-factor(rep(letters[1:10],3))
-friedman.test(response~factor|block)
-wilcox.paired.multcomp(response~factor|block)
+response <- c(rnorm(10,0,3),rnorm(10,5,3),rnorm(10,8,2))
+fact <- factor(rep(LETTERS[1:3],each=10))
+block <- factor(rep(letters[1:10],3))
+friedman.test(response~fact|block)
+
+# Wilcoxon signed rank test
+wilcox.paired.multcomp(response~fact|block)
+
+# Wilcoxon permutational signed rank test
+wilcox.paired.multcomp(response~fact|block,perm=TRUE)
+
+# Wilcoxon sign test
+wilcox.paired.multcomp(response~fact|block,sign=TRUE)
 
 
 
@@ -649,11 +778,15 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-x<-rnorm(7,3,1.5)
-y<-rnorm(7,5.5,2)
+set.seed(1706)
+x <- rnorm(7,3,1.5)
+
+# Comparison of 2 samples
+y <- rnorm(7,5.5,2)
 wilcox.signtest(x,y)
 
-theo=4
+# Comparison to a given value
+theo <- 4
 wilcox.signtest(x,mu=theo)
 
 

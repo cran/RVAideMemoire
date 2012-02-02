@@ -24,9 +24,9 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{glm}}, \code{\link{nls}}
 }
 \examples{
-x<-1:50
-y<-c(rep(0,18),sample(0:1,14,replace=TRUE),rep(1,18))
-model<-glm(y~x,family=binomial)
-y2<-logis.noise(model)
-# Then model2<-nls(y2~SSlogis(...))
+x <- 1:50
+y <- c(rep(0,18),sample(0:1,14,replace=TRUE),rep(1,18))
+model <- glm(y~x,family=binomial)
+y2 <- logis.noise(model)
+# Then model2 <- nls(y2~SSlogis(...))
 }
