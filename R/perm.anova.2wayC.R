@@ -5,7 +5,7 @@ function(resp,fact1,fact2,nest.f2,variables,nperm) {
   if (nest.f2=="random") {anova.ref[1,"F value"] <- anova.ref[1,"Mean Sq"]/anova.ref[2,"Mean Sq"]}
   F1.ref <- anova.ref[1,"F value"]
   F2.ref <- anova.ref[2,"F value"]
-  tab <- data.frame("Sum Sq"=round(anova.ref[,"Sum Sq"],2),"Df"=anova.ref[,"Df"],"Mean Sq"=round(anova.ref[,"Mean Sq"],2),
+  tab <- data.frame("Sum Sq"=round(anova.ref[,"Sum Sq"],3),"Df"=anova.ref[,"Df"],"Mean Sq"=round(anova.ref[,"Mean Sq"],3),
     "F value"=c(round(anova.ref[1:2,"F value"],4)," "),"Pr(>F)"=NA," "=character(3),stringsAsFactors=FALSE,check.names=FALSE)
   rownames(tab) <- c(variables[2],paste(variables[2],variables[3],sep=":"),"Residuals")
   F1.perm <- numeric(nperm+1)
@@ -20,9 +20,7 @@ function(resp,fact1,fact2,nest.f2,variables,nperm) {
 	F1.perm[i+1] <- anova.perm1[1,"F value"]
     }
     ordre <- order(fact1)
-    repet <- length(resp)/nlevels(fact1)
-    ordre.new <- integer(length(ordre))
-    for (j in 1:nlevels(fact1)) {ordre.new[(j*repet-(repet-1)):(j*repet)] <- sample(ordre[(j*repet-(repet-1)):(j*repet)],repet)}
+    ordre.new <- unlist(tapply(ordre,factor(rep(1:nlevels(fact1),each=length(fact1)/nlevels(fact1))),sample))
     anova.perm2 <- anova(lm(resp[ordre.new]~fact1/fact2))
     F2.perm[i+1] <- anova.perm2[2,"F value"]
   }
@@ -33,5 +31,6 @@ function(resp,fact1,fact2,nest.f2,variables,nperm) {
     warning("only 1 observation per level of '",variables[3],"', permutation of '",variables[2],"' only")
     tab[2,"Pr(>F)"] <- "NA"
   }
+  if (nest.f2=="random") {tab <- tab[-2,]}
   return(list(tab=tab))
 }
