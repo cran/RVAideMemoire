@@ -363,31 +363,40 @@ flush(stderr()); flush(stdout())
 ### Name: perm.anova
 ### Title: Permutational Analysis of Variance
 ### Aliases: perm.anova perm.anova.1way perm.anova.2wayA perm.anova.2wayB
-###   perm.anova.2wayC perm.anova.2wayD
+###   perm.anova.2wayC perm.anova.2wayD perm.anova.3wayA perm.anova.3wayB
 
 ### ** Examples
 
 set.seed(1203)
 response <- c(rnorm(12),rpois(12,0.5),rnorm(12,2,1))
+fact1 <- factor(rep(LETTERS[1:3],each=12))
+fact2 <- factor(rep(letters[1:3],12))
+fact3 <- factor(rep(letters[1:6],each=6))
+block <- factor(rep(rep(letters[1:2],each=6),3))
 
 # 1 factor
-fact1 <- factor(rep(LETTERS[1:3],each=12))
 perm.anova(response~fact1)
 
 # 2 crossed fixed factors without interaction
-fact2 <- factor(rep(letters[1:3],12))
 perm.anova(response~fact1+fact2)
 
 # 2 crossed fixed factors with interaction
 perm.anova(response~fact1*fact2)
 
 # 2 nested fixed factors
-fact3 <- factor(rep(letters[1:6],each=6))
 perm.anova(response~fact1/fact2)
 
-# 1 fixed factor and 1 random factor (blocks)
-block <- factor(rep(rep(letters[1:3],each=4),3))
-perm.anova(response~fact1|fact2)
+# 2 nested factors, fact2 being random
+perm.anova(response~fact1/fact3,nest.f2="random")
+
+# 1 fixed factor and 1 blocking (random) factor
+perm.anova(response~fact1|block)
+
+# 2 fixed crossed factors and 1 blocking (random) factor, without interaction
+perm.anova(response~fact1+fact2|block)
+
+# 2 fixed crossed factors and 1 blocking (random) factor, with interaction
+perm.anova(response~fact1*fact2|block)
 
 
 
@@ -410,20 +419,20 @@ perm.bartlett.test(response~fact)
 
 
 cleanEx()
-nameEx("perm.kruskal.test")
-### * perm.kruskal.test
+nameEx("perm.cor.test")
+### * perm.cor.test
 
 flush(stderr()); flush(stdout())
 
-### Name: perm.kruskal.test
-### Title: Permutational Kruskal-Wallis rank sum test
-### Aliases: perm.kruskal.test
+### Name: perm.cor.test
+### Title: Permutational Pearson's correlation test
+### Aliases: perm.cor.test
 
 ### ** Examples
 
-response <- c(rnorm(5),rpois(5,1),rnorm(5,5,3))
-fact <- factor(rep(LETTERS[1:3],each=5))
-perm.kruskal.test(response~fact)
+x <- rnorm(50)
+y <- runif(50)
+perm.cor.test(x,y)
 
 
 
@@ -465,29 +474,6 @@ flush(stderr()); flush(stdout())
 response <- c(rpois(8,1),rpois(8,3))
 fact <- factor(rep(LETTERS[1:2],each=8))
 perm.var.test(response~fact)
-
-
-
-cleanEx()
-nameEx("perm.wilcox.test")
-### * perm.wilcox.test
-
-flush(stderr()); flush(stdout())
-
-### Name: perm.wilcox.test
-### Title: Permutational Wilcoxon rank sum and signed rank tests
-### Aliases: perm.wilcox.test
-
-### ** Examples
-
-response <- c(rnorm(5),rpois(5,4))
-fact <- factor(rep(LETTERS[1:2],each=5))
-
-# Unpaired test
-perm.wilcox.test(response~fact)
-
-# Paired test
-perm.wilcox.test(response~fact,paired=TRUE)
 
 
 
@@ -757,9 +743,6 @@ friedman.test(response~fact|block)
 
 # Wilcoxon signed rank test
 wilcox.paired.multcomp(response~fact|block)
-
-# Wilcoxon permutational signed rank test
-wilcox.paired.multcomp(response~fact|block,perm=TRUE)
 
 # Wilcoxon sign test
 wilcox.paired.multcomp(response~fact|block,sign=TRUE)
