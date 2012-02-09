@@ -15,10 +15,9 @@
 \alias{print.lr.multcomp}
 \alias{print.perm.anova}
 \alias{print.perm.bartlett.test}
-\alias{print.perm.kruskal.test}
+\alias{print.perm.cor.test}
 \alias{print.perm.t.test}
 \alias{print.perm.var.test}
-\alias{print.perm.wilcox.test}
 \alias{print.plotsurvivors}
 \alias{print.prop.multcomp}
 \alias{print.reg.intcomp}
