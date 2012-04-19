@@ -4,7 +4,7 @@
 Mode
 }
 \description{
-Compute the mode of a vector.
+Compute the mode of a vector. The function makes the difference between continuous and discontinuous variables (which are made up of integers only).
 }
 \usage{
 mod(x)
@@ -21,5 +21,11 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{density}}
 }
 \examples{
-mod(rnorm(100))
+# Continuous variable
+x <- rnorm(100)
+mod(x)
+
+# Discontinuous variable
+y <- rpois(100,2)
+mod(y)
 }

@@ -84,16 +84,21 @@ function(formula,mat,data=NULL,strata=NULL,type=c("coxph","survreg"),distributio
     } else if (ncol(datas)==5) {
 	surv2 <- Surv(datas$start,datas$stop,datas$status)
     }
+    method <- NULL
     model <- if (!is.null(strata)) {
 	if (type=="survreg") {
+	  method <- "log-rank test"
 	  survreg(surv2~datas$fac+strata(datas$stra),dist=distribution)
 	} else {
+	  method <- "likelihood ratio test"
 	  coxph(surv2~datas$fac+strata(datas$stra))
 	}
     } else {
 	if (type=="survreg") {
+	  method <- "log-rank test"
 	  survreg(surv2~datas$fac,dist=distribution)
 	} else {
+	  method <- "likelihood ratio test"
 	  coxph(surv2~datas$fac)
 	}
     }
@@ -128,7 +133,7 @@ function(formula,mat,data=NULL,strata=NULL,type=c("coxph","survreg"),distributio
     } else {
 	paste("model: coxph(",variables[1]," ~ ",variables[2],")",sep="")
     }  }
-  result <- list(model=model.txt,statistic=test,p.adjust.method=p.method,p.value=p.adj,comp=comp)
+  result <- list(model=model.txt,statistic=test,method=method,p.adjust.method=p.method,p.value=p.adj,comp=comp)
   class(result) <- c("surv.multcomp","list")
   return(result)
 }

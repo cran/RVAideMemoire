@@ -7,14 +7,11 @@ Martingale residuals of a Cox model
 Plot martingale residuals of a Cox model against fitted values, to check for log-linearity of covariables.
 }
 \usage{
-cox.resid(model, covar)
+cox.resid(model)
 }
 \arguments{
   \item{model}{
 \code{coxph} model.
-}
-  \item{covar}{
-list of covariables.
 }
 }
 \references{
@@ -30,5 +27,5 @@ Maxime Hervé <mx.herve@gmail.com>, based on a John Fox idea.
 # 'kidney' dataset in MASS package
 data(kidney)
 model <- coxph(Surv(time,status)~age+frail,data=kidney)
-cox.resid(model,list(age=kidney$age,frail=kidney$frail))
+cox.resid(model)
 }
