@@ -7,14 +7,14 @@ Wilcoxon sign test
 Perform a Wilcoxon sign test to compare medians of two small paired samples or one median to a given value.
 }
 \usage{
-wilcox.signtest(x, y, mu = NULL)
+wilcox.signtest(x, data = NULL, mu = NULL)
 }
 \arguments{
   \item{x}{
-numeric vector (first sample).
+either a formula of the form \code{a ~ b} where \code{a} gives the data values and \code{b} a factor with 2 levels giving the corresponding groups (comparison of two medians); or a numeric vector (comparison of one median to a given value).
 }
-  \item{y}{
-optional numeric vector (second sample).
+  \item{data}{
+an optional data frame containing the variables in the formula \code{x} (if \code{x} is a formula). By default the variables are taken from \code{environment(x)}. Not used if is a numeric vector.
 }
   \item{mu}{
 theoretical median.
@@ -34,13 +34,13 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 set.seed(1706)
-x <- rnorm(7,3,1.5)
+response <- c(rnorm(7,3,1.5),rnorm(7,5.5,2))
 
 # Comparison of 2 samples
-y <- rnorm(7,5.5,2)
-wilcox.signtest(x,y)
+fact <- factor(rep(LETTERS[1:2],each=7)) 
+wilcox.signtest(response~fact)
 
 # Comparison to a given value
 theo <- 4
-wilcox.signtest(x,mu=theo)
+wilcox.signtest(response,mu=theo)
 }

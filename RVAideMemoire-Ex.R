@@ -27,6 +27,25 @@ bootstrap(samp,function(x,i) sd(x[i])/sqrt(length(x[i])))
 
 
 cleanEx()
+nameEx("chisq.bintest")
+### * chisq.bintest
+
+flush(stderr()); flush(stdout())
+
+### Name: chisq.bintest
+### Title: Pearson's Chi-squared test or Fisher's exact test for binary
+###   variables
+### Aliases: chisq.bintest
+
+### ** Examples
+
+response <- c(0,0,0,0,0,0,1,0,0,1,0,0,1,0,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1,1)
+fact <- factor(rep(LETTERS[1:3],each=10))
+chisq.bintest(response~fact)
+
+
+
+cleanEx()
 nameEx("chisq.exp")
 ### * chisq.exp
 
@@ -179,7 +198,7 @@ flush(stderr()); flush(stdout())
 # 'kidney' dataset in MASS package
 data(kidney)
 model <- coxph(Surv(time,status)~age+frail,data=kidney)
-cox.resid(model,list(age=kidney$age,frail=kidney$frail))
+cox.resid(model)
 
 
 
@@ -195,8 +214,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-var1 <- sample(LETTERS[1:3],15,replace=TRUE)
-var2 <- sample(letters[1:3],15,replace=TRUE)
+var1 <- sample(LETTERS[1:3],30,replace=TRUE)
+var2 <- sample(letters[1:3],30,replace=TRUE)
 cramer.coeff(var1,var2)
 
 
@@ -350,7 +369,31 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-mod(rnorm(100))
+# Continuous variable
+x <- rnorm(100)
+mod(x)
+
+# Discontinuous variable
+y <- rpois(100,2)
+mod(y)
+
+
+
+cleanEx()
+nameEx("mqqnorm")
+### * mqqnorm
+
+flush(stderr()); flush(stdout())
+
+### Name: mqqnorm
+### Title: Multivariate normality QQ-Plot
+### Aliases: mqqnorm
+
+### ** Examples
+
+x <- 1:30+rnorm(30)
+y <- 1:30+rnorm(30,1,3)
+mqqnorm(rbind(x,y))
 
 
 
@@ -740,12 +783,7 @@ response <- c(rnorm(10,0,3),rnorm(10,5,3),rnorm(10,8,2))
 fact <- factor(rep(LETTERS[1:3],each=10))
 block <- factor(rep(letters[1:10],3))
 friedman.test(response~fact|block)
-
-# Wilcoxon signed rank test
 wilcox.paired.multcomp(response~fact|block)
-
-# Wilcoxon sign test
-wilcox.paired.multcomp(response~fact|block,sign=TRUE)
 
 
 
@@ -762,15 +800,15 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 set.seed(1706)
-x <- rnorm(7,3,1.5)
+response <- c(rnorm(7,3,1.5),rnorm(7,5.5,2))
 
 # Comparison of 2 samples
-y <- rnorm(7,5.5,2)
-wilcox.signtest(x,y)
+fact <- factor(rep(LETTERS[1:2],each=7)) 
+wilcox.signtest(response~fact)
 
 # Comparison to a given value
 theo <- 4
-wilcox.signtest(x,mu=theo)
+wilcox.signtest(response,mu=theo)
 
 
 
