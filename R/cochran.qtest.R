@@ -15,7 +15,7 @@ function(formula,data=NULL,alpha=0.05,p.method="fdr") {
   if (!is.numeric(resp)) {resp <- as.numeric(as.character(resp))}
   if (!is.factor(fact)) {fact <- factor(fact)}
   if (!is.factor(block)) {block <- factor(block)}
-  tab.length<-tapply(resp,list(block,fact),function(x) length(na.omit(x)))
+  tab.length <- tapply(resp,list(block,fact),function(x) length(na.omit(x)))
   if (any(tab.length!=1)) {stop(paste("there must be 1 observation per level of '",variables[2],"' in each block",sep=""))}
   tab <- tapply(resp,list(block,fact),function(x) sum(x))
   k <- ncol(tab)
@@ -28,7 +28,7 @@ function(formula,data=NULL,alpha=0.05,p.method="fdr") {
   p <- pchisq(Q,k-1,lower.tail=FALSE)
   names(p) <- NULL
   tab.test <- data.frame("Q"=Q,"Df"=k-1,"Pr(>Q)"=p," "=psignif(p),stringsAsFactors=FALSE,check.names=FALSE)
-  result=list(data.name=data.name,statistic=Q,p.value=p,tab.test=tab.test,alpha=alpha)
+  result <- list(data.name=data.name,statistic=Q,p.value=p,tab.test=tab.test,alpha=alpha)
   if (p<alpha) {
     fun.p <- function(i,j) {
 	signs <- apply(tab[,c(i,j)],1,diff)

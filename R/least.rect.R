@@ -25,7 +25,7 @@ function(formula,data=NULL,conf.level=0.95,theo=1){
   p <- min(pt(t.obs,length(x.2)-2),pt(t.obs,length(x.2)-2,lower.tail=FALSE))*2
   conf.int <- matrix(c(a.inf,b.inf,a,b,a.sup,b.sup),nrow=2,dimnames=list(c("(Intercept)",variables[2]),
     c("inf","coeff","sup")))
-  conform <- data.frame("observed"=b,"theoretical"=theo,"Df"=length(x.2)-2,"t"=t.obs,"Pr(>|t])"=p,
+  conform <- data.frame("observed"=b,"theoretical"=theo,"Df"=length(x.2)-2,"t"=t.obs,"Pr(>|t|)"=p,
     " "=psignif(p),stringsAsFactors=FALSE,check.names=FALSE)
   p.corr <- as.numeric(corr$p.value)
   corr.tab <- data.frame("inf"=as.numeric(corr$conf.int[1]),"r"=r,"sup"=as.numeric(corr$conf.int[2]),

@@ -39,6 +39,7 @@ When pairwise comparisons are based on a \code{"survreg"} model, a logrank test 
 \value{
   \item{model}{model formula.}
   \item{statistic}{test statistics.}
+  \item{method}{a character string giving the name of the test computed.}
   \item{p.adjust.method}{method for p-values correction.}
   \item{p.value}{corrected p-values.}
   \item{comparisons}{table of results.}

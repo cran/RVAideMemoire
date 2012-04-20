@@ -7,7 +7,7 @@ Confidence interval of a Spearman's rank correlation coefficient
 Compute the confidence interval of a Spearman's rank correlation coefficient by bootstraping.
 }
 \usage{
-spearman.ci(var1, var2, rep = 1000, conf.level = 0.95)
+spearman.ci(var1, var2, nrep = 1000, conf.level = 0.95)
 }
 \arguments{
   \item{var1}{
@@ -16,7 +16,7 @@ numeric vector (first variable).
   \item{var2}{
 nuermic verctor (second variable).
 }
-  \item{rep}{
+  \item{nrep}{
 number of replicates for bootstraping.
 }
   \item{conf.level}{

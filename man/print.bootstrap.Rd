@@ -1,6 +1,7 @@
 \name{print.adjust.esticon}
 \alias{print.adjust.esticon}
 \alias{print.bootstrap}
+\alias{print.chisq.bintest}
 \alias{print.chisq.exp}
 \alias{print.chisq.multcomp}
 \alias{print.chisq.theo.multcomp}

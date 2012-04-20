@@ -21,12 +21,12 @@ logical. If \code{TRUE} a mosaic plot of expected counts is drawn.
 }
 }
 \details{
-The function returns how many counts can be <= 5 to respect Cochran's rule (80 \% of counts must be <= 5).
+The function returns how many counts can be < 5 to respect Cochran's rule (80\% of counts must be >= 5).
 }
 \value{
   \item{p.theo}{theoretical proportions.}
   \item{mat}{contingency table of expected counts.}
-  \item{cochran}{number of counts which can <= 5.}
+  \item{cochran}{number of counts which can be < 5.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

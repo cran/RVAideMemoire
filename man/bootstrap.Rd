@@ -7,7 +7,7 @@ Bootstrap
 Simplified version of the \code{boot()} function (package boot).
 }
 \usage{
-bootstrap(x, fun, rep = 1000, conf.level = 0.95, ...)
+bootstrap(x, fun, nrep = 1000, conf.level = 0.95, ...)
 }
 \arguments{
   \item{x}{
@@ -16,7 +16,7 @@ numeric vector.
   \item{fun}{
 function to be used for computation (\code{function(x,i) ...(x[i])}).
 }
-  \item{rep}{
+  \item{nrep}{
 number of replicates.
 }
   \item{conf.level}{
