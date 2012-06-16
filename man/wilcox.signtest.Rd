@@ -37,7 +37,7 @@ set.seed(1706)
 response <- c(rnorm(7,3,1.5),rnorm(7,5.5,2))
 
 # Comparison of 2 samples
-fact <- factor(rep(LETTERS[1:2],each=7)) 
+fact <- gl(2,7,labels=LETTERS[1:2])
 wilcox.signtest(response~fact)
 
 # Comparison to a given value

@@ -2,11 +2,11 @@ Encoding: latin1
 Package: RVAideMemoire
 Type: Package
 Title: Diverse basic statistical and graphical functions
-Version: 0.9-9
-Date: 2012-04-19
+Version: 0.9-10
+Date: 2012-06-16
 Author: Maxime Hervé
 Maintainer: Maxime Hervé <mx.herve@gmail.com>
-Depends: ade4, boot, doBy, statmod
+Depends: ade4, boot, doBy, lme4, statmod
 Description: This package contains diverse more or less complicated
         functions, written to simplify beginners' (but not only) life:
         simplifications of existing functions, basic but not
@@ -16,6 +16,6 @@ Description: This package contains diverse more or less complicated
         available on CRAN.
 License: GPL-2
 LazyLoad: yes
-Packaged: 2012-04-19 17:23:53 UTC; Maxime
+Packaged: 2012-06-16 19:13:55 UTC; Maxime
 Repository: CRAN
-Date/Publication: 2012-04-20 06:39:47
+Date/Publication: 2012-06-17 00:19:15

@@ -22,23 +22,21 @@ function (model,shapiro=FALSE) {
   } else if ("mer"%in%class(model)) {
     model.residuals <- model@resid
     res.lab <- "Residuals"
-  } else if ("survreg"%in%class(model)) {
-    model.residuals <- residuals(model)
+  } else if ("glmmadmb"%in%class(model)) {
+    model.residuals <- model$resid
     res.lab <- "Residuals"
-  } else if ("least.rect"%in%class(model)) {
+  } else if (any(c("survreg","least.rect","lme","nls")%in%class(model))) {
     model.residuals <- residuals(model)
     res.lab <- "Residuals"
   } else {
     stop("model not recognized")
   }
-  fit <- if ("lm"%in%class(model)) {
+  fit <- if (any(c("lm","least.rect","glmmadmb","lme","nls")%in%class(model))) {
     fitted(model)
   } else if ("mer"%in%class(model)) {
-    model@X%*%fixef(model)
+    model@X%*%lme4:::fixef(model)
   } else if ("survreg"%in%class(model)) {
     predict(model)
-  } else if ("least.rect"%in%class(model)) {
-    fitted(model)
   }
   par(mfrow=c(1,2))
   plot(fit,model.residuals,xlab="Fitted values",ylab=res.lab,main=paste(res.lab,"vs fitted"))
@@ -49,5 +47,3 @@ function (model,shapiro=FALSE) {
     shapiro.test(model.residuals)
   }
 }
-
-

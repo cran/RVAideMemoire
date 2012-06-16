@@ -40,7 +40,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 response <- c(0,0,0,0,0,0,1,0,0,1,0,0,1,0,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1,1)
-fact <- factor(rep(LETTERS[1:3],each=10))
+fact <- gl(3,10,labels=LETTERS[1:3])
 chisq.bintest(response~fact)
 
 
@@ -116,8 +116,8 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 response <- c(0,1,1,0,0,1,0,1,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,0,1,1,0,0,1)
-fact <- factor(rep(LETTERS[1:3],10))
-block <- factor(rep(letters[1:10],each=3))
+fact <- gl(3,1,30,labels=LETTERS[1:3])
+block <- gl(10,3,labels=letters[1:10])
 cochran.qtest(response~fact|block)
 
 
@@ -175,7 +175,7 @@ flush(stderr()); flush(stdout())
 
 var1 <- c(1:15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
 var2 <- c(-1:-15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
-fact <- factor(rep(LETTERS[1:3],each=15))
+fact <- gl(3,15,labels=LETTERS[1:3])
 cor.multcomp(var1,var2,fact)
 
 var3 <- c(1:15+rnorm(15,0,1),1:15+rnorm(15,0,3),1:15+rnorm(15,0,2))
@@ -197,7 +197,7 @@ flush(stderr()); flush(stdout())
 
 # 'kidney' dataset in MASS package
 data(kidney)
-model <- coxph(Surv(time,status)~age+frail,data=kidney)
+model <- coxph(Surv(time,status)~age+factor(sex),data=kidney)
 cox.resid(model)
 
 
@@ -249,7 +249,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-tab.cont <- as.table(matrix(c(25,10,12,6,15,14,9,16,9),ncol=3,dimnames=list(c("fair","dark","russet"),c("blue","brown","green"))))
+tab.cont <- as.table(matrix(c(25,10,12,6,15,14,9,16,9),ncol=3,dimnames=list(c("fair",
+  "dark","russet"),c("blue","brown","green"))))
 chisq.test(tab.cont)
 fisher.multcomp(tab.cont)
 
@@ -352,8 +353,37 @@ flush(stderr()); flush(stdout())
 
 x <- rep(1:30,3)
 y <- c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
-fact <- as.factor(rep(LETTERS[1:3],each=30))
+fact <- gl(3,30,labels=LETTERS[1:3])
 lr.multcomp(y~x|fact)
+
+
+
+cleanEx()
+nameEx("mat.cont")
+### * mat.cont
+
+flush(stderr()); flush(stdout())
+
+### Name: mat.cont
+### Title: Matrix of contrasts generation
+### Aliases: mat.cont
+
+### ** Examples
+
+# A factor with 5 levels
+fact <- gl(5,10,labels=LETTERS[1:5])
+
+# A matrix of contrasts with all possible pairwise comparisons
+mat.cont(fact)
+
+# A matrix with only comparisons to level "A"
+mat.cont(fact,ref="A")
+
+# A matrix with all pairwise comparisons between "A", "B" and "E"
+mat.cont(fact,restrict=c("A","B","E"))
+
+# The same with levels "C" and "D" excluded
+mat.cont(fact,restrict=c("A","B","E"),exclude=TRUE)
 
 
 
@@ -398,6 +428,30 @@ mqqnorm(rbind(x,y))
 
 
 cleanEx()
+nameEx("pairwise.perm.t.test")
+### * pairwise.perm.t.test
+
+flush(stderr()); flush(stdout())
+
+### Name: pairwise.perm.t.test
+### Title: Pairwise permutational t tests
+### Aliases: pairwise.perm.t.test
+
+### ** Examples
+
+set.seed(1203)
+response <- c(rnorm(5),rpois(5,0.5),rnorm(5,2,1))
+fact <- gl(3,5,labels=LETTERS[1:3])
+
+# Permutational ANOVA
+perm.anova(response~fact)
+
+# Pairwise comparisons
+pairwise.perm.t.test(response,fact)
+
+
+
+cleanEx()
 nameEx("perm.anova")
 ### * perm.anova
 
@@ -412,10 +466,10 @@ flush(stderr()); flush(stdout())
 
 set.seed(1203)
 response <- c(rnorm(12),rpois(12,0.5),rnorm(12,2,1))
-fact1 <- factor(rep(LETTERS[1:3],each=12))
-fact2 <- factor(rep(letters[1:3],12))
-fact3 <- factor(rep(letters[1:6],each=6))
-block <- factor(rep(rep(letters[1:2],each=6),3))
+fact1 <- gl(3,12,labels=LETTERS[1:3])
+fact2 <- gl(3,1,36,labels=letters[1:3])
+fact3 <- gl(6,6,labels=letters[1:6])
+block <- gl(2,6,36,labels=letters[1:2])
 
 # 1 factor
 perm.anova(response~fact1)
@@ -456,7 +510,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 response <- c(rnorm(12),rpois(12,1),rnorm(12,2,1))
-fact <- factor(rep(LETTERS[1:3],each=12))
+fact <- gl(3,12,labels=LETTERS[1:3])
 perm.bartlett.test(response~fact)
 
 
@@ -492,7 +546,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 response <- c(rnorm(5),rnorm(5,2,1))
-fact <- factor(rep(LETTERS[1:2],each=5))
+fact <- gl(2,5,labels=LETTERS[1:2])
 
 # Unpaired test
 perm.t.test(response~fact)
@@ -515,7 +569,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 response <- c(rpois(8,1),rpois(8,3))
-fact <- factor(rep(LETTERS[1:2],each=8))
+fact <- gl(2,8,labels=LETTERS[1:2])
 perm.var.test(response~fact)
 
 
@@ -613,7 +667,7 @@ flush(stderr()); flush(stdout())
 
 covariable <- rep(1:30,3)
 variable <- c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
-fact <- factor(rep(LETTERS[1:3],each=30))
+fact <- gl(3,30,labels=LETTERS[1:3])
 reg.intcomp(variable~covariable|fact)
 
 
@@ -632,7 +686,7 @@ flush(stderr()); flush(stdout())
 
 covariable <- rep(1:30,3)
 variable <- c(seq(1,10,9/29)+rnorm(30,0,3),seq(1,30,1)+rnorm(30,0,3),seq(-1,-80,-79/29)+rnorm(30,0,3))
-fact <- factor(rep(LETTERS[1:3],each=30))
+fact <- gl(3,30,labels=LETTERS[1:3])
 reg.slpcomp(variable~covariable|fact)
 
 
@@ -754,7 +808,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 death <- c(sample(8:15,20,replace=TRUE),sample(12:20,20,replace=TRUE),sample(18:22,20,replace=TRUE))
-groups <- factor(rep(LETTERS[1:3],each=20))
+groups <- gl(3,20,labels=LETTERS[1:3])
 model1 <- coxph(Surv(death)~groups)
 model1
 mat <- matrix(c(1,-1,0,0,1,-1,2,-1,-1),ncol=3,byrow=TRUE,dimnames=list(1:3,levels(groups)))
@@ -780,8 +834,8 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 response <- c(rnorm(10,0,3),rnorm(10,5,3),rnorm(10,8,2))
-fact <- factor(rep(LETTERS[1:3],each=10))
-block <- factor(rep(letters[1:10],3))
+fact <- gl(3,10,labels=LETTERS[1:3])
+block <- gl(10,1,30,labels=letters[1:10])
 friedman.test(response~fact|block)
 wilcox.paired.multcomp(response~fact|block)
 
@@ -803,7 +857,7 @@ set.seed(1706)
 response <- c(rnorm(7,3,1.5),rnorm(7,5.5,2))
 
 # Comparison of 2 samples
-fact <- factor(rep(LETTERS[1:2],each=7)) 
+fact <- gl(2,7,labels=LETTERS[1:2])
 wilcox.signtest(response~fact)
 
 # Comparison to a given value

@@ -48,6 +48,6 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 covariable <- rep(1:30,3)
 variable <- c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
-fact <- factor(rep(LETTERS[1:3],each=30))
+fact <- gl(3,30,labels=LETTERS[1:3])
 reg.intcomp(variable~covariable|fact)
 }
