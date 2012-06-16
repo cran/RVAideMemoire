@@ -40,6 +40,6 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 covariable <- rep(1:30,3)
 variable <- c(seq(1,10,9/29)+rnorm(30,0,3),seq(1,30,1)+rnorm(30,0,3),seq(-1,-80,-79/29)+rnorm(30,0,3))
-fact <- factor(rep(LETTERS[1:3],each=30))
+fact <- gl(3,30,labels=LETTERS[1:3])
 reg.slpcomp(variable~covariable|fact)
 }

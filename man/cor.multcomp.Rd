@@ -59,7 +59,7 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 var1 <- c(1:15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
 var2 <- c(-1:-15+rnorm(15,0,4),1:15+rnorm(15,0,1),1:15+rnorm(15,0,8))
-fact <- factor(rep(LETTERS[1:3],each=15))
+fact <- gl(3,15,labels=LETTERS[1:3])
 cor.multcomp(var1,var2,fact)
 
 var3 <- c(1:15+rnorm(15,0,1),1:15+rnorm(15,0,3),1:15+rnorm(15,0,2))

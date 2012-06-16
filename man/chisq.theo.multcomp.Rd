@@ -7,7 +7,7 @@ Pairwise comparisons after a chi-squared test for given probabilities
 Perform pairwise comparisons after a global chi-squared test for given probabilities.
 }
 \usage{
-chisq.theo.multcomp(x, p, p.method = "fdr")
+chisq.theo.multcomp(x, p = rep(1/length(x), length(x)), p.method = "fdr")
 }
 \arguments{
   \item{x}{

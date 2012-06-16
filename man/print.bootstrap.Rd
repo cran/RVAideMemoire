@@ -14,6 +14,7 @@
 \alias{print.ind.contrib}
 \alias{print.least.rect}
 \alias{print.lr.multcomp}
+\alias{print.pairwise.perm.t.test}
 \alias{print.perm.anova}
 \alias{print.perm.bartlett.test}
 \alias{print.perm.cor.test}

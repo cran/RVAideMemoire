@@ -44,7 +44,7 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 response <- c(rnorm(5),rnorm(5,2,1))
-fact <- factor(rep(LETTERS[1:2],each=5))
+fact <- gl(2,5,labels=LETTERS[1:2])
 
 # Unpaired test
 perm.t.test(response~fact)

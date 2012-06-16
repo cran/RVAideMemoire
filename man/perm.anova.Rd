@@ -58,16 +58,10 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 set.seed(1203)
 response <- c(rnorm(12),rpois(12,0.5),rnorm(12,2,1))
-fact1 <- factor(rep(LETTERS[1:3],each=12))
-fact2 <- factor(rep(letters[1:3],12))
-fact3 <- factor(rep(letters[1:6],each=6))
-block <- factor(rep(rep(letters[1:2],each=6),3))
-
-# 1 factor
-perm.anova(response~fact1)
-
-# 2 crossed fixed factors without interaction
-perm.anova(response~fact1+fact2)
+fact1 <- gl(3,12,labels=LETTERS[1:3])
+fact2 <- gl(3,1,36,labels=letters[1:3])
+fact3 <- gl(6,6,labels=letters[1:6])
+block <- gl(2,6,36,labels=letters[1:2])
 
 # 2 crossed fixed factors with interaction
 perm.anova(response~fact1*fact2)
@@ -80,10 +74,4 @@ perm.anova(response~fact1/fact3,nest.f2="random")
 
 # 1 fixed factor and 1 blocking (random) factor
 perm.anova(response~fact1|block)
-
-# 2 fixed crossed factors and 1 blocking (random) factor, without interaction
-perm.anova(response~fact1+fact2|block)
-
-# 2 fixed crossed factors and 1 blocking (random) factor, with interaction
-perm.anova(response~fact1*fact2|block)
 }

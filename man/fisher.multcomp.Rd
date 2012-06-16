@@ -28,7 +28,8 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{chisq.test}}, \code{\link{fisher.test}}
 }
 \examples{
-tab.cont <- as.table(matrix(c(25,10,12,6,15,14,9,16,9),ncol=3,dimnames=list(c("fair","dark","russet"),c("blue","brown","green"))))
+tab.cont <- as.table(matrix(c(25,10,12,6,15,14,9,16,9),ncol=3,dimnames=list(c("fair",
+  "dark","russet"),c("blue","brown","green"))))
 chisq.test(tab.cont)
 fisher.multcomp(tab.cont)
 }

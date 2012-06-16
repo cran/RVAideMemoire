@@ -7,14 +7,14 @@
 Return the results of the \code{esticon()} function (package doBy), except that p-values are corrected.
 }
 \usage{
-adjust.esticon(model, matrix, p.method = "fdr", ...)
+adjust.esticon(model, mat, p.method = "fdr", ...)
 }
 \arguments{
   \item{model}{
 model. See help of the \code{esticon()} function.
 }
-  \item{matrix}{
-matrix of comparisons. See help of the \code{esticon()} function.
+  \item{mat}{
+matrix of comparisons (contrasts). See help of the \code{esticon()} function.
 }
   \item{p.method}{
 method for p-values correction. See help of the \code{p.adjust()} function.

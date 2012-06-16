@@ -4,7 +4,7 @@
 Cramer's association coefficient
 }
 \description{
-Compute the Cramer's association coefficient between 2 nominal variables, and its confidence interval (by bootstraping) and tests for its significance.
+Compute the Cramer's association coefficient between 2 nominal variables, its confidence interval (by bootstraping) and tests for its significance.
 }
 \usage{
 cramer.coeff(var1, var2, nrep = 1000, conf.level = 0.95)

@@ -14,7 +14,7 @@ surv.multcomp(formula, mat, data=NULL, strata = NULL, type = c("coxph", "survreg
 a formula of the form \code{a ~ b}, where \code{a} is a \code{Surv()} object and \code{b} is a factor giving levels to be compared.
 }
   \item{mat}{
-matrix of comparisons (see help of the \code{esticon()} function in the package doBy).
+matrix of comparisons (see help of the \code{mat.cont()} function in this package, and the \code{esticon()} function in the package doBy).
 }
   \item{data}{
 an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
@@ -52,7 +52,7 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 death <- c(sample(8:15,20,replace=TRUE),sample(12:20,20,replace=TRUE),sample(18:22,20,replace=TRUE))
-groups <- factor(rep(LETTERS[1:3],each=20))
+groups <- gl(3,20,labels=LETTERS[1:3])
 model1 <- coxph(Surv(death)~groups)
 model1
 mat <- matrix(c(1,-1,0,0,1,-1,2,-1,-1),ncol=3,byrow=TRUE,dimnames=list(1:3,levels(groups)))

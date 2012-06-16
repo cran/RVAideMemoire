@@ -26,6 +26,6 @@ Maxime Hervé <mx.herve@gmail.com>, based on a John Fox idea.
 \examples{
 # 'kidney' dataset in MASS package
 data(kidney)
-model <- coxph(Surv(time,status)~age+frail,data=kidney)
+model <- coxph(Surv(time,status)~age+factor(sex),data=kidney)
 cox.resid(model)
 }

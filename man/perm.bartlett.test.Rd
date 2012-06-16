@@ -34,6 +34,6 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 response <- c(rnorm(12),rpois(12,1),rnorm(12,2,1))
-fact <- factor(rep(LETTERS[1:3],each=12))
+fact <- gl(3,12,labels=LETTERS[1:3])
 perm.bartlett.test(response~fact)
 }
