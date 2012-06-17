@@ -5,16 +5,15 @@ function(dudi.obj,xax=1,yax=2,csub=2,possub="topleft",...){
   tabcomplet <- eval(as.list(dudi.obj$call)[[2]],sys.frame(0))
   indexation <- dudi.obj$index=="f"
   oritab <- tabcomplet[,indexation]
+  if (!is.data.frame(oritab)) {oritab <- as.data.frame(oritab)}
   nvar <- ncol(oritab)
-  levels <- integer(ncol(tabcomplet))
+  lev <- integer(ncol(tabcomplet))
   for (i in 1:ncol(tabcomplet)) {
-    levels <- c(levels,length(levels(tabcomplet[,i])))
+    lev[i] <- nlevels(tabcomplet[,i])
   }
-  ncol <- (max(levels)%/%5)+1
   par(mfrow=n2mfrow(nvar))
-  for(i in 1 :nvar) {
+  for(i in 1:nvar) {
     s.class(dudi.obj$li,oritab[,i],xax=xax,yax=yax,clabel=1.5,sub=names(oritab[i]),csub=csub,possub=possub,
-	col=rep(c('black','red','blue','green','orange'),ncol),cgrid=0,cstar=0)
+	col=rainbow(nlevels(oritab[,i])),cgrid=0,cstar=0)
   }
 }
-

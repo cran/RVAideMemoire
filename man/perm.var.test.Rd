@@ -43,6 +43,6 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 response <- c(rpois(8,1),rpois(8,3))
-fact <- factor(rep(LETTERS[1:2],each=8))
+fact <- gl(2,8,labels=LETTERS[1:2])
 perm.var.test(response~fact)
 }

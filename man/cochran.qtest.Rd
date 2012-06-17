@@ -37,7 +37,7 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 response <- c(0,1,1,0,0,1,0,1,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,0,1,1,0,0,1)
-fact <- factor(rep(LETTERS[1:3],10))
-block <- factor(rep(letters[1:10],each=3))
+fact <- gl(3,1,30,labels=LETTERS[1:3])
+block <- gl(10,3,labels=letters[1:10])
 cochran.qtest(response~fact|block)
 }

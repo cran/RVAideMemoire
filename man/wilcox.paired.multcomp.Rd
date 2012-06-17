@@ -34,8 +34,8 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 response <- c(rnorm(10,0,3),rnorm(10,5,3),rnorm(10,8,2))
-fact <- factor(rep(LETTERS[1:3],each=10))
-block <- factor(rep(letters[1:10],3))
+fact <- gl(3,10,labels=LETTERS[1:3])
+block <- gl(10,1,30,labels=letters[1:10])
 friedman.test(response~fact|block)
 wilcox.paired.multcomp(response~fact|block)
 }

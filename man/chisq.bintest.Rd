@@ -40,6 +40,6 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 response <- c(0,0,0,0,0,0,1,0,0,1,0,0,1,0,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1,1)
-fact <- factor(rep(LETTERS[1:3],each=10))
+fact <- gl(3,10,labels=LETTERS[1:3])
 chisq.bintest(response~fact)
 }

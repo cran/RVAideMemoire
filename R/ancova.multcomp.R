@@ -22,7 +22,7 @@ function(model) {
   ci <- qnorm(0.025,0,1,lower.tail=FALSE)*pred$se.fit
   tab <- data.frame(lwr=pred$fit-ci,mean=pred$fit,upr=pred$fit+ci,row.names=levels(fact))
   dotchart(pred$fit,xlim=c(0.9*min(pred$fit-ci),1.1*max(pred$fit+ci)),labels=levels(fact),pch=16,
-    xlab=colnames(m.frame)[which(colnames(m.frame)[2:3]!=facteur)],
+    xlab=colnames(m.frame)[which(colnames(m.frame) != facteur)][2],
     main="Adjusted means +/- 95% confidence interval")
   segments(pred$fit-ci,1:nlevels(fact),pred$fit+ci,1:nlevels(fact))
   segments(pred$fit-ci,1:nlevels(fact)-(nlevels(fact)/40),pred$fit-ci,1:nlevels(fact)+(nlevels(fact)/40))

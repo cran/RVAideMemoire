@@ -1,5 +1,5 @@
 chisq.theo.multcomp <-
-function(x,p,p.method="fdr") {
+function(x,p=rep(1/length(x),length(x)),p.method="fdr") {
   if (sum(p)!=1) {stop("sum of probabilities must be 1")}
   theo <- integer(length(x))
   chi2 <- integer(length(x))
