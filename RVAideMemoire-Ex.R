@@ -6,6 +6,63 @@ library('RVAideMemoire')
 
 assign(".oldSearch", search(), pos = 'CheckExEnv')
 cleanEx()
+nameEx("G.multcomp")
+### * G.multcomp
+
+flush(stderr()); flush(stdout())
+
+### Name: G.multcomp
+### Title: Pairwise comparisons after a G-test
+### Aliases: G.multcomp
+
+### ** Examples
+
+counts <- c(5,15,23,8,14)
+G.test(counts)
+G.multcomp(counts)
+
+
+
+cleanEx()
+nameEx("G.test")
+### * G.test
+
+flush(stderr()); flush(stdout())
+
+### Name: G.test
+### Title: G-test
+### Aliases: G.test
+
+### ** Examples
+
+proportions <- sample(c(0,1),60,replace=TRUE)
+populations <- sample(LETTERS[1:3],60,replace=TRUE)
+tab.cont <- table(populations,proportions)
+p.theo <- c(0.2,0.5,0.7)
+chisq.exp(tab.cont,p=p.theo)
+
+
+
+cleanEx()
+nameEx("G.theo.multcomp")
+### * G.theo.multcomp
+
+flush(stderr()); flush(stdout())
+
+### Name: G.theo.multcomp
+### Title: Pairwise comparisons after a G-test for given probabilities
+### Aliases: G.theo.multcomp
+
+### ** Examples
+
+counts <- c(5,15,23,8,14)
+p.theo <- c(0.1,0.4,0.3,0.15,0.05)
+G.test(counts,p=p.theo)
+G.theo.multcomp(counts,p=p.theo)
+
+
+
+cleanEx()
 nameEx("bootstrap")
 ### * bootstrap
 
@@ -23,6 +80,57 @@ bootstrap(samp,function(x,i) mean(x[i]))
 
 # Confidence interval of the standard error of the mean
 bootstrap(samp,function(x,i) sd(x[i])/sqrt(length(x[i])))
+
+
+
+cleanEx()
+nameEx("byf.hist")
+### * byf.hist
+
+flush(stderr()); flush(stdout())
+
+### Name: byf.hist
+### Title: Histogram for factor levels
+### Aliases: byf.hist
+
+### ** Examples
+
+data(iris)
+byf.hist(iris$Sepal.Length,iris$Species)
+
+
+
+cleanEx()
+nameEx("byf.qqnorm")
+### * byf.qqnorm
+
+flush(stderr()); flush(stdout())
+
+### Name: byf.qqnorm
+### Title: QQ-plot for factor levels
+### Aliases: byf.qqnorm
+
+### ** Examples
+
+data(iris)
+byf.qqnorm(iris$Sepal.Length,iris$Species)
+
+
+
+cleanEx()
+nameEx("byf.shapiro")
+### * byf.shapiro
+
+flush(stderr()); flush(stdout())
+
+### Name: byf.shapiro
+### Title: Shapiro-Wilk's test for factor levels
+### Aliases: byf.shapiro
+
+### ** Examples
+
+data(iris)
+byf.shapiro(iris$Sepal.Length,iris$Species)
 
 
 
@@ -428,6 +536,24 @@ mqqnorm(rbind(x,y))
 
 
 cleanEx()
+nameEx("pairwise.G.test")
+### * pairwise.G.test
+
+flush(stderr()); flush(stdout())
+
+### Name: pairwise.G.test
+### Title: Pairwise comparisons for proportions using G-tests
+### Aliases: pairwise.G.test
+
+### ** Examples
+
+x <- matrix(c(22,28,13,37,35,15),ncol=2,dimnames=list(c("Control","Treatment1","Treatment2"),c("Alive","Dead")),byrow=TRUE)
+G.test(x)
+pairwise.G.test(x)
+
+
+
+cleanEx()
 nameEx("pairwise.perm.t.test")
 ### * pairwise.perm.t.test
 
@@ -471,12 +597,6 @@ fact2 <- gl(3,1,36,labels=letters[1:3])
 fact3 <- gl(6,6,labels=letters[1:6])
 block <- gl(2,6,36,labels=letters[1:2])
 
-# 1 factor
-perm.anova(response~fact1)
-
-# 2 crossed fixed factors without interaction
-perm.anova(response~fact1+fact2)
-
 # 2 crossed fixed factors with interaction
 perm.anova(response~fact1*fact2)
 
@@ -488,12 +608,6 @@ perm.anova(response~fact1/fact3,nest.f2="random")
 
 # 1 fixed factor and 1 blocking (random) factor
 perm.anova(response~fact1|block)
-
-# 2 fixed crossed factors and 1 blocking (random) factor, without interaction
-perm.anova(response~fact1+fact2|block)
-
-# 2 fixed crossed factors and 1 blocking (random) factor, with interaction
-perm.anova(response~fact1*fact2|block)
 
 
 

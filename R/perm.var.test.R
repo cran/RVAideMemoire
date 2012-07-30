@@ -17,9 +17,12 @@ function(formula,data=NULL,ratio=1,alternative=c("two.sided","less","greater"),n
   F.ref <- var.test(resp~fact,ratio=ratio,alternative=alternative)$statistic
   F.perm <- numeric(nperm+1)
   F.perm[1] <- F.ref
+  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
   for(i in 1:nperm) {
     F.perm[i+1] <- var.test(sample(resp)~fact,ratio=ratio,alternative=alternative)$statistic
+    setTxtProgressBar(pb,round(i*100/nperm,0))
   }
+  cat("\n")
   pvalue <- NULL
   H1 <- NULL
   if (alternative=="two.sided") {

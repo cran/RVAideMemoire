@@ -10,10 +10,13 @@ function(resp,fact1,fact2,variables,nperm) {
   rownames(tab) <- c(variables[2],"Residuals")
   F1.perm <- numeric(nperm+1)
   F1.perm[1] <- F1.ref
+  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
   for (i in 1:nperm) {
     anova.perm <- anova(lm(sample(resp)~fact1*fact2))
     F1.perm[i+1] <- anova.perm[1,"Mean Sq"]/anova.perm[3,"Mean Sq"]
-   }
+    setTxtProgressBar(pb,round(i*100/nperm,0))
+  }
+  cat("\n")
   pvalue <- length(which(F1.perm >= F1.ref))/(nperm+1)
   tab[1,"Pr(>F)"] <- format(pvalue,digits=5,nsmall=5)
   return(list(tab=tab))
