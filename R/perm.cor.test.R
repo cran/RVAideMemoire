@@ -10,9 +10,12 @@ function(x,y,alternative=c("two.sided","less","greater"),nperm=999) {
   t.ref <- cor.test(x,y,alternative=alternative)$statistic
   t.perm <- numeric(nperm+1)
   t.perm[1] <- t.ref
+  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
   for(i in 1:nperm) {
+    setTxtProgressBar(pb,round(i*100/nperm,0))
     t.perm[i+1] <- cor.test(x,sample(y),alternative=alternative)$statistic
   }
+  cat("\n")
   pvalue <- NULL
   H1 <- NULL
   if (alternative=="two.sided") {

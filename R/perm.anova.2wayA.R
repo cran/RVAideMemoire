@@ -11,11 +11,14 @@ function(resp,fact1,fact2,variables,nperm) {
   F2.perm <- numeric(nperm+1)
   F1.perm[1] <- F1.ref
   F2.perm[1] <- F2.ref
+  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
   for (i in 1:nperm) {
     anova.perm <- anova(lm(sample(resp)~fact1+fact2))
     F1.perm[i+1] <- anova.perm[1,"F value"]
     F2.perm[i+1] <- anova.perm[2,"F value"]
+    setTxtProgressBar(pb,round(i*100/nperm,0))
   }
+  cat("\n")
   pvalue1 <- length(which(F1.perm >= F1.ref))/(nperm+1)
   pvalue2 <- length(which(F2.perm >= F2.ref))/(nperm+1)
   tab[1:2,"Pr(>F)"] <- format(c(pvalue1,pvalue2),digits=5,nsmall=5)
