@@ -18,12 +18,14 @@ function(formula,data=NULL,alternative=c("two.sided","less","greater"),paired=FA
   t.ref <- t.test(resp~fact,var.equal=TRUE,alternative=alternative,paired=paired)$statistic
   t.perm <- numeric(nperm+1)
   t.perm[1] <- t.ref
+  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
   if (!paired) {
     method <- "     Permutational Two Sample t-test"
     moy <- tapply(resp,fact,mean)
     names(moy) <- paste("mean in group ",levels(fact),sep="")
     for(i in 1:nperm) {
 	t.perm[i+1] <- t.test(sample(resp)~fact,var.equal=TRUE,alternative=alternative,paired=FALSE)$statistic
+	setTxtProgressBar(pb,round(i*100/nperm,0))
     }
   } else {
     method <- "     Permutational Paired t-test"
@@ -33,8 +35,10 @@ function(formula,data=NULL,alternative=c("two.sided","less","greater"),paired=FA
     for (i in 1:nperm) {
 	resp.perm <- t(apply(resp2,1,sample))
 	t.perm[i+1] <- t.test(resp.perm[,1],resp.perm[,2],alternative=alternative,paired=TRUE)$statistic
+	setTxtProgressBar(pb,round(i*100/nperm,0))
     }
   }
+  cat("\n")
   pvalue <- NULL
   H1 <- NULL
   if (alternative=="two.sided") {

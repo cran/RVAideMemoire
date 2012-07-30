@@ -1,6 +1,7 @@
 \name{print.adjust.esticon}
 \alias{print.adjust.esticon}
 \alias{print.bootstrap}
+\alias{print.byf.shapiro}
 \alias{print.chisq.bintest}
 \alias{print.chisq.exp}
 \alias{print.chisq.multcomp}
@@ -11,6 +12,10 @@
 \alias{print.cor.multcomp}
 \alias{print.cramer.coeff}
 \alias{print.fisher.multcomp}
+\alias{print.G.multcomp}
+\alias{print.G.test}
+\alias{print.G.theo.multcomp}
+\alias{print.pairwise.G.test}
 \alias{print.ind.contrib}
 \alias{print.least.rect}
 \alias{print.lr.multcomp}

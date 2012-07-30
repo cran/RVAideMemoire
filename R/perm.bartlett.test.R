@@ -13,9 +13,12 @@ function(formula,data=NULL,nperm=999) {
   K.ref <- bartlett.test(resp~fact)$statistic
   K.perm <- numeric(nperm+1)
   K.perm[1] <- K.ref
+  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
   for(i in 1:nperm) {
     K.perm[i+1] <- bartlett.test(sample(resp)~fact)$statistic
+    setTxtProgressBar(pb,round(i*100/nperm,0))
   }
+  cat("\n")
   pvalue <- min(length(which(K.perm <= K.ref)),length(which(K.perm >= K.ref)))*2/(nperm+1)
   result <- list(statistic=K.ref,permutations=nperm,p.value=pvalue,data.name=data.name)
   class(result) <- c("list","perm.bartlett.test")

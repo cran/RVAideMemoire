@@ -7,10 +7,13 @@ function(resp,fact1,variables,nperm) {
   rownames(tab) <- c(variables[2],"Residuals")
   F.perm <- numeric(nperm+1)
   F.perm[1] <- anova.ref[1,"F value"]
+  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
   for (i in 1:nperm) {
     anova.perm <- anova(lm(sample(resp)~fact1))
     F.perm[i+1] <- anova.perm[1,"F value"]
+    setTxtProgressBar(pb,round(i*100/nperm,0))
   }
+  cat("\n")
   pvalue <- length(which(F.perm >= F.ref))/(nperm+1)
   tab[1,"Pr(>F)"] <- format(pvalue,digits=5,nsmall=5)
   return(list(tab=tab))
