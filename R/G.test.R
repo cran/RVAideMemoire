@@ -13,9 +13,8 @@ function(x,p=rep(1/length(x),length(x))) {
   names(G) <- "G"
   ddl <- chi$parameter
   p <- pchisq(G,ddl,lower.tail=FALSE)
-  result <- list(statistic=G,parameter=ddl,p.value=p,method=method,
+  result <- list(method=method,statistic=G,parameter=ddl,p.value=p,
     data.name=data.name,observed=x,expected=theo)
-  class(result) <- c("list","G.test")
+  class(result) <- "htest"
   return(result)
 }
-

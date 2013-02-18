@@ -7,7 +7,7 @@ Wilcoxon sign test
 Perform a Wilcoxon sign test to compare medians of two small paired samples or one median to a given value.
 }
 \usage{
-wilcox.signtest(x, data = NULL, mu = NULL)
+wilcox.signtest(x, data, mu = 0)
 }
 \arguments{
   \item{x}{
@@ -23,8 +23,10 @@ theoretical median.
 \value{
   \item{method}{a character string indicating what type of test was performed.}
   \item{data.name}{a character string giving the name(s) of the data.}
-  \item{mu}{theoretical median.}
+  \item{null.value}{the specified hypothesized value of the median or median difference depending on the test performed.}
   \item{p.value}{p-value of the test.}
+  \item{estimate}{the estimated median or difference in medians depending on the test performed.}
+  \item{alternative}{a character string giving the alternative hypothesis, always \code{"two.sided"}}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

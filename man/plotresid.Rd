@@ -21,5 +21,5 @@ logical. If \code{TRUE} a Shapiro-Wilk's test is performed on residuals.
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link{lm}}, \code{\link{glm}}, \code{\link[MASS]{glm.nb}}, \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer}}, \code{\link{nls}}, \code{\link[survival]{survreg}}, \code{\link[RVAideMemoire]{least.rect}}, \code{\link[statmod]{qresiduals}}, \code{\link{qqnorm}}
+\code{\link{lm}}, \code{\link{glm}}, \code{\link[MASS]{glm.nb}}, \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer}}, \code{\link{nls}}, \code{\link[survival]{survreg}}, \code{\link[RVAideMemoire]{least.rect}}, \code{\link[statmod]{qresiduals}}, \code{\link[car]{qqPlot}}
 }

@@ -1,18 +1,19 @@
 lr.multcomp <-
-function(formula,data=NULL,conf.level=0.95) {
-  if (all.names(formula)[1]!="~" | all.names(formula)[3]!="|") {stop("incorrect 'formula'")}
-  variables <- all.vars(formula)
-  y <- if (is.null(data)) {get(variables[1],pos=environment(formula))}
-    else {get(variables[1],pos=get(deparse(substitute(data))))}
-  x <- if (is.null(data)) {get(variables[2],pos=environment(formula))}
-    else {get(variables[2],pos=get(deparse(substitute(data))))}
-  fact <- if (is.null(data)) {get(variables[3],pos=environment(formula))}
-    else {get(variables[3],pos=get(deparse(substitute(data))))}
-  data.name <- paste(variables[1]," ~ ",variables[2],", factor = ",variables[3],sep="")
-  if (length(x)!=length(y)) {stop(paste("'",variables[2],"' and '",variables[1],"' lengths differ",sep=""))}
-  if (length(x)!=length(fact)) {stop(paste("'",variables[2],"' and '",variables[3],"' lengths differ",sep=""))}
-  if (length(y)!=length(fact)) {stop(paste("'",variables[1],"' and '",variables[3],"' lengths differ",sep=""))}
-  if (is.character(fact) & !is.factor(fact)) {fact <- factor(fact)}
+function(formula,data,conf.level=0.95) {
+  if (missing(formula)) {stop("formula missing")}
+  if ((length(formula)!=3) || (length(formula[[3]])!=3) || (formula[[3]][[1]]!=as.name("|")) ||
+    (length(formula[[3]][[2]])!=1) || (length(formula[[3]][[3]])!=1)) {stop("incorrect specification for formula")}
+  formula[[3]][[1]] <- as.name("+")
+  m <- match.call()
+  m$formula <- formula
+  if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
+  m[[1]] <- as.name("model.frame")
+  m$conf.level <- NULL
+  mf <- eval(m,parent.frame())
+  dname <- paste(names(mf)[1]," ~ ",names(mf)[2],", factor = ",names(mf)[3],sep="")
+  y <- mf[,1]
+  x <- mf[,2]
+  fact <- mf[,3]
   nul <- as.numeric(row.names(table(c(which(is.na(y)),which(is.na(x))))))
   y2 <- if(length(nul)>0) {y[-nul]} else {y}
   x2 <- if(length(nul)>0) {x[-nul]} else {x}
@@ -43,9 +44,19 @@ function(formula,data=NULL,conf.level=0.95) {
   }
   slope.comp <- slope.comp[-1,-ncol(slope.comp)]
   intcpt.comp <- intcpt.comp[-1,-ncol(intcpt.comp)]
-  result <- list(data.name=data.name,conf.level=conf.level,n.reg=nlevels(fact2),intercepts=intcpt,slopes=slope,
+  result <- list(data.name=dname,conf.level=conf.level,n.reg=nlevels(fact2),intercepts=intcpt,slopes=slope,
     intercepts.comp=intcpt.comp,slopes.comp=slope.comp)
-  class(result) <- c("lr.multcomp","list")
+  class(result) <- "lr.multcomp"
   return(result)
 }
 
+print.lr.multcomp <-
+function(x,...) {
+  cat(paste("\nComparison of",x$n.reg,"least rectangles simple linear regressions\n\n"))
+  cat(x$data.name,"\n\n")
+  cat("Intercepts:\n")
+  print(noquote(x$intercepts.comp),na.print="-")
+  cat("\nSlopes:\n")
+  print(noquote(x$slopes.comp),na.print="-")
+  cat("\n")
+}

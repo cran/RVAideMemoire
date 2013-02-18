@@ -1,1 +1,10 @@
+importFrom(ade4,s.class,s.corcircle,dudi.mix)
+importFrom(boot,boot)
+importFrom(car,qqPlot)
+importFrom(doBy,esticon)
+importFrom(MASS,glm.nb,lda)
+importFrom(statmod,qresiduals)
+importFrom(survival,is.Surv,Surv,survreg,coxph)
+
+
 exportPattern("^[[:alpha:]]+")

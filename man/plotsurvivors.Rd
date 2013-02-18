@@ -26,7 +26,8 @@ status (1: event observed, 0: event not observed).
 Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
-# 'kidney' dataset in MASS package
+# 'kidney' dataset of package 'survival'
+require(survival)
 data(kidney)
 plotsurvivors(kidney$time,kidney$status)
 }

@@ -24,6 +24,7 @@ confidence level.
 }
 }
 \value{
+  \item{method}{name of the test.}
   \item{statistic}{test statistics.}
   \item{parameter}{test degrees of freedom.}
   \item{p.value}{test p-value.}
@@ -31,7 +32,9 @@ confidence level.
   \item{estimate}{Cramer's coefficient.}
   \item{conf.level}{confidence level.}
   \item{rep}{number of replicates.}
-  \item{interval}{confidence interval.}
+  \item{conf.int}{confidence interval.}
+  \item{alternative}{a character string giving the alternative hypothesis, always \code{"two.sided"}}
+  \item{null.value}{the value of the association measure under the null hypothesis, always 0.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

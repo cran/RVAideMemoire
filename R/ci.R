@@ -1,4 +1,4 @@
-ci <-
+.ci <-
 function(x,conf.level=0.95) {
   tri <- sort(na.omit(x))
   if (any(!is.finite(tri))) {tri <- tri[-which(!is.finite(tri))]}

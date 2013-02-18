@@ -14,9 +14,15 @@ function(var1,var2,var3,var4,alpha=0.05,conf.level=0.95,theo=0){
   z1 <- 0.5*log((1+r1)/(1-r1))
   z2 <- 0.5*log((1+r2)/(1-r2))
   u.obs <- abs(z1-z2)/sqrt(1/(length(var1.2)-3)+1/(length(var3.2)-3))
+  names(u.obs) <- "U"
   p <- min(pnorm(u.obs,0,1),pnorm(u.obs,0,1,lower.tail=FALSE))*2
-  tab <- data.frame("r1"=r1,"r2"=r2,"u"=u.obs,"Pr(>|u|)"=p," "=psignif(p),stringsAsFactors=FALSE,check.names=FALSE)
-  result <- list(conf.level=conf.level,alpha=alpha,coeffs=c(r1,r2),u.comp=u.obs,p.comp=p,comp=tab)
+  met <- "Comparison of 2 Pearson's linear correlation coefficients"
+  nval <- 0
+  names(nval) <- "difference in coefficients"
+  estimate <- c(r1,r2)
+  names(estimate) <- paste("coeff in group ",1:2,sep="")
+  result <- list(method.test=met,data.name="4 variables",statistic=u.obs,p.value=p,alternative="two.sided",
+    null.value=nval,estimate=estimate,alpha=alpha)
   if (p>alpha){
     z.moy <- sum((length(var1.2)-3)*z1,(length(var3.2)-3)*z2)/sum(length(var1.2)-3,length(var3.2)-3)
     r.com <- (exp(2*z.moy)-1)/(exp(2*z.moy)+1)
@@ -27,15 +33,13 @@ function(var1,var2,var3,var4,alpha=0.05,conf.level=0.95,theo=0){
     zeta <- 0.5*log((1+theo)/(1-theo))
     u.obs.com <- abs(z.moy-zeta)*sqrt(sum(length(var1.2),length(var3.2))-6)
     p.com <- min(pnorm(u.obs.com,0,1),pnorm(u.obs.com,0,1,lower.tail=FALSE))*2
-    tab.com <- data.frame("inf"=r.com.inf,"r"=r.com,"sup"=r.com.sup,"theoretical"=theo,"u"=u.obs.com,"Pr(>|u|)"=p.com,
-	" "=psignif(p.com),stringsAsFactors=FALSE,check.names=FALSE)
-    result$r.comm <- c("inf"=r.com.inf,"r"=r.com,"sup"=r.com.sup)
-    result$r.theo <- theo
-    result$u.comm <- u.obs.com
-    result$p.comm <- p.com
-    result$comm <- tab.com
+    tab.com <- data.frame("inf"=r.com.inf,"r"=r.com,"sup"=r.com.sup,"theoretical"=theo,"U"=u.obs.com,"Pr(>|U|)"=p.com,
+	" "=.psignif(p.com),stringsAsFactors=FALSE,check.names=FALSE)
+    result$conf.level <- conf.level
+    result$common.name <- paste("        Common correlation coefficient, ",100*conf.level,"% confidence interval\n",
+	"          and equality to given value ",theo,sep="")
+    result$common <- tab.com
   }
-  class(result)<-c("cor.2comp","list")
+  class(result) <- "RVtest"
   return(result)
 }
-

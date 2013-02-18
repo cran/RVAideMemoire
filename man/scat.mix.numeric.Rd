@@ -33,6 +33,7 @@ Stéphane Champely
 \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{s.corcircle}}
 }
 \examples{
+require(ade4)
 # Fictive dataset
 age <- sample(15:60,50,replace=TRUE)
 sex <- sample(c("M","F"),50,replace=TRUE)

@@ -21,14 +21,14 @@ number of permutations.
 }
 }
 \value{
+  \item{method}{name of the test.}
+  \item{data.name}{a character string giving the name(s) of the data.}
   \item{statistic}{test statistics of the parametric test.}
   \item{permutations}{number of permutations.}
   \item{p.value}{p-value of the permutational test.}
   \item{estimate}{the estimated correlation coefficient.}
   \item{alternative}{a character string describing the alternative hypothesis.}
-  \item{H1}{a character string giving the explicit alternative hypothesis.}
-  \item{data.name}{a character string giving the names of the data.}
-  \item{conf.int}{the 95\% confidence interval for the correlation coefficient.}
+  \item{null.value}{the value of the association measure under the null hypothesis, always 0.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

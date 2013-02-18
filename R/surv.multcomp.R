@@ -1,55 +1,31 @@
 surv.multcomp <-
-function(formula,mat,data=NULL,strata=NULL,type=c("coxph","survreg"),distribution="exponential",
+function(formula,mat,data,strata=NULL,type=c("coxph","survreg"),distribution="exponential",
  p.method="fdr") {
-  if (all.names(formula)[1]!="~") {stop("incorrect 'formula'")}
-  if (length(all.names(formula))==3) {
-    variables <- all.vars(formula)
-    surv.temp <- if (is.null(data)) {get(variables[1],pos=environment(formula))}
-	else {get(variables[1],pos=get(deparse(substitute(data))))}
-    if (!is.Surv(surv.temp)) {
-	stop(paste("'",variables[1],"' is not a Surv() object",sep=""))
-	  } else {
-	surv <- surv.temp
-	fact <- if (is.null(data)) {get(variables[2],pos=environment(formula))}
-	  else {get(variables[2],pos=get(deparse(substitute(data))))}
-    }
-  } else if (length(all.names(formula))==4) {
-    variables <- c(paste("Surv(",all.vars(formula)[1],")",sep=""),all.vars(formula)[2])
-    surv.temp <- if (is.null(data)) {get(all.vars(formula)[1],pos=environment(formula))}
-	else {get(all.vars(formula)[1],pos=get(deparse(substitute(data))))}
-    surv <- Surv(surv.temp)
-    fact <- if (is.null(data)) {get(all.vars(formula)[2],pos=environment(formula))}
-	else {get(all.vars(formula)[2],pos=get(deparse(substitute(data))))}	
-  }  else if (length(all.names(formula))==5) {
-    variables.temp <- all.vars(formula)
-    variables <- c(paste("Surv(",variables.temp[1],",",variables.temp[2],")",sep=""),variables.temp[3])
-    surv.temp <- if (is.null(data)) {get(variables.temp[1],pos=environment(formula))}
-	else {get(variables.temp[1],pos=get(deparse(substitute(data))))}
-    status <- if (is.null(data)) {get(variables.temp[2],pos=environment(formula))}
-	else {get(variables.temp[2],pos=get(deparse(substitute(data))))}
-    surv <- Surv(surv.temp,status)
-    fact <- if (is.null(data)) {get(variables.temp[3],pos=environment(formula))}
-	else {get(variables.temp[3],pos=get(deparse(substitute(data))))}	
-  }
-  if (nrow(rbind(surv))!=length(fact)) {stop(paste("'",variables[1],"' and '",variables[2],"' lengths differ",sep=""))}
+  if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
+  allnames <- all.names(formula)
+  m <- match.call()
+  if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
+  m[[1]] <- as.name("model.frame")
+  m$mat <- m$strata <- m$type <- m$distribution <- m$p.method <- NULL
+  mf <- eval(m,parent.frame())
+  if (!is.Surv(mf[,1])) {stop(paste("'",names(mf)[1],"' is not a Surv() object",sep=""))}
+  surv <- mf[,1]
+  fact <- mf[,2]
+  variables <- names(mf)
   if (!is.matrix(mat)) {stop("'mat' is not a \"matrix\" object")}
-  if (!is.factor(fact)) {
-    fact2 <- as.factor(fact)
-  } else {
-    fact2 <- fact
-  }
-  if (ncol(mat)!=nlevels(fact2)) {stop("incorrect 'mat' dimensions")}
-  colnames(mat) <- levels(fact2)
+  levels(fact) <- abbreviate(levels(fact),3)
+  if (ncol(mat)!=nlevels(fact)) {stop("incorrect 'mat' dimensions")}
+  colnames(mat) <- levels(fact)
   suppressWarnings(if (!type%in%c("coxph","survreg")) {stop("model type not recognized")})
-  if (length(type)>1) {type <- "coxph"}
+  if (length(type)!=1) {type <- "coxph"}
   liste.surv <- list()
   if (!is.null(strata)) {liste.stra <- list()}
-  for (i in 1:nlevels(fact2)) {
-    liste.surv[[i]] <- subset(surv,fact2==levels(fact2)[i])
-    if (!is.null(strata)) {liste.stra[[i]] <- subset(strata,fact2==levels(fact2)[i])}
+  for (i in 1:nlevels(fact)) {
+    liste.surv[[i]] <- subset(surv,fact==levels(fact)[i])
+    if (!is.null(strata)) {liste.stra[[i]] <- subset(strata,fact==levels(fact)[i])}
   }
-  names(liste.surv) <- levels(fact2)
-  if (!is.null(strata)) {names(liste.stra) <- levels(fact2)}
+  names(liste.surv) <- levels(fact)
+  if (!is.null(strata)) {names(liste.stra) <- levels(fact)}
   comparisons <- character(nrow(mat))
   test <- integer(nrow(mat))
   p <- integer(nrow(mat))
@@ -87,18 +63,18 @@ function(formula,mat,data=NULL,strata=NULL,type=c("coxph","survreg"),distributio
     method <- NULL
     model <- if (!is.null(strata)) {
 	if (type=="survreg") {
-	  method <- "log-rank test"
+	  method <- "log-rank tests"
 	  survreg(surv2~datas$fac+strata(datas$stra),dist=distribution)
 	} else {
-	  method <- "likelihood ratio test"
+	  method <- "likelihood ratio tests"
 	  coxph(surv2~datas$fac+strata(datas$stra))
 	}
     } else {
 	if (type=="survreg") {
-	  method <- "log-rank test"
+	  method <- "log-rank tests"
 	  survreg(surv2~datas$fac,dist=distribution)
 	} else {
-	  method <- "likelihood ratio test"
+	  method <- "likelihood ratio tests"
 	  coxph(surv2~datas$fac)
 	}
     }
@@ -116,25 +92,25 @@ function(formula,mat,data=NULL,strata=NULL,type=c("coxph","survreg"),distributio
 	paste(colnames(mat)[which(contrast<0)],collapse="-"))
   }
   p.adj <- p.adjust(p,method=p.method)
-  comp <- data.frame("Chi"=test,"Pr(>Chi)"=p.adj," "=psignif(p.adj),row.names=comparisons,
+  comp <- data.frame(" "=comparisons,"Chi"=test,"Pr(>Chi)"=p.adj," "=.psignif(p.adj),
     stringsAsFactors=FALSE,check.names=FALSE)
   model.txt <- if (!is.null(strata)) {
     if (type=="survreg") {
-	paste("model: survreg(",variables[1]," ~ ",variables[2]," + strata(",
+	paste("survreg(",variables[1]," ~ ",variables[2]," + strata(",
 	  deparse(substitute(strata)),"), dist=\"",distribution,"\")",sep="")
     } else {
-	paste("model: coxph(",variables[1]," ~ ",variables[2]," + strata(",
+	paste("coxph(",variables[1]," ~ ",variables[2]," + strata(",
 	  deparse(substitute(strata)),"))",sep="")
     }
   } else {
     if (type=="survreg") {
-	paste("model: survreg(",variables[1]," ~ ",variables[2],", dist=\"",distribution,
+	paste("survreg(",variables[1]," ~ ",variables[2],", dist=\"",distribution,
 	  "\")",sep="")
     } else {
-	paste("model: coxph(",variables[1]," ~ ",variables[2],")",sep="")
-    }  }
-  result <- list(model=model.txt,statistic=test,method=method,p.adjust.method=p.method,p.value=p.adj,comp=comp)
-  class(result) <- c("surv.multcomp","list")
+	paste("coxph(",variables[1]," ~ ",variables[2],")",sep="")
+    }
+  }
+  result <- list(model=model.txt,statistic=test,method=method,p.adjust.method=p.method,p.value2=p.adj,p.value=comp)
+  class(result) <- "RV.multcomp"
   return(result)
 }
-

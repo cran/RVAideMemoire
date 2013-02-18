@@ -21,11 +21,13 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
+  \item{method}{name of the test.}
+  \item{data.name}{a character string giving the name(s) of the data.}
   \item{observed}{observed proportions.}
   \item{expected}{expected proportions.}
   \item{p.adjust.method}{method for p-values correction.}
-  \item{p.value}{corrected p-values.}
-  \item{comp}{table or results of pairwise comparisons.}
+  \item{p.value2}{corrected p-values.}
+  \item{p.value}{table or results of pairwise comparisons.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

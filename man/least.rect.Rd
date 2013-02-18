@@ -1,5 +1,6 @@
 \name{least.rect}
 \alias{least.rect}
+\alias{print.least.rect}
 \title{
 Least rectangles linear regression
 }
@@ -7,7 +8,7 @@ Least rectangles linear regression
 Return information about a least rectangle linear regression: equation, confidence interval of parameters, equality of the slope to a given value and Pearson's linear correlation coefficient.
 }
 \usage{
-least.rect(formula, data=NULL, conf.level = 0.95, theo = 1)
+least.rect(formula, data, conf.level = 0.95, theo = 1)
 }
 \arguments{
   \item{formula}{

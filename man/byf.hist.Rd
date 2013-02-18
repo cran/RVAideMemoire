@@ -7,14 +7,14 @@ Histogram for factor levels
 Draw a histogram of a numeric variable per level of a factor.
 }
 \usage{
-byf.hist(x, f, ...)
+byf.hist(formula, data, ...)
 }
 \arguments{
-  \item{x}{
-numeric vector.
+  \item{formula}{
+a formula of the form \code{a ~ b} where \code{a} gives the data values and \code{b} a factor giving the corresponding groups.
 }
-  \item{f}{
-factor.
+  \item{data}{
+an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
 }
   \item{...}{
 other arguments to pass to the \code{hist()} function.
@@ -25,5 +25,5 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 data(iris)
-byf.hist(iris$Sepal.Length,iris$Species)
+byf.hist(Sepal.Length~Species,data=iris)
 }

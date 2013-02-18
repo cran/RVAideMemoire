@@ -21,11 +21,13 @@ theoretical value.
 }
 }
 \value{
-  \item{r.theo}{theoretical coefficient.}
-  \item{r.obs}{observed coefficient.}
+  \item{method}{a character string giving the name of the test.}
+  \item{data.name}{a character string giving the name(s) of the data.}
   \item{statistic}{test statistics.}
-  \item{p.value}{p-value.}
-  \item{conform}{data frame of results.}
+  \item{p.value}{p-value of the test.}
+  \item{null.value}{the value of the theoretical coefficient.}
+  \item{alternative}{a character string describing the alternative hypothesis.}
+  \item{estimate}{the estimated correlation coefficient.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

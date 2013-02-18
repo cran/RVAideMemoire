@@ -11,10 +11,10 @@ function(x,p=rep(1/length(x),length(x)),p.method="fdr") {
     pval[i] <- as.numeric(test$p.value)
   }
   p.adj <- p.adjust(pval,method=p.method)
-  comp <- data.frame("observed"=x,"expected"=theo,"G"=G,"Pr(>G)"=p.adj," "=psignif(p.adj),
+  comp <- data.frame("observed"=x,"expected"=theo,"G"=G,"Pr(>G)"=p.adj," "=.psignif(p.adj),
     stringsAsFactors=FALSE,check.names=FALSE)
-  result <- list(observed=x,expected=theo,p.adjust.method=p.method,statistic=G,p.value=p.adj,comp=comp)
-  class(result) <- c("G.theo.multcomp","list")
+  dname <- paste(quote(x)," and ",quote(p),sep="")
+  result <- list(method="G-tests",data.name=dname,observed=x,expected=theo,p.adjust.method=p.method,statistic=G,p.value2=p.adj,p.value=comp)
+  class(result) <- "RV.multcomp"
   return(result)
 }
-

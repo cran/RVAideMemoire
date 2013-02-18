@@ -1,25 +1,16 @@
 wilcox.signtest <-
-function (x,data=NULL,mu=NULL) {
+function (x,data,mu=0) {
   if (is(x,"formula")) {
-    if (all.names(x)[1]!="~") {
-	stop("incorrect formula")
-    }
-    variables <- all.vars(x)
-    data.name <- paste("data: ",variables[1]," ~ ",variables[2],sep="")
-    resp <- if (is.null(data)) {
-	get(variables[1],pos=environment(x))
-    } else {
-	get(variables[1],pos=get(deparse(substitute(data))))
-    }
-    fact <- if (is.null(data)) {
-	get(variables[2],pos=environment(x))
-    } else {
-	get(variables[2],pos=get(deparse(substitute(data))))
-    }
-    if (length(resp)!=length(fact)) {
-	stop(paste("'",variables[1],"' and '",variables[2],"' lengths differ",sep=""))
-    }
-    method <- "Comparison of 2 medians by Wilcoxon sign test"
+    if (length(x)!=3) {stop("missing or incorrect formula")}
+    m <- match.call()
+    if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
+    m[[1]] <- as.name("model.frame")
+    names(m)[2] <- "formula"
+    m$mu <- NULL
+    mf <- eval(m,parent.frame())
+    dname <- paste(names(mf)[1],paste(names(mf)[2:ncol(mf)],collapse=":"),sep=" by ")
+    resp <- mf[,1]
+    fact <- interaction(mf[,2:ncol(mf)],sep=":")
     ech1 <- resp[as.numeric(fact)==1]
     ech2 <- resp[as.numeric(fact)==2]
     if (length(ech1)!=length(ech2)) {
@@ -29,19 +20,24 @@ function (x,data=NULL,mu=NULL) {
     ech2 <- ech2[complete.cases(ech1,ech2)]
     signs <- ech1-ech2
     p <- binom.test(length(signs[signs>0]),length(signs[signs!=0]),0.5)$p.value
+    med <- tapply(resp,fact,median,na.rm=TRUE)
+    names(med) <- paste("median in group ",levels(fact),sep="")
+    names(mu) <- "difference in medians"
   } else {
-    if (is.null(mu)) {
+    if (!is.numeric(mu)) {
 	stop("'mu' is missing")
     } else {
-	data.name <- paste("data: ",deparse(substitute(x)),sep="")
-	method <- "Comparison of one median to a given value\n  by Wilcoxon sign test"
+	dname <- paste(deparse(substitute(x)),sep="")
 	x <- na.omit(x)
 	signs <- x-mu
 	p <- binom.test(length(signs[signs>0]),length(signs[signs!=0]),0.5)$p.value
+	med <- median(x)
+	names(med) <- "median of x"
+	names(mu) <- "median"
     }
   }
-  result <- list(method=method,data.name=data.name,mu=mu,p.value=p)
-  class(result) <- c("wilcox.signtest","list")
+  result <- list(method="Wilcoxon sign test",data.name=dname,null.value=mu,p.value=p,estimate=med,
+    alternative="two.sided")
+  class(result) <- "htest"
   return(result)
 }
-

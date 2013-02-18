@@ -22,7 +22,7 @@ function(model,print.diff=FALSE,graph=TRUE,warning=25) {
     stop("model not recognized")
   }
   coeffs.prop <- 100*coeffs.diff/coeffs
-  if (graph==TRUE) {
+  if (graph) {
     plot(coeffs.prop[,1],ylim=c(1.1*min(coeffs.prop),1.1*max(coeffs.prop)),type="o",pch=16,cex=0.5,xlab="Individual",ylab="Difference in parameters (%)")
     abline(h=0,col="grey",lty=3)
     abline(h=-100,col="grey",lty=3)
@@ -34,15 +34,16 @@ function(model,print.diff=FALSE,graph=TRUE,warning=25) {
     }
     legend(0.75*nrow(model$model),1.05*max(coeffs.prop),colnames(coeffs.prop),col=1:ncol(coeffs.prop),lty=1)
     lignes <- which(abs(coeffs.prop)>warning)
-    colonnes <- integer(length(lignes))
-    for (i in 1:length(lignes)) {
-	colonnes[i] <- which.max(abs(coeffs.prop[lignes[i],]))
+    if (length(lignes)>0) {
+	colonnes <- integer(length(lignes))
+	for (i in 1:length(lignes)) {
+	  colonnes[i] <- which.max(abs(coeffs.prop[lignes[i],]))
+	}
+	ecart <- abs(1.1*max(coeffs.prop)-1.1*min(coeffs.prop))*4/100
+	for (i in 1:length(lignes)) {text(lignes[i],coeffs.prop[lignes[i],colonnes[i]]+ecart*sign(coeffs.prop[lignes[i],colonnes[i]]),lignes[i],cex=0.5)}
     }
-    ecart <- abs(1.1*max(coeffs.prop)-1.1*min(coeffs.prop))*4/100
-    for (i in 1:length(lignes)) {text(lignes[i],coeffs.prop[lignes[i],colonnes[i]]+ecart*sign(coeffs.prop[lignes[i],colonnes[i]]),lignes[i],cex=0.5)}
   }
-  result <- list(print.diff=print.diff,coefficients=coeffs,coefficients.diff=coeffs.diff,coefficients.prop=coeffs.prop)
-  class(result) <- c("ind.contrib","list")
+  if (print.diff) {print(coeffs.prop,digits=5)}
+  result <- list(coefficients=coeffs,coefficients.diff=coeffs.diff,coefficients.prop=coeffs.prop)
   return(result)
 }
-

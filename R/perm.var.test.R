@@ -1,19 +1,19 @@
 perm.var.test <-
-function(formula,data=NULL,ratio=1,alternative=c("two.sided","less","greater"),nperm=999) {
-  if (all.names(formula)[1]!="~") {stop("incorrect 'formula'")}
-  variables<-all.vars(formula)
-  resp <- if (is.null(data)) {get(variables[1],pos=environment(formula))}
-    else {get(variables[1],pos=get(deparse(substitute(data))))}
-  fact <- if (is.null(data)) {get(variables[2],pos=environment(formula))}
-    else {get(variables[2],pos=get(deparse(substitute(data))))}
-  if (length(resp)!=length(fact)) {stop(paste("'",variables[1],"' and '",variables[2],"' lengths differ",sep=""))}
-  if (!is.numeric(resp)) {resp <- as.numeric(as.character(resp))}
-  if (!is.factor(fact)) {fact <- factor(fact)}
-  if (nlevels(fact)!=2) {stop(paste(variables[2]," is not a 2-levels factor",sep=""))}
+function(formula,data,ratio=1,alternative=c("two.sided","less","greater"),nperm=999) {
+  if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
+  m <- match.call()
+  if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
+  m[[1]] <- as.name("model.frame")
+  m$ratio <- m$alternative <- m$nperm <- NULL
+  mf <- eval(m,parent.frame())
+  dname <- paste(paste(names(mf)[1],paste(names(mf)[2:ncol(mf)],collapse=":"),sep=" by "),"\n",nperm," permutations",sep="")
+  resp <- mf[,1]
+  fact <- interaction(mf[,2:ncol(mf)],sep=":")
+  if (nlevels(fact)!=2) {stop(paste(paste(names(mf)[2:ncol(mf)],collapse=":")," is not a 2-levels factor",sep=""))}
   if (length(alternative)>1) {alternative <- "two.sided"}
-  data.name <- paste("data: ",variables[1]," by ",variables[2],sep="")
   variance <- var(resp[fact==levels(fact)[1]],na.rm=TRUE)/var(resp[fact==levels(fact)[2]],na.rm=TRUE)
-  names(variance) <- "ratio of variances"
+  ratio <- 1
+  names(variance) <- names(ratio) <- "ratio of variances"
   F.ref <- var.test(resp~fact,ratio=ratio,alternative=alternative)$statistic
   F.perm <- numeric(nperm+1)
   F.perm[1] <- F.ref
@@ -24,21 +24,17 @@ function(formula,data=NULL,ratio=1,alternative=c("two.sided","less","greater"),n
   }
   cat("\n")
   pvalue <- NULL
-  H1 <- NULL
   if (alternative=="two.sided") {
     pvalue <- min(length(which(F.perm <= F.ref)),length(which(F.perm >= F.ref)))*2/(nperm+1)
-    H1 <- paste("alternative hypothesis: true ratio of variances is not equal to ",ratio,sep="")
   }
   if (alternative=="less") {
     pvalue <- length(which(F.perm <= F.ref))/(nperm+1)
-    H1 <- paste("alternative hypothesis: true ratio of variances is less than ",ratio,sep="")
     }
   if (alternative=="greater") {
     pvalue <- length(which(F.perm >= F.ref))/(nperm+1)
-    H1 <- paste("alternative hypothesis: true ratio of variances is greater than ",ratio,sep="")
   }
-  result <- list(statistic=F.ref,permutations=nperm,p.value=pvalue,estimate=variance,alternative=alternative,H1=H1,
-    data.name=data.name)
-  class(result) <- c("list","perm.var.test")
+  result <- list(method="Permutational F test to compare two variances",statistic=F.ref,permutations=nperm,
+    p.value=pvalue,estimate=variance,null.value=ratio,alternative=alternative,data.name=dname)
+  class(result) <- "htest"
   return(result)
 }

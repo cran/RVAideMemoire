@@ -4,10 +4,10 @@
 Cochran's Q test
 }
 \description{
-Perform the Cochran's Q test for unreplicated randomized block design experiments whith a binary response variable and paired data. If the p-value of the test is significative, the function performs pairwise comparisons by using the Wilcoxon sign test.
+Perform the Cochran's Q test for unreplicated randomized block design experiments with a binary response variable and paired data. If the p-value of the test is significant, the function performs pairwise comparisons by using the Wilcoxon sign test.
 }
 \usage{
-cochran.qtest(formula, data=NULL, alpha = 0.05, p.method = "fdr")
+cochran.qtest(formula, data, alpha = 0.05, p.method = "fdr")
 }
 \arguments{
   \item{formula}{
@@ -24,13 +24,18 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
+  \item{method.test}{a character string giving the name of the global test computed.}
   \item{data.name}{a character string giving the name(s) of the data.}
-  \item{statistic}{test statistics.}
+  \item{alternative}{a character string describing the alternative hypothesis.}
+  \item{estimate}{the estimated probabilities.}
+  \item{null.value}{the value of the difference in probabilities under the null hypothesis, always 0.}
+  \item{statistic}{test statistics (Pearson's Chi-squared test only).}
+  \item{parameter}{test degrees of freedom (Pearson's Chi-squared test only).}
   \item{p.value}{p-value of the global test.}
-  \item{tab.test}{data frame of global test result.}
   \item{alpha}{significance level.}
   \item{p.adjust.method}{method for p-values correction.}
-  \item{multcomp}{data frame of pairwise comparisons result.}
+  \item{p.value.multcomp}{data frame of pairwise comparisons result.}
+  \item{method.multcomp}{a character string giving the name of the test computed for pairwise comparisons.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

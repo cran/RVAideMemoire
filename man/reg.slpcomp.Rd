@@ -1,5 +1,6 @@
 \name{reg.slpcomp}
 \alias{reg.slpcomp}
+\alias{print.reg.slpcomp}
 \title{
 Comparison of several simple linear regression slopes
 }
@@ -7,7 +8,7 @@ Comparison of several simple linear regression slopes
 Test for equality of slopes of several simple regression lines. The function returns the confidence interval of each slope and perfoms pairwise comparisons.
 }
 \usage{
-reg.slpcomp(formula, data=NULL, conf.level = 0.95, p.method = "fdr")
+reg.slpcomp(formula, data, conf.level = 0.95, p.method = "fdr")
 }
 \arguments{
   \item{formula}{

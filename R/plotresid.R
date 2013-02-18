@@ -38,11 +38,13 @@ function (model,shapiro=FALSE) {
   } else if ("survreg"%in%class(model)) {
     predict(model)
   }
+  opar <- par(no.readonly=TRUE)
+  on.exit(par(opar))
   par(mfrow=c(1,2))
   plot(fit,model.residuals,xlab="Fitted values",ylab=res.lab,main=paste(res.lab,"vs fitted"))
   abline(h=0,col="grey",lty=3)
   panel.smooth(fit,model.residuals)
-  qqnorm(model.residuals)
+  qqPlot(model.residuals,lwd=1,grid=FALSE,xlab="Theoretical quantiles",ylab="Sample quantiles")
   if (shapiro) {
     shapiro.test(model.residuals)
   }

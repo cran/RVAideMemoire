@@ -25,5 +25,10 @@ mat.cont <- function(f,ref=NULL,restrict=NULL,exclude=FALSE) {
     result[i,comb[i,1]] <- 1
     result[i,comb[i,2]] <- -1
   }
+  colnames(result) <- abbreviate(colnames(result),3)
+  for (i in 1:nrow(result)) {
+    rownames(result)[i] <- paste(colnames(result)[which(result[i,]==1)],"-",
+	colnames(result)[which(result[i,]==-1)],sep="")
+  }
   return(result)
 }

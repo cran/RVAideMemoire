@@ -1,5 +1,6 @@
 \name{chisq.exp}
 \alias{chisq.exp}
+\alias{print.chisq.exp}
 \title{
 Expected counts for comparison of proportions to given values
 }

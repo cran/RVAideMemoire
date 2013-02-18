@@ -8,10 +8,10 @@ function(x,p,p.method="fdr") {
     pval[i] <- test$p.value
   }
   p.adj <- p.adjust(pval,method=p.method)
-  comp <- data.frame("observed"=obs,"expected"=p,"p-value"=p.adj," "=psignif(p.adj),stringsAsFactors=FALSE,check.names=FALSE)
+  comp <- data.frame("observed"=obs,"expected"=p,"p-value"=p.adj," "=.psignif(p.adj),stringsAsFactors=FALSE,check.names=FALSE)
   if (!is.null(rownames(x))) {rownames(comp) <- rownames(x)}
-  result <- list(observed=obs,expected=p,p.adjust.method=p.method,p.value=p.adj,comp=comp)
-  class(result) <- c("prop.multcomp","list")
+  dname <- paste(quote(x)," and ",quote(p),sep="")
+  result <- list(method="exact binomial tests",data.name=dname,observed=obs,expected=p,p.adjust.method=p.method,p.value2=p.adj,p.value=comp)
+  class(result) <- "RV.multcomp"
   return(result)
 }
-

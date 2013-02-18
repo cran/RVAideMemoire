@@ -7,7 +7,7 @@ Permutational Bartlett's test of homogeneity of variances
 Perform a permutational Bartlett's test of homogeneity of k variances.
 }
 \usage{
-perm.bartlett.test(formula, data=NULL, nperm = 999)
+perm.bartlett.test(formula, data, nperm = 999)
 }
 \arguments{
   \item{formula}{
@@ -21,10 +21,11 @@ number of permutations.
 }
 }
 \value{
+  \item{method}{name of the test.}
+  \item{data.name}{a character string giving the name(s) of the data.}
   \item{statistic}{test statistics of the parametric test.}
   \item{permutations}{number of permutations.}
   \item{p.value}{p-value of the permutational test.}
-  \item{data.name}{a character string giving the name(s) of the data.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

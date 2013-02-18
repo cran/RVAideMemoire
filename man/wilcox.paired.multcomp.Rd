@@ -7,7 +7,7 @@ Non parametric pairwise comparisons for paired data
 Perform non parametric pairwise comparisons of paired samples by Wilcoxon signed rank tests for paired data.
 }
 \usage{
-wilcox.paired.multcomp(formula, data=NULL, p.method = "fdr")
+wilcox.paired.multcomp(formula, data, p.method = "fdr")
 }
 \arguments{
   \item{formula}{
@@ -21,10 +21,11 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
+  \item{method}{name of the test.}
   \item{data.name}{a character string giving the name(s) of the data.}
   \item{method}{a character string indicating the name of the test.}
   \item{p.adjust.method}{method for p-values correction.}
-  \item{comp}{table of results of pairwise comparisons.}
+  \item{p.value}{table of results of pairwise comparisons.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

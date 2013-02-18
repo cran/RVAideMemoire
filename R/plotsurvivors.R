@@ -18,7 +18,5 @@ function(x,status=rep(1,length(x))) {
   }
   plot(tri2,alive,pch=16,xlab="Time",ylab="Survivors (log scale)",log="y")
   result <- list(n=n,time=tri2,alive=alive)
-  class(result) <- c("plotsurvivors","list")
-  return(result)
+  invisible(result)
 }
-
