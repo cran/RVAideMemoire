@@ -33,10 +33,10 @@ The function works as \code{chisq.test()} :
 - if \code{x} is a matrix, equality of proportion of successes between populations is tested.
 }
 \value{
+  \item{method}{name of the test.}
   \item{statistic}{test statistics.}
   \item{parameter}{test degrees of freedom}
   \item{p.value}{p-value.}
-  \item{method}{a character string indicating the type of test performed.}
   \item{data.name}{a character string giving the name(s) of the data.}
   \item{observed}{the observed counts.}
   \item{expected}{the expected counts under the null hypothesis.}
@@ -46,4 +46,8 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
 \code{\link{chisq.test}}, \code{\link{G.multcomp}}, \code{\link{G.theo.multcomp}}, \code{\link{pairwise.G.test}}
+}
+\examples{
+counts <- c(5,15,23,8,14)
+G.test(counts)
 }

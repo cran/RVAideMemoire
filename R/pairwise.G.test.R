@@ -10,7 +10,7 @@ function(x,p.method="fdr") {
     LETTERS[1:nrow(x)]
   }
   tab.p <- pairwise.table(fun.p,level.names,p.adjust.method=p.method)
-  result <- list(p.adjust.method=p.method,p.value=tab.p)
-  class(result) <- c("pairwise.G.test","list")
+  result <- list(method="G-tests",data.name=deparse(substitute(x)),p.adjust.method=p.method,p.value=tab.p)
+  class(result) <- "pairwise.htest"
   return(result)
 }

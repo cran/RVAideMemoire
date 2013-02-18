@@ -3,7 +3,7 @@ function (var1,var2,nrep=1000,conf.level=0.95) {
   if (length(var1)!=length(var2)) {
     stop(paste("'",deparse(substitute(var1)),"' and '",deparse(substitute(var2)),"' lengths differ",sep=""))
   }
-  data.name <- paste("data: ",deparse(substitute(var1))," and ",deparse(substitute(var2)),sep="")
+  data.name <- paste(deparse(substitute(var1))," and ",deparse(substitute(var2)),sep="")
   if (!is.factor(var1)) {var1 <- factor(var1)}
   if (!is.factor(var2)) {var2 <- factor(var2)}
   nul <- as.numeric(row.names(table(c(which(is.na(var1)), which(is.na(var2))))))
@@ -29,10 +29,15 @@ function (var1,var2,nrep=1000,conf.level=0.95) {
     sqrt(as.numeric(suppressWarnings(chisq.test(cont)$statistic))/(sum(cont)*(min(dim(cont))-1)))
   }
   simul <- boot(data.frame(var1.2, var2.2),v.fun,R=nrep)
-  interval <- ci(simul$t,conf.level=conf.level)
+  cint <- .ci(simul$t,conf.level=conf.level)
+  attr(cint, "conf.level") <- conf.level
   test <- suppressWarnings(chisq.test(tab.cont))
-  result <- list(statistic=test$statistic,parameter=test$parameter,p.value=test$p.value,data.name=data.name,
-    estimate=v,conf.level=conf.level,rep=nrep,interval=interval)
-  class(result) <- c("cramer.coeff","list")
+  nval <- 0
+  names(nval) <- "association"
+  result <- list(method="Cramer's association coefficient",statistic=test$statistic,parameter=test$parameter,
+    p.value=test$p.value,data.name=data.name,estimate=v,conf.level=conf.level,rep=nrep,conf.int=cint,
+    alternative="two.sided",null.value=nval)
+  class(result) <- "htest"
   return(result)
 }
+

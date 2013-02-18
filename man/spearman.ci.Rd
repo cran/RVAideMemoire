@@ -24,10 +24,12 @@ confidence level.
 }
 }
 \value{
+  \item{method}{name of the test.}
+  \item{data.name}{a character string giving the name(s) of the data.}
   \item{conf.level}{confidence level.}
   \item{rep}{number of replicates.}
-  \item{coeff}{Spearman's rank correlation coefficient.}
-  \item{interval}{confidence interval.}
+  \item{estimate}{Spearman's rank correlation coefficient.}
+  \item{conf.int}{confidence interval.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

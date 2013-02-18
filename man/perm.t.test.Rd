@@ -7,7 +7,7 @@ Permutational Student's t-test
 Perform a permutational Student's t-test.
 }
 \usage{
-perm.t.test(formula, data=NULL, alternative = c("two.sided", "less", "greater"), paired = FALSE, nperm = 999)
+perm.t.test(formula, data, alternative = c("two.sided", "less", "greater"), paired = FALSE, nperm = 999)
 }
 \arguments{
   \item{formula}{
@@ -32,9 +32,9 @@ number of permutations.
   \item{p.value}{p-value of the permutational test.}
   \item{estimate}{the estimated mean or difference in means depending on whether it was a paired or not paired test.}
   \item{alternative}{a character string describing the alternative hypothesis.}
-  \item{H1}{a character string giving the explicit alternative hypothesis.}
   \item{method}{a character string indicating what type of t-test was performed.}
   \item{data.name}{a character string giving the name(s) of the data.}
+  \item{null.value}{the specified hypothesized value of the mean difference, always 0.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

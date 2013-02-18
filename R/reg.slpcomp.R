@@ -1,18 +1,19 @@
 reg.slpcomp <-
 function(formula,data=NULL,conf.level=0.95,p.method="fdr"){
-  if (all.names(formula)[1]!="~" | all.names(formula)[3]!="|") {stop("incorrect 'formula'")}
-  variables <- all.vars(formula)
-  data.name <- paste(variables[1],"~",variables[2],", factor =",variables[3])
-  var <- if (is.null(data)) {get(variables[1],pos=environment(formula))}
-    else {get(variables[1],pos=get(deparse(substitute(data))))}
-  covar <- if (is.null(data)) {get(variables[2],pos=environment(formula))}
-    else {get(variables[2],pos=get(deparse(substitute(data))))}
-  fact <- if (is.null(data)) {get(variables[3],pos=environment(formula))}
-    else {get(variables[3],pos=get(deparse(substitute(data))))}
-  if (length(var)!=length(fact)) {stop(paste("'",variables[1],"' and '",variables[3],"' lengths differ",sep=""))}
-  if (length(var)!=length(covar)) {stop(paste("'",variables[1],"' and '",variables[2],"' lengths differ",sep=""))}
-  if (length(covar)!=length(fact)) {stop(paste("'",variables[2],"' and '",variables[3],"' lengths differ",sep=""))}
-  if (is.character(fact) & !is.factor(fact)) {fact <- as.factor(fact)}
+  if (missing(formula)) {stop("formula missing")}
+  if ((length(formula)!=3) || (length(formula[[3]])!=3) || (formula[[3]][[1]]!=as.name("|")) ||
+    (length(formula[[3]][[2]])!=1) || (length(formula[[3]][[3]])!=1)) {stop("incorrect specification for formula")}
+  formula[[3]][[1]] <- as.name("+")
+  m <- match.call()
+  m$formula <- formula
+  if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
+  m[[1]] <- as.name("model.frame")
+  m$conf.level <- m$theo <- m$p.method <- NULL
+  mf <- eval(m,parent.frame())
+  dname <- paste(names(mf)[1]," ~ ",names(mf)[2],", factor = ",names(mf)[3],sep="")
+  var <- mf[,1]
+  covar <- mf[,2]
+  fact <- mf[,3]
   nul <- as.numeric(row.names(table(c(which(is.na(var)),which(is.na(covar))))))
   var.2 <- if(length(nul)>0) {var[-nul]} else {var}
   covar.2 <- if(length(nul)>0) {covar[-nul]} else {covar}
@@ -38,8 +39,18 @@ function(formula,data=NULL,conf.level=0.95,p.method="fdr"){
     min(pt(t.obs,ddl),pt(t.obs,ddl,lower.tail=FALSE))*2
   }
   comp <- pairwise.table(fun.p,levels(fact.2),p.adjust.method=p.method)
-  result <- list(data.name=data.name,conf.level=conf.level,coeffs=dir,coeffs.tab=tab.ci,p.adjust.method=p.method,multcomp=comp)
-  class(result) <- c("reg.slpcomp","list")
+  result <- list(data.name=dname,conf.level=conf.level,coeffs=dir,coeffs.tab=tab.ci,p.adjust.method=p.method,multcomp=comp)
+  class(result) <- "reg.slpcomp"
   return(result)
+}
+
+print.reg.slpcomp <-
+function(x,...) {
+  cat("\n",x$data.name,"\n\n")
+  cat(paste("Slopes and ",100*x$conf.level,"% confidence intervals\n",sep=""))
+  print(x$coeffs.tab,digits=5)
+  cat(paste("\nPairwise comparisons - correction: ",x$p.adjust.method,"\n"))
+  print(x$multcomp,digits=5,na.print="-")
+  cat("\n")
 }
 

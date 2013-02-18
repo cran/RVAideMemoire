@@ -7,7 +7,7 @@ Pairwise comparisons for survival analysis
 Perform pairwise comparisons between groups for equality of time to event. The function deals with \code{coxph} and \code{survreg} models.
 }
 \usage{
-surv.multcomp(formula, mat, data=NULL, strata = NULL, type = c("coxph", "survreg"), distribution = "exponential", p.method = "fdr")
+surv.multcomp(formula, mat, data, strata = NULL, type = c("coxph", "survreg"), distribution = "exponential", p.method = "fdr")
 }
 \arguments{
   \item{formula}{
@@ -41,8 +41,8 @@ When pairwise comparisons are based on a \code{"survreg"} model, a logrank test 
   \item{statistic}{test statistics.}
   \item{method}{a character string giving the name of the test computed.}
   \item{p.adjust.method}{method for p-values correction.}
-  \item{p.value}{corrected p-values.}
-  \item{comparisons}{table of results.}
+  \item{p.value2}{corrected p-values.}
+  \item{p.value}{table of results.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
@@ -51,6 +51,7 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link[survival]{survreg}}, \code{\link[survival]{coxph}}
 }
 \examples{
+require(survival)
 death <- c(sample(8:15,20,replace=TRUE),sample(12:20,20,replace=TRUE),sample(18:22,20,replace=TRUE))
 groups <- gl(3,20,labels=LETTERS[1:3])
 model1 <- coxph(Surv(death)~groups)

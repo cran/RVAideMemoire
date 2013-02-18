@@ -16,6 +16,8 @@ function (model) {
   }
   res <- residuals(model,type="martingale")
   if (ncol(covar)>1) {
+    opar <- par(no.readonly=TRUE)
+    on.exit(par(opar))
     par(mfrow=n2mfrow(ncol(covar)))
   }
   for (i in 1:ncol(covar)) {

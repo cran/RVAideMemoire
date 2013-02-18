@@ -30,9 +30,12 @@ additional arguments to \code{boot()}. See help of this function.
 See help of the \code{boot()} function for more explanations.
 }
 \value{
+  \item{method}{the character string \code{"Bootstrap"}}
+  \item{data.name}{a character string giving the name of the data.}
+  \item{estimate}{the estimated original value}
   \item{conf.level}{confidence level for confidence interval.}
   \item{rep}{number of replicates.}
-  \item{interval}{limits of the confidence interval.}
+  \item{conf.int}{limits of the confidence interval.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

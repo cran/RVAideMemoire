@@ -21,12 +21,14 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
+  \item{method}{name of the test.}
+  \item{data.name}{a character string giving the name(s) of the data.}
   \item{observed}{observed counts.}
   \item{expected}{expected counts.}
   \item{p.adjust.method}{method for p-values correction.}
   \item{statistic}{statistics of each test.}
-  \item{p.value}{corrected p-values.}
-  \item{comp}{data frame of results.}
+  \item{p.value2}{corrected p-values.}
+  \item{p.value}{data frame of results.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

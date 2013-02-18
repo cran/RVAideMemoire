@@ -11,10 +11,10 @@ function(x,p=rep(1/length(x),length(x)),p.method="fdr") {
     pval[i] <- as.numeric(test$p.value)
   }
   p.adj <- p.adjust(pval,method=p.method)
-  comp <- data.frame("observed"=x,"expected"=theo,"Chi"=chi2,"Pr(>Chi)"=p.adj," "=psignif(p.adj),
+  comp <- data.frame("observed"=x,"expected"=theo,"Chi"=chi2,"Pr(>Chi)"=p.adj," "=.psignif(p.adj),
     stringsAsFactors=FALSE,check.names=FALSE)
-  result <- list(observed=x,expected=theo,p.adjust.method=p.method,statistic=chi2,p.value=p.adj,comp=comp)
-  class(result) <- c("chisq.theo.multcomp","list")
+  dname <- paste(quote(x)," and ",quote(p),sep="")
+  result <- list(method="chi-squared tests",data.name=dname,observed=x,expected=theo,p.adjust.method=p.method,statistic=chi2,p.value2=p.adj,p.value=comp)
+  class(result) <- "RV.multcomp"
   return(result)
 }
-

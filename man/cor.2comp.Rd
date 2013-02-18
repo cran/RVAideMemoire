@@ -33,17 +33,17 @@ theoretical coefficient.
 }
 }
 \value{
-  \item{conf.level}{confidence level.}
+  \item{method.test}{a character string giving the name of the global test computed.}
+  \item{data.name}{a character string giving the name(s) of the data.}
+  \item{statistic}{test statistics.}
+  \item{p.value}{p-value for comparison of the 2 coefficients.}
+  \item{null.value}{the value of the difference in coefficients under the null hypothesis, always 0.}
+  \item{alternative}{a character string describing the alternative hypothesis.}
+  \item{estimate}{the estimated correlation coefficients.}
   \item{alpha}{significance level.}
-  \item{coeffs}{observed Pearson's coefficients.}
-  \item{u.comp}{test statistics for comparison of the 2 coefficients.}
-  \item{p.comp}{p-value for comparison of the 2 coefficients.}
-  \item{comp}{data frame of results for comparison of the 2 coefficients.}
-  \item{r.comm}{common correlation coefficient and confidence interval.}
-  \item{r.theo}{theoretical coefficient.}
-  \item{u.comm}{test statistics for equality of the common coefficient to the theoretical value.}
-  \item{p.comm}{p-value for equality of the common coefficient to the theoretical value.}
-  \item{comm}{data frame or results for equality of the common coefficient to the theoretical value.}
+  \item{conf.level}{confidence level.}
+  \item{common.name}{a character string explaining the elements of the table below.}
+  \item{common}{data frame of results if the coefficients are not significantly different (common coefficient).}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

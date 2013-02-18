@@ -24,7 +24,6 @@ level of graphical warning.
 }
 }
 \value{
-  \item{print.diff}{\code{print.diff} argument of the function.}
   \item{coefficients}{coefficients of each computed regression.}
   \item{coefficients.diff}{difference in coefficients between each computed regression and the whole regression.}
   \item{coefficients.prop}{difference in coefficients expressed in proportion of the whole regression coefficients.}
