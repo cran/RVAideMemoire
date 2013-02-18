@@ -35,20 +35,20 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
-  \item{levels}{number of levels of \code{fact}.}
-  \item{conf.level}{confidence level.}
+  \item{method.test}{a character string giving the name of the global test computed.}
+  \item{data.name}{a character string giving the name(s) of the data.}
+  \item{statistic}{test statistics.}
+  \item{parameter}{test degrees of freedom.}
+  \item{p.value}{p-value for comparison of the coefficients.}
+  \item{null.value}{the value of the difference in coefficients under the null hypothesis, always 0.}
+  \item{alternative}{a character string describing the alternative hypothesis.}
+  \item{estimate}{the estimated correlation coefficients.}
   \item{alpha}{significance level.}
-  \item{coeffs}{observed correlation coefficients.}
-  \item{statistic.comp}{test statistics for equality of all coefficients.}
-  \item{p.value.comp}{p-value for equality of all coefficients.}
-  \item{comp}{data frame of results for equality of all coefficients.}
-  \item{r.comm}{common correlation coefficient and confidence interval.}
-  \item{r.theo}{theoretical coefficient.}
-  \item{statistic.comm}{test statistics for equality of the common coefficient to the theoretical value.}
-  \item{p.value.comm}{p-value for equality of the common coefficient to the theoretical value.}
-  \item{comm}{data frame for equality of the common coefficient to the theoretical value.}
+  \item{conf.level}{confidence level.}
   \item{p.adjust.method}{method for p-values correction.}
-  \item{p.multcomp}{data frame of results of pairwise comparisons.}
+  \item{p.value.multcomp}{data frame of pairwise comparisons result.}
+  \item{common.name}{a character string explaining the elements of the table below.}
+  \item{common}{data frame of results if the coefficients are not significantly different (common coefficient).}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

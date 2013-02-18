@@ -7,7 +7,7 @@ function(x,p.method="fdr") {
     suppressWarnings(chisq.test(c(xi, xj)))$p.value
   }
   tab.p <- pairwise.table(fun.p,as.character(x),p.adjust.method=p.method)
-  result <- list(p.adjust.method=p.method,p.value=tab.p)
-  class(result) <- c("chisq.multcomp","list")
+  result <- list(method="chi-squared tests",data.name=deparse(substitute(x)),p.adjust.method=p.method,p.value=tab.p)
+  class(result) <- "pairwise.htest"
   return(result)
 }

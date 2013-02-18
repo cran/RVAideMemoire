@@ -1,4 +1,4 @@
-psignif <-
+.psignif <-
 function (p) {
   result <- character(length(p))
   for (i in 1:length(p)) {

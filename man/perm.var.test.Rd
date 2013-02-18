@@ -7,7 +7,7 @@ Permutational F test to compare two variances
 Perform a permutational F test to compare two variances.
 }
 \usage{
-perm.var.test(formula, data=NULL, ratio = 1, alternative = c("two.sided", "less", "greater"), nperm = 999)
+perm.var.test(formula, data, ratio = 1, alternative = c("two.sided", "less", "greater"), nperm = 999)
 }
 \arguments{
   \item{formula}{
@@ -27,13 +27,14 @@ number of permutations.
 }
 }
 \value{
+  \item{method}{name of the test.}
   \item{statistic}{test statistics of the parametric test.}
   \item{permutations}{number of permutations.}
   \item{p.value}{p-value of the permutational test.}
   \item{estimate}{the ratio of the two variances.}
   \item{alternative}{a character string describing the alternative hypothesis.}
-  \item{H1}{a character string giving the explicit alternative hypothesis.}
   \item{data.name}{a character string giving the name(s) of the data.}
+  \item{null.value}{the ratio of population variances under the null hypothesis.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

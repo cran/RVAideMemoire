@@ -39,6 +39,7 @@ Maxime Hervé <mx.herve@gmail.com>, based on a Stéphane Champely idea.
 \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{s.class}}
 }
 \examples{
+require(ade4)
 # Fictive dataset
 age <- sample(15:60,50,replace=TRUE)
 sex <- sample(c("M","F"),50,replace=TRUE)

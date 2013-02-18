@@ -6,6 +6,46 @@ library('RVAideMemoire')
 
 assign(".oldSearch", search(), pos = 'CheckExEnv')
 cleanEx()
+nameEx("DA.valid")
+### * DA.valid
+
+flush(stderr()); flush(stdout())
+
+### Name: DA.valid
+### Title: Cross-validation in Linear Discriminant Analysis
+### Aliases: DA.valid print.DA.valid
+
+### ** Examples
+
+# Cross-validation of a LDA model
+require(MASS)
+data(iris)
+model.LDA <- lda(iris[,1:4],iris$Species)
+DA.valid(model.LDA)
+
+
+
+cleanEx()
+nameEx("DA.var")
+### * DA.var
+
+flush(stderr()); flush(stdout())
+
+### Name: DA.var
+### Title: Explained variance in Linear Discriminant Analysis
+### Aliases: DA.var
+
+### ** Examples
+
+# LDA model
+require(MASS)
+data(iris)
+model.LDA <- lda(iris[,1:4],iris$Species)
+DA.var(model.LDA)
+
+
+
+cleanEx()
 nameEx("G.multcomp")
 ### * G.multcomp
 
@@ -35,11 +75,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-proportions <- sample(c(0,1),60,replace=TRUE)
-populations <- sample(LETTERS[1:3],60,replace=TRUE)
-tab.cont <- table(populations,proportions)
-p.theo <- c(0.2,0.5,0.7)
-chisq.exp(tab.cont,p=p.theo)
+counts <- c(5,15,23,8,14)
+G.test(counts)
 
 
 
@@ -59,6 +96,28 @@ counts <- c(5,15,23,8,14)
 p.theo <- c(0.1,0.4,0.3,0.15,0.05)
 G.test(counts,p=p.theo)
 G.theo.multcomp(counts,p=p.theo)
+
+
+
+cleanEx()
+nameEx("LDA.format")
+### * LDA.format
+
+flush(stderr()); flush(stdout())
+
+### Name: LDA.format
+### Title: Re-formating LDA data
+### Aliases: LDA.format
+
+### ** Examples
+
+require(MASS)
+require(ade4)
+data(iris)
+model.LDA <- lda(iris[,1:4],iris$Species)
+coord <- LDA.format(model.LDA)
+s.class(coord$li,fac=coord$grouping,col=rainbow(nlevels(coord$grouping)),cellipse=0)
+s.corcircle(coord$co,label=abbreviate(rownames(coord$co),3))
 
 
 
@@ -96,7 +155,41 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 data(iris)
-byf.hist(iris$Sepal.Length,iris$Species)
+byf.hist(Sepal.Length~Species,data=iris)
+
+
+
+cleanEx()
+nameEx("byf.mqqnorm")
+### * byf.mqqnorm
+
+flush(stderr()); flush(stdout())
+
+### Name: byf.mqqnorm
+### Title: QQ-plot for factor levels
+### Aliases: byf.mqqnorm
+
+### ** Examples
+
+data(iris)
+byf.mqqnorm(iris[,1:4],iris$Species)
+
+
+
+cleanEx()
+nameEx("byf.normhist")
+### * byf.normhist
+
+flush(stderr()); flush(stdout())
+
+### Name: byf.normhist
+### Title: Histogram and normal distribution for factor levels
+### Aliases: byf.normhist
+
+### ** Examples
+
+data(iris)
+byf.normhist(Sepal.Length~Species,data=iris)
 
 
 
@@ -113,7 +206,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 data(iris)
-byf.qqnorm(iris$Sepal.Length,iris$Species)
+byf.qqnorm(Sepal.Length~Species,data=iris)
 
 
 
@@ -130,7 +223,7 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 data(iris)
-byf.shapiro(iris$Sepal.Length,iris$Species)
+byf.shapiro(Sepal.Length~Species,data=iris)
 
 
 
@@ -161,7 +254,7 @@ flush(stderr()); flush(stdout())
 
 ### Name: chisq.exp
 ### Title: Expected counts for comparison of proportions to given values
-### Aliases: chisq.exp
+### Aliases: chisq.exp print.chisq.exp
 
 ### ** Examples
 
@@ -303,7 +396,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-# 'kidney' dataset in MASS package
+# 'kidney' dataset of package 'survival'
+require(survival)
 data(kidney)
 model <- coxph(Surv(time,status)~age+factor(sex),data=kidney)
 cox.resid(model)
@@ -341,6 +435,25 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 cv(rnorm(30))
+
+
+
+cleanEx()
+nameEx("dendro.gp")
+### * dendro.gp
+
+flush(stderr()); flush(stdout())
+
+### Name: dendro.gp
+### Title: Dendrogram and number of groups to be chosen
+### Aliases: dendro.gp
+
+### ** Examples
+
+data(iris)
+distances <- dist(iris[,1:4],method="euclidian")
+dendro <- hclust(distances,method="ward")
+dendro.gp(dendro)
 
 
 
@@ -393,7 +506,7 @@ flush(stderr()); flush(stdout())
 
 ### Name: least.rect
 ### Title: Least rectangles linear regression
-### Aliases: least.rect
+### Aliases: least.rect print.least.rect
 
 ### ** Examples
 
@@ -455,7 +568,7 @@ flush(stderr()); flush(stdout())
 ### Name: lr.multcomp
 ### Title: Comparison of several simple linear least rectangles regression
 ###   lines
-### Aliases: lr.multcomp
+### Aliases: lr.multcomp print.lr.multcomp
 
 ### ** Examples
 
@@ -554,6 +667,28 @@ pairwise.G.test(x)
 
 
 cleanEx()
+nameEx("pairwise.manova")
+### * pairwise.manova
+
+flush(stderr()); flush(stdout())
+
+### Name: pairwise.manova
+### Title: Pairwise MANOVAs
+### Aliases: pairwise.manova
+
+### ** Examples
+
+data(iris)
+
+# MANOVA
+summary(manova(as.matrix(iris[,1:4])~iris$Species))
+
+# Pairwise comparisons
+pairwise.manova(iris[,1:4],iris$Species)
+
+
+
+cleanEx()
 nameEx("pairwise.perm.t.test")
 ### * pairwise.perm.t.test
 
@@ -585,8 +720,7 @@ flush(stderr()); flush(stdout())
 
 ### Name: perm.anova
 ### Title: Permutational Analysis of Variance
-### Aliases: perm.anova perm.anova.1way perm.anova.2wayA perm.anova.2wayB
-###   perm.anova.2wayC perm.anova.2wayD perm.anova.3wayA perm.anova.3wayB
+### Aliases: perm.anova
 
 ### ** Examples
 
@@ -689,6 +823,47 @@ perm.var.test(response~fact)
 
 
 cleanEx()
+nameEx("plot1comp.ind")
+### * plot1comp.ind
+
+flush(stderr()); flush(stdout())
+
+### Name: plot1comp.ind
+### Title: Plot of indiviuals and their class on a single axis (component)
+### Aliases: plot1comp.ind
+
+### ** Examples
+
+require(MASS)
+data(iris)
+LDA <- lda(iris[,1:4],iris$Species)
+LDA.form <- LDA.format(LDA)
+plot1comp.ind(LDA.form$li,LDA.form$grouping,col=1:3)
+
+
+
+cleanEx()
+nameEx("plot1comp.var")
+### * plot1comp.var
+
+flush(stderr()); flush(stdout())
+
+### Name: plot1comp.var
+### Title: Plot of correlation between predictor variables and a single
+###   component
+### Aliases: plot1comp.var
+
+### ** Examples
+
+require(MASS)
+data(iris)
+LDA <- lda(iris[,1:4],iris$Species)
+LDA.form <- LDA.format(LDA)
+plot1comp.var(LDA.form$co)
+
+
+
+cleanEx()
 nameEx("plotsurvivors")
 ### * plotsurvivors
 
@@ -700,7 +875,8 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-# 'kidney' dataset in MASS package
+# 'kidney' dataset of package 'survival'
+require(survival)
 data(kidney)
 plotsurvivors(kidney$time,kidney$status)
 
@@ -724,23 +900,6 @@ tab.cont <- table(populations,proportions)
 p.theo <- c(0.2,0.5,0.7)
 prop.test(tab.cont,p=p.theo)
 prop.multcomp(tab.cont,p=p.theo)
-
-
-
-cleanEx()
-nameEx("psignif")
-### * psignif
-
-flush(stderr()); flush(stdout())
-
-### Name: psignif
-### Title: Stars for p-values significance
-### Aliases: psignif
-
-### ** Examples
-
-p <- c(0.005,0.02,0.0000001,0.35)
-psignif(p)
 
 
 
@@ -775,7 +934,7 @@ flush(stderr()); flush(stdout())
 ### Name: reg.intcomp
 ### Title: Common slope and comparison of several simple linear regression
 ###   intercepts
-### Aliases: reg.intcomp
+### Aliases: reg.intcomp print.reg.intcomp
 
 ### ** Examples
 
@@ -794,7 +953,7 @@ flush(stderr()); flush(stdout())
 
 ### Name: reg.slpcomp
 ### Title: Comparison of several simple linear regression slopes
-### Aliases: reg.slpcomp
+### Aliases: reg.slpcomp print.reg.slpcomp
 
 ### ** Examples
 
@@ -818,6 +977,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+require(ade4)
 # Fictive dataset
 age <- sample(15:60,50,replace=TRUE)
 sex <- sample(c("M","F"),50,replace=TRUE)
@@ -845,6 +1005,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+require(ade4)
 # Fictive dataset
 age <- sample(15:60,50,replace=TRUE)
 sex <- sample(c("M","F"),50,replace=TRUE)
@@ -921,6 +1082,7 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+require(survival)
 death <- c(sample(8:15,20,replace=TRUE),sample(12:20,20,replace=TRUE),sample(18:22,20,replace=TRUE))
 groups <- gl(3,20,labels=LETTERS[1:3])
 model1 <- coxph(Surv(death)~groups)

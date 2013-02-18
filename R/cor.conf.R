@@ -5,16 +5,20 @@ function(var1,var2,theo) {
   nul <- as.numeric(row.names(table(c(which(is.na(var1)),which(is.na(var2))))))
   var1.2 <- if(length(nul)>0) {var1[-nul]} else {var1}
   var2.2 <- if(length(nul)>0) {var2[-nul]} else {var2}
+  dname <- paste(deparse(substitute(var1))," and ",deparse(substitute(var2)),sep="")
   r <- as.numeric(cor.test(var1.2,var2.2,method="pearson")$estimate)
+  names(r) <- "cor"
   z <- 0.5*log((1+r)/(1-r))
   zeta <- 0.5*log((1+theo)/(1-theo))
   u.obs <- abs(z-zeta)*sqrt(length(var1.2)-3)
-  names(u.obs) <- "u"
+  names(u.obs) <- "U"
   p <- min(pnorm(u.obs,0,1),pnorm(u.obs,0,1,lower.tail=FALSE))*2
-  conform <- data.frame("observed"=r,"theoretical"=theo,"u"=u.obs,"Pr(>|u|)"=p," "=psignif(p),
-    stringsAsFactors=FALSE,check.names=FALSE)
-  result <- list(r.theo=theo,r.obs=r,statistic=u.obs,p.value=p,conform=conform)
-  class(result) <- c("cor.conf","list")
+  met <- "Equality of a Pearson's linear correlation coefficient to a given value"
+  alternative <- "two.sided"
+  nval <- theo
+  names(nval) <- "coefficient"
+  result <- list(method=met,data.name=dname,statistic=u.obs,p.value=p,alternative=alternative,
+    null.value=nval,estimate=r)
+  class(result) <- "htest"
   return(result)
 }
-

@@ -18,4 +18,3 @@ function(model,conf.level=0.95,type=c("mean","ind"),...){
   lines(sequence,pred[,"lwr"],...)
   lines(sequence,pred[,"upr"],...)
 }
-

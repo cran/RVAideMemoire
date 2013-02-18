@@ -1,5 +1,6 @@
 \name{lr.multcomp}
 \alias{lr.multcomp}
+\alias{print.lr.multcomp}
 \title{
 Comparison of several simple linear least rectangles regression lines
 }
@@ -7,7 +8,7 @@ Comparison of several simple linear least rectangles regression lines
 Compare confidence intervals of parameters of several simple linear least rectangles regression lines. No test is performed, the function just compares confidence intervals and returns 'equal' or 'unequal'.
 }
 \usage{
-lr.multcomp(formula, data=NULL, conf.level = 0.95)
+lr.multcomp(formula, data, conf.level = 0.95)
 }
 \arguments{
   \item{formula}{

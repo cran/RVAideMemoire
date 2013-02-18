@@ -18,6 +18,8 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 }
 }
 \value{
+  \item{method}{name of the test.}
+  \item{data.name}{a character string giving the name(s) of the data.}
   \item{p.adjust.method}{method for p-values correction.}
   \item{p.value}{table of results.}
 }

@@ -1,5 +1,6 @@
 \name{reg.intcomp}
 \alias{reg.intcomp}
+\alias{print.reg.intcomp}
 \title{
 Common slope and comparison of several simple linear regression intercepts
 }
@@ -7,7 +8,7 @@ Common slope and comparison of several simple linear regression intercepts
 Compute the common slope of parallel linear regression lines and test for equality of their intercepts. The function returns the common slope and its confidence interval, the intercept of each regression line and its confidence interval, test for equality of each intercept to a given value and performs pairwise comparisons between intercepts.
 }
 \usage{
-reg.intcomp(formula, data=NULL, conf.level = 0.95, theo = 0, p.method = "fdr")
+reg.intcomp(formula, data, conf.level = 0.95, theo = 0, p.method = "fdr")
 }
 \arguments{
   \item{formula}{
