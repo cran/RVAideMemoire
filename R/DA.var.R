@@ -1,5 +1,5 @@
 DA.var <- function(model) {
-  if (class(model)!="lda") {stop("model not recognized")}
+  if (!class(model)%in%c("lda","plsda")) {stop("model not recognized")}
   if (class(model)=="lda") {
     model <- LDA.format(model)
     Y <- model$grouping
@@ -7,6 +7,25 @@ DA.var <- function(model) {
     ncomp <- ncol(model$li)
     ncomp.tot <- ncomp
     coord <- model$li
+  } else {
+    X <- model$X
+    Y <- character(nrow(X))
+    for (i in 1:length(Y)) {
+	if (any(model$ind.mat[i,]!=0)) {
+	  Y[i] <- model$names$Y[which(model$ind.mat[i,]==1)]
+	} else {
+	  Y[i] <- NA
+	}
+    }
+    Y <- factor(Y)
+    if (any(is.na(Y))) {
+	X <- X[-which(is.na(Y)),]
+	Y <- na.omit(Y)
+    }
+    ncomp <- model$ncomp
+    ncomp.tot <- ncol(X)
+    model2 <- plsda(X,Y,ncomp=ncomp.tot)
+    coord <- model2$variates$X
   }
   weights <- table(Y)
   means <- aggregate(coord,list(Y=Y),mean)[,-1]
@@ -21,5 +40,8 @@ DA.var <- function(model) {
   prop <- round(as.vector(100*vars/sum(vars)),2)
   tab <- data.frame("Proportion (%)"=prop,Cumulative=round(cumsum(prop),2),
     row.names=paste("Comp",1:ncomp.tot,sep=""),check.names=FALSE)
+  if (class(model)=="plsda") {
+    tab <- tab[1:ncomp,]
+  }
   return(tab)
 }

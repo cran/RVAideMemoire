@@ -3,6 +3,7 @@ importFrom(boot,boot)
 importFrom(car,qqPlot)
 importFrom(doBy,esticon)
 importFrom(MASS,glm.nb,lda)
+importFrom(mixOmics,plsda,valid,vip)
 importFrom(statmod,qresiduals)
 importFrom(survival,is.Surv,Surv,survreg,coxph)
 

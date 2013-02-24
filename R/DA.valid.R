@@ -1,6 +1,7 @@
 DA.valid <-
-function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debiased"),M=10,nrep=20) {
-  if (class(model)!="lda") {stop("model not recognized")}
+function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debiased"),
+  crit.plsda=c("mahalanobis.dist","centroids.dist","max.dist"),M=10,nrep=20) {
+  if (!class(model)%in%c("lda","plsda")) {stop("model not recognized")}
   if (length(method)!=1) {method <- "Mfold"}
   if (!method%in%c("Mfold","loo")) {stop("method not recognized")}
   result <- list(model=class(model),method=method)
@@ -55,6 +56,55 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 	result$nrep <- nrep
 	result$tab <- tab
     }
+  } else if (class(model)=="plsda") {
+    ncomp <- model$ncomp
+    if (length(crit.plsda)!=1) {crit.plsda <- "mahalanobis.dist"}
+    if (!crit.plsda%in%c("max.dist","centroids.dist","mahalanobis.dist")) {stop("distance criterion not recognized")}
+    result$crit.plsda <- crit.plsda
+    tab.temp <- data.frame(Run1=integer(ncomp),row.names=paste("Axis",1:ncomp))
+    if (method=="loo" | (method=="Mfold" & nrep==1)) {
+	ok <- FALSE
+	while (!ok) {
+	  test <- try(valid(model,validation=method,method=crit.plsda,folds=M),silent=TRUE)
+	  if ("try-error"%in%class(test)) {
+	    next
+	  } else {
+	    val <- test
+	    ok <- TRUE
+	  }
+	}
+	tab.temp[,1] <- val[,crit.plsda]
+	if (method=="Mfold") {
+	  result$M <- M
+	  result$nrep <- nrep
+	}
+    } else {
+	for (i in 2:nrep) {
+	  tab.temp <- cbind(tab.temp,integer(ncomp))
+	  colnames(tab.temp)[i] <- paste("Run",i,sep="")
+	}
+	pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
+	for (i in 1:nrep) {
+	  ok <- FALSE
+	  while (!ok) {
+	    test <- try(valid(model,validation="Mfold",method=crit.plsda,folds=M),silent=TRUE)
+	    if ("try-error"%in%class(test)) {
+		next
+	    } else {
+		val <- test
+		ok <- TRUE
+	    }
+	  }
+	  tab.temp[,i] <- val[,crit.plsda]
+	  setTxtProgressBar(pb,round(i*100/nrep,0))
+	}
+	cat("\n")
+	result$M <- M
+	result$nrep <- nrep
+    }
+    tab <- data.frame("Error rate (%)"=integer(ncomp),row.names=paste("Axis",1:ncomp),check.names=FALSE)
+    tab[,1] <- 100*apply(tab.temp,1,mean)
+    result$tab <- tab
   }
   class(result) <- "DA.valid"
   return(result)
@@ -62,7 +112,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 
 print.DA.valid <-
 function(x,digits=4,...) {
-  model <- "LDA"
+  model <- ifelse(x$model=="lda","LDA","PLS-DA")
   cat(paste("\n\tCross-validation on a ",model," model\n\n",sep=""))
   m <- if (x$method=="loo") {
     "Leave-one-out"
@@ -73,8 +123,18 @@ function(x,digits=4,...) {
   if (x$method=="Mfold") {
     cat(paste("Repetitions: ",x$nrep,"\n",sep=""))
   }
-  crit <- x$crit.lda
-  cat(paste("Parameter estimation method: ",crit,"\n\n",sep=""))
+  crit <- if (x$model=="lda") {
+    x$crit.lda
+  } else {
+    if (x$crit.plsda=="max.dist") {
+	"maximum distance"
+    } else if (x$crit.plsda=="centroids.dist") {
+	"centroids distance"
+    } else {
+	"mahalanobis distance"
+    }
+  }
+  cat(paste(ifelse(x$model=="lda","Parameter estimation method: ","Distance criterion: "),crit,"\n\n",sep=""))
   print(x$tab,digits=digits)
   cat("\n")
 }
