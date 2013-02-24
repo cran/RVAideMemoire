@@ -2,21 +2,21 @@ Encoding: latin1
 Package: RVAideMemoire
 Type: Package
 Title: Diverse basic statistical and graphical functions
-Version: 0.9-22
-Date: 2013-02-18
+Version: 0.9-27
+Date: 2013-02-24
 Author: Maxime Hervé
 Maintainer: Maxime Hervé <mx.herve@gmail.com>
-Imports: ade4, boot, car, doBy, lme4, MASS, statmod, survival
+Imports: ade4, boot, car, doBy, lme4, MASS, mixOmics, statmod, survival
 Description: This package contains diverse more or less complicated
         functions, written to simplify beginners' (but not only) life:
         simplifications of existing functions, basic but not
-        implemented tests, easy-to-use tools... All functions are
-        presented in the French book 'Aide-memoire de statistique
-        appliquee a la biologie', written by the same author and
-        available on CRAN.
+        implemented tests, easy-to-use tools, bridges between functions
+        of different packages... All functions are presented in the
+        French book 'Aide-memoire de statistique appliquee a la
+        biologie', written by the same author and available on CRAN.
 License: GPL-2
 LazyLoad: yes
-Packaged: 2013-02-18 07:13:32 UTC; Maxime
+Packaged: 2013-02-24 19:16:27 UTC; Maxime
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-02-18 09:12:54
+Date/Publication: 2013-02-25 07:39:30

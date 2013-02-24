@@ -12,7 +12,7 @@ nameEx("DA.valid")
 flush(stderr()); flush(stdout())
 
 ### Name: DA.valid
-### Title: Cross-validation in Linear Discriminant Analysis
+### Title: Cross-validation in Discriminant Analysis
 ### Aliases: DA.valid print.DA.valid
 
 ### ** Examples
@@ -23,6 +23,12 @@ data(iris)
 model.LDA <- lda(iris[,1:4],iris$Species)
 DA.valid(model.LDA)
 
+# Cross-validation of a PLS-DA model
+require(mixOmics)
+data(yeast)
+model.PLSDA <- plsda(t(yeast$data),yeast$cond,ncomp=2)
+DA.valid(model.PLSDA)
+
 
 
 cleanEx()
@@ -32,7 +38,7 @@ nameEx("DA.var")
 flush(stderr()); flush(stdout())
 
 ### Name: DA.var
-### Title: Explained variance in Linear Discriminant Analysis
+### Title: Explained variance in Discriminant Analysis
 ### Aliases: DA.var
 
 ### ** Examples
@@ -42,6 +48,12 @@ require(MASS)
 data(iris)
 model.LDA <- lda(iris[,1:4],iris$Species)
 DA.var(model.LDA)
+
+# PLS-DA model
+require(mixOmics)
+data(yeast)
+model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond,ncomp=3)
+DA.var(model.PLSDA)
 
 
 
@@ -118,6 +130,69 @@ model.LDA <- lda(iris[,1:4],iris$Species)
 coord <- LDA.format(model.LDA)
 s.class(coord$li,fac=coord$grouping,col=rainbow(nlevels(coord$grouping)),cellipse=0)
 s.corcircle(coord$co,label=abbreviate(rownames(coord$co),3))
+
+
+
+cleanEx()
+nameEx("PLSDA.VIP")
+### * PLSDA.VIP
+
+flush(stderr()); flush(stdout())
+
+### Name: PLSDA.VIP
+### Title: Variable Importance in the Projection (VIP)
+### Aliases: PLSDA.VIP print.PLSDA.VIP
+
+### ** Examples
+
+require(mixOmics)
+data(yeast)
+model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond,ncomp=3)
+PLSDA.VIP(model.PLSDA)
+
+
+
+cleanEx()
+nameEx("PLSDA.ncomp")
+### * PLSDA.ncomp
+
+flush(stderr()); flush(stdout())
+
+### Name: PLSDA.ncomp
+### Title: Graphical help to number of components selection in PLS-DA
+### Aliases: PLSDA.ncomp
+
+### ** Examples
+
+require(mixOmics)
+data(yeast)
+X <- t(yeast$data)
+Y <- yeast$strain.cond
+PLSDA.ncomp(X,Y)
+
+
+
+cleanEx()
+nameEx("PLSDA.test")
+### * PLSDA.test
+
+flush(stderr()); flush(stdout())
+
+### Name: PLSDA.test
+### Title: Permutational test for the discriminant ability of the factor in
+###   PLS-DA
+### Aliases: PLSDA.test
+
+### ** Examples
+
+# There is not enough permutations here but the example runs faster.
+
+require(mixOmics)
+data(yeast)
+X <- t(yeast$data)
+Y <- yeast$strain.cond
+model <- plsda(X,Y,ncomp=3)
+PLSDA.test(model,nperm=49)
 
 
 
@@ -731,17 +806,19 @@ fact2 <- gl(3,1,36,labels=letters[1:3])
 fact3 <- gl(6,6,labels=letters[1:6])
 block <- gl(2,6,36,labels=letters[1:2])
 
+# Not enough permutations here but faster to run
+
 # 2 crossed fixed factors with interaction
-perm.anova(response~fact1*fact2)
+perm.anova(response~fact1*fact2,nperm=49)
 
 # 2 nested fixed factors
-perm.anova(response~fact1/fact2)
+perm.anova(response~fact1/fact2,nperm=49)
 
 # 2 nested factors, fact2 being random
-perm.anova(response~fact1/fact3,nest.f2="random")
+perm.anova(response~fact1/fact3,nest.f2="random",nperm=49)
 
 # 1 fixed factor and 1 blocking (random) factor
-perm.anova(response~fact1|block)
+perm.anova(response~fact1|block,nperm=49)
 
 
 
