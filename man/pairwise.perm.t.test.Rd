@@ -47,9 +47,11 @@ set.seed(1203)
 response <- c(rnorm(5),rpois(5,0.5),rnorm(5,2,1))
 fact <- gl(3,5,labels=LETTERS[1:3])
 
+# Not enough permutations here but it runs faster
+
 # Permutational ANOVA
-perm.anova(response~fact)
+perm.anova(response~fact,nperm=49)
 
 # Pairwise comparisons
-pairwise.perm.t.test(response,fact)
+pairwise.perm.t.test(response,fact,nperm=49)
 }

@@ -6,14 +6,14 @@
 Diverse basic statistical and graphical functions
 }
 \description{
-This package contains diverse more or less complicated functions, written to simplify beginners' (but not only) life: simplifications of existing functions, basic but not implemented tests, easy-to-use tools... All functions are presented in the French book 'Aide-memoire de statistique appliquee a la biologie', written by the same author and available on CRAN.
+This package contains diverse more or less complicated functions, written to simplify beginners' (but not only) life: simplifications of existing functions, basic but not implemented tests, easy-to-use tools, bridges between functions of different packages... All functions are presented in the French book 'Aide-memoire de statistique appliquee a la biologie', written by the same author and available on CRAN.
 }
 \details{
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9-22\cr
-Date: \tab 2013-02-18\cr
+Version: \tab 0.9-27\cr
+Date: \tab 2013-02-24\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
