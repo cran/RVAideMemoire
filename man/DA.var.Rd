@@ -4,14 +4,14 @@
 Explained variance in Discriminant Analysis
 }
 \description{
-Calculate intergroup variance explained by components of a Discriminant Analysis (either obtained from the function \code{lda)} of the package MASS or the function \code{plsda()} of the package mixOmics).
+Calculate intergroup variance explained by components of a Discriminant Analysis (either obtained from \code{\link[MASS]{lda}} or \code{\link[mixOmics]{plsda}}).
 }
 \usage{
 DA.var(model)
 }
 \arguments{
   \item{model}{
-object of class \code{"lda"} (from the function \code{lda()} of the package MASS) or \code{"plsda"} (from the function \code{plsda()} of the package mixOmics).
+object of class \code{"lda"} (from \code{\link[MASS]{lda}}) or \code{"plsda"} (from \code{\link[mixOmics]{plsda}}).
 }
 }
 \author{
@@ -30,6 +30,6 @@ DA.var(model.LDA)
 # PLS-DA model
 require(mixOmics)
 data(yeast)
-model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond,ncomp=3)
+model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond)
 DA.var(model.PLSDA)
 }

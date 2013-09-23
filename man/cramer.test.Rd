@@ -1,5 +1,5 @@
-\name{cramer.coeff}
-\alias{cramer.coeff}
+\name{cramer.test}
+\alias{cramer.test}
 \title{
 Cramer's association coefficient
 }
@@ -7,14 +7,14 @@ Cramer's association coefficient
 Compute the Cramer's association coefficient between 2 nominal variables, its confidence interval (by bootstraping) and tests for its significance.
 }
 \usage{
-cramer.coeff(var1, var2, nrep = 1000, conf.level = 0.95)
+cramer.test(x, y, nrep = 1000, conf.level = 0.95)
 }
 \arguments{
-  \item{var1}{
-factor (first variable).
+  \item{x}{
+a contingency table ('matrix' or 'table' object). \code{x} and \code{y} can also both be factors.
 }
-  \item{var2}{
-factor (second variable).
+  \item{y}{
+ignored if \code{x} is a contingency table. If not, \code{y} should be a vector of the same length.
 }
   \item{nrep}{
 number of replicates for bootstraping.
@@ -45,5 +45,7 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 var1 <- sample(LETTERS[1:3],30,replace=TRUE)
 var2 <- sample(letters[1:3],30,replace=TRUE)
-cramer.coeff(var1,var2)
+cramer.test(var1,var2)
+# or
+cramer.test(table(var1,var2))
 }

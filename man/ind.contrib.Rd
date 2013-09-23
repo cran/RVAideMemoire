@@ -4,7 +4,7 @@
 Individual contributions in regression
 }
 \description{
-Compute difference in regression parameters when each individual is dropped, expressed in proportion of the whole regression coefficients. The function deals with \code{lm} and \code{least.rect} models.
+Compute difference in regression parameters when each individual is dropped, expressed in proportion of the whole regression coefficients. The function deals with \code{\link{lm}} (including \link{glm}) and \code{\link[RVAideMemoire]{least.rect}} models.
 }
 \usage{
 ind.contrib(model, print.diff = FALSE, graph = TRUE, warning=25)

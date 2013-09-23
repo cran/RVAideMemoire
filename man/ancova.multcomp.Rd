@@ -4,14 +4,14 @@
 Pairwise comparisons after an analysis of covariance
 }
 \description{
-Plot and return mean of the dependent variable for each class of the factor, adjusted for the covariate, and 95\% confidence interval of these means. The function deals with \code{lm}, \code{glm} and \code{glm.nb} models.
+Plot and return mean of the dependent variable for each class of the factor, adjusted for the covariate, and 95\% confidence interval of these means. The function deals with \code{\link{lm}}, \code{\link{glm}} and \code{\link[MASS]{glm.nb}} models.
 }
 \usage{
 ancova.multcomp(model)
 }
 \arguments{
   \item{model}{
-\code{lm}, \code{glm} or \code{glm.nb} model.
+a \code{\link{lm}}, \code{\link{glm}} and \code{\link[MASS]{glm.nb}} model.
 }
 }
 \author{

@@ -11,7 +11,7 @@ dendro.gp(dend)
 }
 \arguments{
   \item{dend}{
-a dendrogram obtained from the \code{hclust()} function.
+a dendrogram obtained from \code{\link{hclust}}.
 }
 }
 \author{

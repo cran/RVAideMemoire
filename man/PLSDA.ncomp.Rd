@@ -7,7 +7,8 @@ Graphical help to number of components selection in PLS-DA
 Draw a graph with classification error rate (obtained from cross-validation with the M-fold method) and proportion of intergroup variance explained from one to any possible components included in a given PLS-DA model. This helps to choose the number of components to be kept in the model.
 }
 \usage{
-PLSDA.ncomp(X, Y, pred.method = c("mahalanobis.dist", "centroids.dist", "max.dist"), M = 10, nrep = 10)
+PLSDA.ncomp(X, Y, pred.method = c("mahalanobis.dist", "centroids.dist", "max.dist"),
+  M = 10, nrep = 10)
 }
 \arguments{
   \item{X}{

@@ -1,4 +1,8 @@
 PLSDA.ncomp <- function(X,Y,pred.method=c("mahalanobis.dist","centroids.dist","max.dist"),M=10,nrep=10) {
+  if (packageVersion("mixOmics")<"4.1.3") {
+    stop(paste("you must update 'mixOmics' to version >= 4.1.3 (actual: ",
+	packageVersion("mixOmics"),")",sep=""))
+  }
   if (length(pred.method)!=1) {pred.method <- "mahalanobis.dist"}
   if (!pred.method%in%c("max.dist","centroids.dist","mahalanobis.dist")) {stop("distance criterion not recognized")}
   ncolX <- ncol(X)

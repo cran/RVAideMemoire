@@ -1,9 +1,22 @@
-cramer.coeff <-
-function (var1,var2,nrep=1000,conf.level=0.95) {
+cramer.test <-
+function (x,y,nrep=1000,conf.level=0.95) {
+  if (is.matrix(x)) {
+    if (is.null(rownames(x))) {rownames(x) <- letters[1:nrow(x)]}
+    if (is.null(colnames(x))) {colnames(x) <- LETTERS[1:ncol(x)]}
+    var1 <- rep(colnames(x),colSums(x))
+    var2 <- rep(rep(rownames(x),ncol(x)),as.vector(x))
+  } else {
+    var1 <- x
+    var2 <- y
+  }
   if (length(var1)!=length(var2)) {
     stop(paste("'",deparse(substitute(var1)),"' and '",deparse(substitute(var2)),"' lengths differ",sep=""))
   }
-  data.name <- paste(deparse(substitute(var1))," and ",deparse(substitute(var2)),sep="")
+  data.name <- if (is.matrix(x)) {
+    deparse(substitute(x))
+  } else {
+    paste(deparse(substitute(x))," and ",deparse(substitute(y)),sep="")
+  }
   if (!is.factor(var1)) {var1 <- factor(var1)}
   if (!is.factor(var2)) {var2 <- factor(var2)}
   nul <- as.numeric(row.names(table(c(which(is.na(var1)), which(is.na(var2))))))
@@ -40,4 +53,3 @@ function (var1,var2,nrep=1000,conf.level=0.95) {
   class(result) <- "htest"
   return(result)
 }
-

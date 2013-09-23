@@ -5,14 +5,14 @@
 Variable Importance in the Projection (VIP)
 }
 \description{
-Return VIP score of each X-variable in a PLS-DA model (obtained from the function \code{plsda()} of the package mixOmics).
+Return VIP score of each X-variable in a PLS-DA model (obtained from \code{\link[mixOmics]{plsda}}).
 }
 \usage{
 PLSDA.VIP(model, graph = FALSE)
 }
 \arguments{
   \item{model}{
-object of class \code{"plsda"} (from the function \code{plsda()} of the package mixOmics).
+object of class \code{"plsda"} (from \code{\link[mixOmics]{plsda}}).
 }
   \item{graph}{
 logical: should VIP scores be printed?
@@ -31,6 +31,6 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 require(mixOmics)
 data(yeast)
-model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond,ncomp=3)
+model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond)
 PLSDA.VIP(model.PLSDA)
 }

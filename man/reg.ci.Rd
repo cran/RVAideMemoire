@@ -20,7 +20,7 @@ confidence level.
 interval type : \code{"mean"} for the interval of the regression line (default), \code{"ind"} for the interval of individual values (also called "prediction interval").
 }
   \item{\dots}{
-other agruments. See help of the \code{lines()} function.
+other agruments. See help of \code{\link{lines}}.
 }
 }
 \author{
