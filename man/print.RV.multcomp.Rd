@@ -4,7 +4,7 @@
 Print method
 }
 \description{
-Print method for pairwise comparisons tables.
+Print method for pairwise comparison tables.
 }
 \usage{
 \method{print}{RV.multcomp}(x, digits = 4, ...)

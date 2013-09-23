@@ -1,6 +1,7 @@
 G.test <- 
 function(x,p=rep(1/length(x),length(x))) {
-  data.name <- deparse(substitute(x))
+  call <- match.call()
+  data.name <- if(length(call$x)==1) {call$x} else {paste(call$x[1],"(",paste(call$x[-1],collapse=","),")",sep="")}
   if (is.table(x) | is.matrix(x)) {
     chi <- suppressWarnings(chisq.test(x))
     method <- "G-test"

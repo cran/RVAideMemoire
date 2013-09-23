@@ -14,7 +14,7 @@ fisher.multcomp(tab.cont, p.method = "fdr")
 contingency table.
 }
   \item{p.method}{
-method for p-values correction. See help of the \code{p.adjust()} function.
+method for p-values correction. See help of \code{\link{p.adjust}}.
 }
 }
 \value{

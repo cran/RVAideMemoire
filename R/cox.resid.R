@@ -9,7 +9,7 @@ function (model) {
 	covar <- as.data.frame(m.frame[,!colnames(m.frame)%in%variables])
 	names(covar) <- colnames(m.frame)[!colnames(m.frame)%in%variables]
     } else {
-	stop("no covariable in the model")
+	stop("no covariate in the model")
     }
   } else {
     covar <- m.frame

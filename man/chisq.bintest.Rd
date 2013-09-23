@@ -20,7 +20,7 @@ an optional data frame containing the variables in the formula \code{formula}. B
 significance level to compute pairwise comparisons.
 }
   \item{p.method}{
-method for p-values correction. See help of the \code{p.adjust()} function.
+method for p-values correction. See help of \code{\link{p.adjust}}.
 }
 }
 \value{

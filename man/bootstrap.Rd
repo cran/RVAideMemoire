@@ -4,7 +4,7 @@
 Bootstrap
 }
 \description{
-Simplified version of the \code{boot()} function (package boot).
+Simplified version of the \code{\link[boot]{boot}} function.
 }
 \usage{
 bootstrap(x, fun, nrep = 1000, conf.level = 0.95, ...)
@@ -23,11 +23,11 @@ number of replicates.
 confidence level for confidence interval.
 }
   \item{\dots}{
-additional arguments to \code{boot()}. See help of this function.
+additional arguments to \code{\link[boot]{boot}}. See help of this function.
 }
 }
 \details{
-See help of the \code{boot()} function for more explanations.
+See help of the \code{\link[boot]{boot}} function for more explanations.
 }
 \value{
   \item{method}{the character string \code{"Bootstrap"}}

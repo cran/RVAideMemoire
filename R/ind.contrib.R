@@ -5,9 +5,9 @@ function(model,print.diff=FALSE,graph=TRUE,warning=25) {
     coeffs.diff <- lm.influence(model)$coefficients
   } else if ("least.rect" %in% class(model)) {
     coeffs <- model$coefficients
-    coeffs.mat <- matrix(ncol=2,nrow=nrow(model$model),dimnames=list(1:nrow(model$model),c("(Intercept)",model$x)))
-    x <- model$model[,"x"]
-    y <- model$model[,"y"]
+    coeffs.mat <- matrix(ncol=2,nrow=nrow(model$model),dimnames=list(1:nrow(model$model),c("(Intercept)",colnames(model$model)[2])))
+    x <- model$model[,2]
+    y <- model$model[,1]
     for (i in 1:nrow(model$model)) {
 	x2 <- x[-i]
 	y2 <- y[-i]
@@ -17,7 +17,7 @@ function(model,print.diff=FALSE,graph=TRUE,warning=25) {
     }
     coeffs.diff <- data.frame(coeffs[1]-coeffs.mat[,1],coeffs[2]-coeffs.mat[,2])
     colnames(coeffs.diff)[1] <- "(Intercept)"
-    colnames(coeffs.diff)[2] <- model$x
+    colnames(coeffs.diff)[2] <- colnames(model$model)[2]
   } else {
     stop("model not recognized")
   }

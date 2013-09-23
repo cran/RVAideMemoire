@@ -17,7 +17,7 @@ a formula of the form \code{a ~ b | c}, where \code{a}, \code{b} and \code{c} gi
 an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
 }
   \item{p.method}{
-method for p-values correction. See help of the \code{p.adjust()} function.
+method for p-values correction. See help of \code{\link{p.adjust}}.
 }
 }
 \value{

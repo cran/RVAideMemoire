@@ -7,23 +7,23 @@ QQ-plot for factor levels
 Draw a multivariate QQ-plot of numeric variables per level of a factor.
 }
 \usage{
-byf.mqqnorm(resp, fact)
+byf.mqqnorm(formula, data)
 }
 \arguments{
-  \item{resp}{
-a data frame or a matrix of numeric variables (each column giving a variable).
+  \item{formula}{
+a formula of the form \code{a ~ b}, where \code{a} is a matrix giving the dependent variables (each column giving a variable) and \code{b} a factor giving the corresponding groups.
 }
-  \item{fact}{
-a factor giving the groups to be plotted.
+  \item{data}{
+an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
 }
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[RVAideMemoire]{mqqnorm}}, \code{\link[car]{qqPlot}}
+\code{\link[RVAideMemoire]{mqqnorm}}, \code{\link[RVAideMemoire]{byf.mshapiro}}, \code{\link[car]{qqPlot}}
 }
 \examples{
 data(iris)
-byf.mqqnorm(iris[,1:4],iris$Species)
+byf.mqqnorm(as.matrix(iris[,1:4])~Species,data=iris)
 }

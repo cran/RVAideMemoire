@@ -1,38 +1,45 @@
 surv.multcomp <-
-function(formula,mat,data,strata=NULL,type=c("coxph","survreg"),distribution="exponential",
- p.method="fdr") {
+function(formula,mat,data,strata=NULL,type=c("coxph","survreg"),dist="exponential",p.method="fdr") {
   if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
+  suppressWarnings(if (!type%in%c("coxph","survreg")) {stop("model type not recognized")})
   allnames <- all.names(formula)
   m <- match.call()
   if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
   m[[1]] <- as.name("model.frame")
-  m$mat <- m$strata <- m$type <- m$distribution <- m$p.method <- NULL
+  m$mat <- m$strata <- m$type <- m$dist <- m$p.method <- NULL
   mf <- eval(m,parent.frame())
   if (!is.Surv(mf[,1])) {stop(paste("'",names(mf)[1],"' is not a Surv() object",sep=""))}
   surv <- mf[,1]
   fact <- mf[,2]
   variables <- names(mf)
-  if (!is.matrix(mat)) {stop("'mat' is not a \"matrix\" object")}
+  if (!is.data.frame(mat)) {
+    if (is.matrix(mat)) {
+	mat <- as.data.frame(mat)
+    } else {stop("'mat' is not a \"data.frame\" object")}
+  }
+  mat <- t(mat)
   levels(fact) <- abbreviate(levels(fact),3)
-  if (ncol(mat)!=nlevels(fact)) {stop("incorrect 'mat' dimensions")}
-  colnames(mat) <- levels(fact)
-  suppressWarnings(if (!type%in%c("coxph","survreg")) {stop("model type not recognized")})
+  if (nrow(mat)!=nlevels(fact)) {stop("incorrect 'mat' dimensions (number of rows != from number of levels of '",
+    names(mf)[2],"')")}
+  rownames(mat) <- levels(fact)
   if (length(type)!=1) {type <- "coxph"}
   liste.surv <- list()
   if (!is.null(strata)) {liste.stra <- list()}
   for (i in 1:nlevels(fact)) {
-    liste.surv[[i]] <- subset(surv,fact==levels(fact)[i])
-    if (!is.null(strata)) {liste.stra[[i]] <- subset(strata,fact==levels(fact)[i])}
+    liste.surv[[i]] <- subset(surv,as.numeric(fact)==i)
+    if (!is.null(strata)) {liste.stra[[i]] <- subset(strata,as.numeric(fact)==i)}
   }
   names(liste.surv) <- levels(fact)
   if (!is.null(strata)) {names(liste.stra) <- levels(fact)}
-  comparisons <- character(nrow(mat))
-  test <- integer(nrow(mat))
-  p <- integer(nrow(mat))
-  for (i in 1:nrow(mat)) {
-    contrast <- mat[i,]
+  comparisons <- character(ncol(mat))
+  test <- integer(ncol(mat))
+  p <- integer(ncol(mat))
+  for (i in 1:ncol(mat)) {
+    contrast <- mat[,i]
     num1 <- which(contrast>0)
+    names(num1) <- rownames(mat)[num1]
     num2 <- which(contrast<0)
+    names(num2) <- rownames(mat)[num2]
     ech1 <- NULL
     ech2 <- NULL
     if (!is.null(strata)) {
@@ -54,7 +61,7 @@ function(formula,mat,data,strata=NULL,type=c("coxph","survreg"),distribution="ex
     } else {
 	rep(NA,length(ech1)+length(ech2))
     }
-    datas <- data.frame(fac=c(rep("Level1",dim(ech1)[1]),rep("Level2",dim(ech2)[1])),rbind(ech1,ech2),stra=strata2)
+    datas <- data.frame(fac=c(rep("Level1",nrow(ech1)),rep("Level2",nrow(ech2))),rbind(ech1,ech2),stra=strata2)
     if (ncol(datas)==4) {
 	surv2 <- Surv(datas$time,datas$status)
     } else if (ncol(datas)==5) {
@@ -64,18 +71,18 @@ function(formula,mat,data,strata=NULL,type=c("coxph","survreg"),distribution="ex
     model <- if (!is.null(strata)) {
 	if (type=="survreg") {
 	  method <- "log-rank tests"
-	  survreg(surv2~datas$fac+strata(datas$stra),dist=distribution)
+	  survreg(surv2~fac+strata(stra),dist=dist,data=datas)
 	} else {
 	  method <- "likelihood ratio tests"
-	  coxph(surv2~datas$fac+strata(datas$stra))
+	  coxph(surv2~fac+strata(stra),data=datas)
 	}
     } else {
 	if (type=="survreg") {
 	  method <- "log-rank tests"
-	  survreg(surv2~datas$fac,dist=distribution)
+	  survreg(surv2~fac,dist=dist,data=datas)
 	} else {
 	  method <- "likelihood ratio tests"
-	  coxph(surv2~datas$fac)
+	  coxph(surv2~fac,data=datas)
 	}
     }
     test[i] <- if (type=="survreg") {
@@ -88,8 +95,8 @@ function(formula,mat,data,strata=NULL,type=c("coxph","survreg"),distribution="ex
     } else {
 	as.numeric(summary(model)$logtest[3])
     }
-    comparisons[i] <- paste(paste(colnames(mat)[which(contrast>0)],collapse="-"),"vs",
-	paste(colnames(mat)[which(contrast<0)],collapse="-"))
+    comparisons[i] <- paste(paste(rownames(mat)[which(contrast>0)],collapse="-"),"vs",
+	paste(rownames(mat)[which(contrast<0)],collapse="-"))
   }
   p.adj <- p.adjust(p,method=p.method)
   comp <- data.frame(" "=comparisons,"Chi"=test,"Pr(>Chi)"=p.adj," "=.psignif(p.adj),
@@ -97,14 +104,14 @@ function(formula,mat,data,strata=NULL,type=c("coxph","survreg"),distribution="ex
   model.txt <- if (!is.null(strata)) {
     if (type=="survreg") {
 	paste("survreg(",variables[1]," ~ ",variables[2]," + strata(",
-	  deparse(substitute(strata)),"), dist=\"",distribution,"\")",sep="")
+	  deparse(substitute(strata)),"), dist=\"",dist,"\")",sep="")
     } else {
 	paste("coxph(",variables[1]," ~ ",variables[2]," + strata(",
 	  deparse(substitute(strata)),"))",sep="")
     }
   } else {
     if (type=="survreg") {
-	paste("survreg(",variables[1]," ~ ",variables[2],", dist=\"",distribution,
+	paste("survreg(",variables[1]," ~ ",variables[2],", dist=\"",dist,
 	  "\")",sep="")
     } else {
 	paste("coxph(",variables[1]," ~ ",variables[2],")",sep="")

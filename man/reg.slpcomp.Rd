@@ -21,7 +21,7 @@ an optional data frame containing the variables in the formula \code{formula}. B
 confidence level.
 }
   \item{p.method}{
-method for p-values correction. See help of the \code{p.adjust()} function.
+method for p-values correction. See help of \code{\link{p.adjust}}.
 }
 }
 \value{
@@ -39,8 +39,9 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{lm}}
 }
 \examples{
-covariable <- rep(1:30,3)
-variable <- c(seq(1,10,9/29)+rnorm(30,0,3),seq(1,30,1)+rnorm(30,0,3),seq(-1,-80,-79/29)+rnorm(30,0,3))
+x <- rep(1:30,3)
+y <- c(seq(1,10,9/29)+rnorm(30,0,3),seq(1,30,1)+rnorm(30,0,3),
+  seq(-1,-80,-79/29)+rnorm(30,0,3))
 fact <- gl(3,30,labels=LETTERS[1:3])
-reg.slpcomp(variable~covariable|fact)
+reg.slpcomp(y~x|fact)
 }

@@ -16,7 +16,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
     if (method=="loo") {
 	pred <- matrix(0,nrow=nrow(X),ncol=ncomp)
 	for (i in 1:nrow(X)) {
-	  model <- lda(X[-i,],grouping[-i])
+	  model <- lda(X[-i,],grouping[-i],prior=model$prior)
 	  for (j in 1:ncomp) {
 	    p <- predict(model,X[i,],dimen=j,method=crit.lda)$class
 	    if (p==grouping[i]) {pred[i,j] <- 1}
@@ -42,7 +42,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 	    ind.tochoice <- ind.tochoice[-(1:nb.ind)]
 	    train <- X[-samp,]
 	    test <- X[samp,]
-	    model <- lda(train,grouping[-samp])
+	    model <- lda(train,grouping[-samp],prior=model$prior)
 	    for (k in 1:ncomp) {
 		p <- predict(model,test,dimen=k,method=crit.lda)$class
 		pred[j,k] <- sum(p==grouping[samp])/length(samp)
@@ -57,6 +57,10 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 	result$tab <- tab
     }
   } else if (class(model)=="plsda") {
+    if (packageVersion("mixOmics")<"4.1.3") {
+	stop(paste("you must update 'mixOmics' to version >= 4.1.3 (actual: ",
+	  packageVersion("mixOmics"),")",sep=""))
+    }
     ncomp <- model$ncomp
     if (length(crit.plsda)!=1) {crit.plsda <- "mahalanobis.dist"}
     if (!crit.plsda%in%c("max.dist","centroids.dist","mahalanobis.dist")) {stop("distance criterion not recognized")}

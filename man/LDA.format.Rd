@@ -4,14 +4,14 @@
 Re-formating LDA data
 }
 \description{
-Re-format data obtained from the \code{lda()} function of the package MASS, especially to get coordinates of individuals on factorial plans and correlation between original variables and LDA components.
+Re-format data obtained from \code{\link[MASS]{lda}}, especially to get coordinates of individuals on factorial plans and correlation between original variables and LDA components.
 }
 \usage{
 LDA.format(model)
 }
 \arguments{
   \item{model}{
-object of class \code{"lda"} (from the function \code{lda()} of the package MASS).
+object of class \code{"lda"} (from \code{\link[MASS]{lda}}).
 }
 }
 \value{
