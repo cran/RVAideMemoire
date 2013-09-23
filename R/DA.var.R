@@ -8,6 +8,10 @@ DA.var <- function(model) {
     ncomp.tot <- ncomp
     coord <- model$li
   } else {
+    if (packageVersion("mixOmics")<"4.1.3") {
+	stop(paste("you must update 'mixOmics' to version >= 4.1.3 (actual: ",
+	  packageVersion("mixOmics"),")",sep=""))
+    }
     X <- model$X
     Y <- character(nrow(X))
     for (i in 1:length(Y)) {

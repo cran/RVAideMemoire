@@ -1,7 +1,7 @@
 importFrom(ade4,s.class,s.corcircle,dudi.mix)
 importFrom(boot,boot)
 importFrom(car,qqPlot)
-importFrom(doBy,esticon)
+importFrom(lme4,fixef,getME,isLMM,VarCorr)
 importFrom(MASS,glm.nb,lda)
 importFrom(mixOmics,plsda,valid,vip)
 importFrom(statmod,qresiduals)

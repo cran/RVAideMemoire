@@ -4,14 +4,14 @@
 Martingale residuals of a Cox model
 }
 \description{
-Plot martingale residuals of a Cox model against fitted values, to check for log-linearity of covariables.
+Plot martingale residuals of a Cox model against fitted values, to check for log-linearity of covariates.
 }
 \usage{
 cox.resid(model)
 }
 \arguments{
   \item{model}{
-\code{coxph} model.
+a \code{\link[survival]{coxph}} model.
 }
 }
 \references{

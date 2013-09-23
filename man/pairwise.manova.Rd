@@ -17,7 +17,7 @@ response matrix (one column per variable). Object of class \code{"data.frame"} a
 grouping factor.
 }
   \item{p.method}{
-method for p-values correction. See help of the \code{p.adjust()} function.
+method for p-values correction. See help of \code{\link{p.adjust}}.
 }
 }
 \value{

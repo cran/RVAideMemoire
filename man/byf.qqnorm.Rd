@@ -17,14 +17,14 @@ a formula of the form \code{a ~ b} where \code{a} gives the data values and \cod
 an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
 }
   \item{...}{
-other arguments to pass to the \code{qqPlot()} function.
+other arguments to pass to \code{\link[car]{qqPlot}}.
 }
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[car]{qqPlot}}
+\code{link[RVAideMemoire]{byf.shapiro}}, \code{\link[car]{qqPlot}}
 }
 \examples{
 data(iris)

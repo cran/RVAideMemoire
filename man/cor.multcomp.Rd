@@ -9,7 +9,8 @@ If no difference, the function returns the common correlation coefficient, its c
 If difference is significative, the functions performs pairwise comparisons between coefficients.
 }
 \usage{
-cor.multcomp(var1, var2, fact, alpha = 0.05, conf.level = 0.95, theo = 0, p.method = "fdr")
+cor.multcomp(var1, var2, fact, alpha = 0.05, conf.level = 0.95, theo = 0,
+  p.method = "fdr")
 }
 \arguments{
   \item{var1}{
@@ -31,7 +32,7 @@ confidence level.
 theoretical coefficient.
 }
   \item{p.method}{
-method for p-values correction. See help of the \code{p.adjust()} function.
+method for p-values correction. See help of\code{\link{p.adjust}}.
 }
 }
 \value{

@@ -15,7 +15,9 @@ function(tab.cont,p.method="fdr") {
   }
   p.adjust <- matrix(p.adjust(p.no.adjust,method=p.method),nrow=nrow(p.no.adjust),ncol=ncol(p.no.adjust),
     dimnames=dimnames(p.no.adjust))
-  result<-list(method="Fisher's exact test for count data",data.name=quote(tab.cont),p.adjust.method=p.method,p.value=p.adjust)
+  call <- match.call()
+  dname <- if(length(call$tab.cont)==1) {call$tab.cont} else {paste(call$tab.cont[1],"(",paste(call$tab.cont[-1],collapse=","),")",sep="")}
+  result<-list(method="Fisher's exact test for count data",data.name=dname,p.adjust.method=p.method,p.value=p.adjust)
   class(result) <- "RV.multcomp"
   return(result)
 }

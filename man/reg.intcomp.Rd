@@ -24,7 +24,7 @@ confidence level.
 numeric vector: theoretical value of each intercept.
 }
   \item{p.method}{
-method for p-values correction. See healp of the \code{p.adjust()} function.
+method for p-values correction. See healp of \code{\link{p.adjust}}.
 }
 }
 \value{
@@ -47,8 +47,8 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{lm}}
 }
 \examples{
-covariable <- rep(1:30,3)
-variable <- c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
+x <- rep(1:30,3)
+y <- c(1:30+rnorm(30,0,3),seq(10,35,25/29)+rnorm(30,0,3),seq(-27,0,27/29)+rnorm(30,0,3))
 fact <- gl(3,30,labels=LETTERS[1:3])
-reg.intcomp(variable~covariable|fact)
+reg.intcomp(y~x|fact)
 }

@@ -8,13 +8,14 @@ byf.shapiro <- function(formula,data) {
   resp <- mf[,1]
   fact <- interaction(mf[,2:ncol(mf)],sep=":")
   nlev <- nlevels(fact)
-  tab <- data.frame(W=integer(nlev),p.value=integer(nlev)," "=character(nlev),stringsAsFactors=FALSE,check.names=FALSE)
+  tab <- data.frame(W=integer(nlev),"p-value"=integer(nlev),check.names=FALSE)
   rownames(tab) <- levels(fact)
   for (i in 1:nlev) {
     test <- shapiro.test(resp[as.numeric(fact)==i])
     tab[i,1] <- test$statistic
     tab[i,2] <- test$p.value
-    tab[i,3] <- .psignif(test$p.value)
   }
-  tab
+  result <- list(method="Shapiro-Wilk normality tests",data.name=dname,tab=tab)
+  class(result) <- "byf.test"
+  return(result) 
 }

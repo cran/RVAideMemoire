@@ -14,7 +14,7 @@ pairwise.G.test(x, p.method = "fdr")
 matrix with 2 columns giving the counts of successes and failures, respectively.
 }
   \item{p.method}{
-method for p-values correction. See help of the \code{p.adjust()} function.
+method for p-values correction. See help of \code{\link{p.adjust}}.
 }
 }
 \value{
@@ -27,7 +27,8 @@ method for p-values correction. See help of the \code{p.adjust()} function.
 \code{\link{G.test}}
 }
 \examples{
-x <- matrix(c(22,28,13,37,35,15),ncol=2,dimnames=list(c("Control","Treatment1","Treatment2"),c("Alive","Dead")),byrow=TRUE)
+x <- matrix(c(22,28,13,37,35,15),ncol=2,dimnames=list(c("Control","Treatment1","Treatment2"),
+  c("Alive","Dead")),byrow=TRUE)
 G.test(x)
 pairwise.G.test(x)
 }

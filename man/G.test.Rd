@@ -24,7 +24,7 @@ If \code{x} is matrix, it must be constructed like this:
 
 - 1 row per population.
 
-The function works as \code{chisq.test()} :
+The function works as \code{\link{chisq.test}} :
 
 - if \code{x} is a vector and theoretical proportions are not given, equality of counts is tested
 

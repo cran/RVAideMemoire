@@ -7,7 +7,8 @@ Permutational F test to compare two variances
 Perform a permutational F test to compare two variances.
 }
 \usage{
-perm.var.test(formula, data, ratio = 1, alternative = c("two.sided", "less", "greater"), nperm = 999)
+perm.var.test(formula, data, ratio = 1, alternative = c("two.sided", "less",
+  "greater"), nperm = 999)
 }
 \arguments{
   \item{formula}{

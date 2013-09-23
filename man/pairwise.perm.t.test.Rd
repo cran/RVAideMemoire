@@ -7,7 +7,8 @@ Pairwise permutational t tests
 Perform pairwise comparisons between group levels with corrections for multiple testing.
 }
 \usage{
-pairwise.perm.t.test(resp, fact, p.method = "fdr", paired = FALSE, alternative = c("two.sided","less", "greater"), nperm = 999)
+pairwise.perm.t.test(resp, fact, p.method = "fdr", paired = FALSE,
+  alternative = c("two.sided","less", "greater"), nperm = 999)
 }
 \arguments{
   \item{resp}{
@@ -17,7 +18,7 @@ response vector.
 grouping factor.
 }
   \item{p.method}{
-method for p-values correction. See help of the \code{p.adjust()} function.
+method for p-values correction. See help of \code{\link{p.adjust}}.
 }
   \item{paired}{
 a logical indicating whether you want paired (permutational) t-tests.

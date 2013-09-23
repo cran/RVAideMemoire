@@ -7,7 +7,8 @@ Permutational Student's t-test
 Perform a permutational Student's t-test.
 }
 \usage{
-perm.t.test(formula, data, alternative = c("two.sided", "less", "greater"), paired = FALSE, nperm = 999)
+perm.t.test(formula, data, alternative = c("two.sided", "less", "greater"),
+  paired = FALSE, nperm = 999)
 }
 \arguments{
   \item{formula}{

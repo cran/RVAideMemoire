@@ -11,11 +11,11 @@ plot1comp.ind <- function(dfxy,fac,axis=1,col=1:nlevels(fac),cex=1,box=TRUE) {
     coord <- dfxy[as.numeric(fac)==i,axis]
     points(coord,rep(i,length(coord)),col=col[i])
     if (box) {
-    xl <- moy[i]-d/100*nchar(names(moy)[i])*cex
-    xr <- moy[i]+d/100*nchar(names(moy)[i])*cex
-    yl <- i+0.5-0.1*cex
-    yr <- i+0.5+0.1*cex
-    rect(xl,yl,xr,yr,col="white",border=col[i])
+	xl <- moy[i]-d/100*nchar(names(moy)[i])*cex
+	xr <- moy[i]+d/100*nchar(names(moy)[i])*cex
+	yl <- i+0.5-0.1*cex
+	yr <- i+0.5+0.1*cex
+	rect(xl,yl,xr,yr,col="white",border=col[i])
     }
     segments(moy[i],i,moy[i],i+0.5-0.1*cex,col=col[i])
     segments(moy[i],0,moy[i],i,col=col[i],lty=2)

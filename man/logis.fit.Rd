@@ -11,13 +11,13 @@ logis.fit(model, int = 5, ...)
 }
 \arguments{
   \item{model}{
-\code{glm} model.
+\code{\link{glm}} model.
 }
   \item{int}{
 number of intervals.
 }
   \item{\dots}{
-other arguments. See help of the \code{points()} and \code{segments()} functions.
+other arguments. See help of \code{\link{points}} and \code{\link{segments}}.
 }
 }
 \author{
