@@ -4,7 +4,7 @@
 Predict method for least rectangles linear regression
 }
 \description{
-Predicted values based on a least rectangles linera regression fitted by \code{\link[RVAideMemoire]{least.rect}}.
+Predicted values based on a least rectangles linear regression fitted by \code{\link[RVAideMemoire]{least.rect}}.
 }
 \usage{
 \method{predict}{least.rect}(object, newdata, ...)
