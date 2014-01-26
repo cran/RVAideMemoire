@@ -14,7 +14,7 @@ wilcox.signtest(x, data, mu = 0)
 either a formula of the form \code{a ~ b} where \code{a} gives the data values and \code{b} a factor with 2 levels giving the corresponding groups (comparison of two medians); or a numeric vector (comparison of one median to a given value).
 }
   \item{data}{
-an optional data frame containing the variables in the formula \code{x} (if \code{x} is a formula). By default the variables are taken from \code{environment(x)}. Not used if is a numeric vector.
+an optional data frame containing the variables in the formula \code{x} (if \code{x} is a formula). By default the variables are taken from \code{environment(x)}. Not used if \code{x} is a numeric vector.
 }
   \item{mu}{
 theoretical median.

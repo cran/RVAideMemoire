@@ -4,8 +4,8 @@ importFrom(car,qqPlot)
 importFrom(lme4,fixef,getME,isLMM,VarCorr)
 importFrom(MASS,glm.nb,lda)
 importFrom(mixOmics,plsda,valid,vip)
+importFrom(multcomp,contrMat,glht)
 importFrom(statmod,qresiduals)
-importFrom(survival,is.Surv,Surv,survreg,coxph)
 
 
 exportPattern("^[[:alpha:]]+")

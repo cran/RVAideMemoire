@@ -43,6 +43,6 @@ eyes <- sample(c("Blue","Green","Brown"),50,replace=TRUE)
 weight <- sample(50:85,50,replace=TRUE)
 hand <- sample(c("Left.handed","Right.handed"),50,replace=TRUE)
 tab <- data.frame(age,sex,size,weight,hand,eyes,hair)
-amix <- dudi.mix(tab,scannf=FALSE,nf=2)
+amix <- dudi.hillsmith(tab,scannf=FALSE,nf=2)
 scat.mix.numeric(amix)
 }

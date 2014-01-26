@@ -57,5 +57,5 @@ data(yeast)
 X <- t(yeast$data)
 Y <- yeast$strain.cond
 model <- plsda(X,Y)
-PLSDA.test(model,M=3,nperm=19)
+\dontrun{PLSDA.test(model,M=3,nperm=29)}
 }
