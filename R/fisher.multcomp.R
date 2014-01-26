@@ -1,7 +1,9 @@
 fisher.multcomp <-
 function(tab.cont,p.method="fdr") {
   if (is.matrix(tab.cont)) {tab.cont <- as.table(tab.cont)}
-  if (!is.table(tab.cont)) {stop("'tab.cont' is not a \"table\" object")}
+  call <- match.call()
+  dname <- if(length(call$tab.cont)==1) {call$tab.cont} else {paste(call$tab.cont[1],"(",paste(call$tab.cont[-1],collapse=","),")",sep="")}
+  if (!is.table(tab.cont)) {stop("'",dname,"' is not a \"table\" object",sep="")}
   colonnes <- combn(colnames(tab.cont),2)
   lignes <- combn(rownames(tab.cont),2)
   colonnes2 <- apply(colonnes,2,function(x) paste(x,collapse=":"))
