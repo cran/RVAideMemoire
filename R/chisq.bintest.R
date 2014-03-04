@@ -6,12 +6,15 @@ function(formula,data,alpha=0.05,p.method="fdr") {
   m[[1]] <- as.name("model.frame")
   m$alpha <- m$p.method <- NULL
   mf <- eval(m,parent.frame())
+  mf <- droplevels(mf[complete.cases(mf),])
   dname <- paste(names(mf)[1],paste(names(mf)[2:ncol(mf)],collapse=":"),sep=" by ")
-  resp <- mf[,1]
+  resp.mf <- mf[,1]
+  resp <- factor(as.numeric(factor(resp.mf))-1)
+  if (nlevels(resp)!=2) {stop(paste(names(mf)[1],"is not a binary variable"))}
+  resp.num <- as.numeric(as.character(resp))
   fact <- interaction(mf[,2:ncol(mf)],sep=":")
-  proba <- tapply(resp,fact,mean)
+  proba <- tapply(resp.num,fact,mean)
   names(proba) <- paste("proba in group ",levels(fact),sep="")
-  if (!is.factor(resp)) {resp <- factor(resp)}
   tab.cont <- table(fact,relevel(resp,ref="1"))
   tab.cont.exp <- suppressWarnings(chisq.test(tab.cont))$expected
   cochran <- length(tab.cont)-ceiling(0.8*length(tab.cont))

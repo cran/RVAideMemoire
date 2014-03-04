@@ -11,7 +11,7 @@ chisq.bintest(formula, data, alpha = 0.05, p.method = "fdr")
 }
 \arguments{
   \item{formula}{
-a formula of the form \code{a ~ b}, where \code{a} and \code{b} give the data values and corresponding groups, respectively.
+a formula of the form \code{a ~ b}, where \code{a} and \code{b} give the data values and corresponding groups, respectively. \code{a} can be a numeric vector or a factor, with only two possible values (except NA).
 }
   \item{data}{
 an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
