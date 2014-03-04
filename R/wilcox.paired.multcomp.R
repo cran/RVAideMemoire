@@ -10,6 +10,7 @@ function(formula,data,p.method="fdr") {
   m[[1]] <- as.name("model.frame")
   m$p.method <- NULL
   mf <- eval(m,parent.frame())
+  mf <- droplevels(mf[complete.cases(mf),])
   dname <- paste(names(mf)[1]," by ",names(mf)[2],", block = ",names(mf)[3],sep="")
   resp <- mf[,1]
   fact <- mf[,2]

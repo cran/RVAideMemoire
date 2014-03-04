@@ -11,7 +11,7 @@ cochran.qtest(formula, data, alpha = 0.05, p.method = "fdr")
 }
 \arguments{
   \item{formula}{
-a formula of the form \code{a ~ b | c}, where \code{a}, \code{b} and \code{c} give the data values and corresponding groups and blocks, respectively.
+a formula of the form \code{a ~ b | c}, where \code{a}, \code{b} and \code{c} give the data values and corresponding groups and blocks, respectively. \code{a} can be a numeric vector or a factor, with only two possible values.
 }
   \item{data}{
 an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
