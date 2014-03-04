@@ -48,7 +48,7 @@ fc.multcomp <- function(model,term=NULL,mat=NULL,p.method="fdr") {
     rownames(mat)[i] <- paste(paste(name.coefs.short[which(mat[i,]>0)],collapse="-"),"vs",
 	paste(name.coefs.short[which(mat[i,]<0)],collapse="-"))
   }
-  if (all(type=="fact") & sum(type=="fact")>1) {stop("interactions bewteen factors are not handled (for now)")}
+  if (all(type=="fact") & sum(type=="fact")>1) {stop("interactions bewteen factors are not handled, see lsmeans() (package 'lsmeans')")}
   if (sum(type=="fact")>1) {stop("interactions between covariate(s) and more than 1 factor are not handled")}
   mod.coefs <- coef(model)
   k.mat <- if (is.vector(mod.coefs)) {

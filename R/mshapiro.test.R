@@ -1,6 +1,7 @@
 mshapiro.test <-
 function (x) {
   if (!is.matrix(x)) {x <- as.matrix(x)}
+  x <- x[complete.cases(x),]
   x <- t(x)
   n <- ncol(x)
   if (n<3 || n>5000) {stop("sample size must be between 3 and 5000")}

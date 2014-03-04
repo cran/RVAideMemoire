@@ -9,16 +9,19 @@ cochran.qtest <- function(formula,data,alpha=0.05,p.method="fdr") {
   m[[1]] <- as.name("model.frame")
   m$alpha <- m$p.method <- NULL
   mf <- eval(m,parent.frame())
+  mf <- droplevels(mf[complete.cases(mf),])
   dname <- paste(names(mf)[1]," by ",names(mf)[2],", block = ",names(mf)[3],sep="")
   resp <- mf[,1]
   fact <- mf[,2]
   block <- mf[,3]
+  if (length(na.omit(unique(resp)))!=2) {stop(paste(names(mf)[1],"is not a binary variable"))}
+  resp <- as.numeric(factor(resp))-1
   proba <- tapply(resp,fact,mean,na.rm=TRUE)
   names(proba) <- paste("proba in group ",levels(fact),sep="")
   nval <- 0
   names(nval) <- "difference in probabilities"
   tab.length <- tapply(resp,list(block,fact),function(x) length(na.omit(x)))
-  if (any(tab.length!=1)) {stop(paste("there must be 1 observation per level of '",names(mf)[2],"' in each block",sep=""))}
+  if (any(tab.length!=1) | any(is.na(tab.length))) {stop(paste("there must be 1 observation per level of '",names(mf)[2],"' in each block",sep=""))}
   tab <- tapply(resp,list(block,fact),function(x) sum(x))
   k <- ncol(tab)
   b <- nrow(tab)
