@@ -1,6 +1,5 @@
 \name{DA.confusion}
 \alias{DA.confusion}
-\alias{print.DA.confusion}
 \title{
 Classification error rate of a Discriminant Analysis
 }

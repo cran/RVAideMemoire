@@ -6,10 +6,10 @@ PLSDA.ncomp <- function(X,Y,pred.method=c("mahalanobis.dist","centroids.dist","m
   if (length(pred.method)!=1) {pred.method <- "mahalanobis.dist"}
   if (!pred.method%in%c("max.dist","centroids.dist","mahalanobis.dist")) {stop("distance criterion not recognized")}
   ncolX <- ncol(X)
-  model0 <- plsda(X,Y,ncomp=ncolX)
-  test <- try(valid(model0,method=pred.method,validation="Mfold",folds=M),silent=TRUE)
+  model0 <- mixOmics::plsda(X,Y,ncomp=ncolX)
+  test <- try(mixOmics::valid(model0,method=pred.method,validation="Mfold",folds=M),silent=TRUE)
   if ("try-error"%in%class(test)) {ncolX <- ncolX-1}
-  model <- plsda(X,Y,ncomp=ncolX)
+  model <- mixOmics::plsda(X,Y,ncomp=ncolX)
   val <- DA.valid(model,method="Mfold",crit.plsda=pred.method,M=M,nrep=nrep)
   vars <- DA.var(model)
   opar <- par(no.readonly=TRUE)

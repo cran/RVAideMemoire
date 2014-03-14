@@ -1,6 +1,5 @@
 \name{DA.valid}
 \alias{DA.valid}
-\alias{print.DA.valid}
 \title{
 Cross-validation in Discriminant Analysis
 }

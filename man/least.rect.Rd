@@ -1,6 +1,5 @@
 \name{least.rect}
 \alias{least.rect}
-\alias{print.least.rect}
 \title{
 Least rectangles linear regression
 }
@@ -39,9 +38,6 @@ theoretical value of the slope. If several regression are fitted, the same value
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
-}
-\seealso{
-\code{\link[RVAideMemoire]{summary.least.rect}}
 }
 \examples{
 x <- 1:30+rnorm(30,0,3)

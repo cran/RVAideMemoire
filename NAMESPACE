@@ -1,10 +1,80 @@
-importFrom(ade4,s.class,s.corcircle,dudi.mix)
-importFrom(boot,boot)
-importFrom(car,qqPlot)
-importFrom(lme4,fixef,getME,isLMM,VarCorr)
-importFrom(MASS,glm.nb,lda)
-importFrom(mixOmics,plsda,valid,vip)
-importFrom(multcomp,contrMat,glht,adjusted)
-importFrom(statmod,qresiduals)
+# Importés directement dans le code des fonctions (évite de charger tous
+# les packages au chargement de RVAideMemoire) :
+#   - ade4 : s.class, S.corcircle
+#   - boot : boot
+#   - lme4 : fixef, getME, isLMM, VarCorr
+#   - MASS : lda
+#   - mixOmics : plsda, valid, vip
+#   - multcomp : contrMat, glht, adjusted
+#   - statmod : qresiduals
 
-exportPattern("^[^\\.]")
+importFrom(car,Anova,qqPlot)
+importFrom(lsmeans,recover.data,lsm.basis)
+importFrom(stats,median,model.matrix)
+
+export(Anova.clm,Anova.clmm,
+  bootstrap,
+  byf.hist,byf.mqqnorm,byf.mshapiro,byf.normhist,byf.qqnorm,byf.shapiro,
+  chisq.bintest,chisq.exp,chisq.multcomp,chisq.theo.multcomp,
+  cochran.qtest,
+  cor.2comp,cor.conf,cor.multcomp,
+  cox.resid,
+  cramer.test,
+  cv,
+  DA.confusion,DA.valid,DA.var,
+  dendro.gp,
+  fc.multcomp,
+  fisher.multcomp,
+  friedman.rating.test,
+  G.multcomp,G.test,G.theo.multcomp,
+  ind.contrib,
+  kruskal.rating.test,
+  LDA.format,
+  least.rect,
+  logis.fit,logis.noise,
+  mod,
+  mqqnorm,
+  mshapiro.test,
+  overdisp.glmer,
+  pairwise.G.test,pairwise.manova,pairwise.perm.t.test,pairwise.wilcox.rating.test,
+  perm.anova,perm.bartlett.test,perm.cor.test,perm.t.test,perm.var.test,
+  plot1comp.ind,plot1comp.var,
+  plotresid,
+  plotsurvivors,
+  PLSDA.ncomp,PLSDA.test,PLSDA.VIP,
+  prop.multcomp,
+  rating.lsmeans,rating.prob,
+  reg.ci,
+  scat.mix.categorical,scat.mix.numeric,
+  se,
+  seq2,
+  spearman.ci,
+  user.cont,
+  wilcox.paired.multcomp,
+  wilcox.paired.rating.multcomp,
+  wilcox.rating.test,
+  wilcox.rating.signtest,
+  wilcox.signtest)
+
+S3method(friedman.rating.test,default)
+S3method(friedman.rating.test,formula)
+S3method(kruskal.rating.test,default)
+S3method(kruskal.rating.test,formula)
+S3method(lsm.basis,clm)
+S3method(lsm.basis,clmm)
+S3method(median,factor)
+S3method(model.matrix,clmm)
+S3method(predict,least.rect)
+S3method(print,byf.test)
+S3method(print,chisq.exp)
+S3method(print,DA.confusion)
+S3method(print,DA.valid)
+S3method(print,least.rect)
+S3method(print,PLSDA.VIP)
+S3method(print,RV.multcomp)
+S3method(print,RVtest)
+S3method(recover.data,clm)
+S3method(recover.data,clmm)
+S3method(summary,least.rect)
+S3method(wilcox.rating.test,default)
+S3method(wilcox.rating.test,formula)

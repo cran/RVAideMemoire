@@ -20,8 +20,9 @@ function(model,train=2/3,crit.lda=c("plug-in","predictive","debiased"),
     ech.train <- X[ind,]
     group.train <- grouping[ind]
     group.test <- grouping[-ind]
-    mod.train <- lda(ech.train,group.train,prior=model$prior)
+    mod.train <- MASS::lda(ech.train,group.train,prior=model$prior)
     pred <- predict(mod.train,X[-ind,],method=crit.lda)$class
+    pred <- factor(pred,levels=levels(grouping))
     confusion <- table(group.test,pred,dnn=c("Real group","Predicted group"))
     prop.confusion <- 1-sum(diag(confusion))/sum(confusion)
     result$prop.train <- c("used"=n,"total"=nrow(X))
@@ -52,9 +53,10 @@ function(model,train=2/3,crit.lda=c("plug-in","predictive","debiased"),
     ech.train <- X[ind,]
     group.train <- grouping[ind]
     group.test <- grouping[-ind]
-    mod.train <- plsda(ech.train,group.train)
+    mod.train <- mixOmics::plsda(ech.train,group.train)
     pred.tab <- predict(mod.train,X[-ind,],method=crit.plsda)$class[[1]]
     pred <- levels(grouping)[pred.tab[,ncol(pred.tab)]]
+    pred <- factor(pred,levels=levels(grouping))
     confusion <- table(group.test,pred,dnn=c("Real group","Predicted group"))
     prop.confusion <- 1-sum(diag(confusion))/sum(confusion)
     result$prop.train <- c("used"=n,"total"=nrow(X))

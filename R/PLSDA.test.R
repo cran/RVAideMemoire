@@ -35,8 +35,8 @@ function(model,pred.method=c("mahalanobis.dist","centroids.dist","max.dist"),M=1
 	X.j <- X[as.numeric(Y)==j,]
 	X.val[(j*n.min-(n.min-1)):(j*n.min),] <- X.j[sample(1:n.by.lev[j],n.min),]
     }
-    model.ref <- plsda(X.val,Y.n.min,ncomp=ncomp)
-    val <- valid(model.ref,method=pred.method,validation="Mfold",folds=M)
+    model.ref <- mixOmics::plsda(X.val,Y.n.min,ncomp=ncomp)
+    val <- mixOmics::valid(model.ref,method=pred.method,validation="Mfold",folds=M)
     pc.ref.all[i] <- 100*val[nrow(val),1]
   }
   pc.ref <- mean(pc.ref.all)
@@ -53,8 +53,8 @@ function(model,pred.method=c("mahalanobis.dist","centroids.dist","max.dist"),M=1
 	X.perm[(j*n.min-(n.min-1)):(j*n.min),] <- X.j[sample(1:n.by.lev[j],n.min),]
     }
     Y.perm <- sample(Y.n.min)
-    model.perm <- plsda(X.perm,Y.perm,ncomp=ncomp)
-    val.perm <- valid(model.perm,method=pred.method,validation="Mfold",folds=M)
+    model.perm <- mixOmics::plsda(X.perm,Y.perm,ncomp=ncomp)
+    val.perm <- mixOmics::valid(model.perm,method=pred.method,validation="Mfold",folds=M)
     pc.perm[i] <- 100*val.perm[nrow(val.perm),1]
     setTxtProgressBar(pb,round(i*100/nperm,0))
   }

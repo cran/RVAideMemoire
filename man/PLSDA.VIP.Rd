@@ -1,6 +1,5 @@
 \name{PLSDA.VIP}
 \alias{PLSDA.VIP}
-\alias{print.PLSDA.VIP}
 \title{
 Variable Importance in the Projection (VIP)
 }

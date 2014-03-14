@@ -1,6 +1,6 @@
 bootstrap <-
 function(x,fun,nrep=1000,conf.level=0.95,...){
-  simul <- boot(x,fun,R=nrep,...)
+  simul <- boot::boot(x,fun,R=nrep,...)
   estimate <- simul$t0
   names(estimate) <- "original value"
   interval <- .ci(simul$t,conf.level=conf.level)

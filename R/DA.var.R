@@ -28,7 +28,7 @@ DA.var <- function(model) {
     }
     ncomp <- model$ncomp
     ncomp.tot <- ncol(X)
-    model2 <- plsda(X,Y,ncomp=ncomp.tot)
+    model2 <- mixOmics::plsda(X,Y,ncomp=ncomp.tot)
     coord <- model2$variates$X
   }
   weights <- table(Y)

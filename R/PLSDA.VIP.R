@@ -3,7 +3,7 @@ PLSDA.VIP <- function(model,graph=FALSE) {
     stop(paste("you must update 'mixOmics' to version >= 4.1.3 (actual: ",
 	packageVersion("mixOmics"),")",sep=""))
   }
-  VIP <- vip(model)
+  VIP <- mixOmics::vip(model)
   tab <- as.data.frame(VIP[order(VIP[,ncol(VIP)],decreasing=TRUE),ncol(VIP)])
   colnames(tab) <- "VIP"
   if (graph) {

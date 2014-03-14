@@ -40,7 +40,7 @@ fc.multcomp <- function(model,term=NULL,mat=NULL,p.method="fdr") {
   if (is.null(mat)) {
     n <- 1:length(name.coefs)
     names(n) <- name.coefs
-    mat <- contrMat(n,type="Tukey")
+    mat <- multcomp::contrMat(n,type="Tukey")
   }
   if (!is.matrix(mat)) {mat <- as.matrix(mat)}
   colnames(mat) <- name.coefs
@@ -73,8 +73,8 @@ fc.multcomp <- function(model,term=NULL,mat=NULL,p.method="fdr") {
     }
   }
   eval(parse(text=paste("k.mat[,columns] <- ",contra,"(ncol(mat))",sep="")))
-  comp <- glht(model,linfct=mat%*%k.mat)
-  summ.comp <- summary(comp,test=adjusted(type=p.method))
+  comp <- multcomp::glht(model,linfct=mat%*%k.mat)
+  summ.comp <- summary(comp,test=multcomp::adjusted(type=p.method))
   pq <- summ.comp$test
   tab <- data.frame(names(pq$coefficients),pq$tstat,pq$pvalues,.psignif(pq$pvalues),
     stringsAsFactors=FALSE,check.names=FALSE)
@@ -90,4 +90,3 @@ fc.multcomp <- function(model,term=NULL,mat=NULL,p.method="fdr") {
   class(result) <- "RV.multcomp"
   return(result)
 }
-

@@ -9,7 +9,7 @@ function(var1,var2,nrep=1000,conf.level=0.95){
   cor.fun <- function(data,ind) {
     as.numeric(suppressWarnings(cor.test(data[ind,1],data[ind,2],method="spearman")$estimate))
   }
-  simul <- boot(data.frame(var1.2,var2.2),cor.fun,R=nrep)
+  simul <- boot::boot(data.frame(var1.2,var2.2),cor.fun,R=nrep)
   interval <- .ci(simul$t,conf.level=conf.level)
   attr(interval,"conf.level") <- conf.level
   coeff <- as.numeric(suppressWarnings(cor.test(var1,var2,method="spearman")$estimate))

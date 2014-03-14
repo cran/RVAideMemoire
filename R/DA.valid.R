@@ -16,7 +16,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
     if (method=="loo") {
 	pred <- matrix(0,nrow=nrow(X),ncol=ncomp)
 	for (i in 1:nrow(X)) {
-	  model <- lda(X[-i,],grouping[-i],prior=model$prior)
+	  model <- MASS::lda(X[-i,],grouping[-i],prior=model$prior)
 	  for (j in 1:ncomp) {
 	    p <- predict(model,X[i,],dimen=j,method=crit.lda)$class
 	    if (p==grouping[i]) {pred[i,j] <- 1}
@@ -42,7 +42,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 	    ind.tochoice <- ind.tochoice[-(1:nb.ind)]
 	    train <- X[-samp,]
 	    test <- X[samp,]
-	    model <- lda(train,grouping[-samp],prior=model$prior)
+	    model <- MASS::lda(train,grouping[-samp],prior=model$prior)
 	    for (k in 1:ncomp) {
 		p <- predict(model,test,dimen=k,method=crit.lda)$class
 		pred[j,k] <- sum(p==grouping[samp])/length(samp)
@@ -69,7 +69,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
     if (method=="loo" | (method=="Mfold" & nrep==1)) {
 	ok <- FALSE
 	while (!ok) {
-	  test <- try(valid(model,validation=method,method=crit.plsda,folds=M),silent=TRUE)
+	  test <- try(mixOmics::valid(model,validation=method,method=crit.plsda,folds=M),silent=TRUE)
 	  if ("try-error"%in%class(test)) {
 	    next
 	  } else {
@@ -91,7 +91,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 	for (i in 1:nrep) {
 	  ok <- FALSE
 	  while (!ok) {
-	    test <- try(valid(model,validation="Mfold",method=crit.plsda,folds=M),silent=TRUE)
+	    test <- try(mixOmics::valid(model,validation="Mfold",method=crit.plsda,folds=M),silent=TRUE)
 	    if ("try-error"%in%class(test)) {
 		next
 	    } else {

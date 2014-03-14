@@ -41,7 +41,7 @@ function (x,y,nrep=1000,conf.level=0.95) {
     cont <- table(dat[ind,1],dat[ind,2])
     sqrt(as.numeric(suppressWarnings(chisq.test(cont)$statistic))/(sum(cont)*(min(dim(cont))-1)))
   }
-  simul <- boot(data.frame(var1.2, var2.2),v.fun,R=nrep)
+  simul <- boot::boot(data.frame(var1.2, var2.2),v.fun,R=nrep)
   cint <- .ci(simul$t,conf.level=conf.level)
   attr(cint, "conf.level") <- conf.level
   test <- suppressWarnings(chisq.test(tab.cont))

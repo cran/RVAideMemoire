@@ -10,12 +10,12 @@ function (model,shapiro=FALSE) {
 	res.lab <- "Externally studentized residuals"
     } else {
 	if ("negbin"%in%class(model)) {
-	  model.residuals <- qresiduals(model)
+	  model.residuals <- statmod::qresiduals(model)
 	  res.lab <- "Quantile residuals"
 	} else {
 	  laws <- c("poisson","quasipoisson","binomial","quasibinomial")
 	  if (model$family[1]%in%laws) {
-	    model.residuals <- qresiduals(model)
+	    model.residuals <- statmod::qresiduals(model)
 	    res.lab <- "Quantile residuals"
 	  } else {
 	    model.residuals <- rstudent(model)
@@ -27,13 +27,13 @@ function (model,shapiro=FALSE) {
     model.residuals <- model$resid
     res.lab <- "Residuals"
   } else if(inherits(model,"merMod")) {
-    if (isLMM(model)) {
+    if (lme4::isLMM(model)) {
 	model.residuals <- residuals(model)
 	res.lab <- "Residuals"
     } else {
 	fam <- family(model)$family
 	if (fam=="poisson") {
-	  y <- getME(model,"y")
+	  y <- lme4::getME(model,"y")
 	  mu <- fitted(model)
 	  a <- ppois(y-1,mu)
 	  b <- ppois(y,mu)
@@ -42,7 +42,7 @@ function (model,shapiro=FALSE) {
 	  res.lab <- "Quantile residuals"
 	} else if (fam=="binomial") {
 	  p <- fitted(model)
-	  y <- getME(model,"y")
+	  y <- lme4::getME(model,"y")
 	  mf <- model.frame(model)
 	  if ("(weights)"%in%colnames(mf)) { 
 	    n <- mf$weights
@@ -56,7 +56,7 @@ function (model,shapiro=FALSE) {
 	  model.residuals <- qnorm(u)
 	  res.lab <- "Quantile residuals"
 	} else if (grepl("Negative Binomial",fam)) {
-	  y <- getME(model,"y")
+	  y <- lme4::getME(model,"y")
 	  size <- model@theta
 	  mu <- fitted(model)
 	  p <- size/(mu+size)
@@ -106,3 +106,4 @@ function (model,shapiro=FALSE) {
     }
   }
 }
+

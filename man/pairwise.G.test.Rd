@@ -4,7 +4,7 @@
 Pairwise comparisons for proportions using G-tests
 }
 \description{
-Perform pairwise comparisons between pairs of proportions with correction for multiple testing 
+Perform pairwise comparisons between pairs of proportions with correction for multiple testing.
 }
 \usage{
 pairwise.G.test(x, p.method = "fdr")

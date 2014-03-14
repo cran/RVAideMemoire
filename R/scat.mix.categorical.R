@@ -13,7 +13,7 @@ function(dudi.obj,xax=1,yax=2,csub=2,possub="topleft",...){
   }
   par(mfrow=n2mfrow(nvar))
   for(i in 1:nvar) {
-    s.class(dudi.obj$li,oritab[,i],xax=xax,yax=yax,clabel=1.5,sub=names(oritab[i]),csub=csub,possub=possub,
+    ade4::s.class(dudi.obj$li,oritab[,i],xax=xax,yax=yax,clabel=1.5,sub=names(oritab[i]),csub=csub,possub=possub,
 	col=rainbow(nlevels(oritab[,i])),cgrid=0,cstar=0,...)
   }
 }
