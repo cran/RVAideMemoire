@@ -1,4 +1,4 @@
-a21c4c69e899cfd02df7e4620fbbba5f *DESCRIPTION
+ba0b32d28f8580e815ff0047a9add727 *DESCRIPTION
 326010c962575458070f176409992b5f *NAMESPACE
 9369df93593f7fc76a1d5885268abe44 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
@@ -41,9 +41,9 @@ dd43c2ddb1185c04c690eb94cd04e1b1 *R/fisher.multcomp.R
 a85ceae9f1ce98046012eba40d810f90 *R/logis.fit.R
 130a831f1f39d18fbaf00164cae2a284 *R/logis.noise.R
 a14c39fe41e4136ad60da846ba3f7b76 *R/lsm.basis.clm.R
-64c7312100ed3d5267db14aa8eed8640 *R/lsm.basis.clmm.R
+547f730d3a004000856a494f43f1dc66 *R/lsm.basis.clmm.R
 d7705c7482b3e53448c19994b45b413f *R/median.factor.R
-f3c5c726dcaba9a01678832d8d7da258 *R/mod.R
+f86417b2a2dc14e198d3a6d6ea972cb4 *R/mod.R
 25d63d76d077b3317745aac6ebeea013 *R/mqqnorm.R
 a579afaed20d1c73c5bf7cbd5f3dd7b8 *R/mshapiro.test.R
 3aa7a26253df12bd038202c6e13057e5 *R/overdisp.glmer.R
@@ -81,7 +81,7 @@ cfd22f60dcf0c190a88d03f6507f9513 *R/wilcox.paired.rating.multcomp.R
 81362b0c9208c951030a0cb528d16f9f *R/wilcox.rating.signtest.R
 6b6d0b0c3b5a879d2ff53b6f217023f8 *R/wilcox.rating.test.R
 0c4cae2f3920e7ee9dd23e6c91426960 *R/wilcox.signtest.R
-080321f4cf46ed3f69cfec564d5f6744 *R/zzz.R
+0f2f4d24ea4b0042c88835c093e029c8 *R/zzz.R
 a3ed2ef2d85eac6e18d6f925f5e607c0 *man/Anova.clm.Rd
 7e65edb2945f05e596b40efca5f1fbf3 *man/DA.confusion.Rd
 9d422b8f982e8b7c68ab26956c8351f5 *man/DA.valid.Rd
@@ -93,7 +93,7 @@ e5a3a9c1a1749cf81a5a481021b32dfb *man/G.test.Rd
 7604d5b8ca227fbb9b742699fd2f30e6 *man/PLSDA.VIP.Rd
 4e37cff34609ce1c03d36ed146b5124d *man/PLSDA.ncomp.Rd
 b39d276de22350490740310a88221dcb *man/PLSDA.test.Rd
-0b2c1c41033896736347a2a3468629c3 *man/RVAideMemoire-package.Rd
+f957d6b0ff7641798d5d03dd27ecc8be *man/RVAideMemoire-package.Rd
 b72310e5677570de6d202e63f5c9a435 *man/bootstrap.Rd
 7c3f43bdd5b8e017e875ce53c78d299d *man/byf.hist.Rd
 6a7ab39712317500b84c2455e188c7a3 *man/byf.mqqnorm.Rd
@@ -128,7 +128,7 @@ e51532fa94233ad8864b73573e6fe401 *man/mshapiro.test.Rd
 8b8bdd1c00bcebed2c9ec936efb29f1c *man/pairwise.G.test.Rd
 df5330dfcf083c19af6319aa2abcbf53 *man/pairwise.manova.Rd
 6b71e1ad7d9127de2ce20ed3903212f3 *man/pairwise.perm.t.test.Rd
-ec2e139439193c826a9208deafc718a6 *man/pairwise.wilcox.rating.test.Rd
+7bb6fab6b8c98b70f46ca435f79f2b83 *man/pairwise.wilcox.rating.test.Rd
 abea19ae143747dbb693af402c013904 *man/perm.anova.Rd
 dd7ea0844a403eeb770daf23be0fa753 *man/perm.bartlett.test.Rd
 d15c05f806d20710f505a7b605a69df3 *man/perm.cor.test.Rd

@@ -19,6 +19,9 @@ lsm.basis.clmm <- function(object,trms,xlev,grid) {
     object$Hessian <- H
   }
   V <- vcov(object)
+  n.rand <- length(object$gfList)
+  names.rand <- paste0("ST",1:n.rand)
+  V <- V[-which(rownames(V)%in%names.rand),-which(colnames(V)%in%names.rand)]
   k <- length(object$alpha)
   j <- matrix(1,nrow=k,ncol=1)
   J <- matrix(1,nrow=nrow(X),ncol=1)

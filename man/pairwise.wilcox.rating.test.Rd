@@ -24,7 +24,7 @@ method for p-values correction. See help of \code{\link{p.adjust}}.
   a logical indicating whether you want a paired test.
 }
   \item{...}{
-  additional arguments to pass to \code{\link[RVAideMemoire]{wilcox.rating.test}}
+  additional arguments to be passed to \code{\link[RVAideMemoire]{wilcox.rating.test}}
 }
 }
 \value{
