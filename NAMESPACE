@@ -1,6 +1,6 @@
 # Importés directement dans le code des fonctions (évite de charger tous
 # les packages au chargement de RVAideMemoire) :
-#   - ade4 : s.class, S.corcircle
+#   - ade4 : s.class, scatterutil.sub
 #   - boot : boot
 #   - lme4 : fixef, getME, isLMM, VarCorr
 #   - MASS : lda
@@ -46,6 +46,7 @@ export(Anova.clm,Anova.clmm,
   rating.lsmeans,rating.prob,
   reg.ci,
   scat.mix.categorical,scat.mix.numeric,
+  s.corcircle2,
   se,
   seq2,
   spearman.ci,

@@ -41,7 +41,7 @@ print.RVtest <- function (x,digits=4,quote=TRUE,prefix="",...) {
   cat("\n")
   if (x$p.value<x$alpha) {
     cat(paste("        Pairwise comparisons ",ifelse(exists("method.multcomp",where=x),
-	paste("by using ",x$method.multcomp,sep=""),""),"\n\n",sep=""))
+	paste("using ",x$method.multcomp,sep=""),""),"\n\n",sep=""))
     print(x$p.value.multcomp,digits=digits,na.print="-",row.names=FALSE)
     cat(paste("\nP value adjustment method: ",x$p.adjust.method,"\n",sep=""))
   } else {

@@ -1,5 +1,5 @@
-ba0b32d28f8580e815ff0047a9add727 *DESCRIPTION
-326010c962575458070f176409992b5f *NAMESPACE
+9fe66c50d8cdba5cba8152b85e7c5c87 *DESCRIPTION
+37e6cb9bda1b204efcc0441b8da2a24f *NAMESPACE
 9369df93593f7fc76a1d5885268abe44 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
 8cb5ab1ec937dfbbcfc19a753651a574 *R/DA.confusion.R
@@ -62,15 +62,16 @@ eb2a0ea1b490ac9846e6bbe0493a65f0 *R/plotresid.R
 6d962e640f9497378963d1018e0c74fe *R/plotsurvivors.R
 d219905f70e32c4496aad8f781847ab2 *R/predict.least.rect.R
 773598548bcd4920d5765f3ffe056874 *R/print.RV.multcomp.R
-af1249d60841cbf92a09d6600e5187eb *R/print.RVtest.R
+9a3d37642194184860a1d10dbae193eb *R/print.RVtest.R
 2081330b12a6e7215b1628795a57d872 *R/print.byf.test.R
 b2d8283eb9f7168abcadc6cd295df8b1 *R/prop.multcomp.R
 e7517ca9f447b36c9103872f5bd753f5 *R/psignif.R
 88d81fc60adac10d465f30e447d46077 *R/rating.lsmeans.R
 a9189f640ab3985871a5d5fe12e0f26c *R/rating.prob.R
 1fbce233e2ffb74de0d9626b9edb4f16 *R/reg.ci.R
+0223a60c3804fd64a4cb445d17225afc *R/s.corcircle2.R
 738ea80b397721fdb5cc1d7cdc14e6fe *R/scat.mix.categorical.R
-b8bd7f653be5aa911a345c3126b3a894 *R/scat.mix.numeric.R
+f4987dc9eafe4a63a279a89fec127bc7 *R/scat.mix.numeric.R
 979053d251a6e8ea632f2e19b9df1c73 *R/se.R
 ab2d4b0688018683b423fc47137e8b0a *R/seq2.R
 9055578a4b68bc01c65b28e53ebb22d2 *R/spearman.ci.R
@@ -81,7 +82,7 @@ cfd22f60dcf0c190a88d03f6507f9513 *R/wilcox.paired.rating.multcomp.R
 81362b0c9208c951030a0cb528d16f9f *R/wilcox.rating.signtest.R
 6b6d0b0c3b5a879d2ff53b6f217023f8 *R/wilcox.rating.test.R
 0c4cae2f3920e7ee9dd23e6c91426960 *R/wilcox.signtest.R
-0f2f4d24ea4b0042c88835c093e029c8 *R/zzz.R
+31a91d3576698e7ba95b67d76dba219e *R/zzz.R
 a3ed2ef2d85eac6e18d6f925f5e607c0 *man/Anova.clm.Rd
 7e65edb2945f05e596b40efca5f1fbf3 *man/DA.confusion.Rd
 9d422b8f982e8b7c68ab26956c8351f5 *man/DA.valid.Rd
@@ -93,7 +94,7 @@ e5a3a9c1a1749cf81a5a481021b32dfb *man/G.test.Rd
 7604d5b8ca227fbb9b742699fd2f30e6 *man/PLSDA.VIP.Rd
 4e37cff34609ce1c03d36ed146b5124d *man/PLSDA.ncomp.Rd
 b39d276de22350490740310a88221dcb *man/PLSDA.test.Rd
-f957d6b0ff7641798d5d03dd27ecc8be *man/RVAideMemoire-package.Rd
+2ac8b82a00c6acd832f427f430ffc830 *man/RVAideMemoire-package.Rd
 b72310e5677570de6d202e63f5c9a435 *man/bootstrap.Rd
 7c3f43bdd5b8e017e875ce53c78d299d *man/byf.hist.Rd
 6a7ab39712317500b84c2455e188c7a3 *man/byf.mqqnorm.Rd
@@ -142,6 +143,7 @@ c186128652591a856400717e12be6308 *man/plotresid.Rd
 fc7ddbe96f53a50a385212ef77d20093 *man/rating.lsmeans.Rd
 62fccae5067a37e1b9bf73a3a3ab5846 *man/rating.prob.Rd
 1670e735ad0e0c8cfe45f59cf8ae6f8e *man/reg.ci.Rd
+a64d7da980de1621d029f11cd9edfb35 *man/s.corcircle2.Rd
 ad104f8029feb2e29d747083e316c5c2 *man/scat.mix.categorical.Rd
 c7b4741ddf7ddc4d2b59082ebc25fc14 *man/scat.mix.numeric.Rd
 994a8a6d3e7024725b4934aeca4fc523 *man/se.Rd
