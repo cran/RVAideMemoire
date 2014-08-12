@@ -4,6 +4,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
   if (!class(model)%in%c("lda","plsda")) {stop("model not recognized")}
   if (length(method)!=1) {method <- "Mfold"}
   if (!method%in%c("Mfold","loo")) {stop("method not recognized")}
+  if (method=="Mfold" & M<=1) {stop("invalid number of folds (must be > 1)")}
   result <- list(model=class(model),method=method)
   if (class(model)=="lda") {
     form <- LDA.format(model)
@@ -57,8 +58,8 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 	result$tab <- tab
     }
   } else if (class(model)=="plsda") {
-    if (packageVersion("mixOmics")<"4.1.3") {
-	stop(paste("you must update 'mixOmics' to version >= 4.1.3 (actual: ",
+    if (packageVersion("mixOmics")<"5.0.2") {
+	stop(paste("you must update 'mixOmics' to version >= 5.0.2 (actual: ",
 	  packageVersion("mixOmics"),")",sep=""))
     }
     ncomp <- model$ncomp
@@ -69,7 +70,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
     if (method=="loo" | (method=="Mfold" & nrep==1)) {
 	ok <- FALSE
 	while (!ok) {
-	  test <- try(mixOmics::valid(model,validation=method,method=crit.plsda,folds=M),silent=TRUE)
+	  test <- try(mixOmics::perf(model,validation=method,method.predict=crit.plsda,folds=M,progressBar=FALSE),silent=TRUE)
 	  if ("try-error"%in%class(test)) {
 	    next
 	  } else {
@@ -77,7 +78,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 	    ok <- TRUE
 	  }
 	}
-	tab.temp[,1] <- val[,crit.plsda]
+	tab.temp[,1] <- val$error.rate[,crit.plsda]
 	if (method=="Mfold") {
 	  result$M <- M
 	  result$nrep <- nrep
@@ -91,7 +92,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 	for (i in 1:nrep) {
 	  ok <- FALSE
 	  while (!ok) {
-	    test <- try(mixOmics::valid(model,validation="Mfold",method=crit.plsda,folds=M),silent=TRUE)
+	    test <- try(mixOmics::perf(model,validation="Mfold",method.predict=crit.plsda,folds=M,progressBar=FALSE),silent=TRUE)
 	    if ("try-error"%in%class(test)) {
 		next
 	    } else {
@@ -99,7 +100,7 @@ function(model,method=c("loo","Mfold"),crit.lda=c("plug-in","predictive","debias
 		ok <- TRUE
 	    }
 	  }
-	  tab.temp[,i] <- val[,crit.plsda]
+	  tab.temp[,i] <- val$error.rate[,crit.plsda]
 	  setTxtProgressBar(pb,round(i*100/nrep,0))
 	}
 	cat("\n")

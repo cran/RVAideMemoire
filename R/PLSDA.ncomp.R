@@ -1,13 +1,14 @@
 PLSDA.ncomp <- function(X,Y,pred.method=c("mahalanobis.dist","centroids.dist","max.dist"),M=10,nrep=10) {
-  if (packageVersion("mixOmics")<"4.1.3") {
-    stop(paste("you must update 'mixOmics' to version >= 4.1.3 (actual: ",
+  if (packageVersion("mixOmics")<"5.0.2") {
+    stop(paste("you must update 'mixOmics' to version >= 5.0.2 (actual: ",
 	packageVersion("mixOmics"),")",sep=""))
   }
   if (length(pred.method)!=1) {pred.method <- "mahalanobis.dist"}
   if (!pred.method%in%c("max.dist","centroids.dist","mahalanobis.dist")) {stop("distance criterion not recognized")}
+  if (M<=1) {stop("invalid number of folds (must be > 1)")}
   ncolX <- ncol(X)
   model0 <- mixOmics::plsda(X,Y,ncomp=ncolX)
-  test <- try(mixOmics::valid(model0,method=pred.method,validation="Mfold",folds=M),silent=TRUE)
+  test <- try(mixOmics::perf(model0,method.predict=pred.method,validation="Mfold",folds=M,progressBar=FALSE),silent=TRUE)
   if ("try-error"%in%class(test)) {ncolX <- ncolX-1}
   model <- mixOmics::plsda(X,Y,ncomp=ncolX)
   val <- DA.valid(model,method="Mfold",crit.plsda=pred.method,M=M,nrep=nrep)

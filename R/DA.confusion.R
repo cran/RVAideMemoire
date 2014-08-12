@@ -31,8 +31,8 @@ function(model,train=2/3,crit.lda=c("plug-in","predictive","debiased"),
     result$confusion <- confusion
     result$prop.confusion <- prop.confusion
   }  else if (class(model)=="plsda") {
-    if (packageVersion("mixOmics")<"4.1.3") {
-	stop(paste("you must update 'mixOmics' to version >= 4.1.3 (actual: ",
+    if (packageVersion("mixOmics")<"5.0.2") {
+	stop(paste("you must update 'mixOmics' to version >= 5.0.2 (actual: ",
 	  packageVersion("mixOmics"),")",sep=""))
     }
     if (length(crit.plsda)!=1) {crit.plsda <- "mahalanobis.dist"}

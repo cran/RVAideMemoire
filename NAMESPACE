@@ -4,7 +4,7 @@
 #   - boot : boot
 #   - lme4 : fixef, getME, isLMM, VarCorr
 #   - MASS : lda
-#   - mixOmics : plsda, valid, vip
+#   - mixOmics : perf, plsda, vip
 #   - multcomp : contrMat, glht, adjusted
 #   - statmod : qresiduals
 

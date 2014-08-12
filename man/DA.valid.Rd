@@ -49,7 +49,7 @@ When working on a LDA model, the prior probabilities for the models fitted on th
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[MASS]{lda}}, \code{\link[MASS]{predict.lda}}, \code{\link[mixOmics]{plsda}}, \code{\link[mixOmics]{valid}}
+\code{\link[MASS]{lda}}, \code{\link[MASS]{predict.lda}}, \code{\link[mixOmics]{plsda}}, \code{\link[mixOmics]{perf}}
 }
 \examples{
 # Cross-validation of a LDA model

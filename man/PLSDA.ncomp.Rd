@@ -34,7 +34,7 @@ The function emphasizes values obtained with \code{nlev - 1} groups, with \code{
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[mixOmics]{plsda}}, \code{\link[mixOmics]{valid}}, \code{\link[RVAideMemoire]{DA.valid}}, \code{\link[RVAideMemoire]{DA.var}}
+\code{\link[mixOmics]{plsda}}, \code{\link[mixOmics]{perf}}, \code{\link[RVAideMemoire]{DA.valid}}, \code{\link[RVAideMemoire]{DA.var}}
 }
 \examples{
 require(mixOmics)

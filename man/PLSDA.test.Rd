@@ -47,7 +47,7 @@ The process is quite long and takes several minutes to be achieved. Just don't w
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[mixOmics]{plsda}}, \code{\link[mixOmics]{valid}}
+\code{\link[mixOmics]{plsda}}, \code{\link[mixOmics]{perf}}
 }
 \examples{
 # Not enough permutations here but it runs faster.
