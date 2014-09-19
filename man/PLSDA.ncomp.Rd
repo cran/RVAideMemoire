@@ -41,5 +41,5 @@ require(mixOmics)
 data(yeast)
 X <- t(yeast$data)
 Y <- yeast$strain.cond
-PLSDA.ncomp(X,Y,M=5,nrep=3)
+# PLSDA.ncomp(X,Y)
 }

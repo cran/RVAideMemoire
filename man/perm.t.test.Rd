@@ -47,9 +47,11 @@ Maxime Hervé <mx.herve@gmail.com>
 response <- c(rnorm(5),rnorm(5,2,1))
 fact <- gl(2,5,labels=LETTERS[1:2])
 
+# Not enough permutations here but faster to run
+
 # Unpaired test
-perm.t.test(response~fact)
+perm.t.test(response~fact,nperm=49)
 
 # Paired test
-perm.t.test(response~fact,paired=TRUE)
+perm.t.test(response~fact,paired=TRUE,nperm=49)
 }

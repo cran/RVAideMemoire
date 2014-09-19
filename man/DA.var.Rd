@@ -5,6 +5,8 @@ Explained variance in Discriminant Analysis
 }
 \description{
 Calculate intergroup variance explained by components of a Discriminant Analysis (either obtained from \code{\link[MASS]{lda}} or \code{\link[mixOmics]{plsda}}).
+
+The function will be deprecated soon, as the more generic \code{\link[RVAideMemoire]{MVA.synt}} is now implemented.
 }
 \usage{
 DA.var(model)
@@ -18,7 +20,7 @@ object of class \code{"lda"} (from \code{\link[MASS]{lda}}) or \code{"plsda"} (f
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[MASS]{lda}}, \code{\link[mixOmics]{plsda}}
+\code{\link[RVAideMemoire]{MVA.synt}}, \code{\link[MASS]{lda}}, \code{\link[mixOmics]{plsda}}
 }
 \examples{
 # LDA model

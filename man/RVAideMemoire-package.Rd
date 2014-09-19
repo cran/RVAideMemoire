@@ -12,8 +12,8 @@ This package contains diverse more or less complicated functions, written to sim
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9-38\cr
-Date: \tab 2014-08-12\cr
+Version: \tab 0.9-39\cr
+Date: \tab 2014-09-18\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }

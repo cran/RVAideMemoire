@@ -56,11 +56,11 @@ Maxime Hervé <mx.herve@gmail.com>
 require(MASS)
 data(iris)
 model.LDA <- lda(iris[,1:4],iris$Species)
-DA.valid(model.LDA,M=5,nrep=10)
+DA.valid(model.LDA,M=5,nrep=5)
 
 # Cross-validation of a PLS-DA model
 require(mixOmics)
 data(yeast)
 model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond)
-DA.valid(model.PLSDA,M=5,nrep=10)
+DA.valid(model.PLSDA,M=5,nrep=5)
 }

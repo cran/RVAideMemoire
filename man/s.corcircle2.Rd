@@ -48,13 +48,13 @@ a character size, parameter used with \code{par("cex")*cgrid} to indicate the me
 a logical value indicating whether the complete circle sould be drawn.
 }
   \item{box}{
-a logical value indcating whether a box should be drawn.
+a logical value indicating whether a box should be drawn.
 }
   \item{add.plot}{
 if TRUE uses the current graphics window.
 }
   \item{boxes}{
-a logical value indcating whether a box should be drawn around labels.
+a logical value indicating whether a box should be drawn around labels.
 }
   \item{col}{
 a vector of colors (unique value or one value per arrow).
@@ -65,7 +65,7 @@ a vector of line widths (unique value or one value per arrow).
 }
 
 \author{
-Maxime Hervé <mx.herve@gmail.com>, based on a function of Stéphane Champely
+Maxime Hervé <mx.herve@gmail.com>, based on a function of Daniel Chessel
 }
 \seealso{
 \code{\link[ade4]{s.corcircle}}

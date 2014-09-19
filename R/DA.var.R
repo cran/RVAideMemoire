@@ -1,4 +1,5 @@
 DA.var <- function(model) {
+  warning("DA.var() will be deprecated soon, use the more generic MVA.synt()")
   if (!class(model)%in%c("lda","plsda")) {stop("model not recognized")}
   if (class(model)=="lda") {
     model <- LDA.format(model)

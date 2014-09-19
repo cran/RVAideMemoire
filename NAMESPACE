@@ -1,6 +1,6 @@
 # Importés directement dans le code des fonctions (évite de charger tous
 # les packages au chargement de RVAideMemoire) :
-#   - ade4 : s.class, scatterutil.sub
+#   - ade4 : add.scatter.eig, inertia.dudi, S.label, s.class, scatterutil.sub
 #   - boot : boot
 #   - lme4 : fixef, getME, isLMM, VarCorr
 #   - MASS : lda
@@ -18,6 +18,7 @@ export(Anova.clm,Anova.clmm,
   chisq.bintest,chisq.exp,chisq.multcomp,chisq.theo.multcomp,
   cochran.qtest,
   cor.2comp,cor.conf,cor.multcomp,
+  cor.sparse,
   cox.resid,
   cramer.test,
   cv,
@@ -35,6 +36,7 @@ export(Anova.clm,Anova.clmm,
   mod,
   mqqnorm,
   mshapiro.test,
+  MVA.synt,
   overdisp.glmer,
   pairwise.G.test,pairwise.manova,pairwise.perm.t.test,pairwise.wilcox.rating.test,
   perm.anova,perm.bartlett.test,perm.cor.test,perm.t.test,perm.var.test,
@@ -46,6 +48,7 @@ export(Anova.clm,Anova.clmm,
   rating.lsmeans,rating.prob,
   reg.ci,
   scat.mix.categorical,scat.mix.numeric,
+  scatter.coa2,
   s.corcircle2,
   se,
   seq2,
@@ -65,12 +68,30 @@ S3method(lsm.basis,clm)
 S3method(lsm.basis,clmm)
 S3method(median,factor)
 S3method(model.matrix,clmm)
+S3method(MVA.synt,dudi)
+S3method(MVA.synt,dudi.pca)
+S3method(MVA.synt,prcomp)
+S3method(MVA.synt,princomp)
+S3method(MVA.synt,spca)
+S3method(MVA.synt,pcoa)
+S3method(MVA.synt,dudi.pco)
+S3method(MVA.synt,pco)
+S3method(MVA.synt,nmds)
+S3method(MVA.synt,monoMDS)
+S3method(MVA.synt,metaMDS)
+S3method(MVA.synt,metaMDS.default)
+S3method(MVA.synt,metaMDS.monoMDS)
+S3method(MVA.synt,dudi.coa)
+S3method(MVA.synt,lda)
+S3method(MVA.synt,discrimin)
+S3method(MVA.synt,plsda)
 S3method(predict,least.rect)
 S3method(print,byf.test)
 S3method(print,chisq.exp)
 S3method(print,DA.confusion)
 S3method(print,DA.valid)
 S3method(print,least.rect)
+S3method(print,MVA.synt)
 S3method(print,PLSDA.VIP)
 S3method(print,RV.multcomp)
 S3method(print,RVtest)

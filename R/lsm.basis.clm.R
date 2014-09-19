@@ -3,7 +3,7 @@ recover.data.clm <- function(object,...) {
   recover.data(fcall,delete.response(terms(object)),object$na.action,...)
 }
 
-lsm.basis.clm <- function(object,trms,xlev,grid) {
+lsm.basis.clm <- function(object,trms,xlev,grid,...) {
   if (object$threshold!="flexible") {
     stop("lsmeans deals only with models based on flexible thresholds")
   }

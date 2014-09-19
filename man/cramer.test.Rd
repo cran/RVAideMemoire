@@ -46,6 +46,5 @@ Maxime Hervé <mx.herve@gmail.com>
 var1 <- sample(LETTERS[1:3],30,replace=TRUE)
 var2 <- sample(letters[1:3],30,replace=TRUE)
 cramer.test(var1,var2)
-# or
-cramer.test(table(var1,var2))
+# or cramer.test(table(var1,var2))
 }

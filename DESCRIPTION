@@ -2,8 +2,8 @@ Encoding: latin1
 Package: RVAideMemoire
 Type: Package
 Title: Diverse basic statistical and graphical functions
-Version: 0.9-38
-Date: 2014-08-12
+Version: 0.9-39
+Date: 2014-09-18
 Author: Maxime Hervé
 Maintainer: Maxime Hervé <mx.herve@gmail.com>
 Imports: ade4, boot, car, lme4 (>= 1.0-4), lsmeans (>= 2.0.1), MASS,
@@ -12,7 +12,7 @@ Suggests: ordinal, survival
 Description: This package contains diverse more or less complicated functions, written to simplify user's life: simplifications of existing functions, basic but not implemented tests, easy-to-use tools, bridges between functions of different packages... All functions are presented in the French book 'Aide-memoire de statistique appliquee a la biologie', written by the same author and available on CRAN.
 License: GPL-2
 LazyLoad: yes
-Packaged: 2014-08-12 17:41:39 UTC; Maxime
+Packaged: 2014-09-18 11:31:15 UTC; Maxime
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-08-12 20:11:44
+Date/Publication: 2014-09-19 00:55:32
