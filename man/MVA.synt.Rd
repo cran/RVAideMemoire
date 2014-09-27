@@ -15,7 +15,7 @@ an object of class \code{"dudi.pca"}, \code{"prcomp"}, \code{"princomp"}, \code{
 }
 }
 \details{
-Total variance explained by axes is given for PCA (performed using \code{\link[ade4]{dudi.pca}}, \code{\link{prcomp}}, \code{\link[mixOmics]{pca}} or \code{\link{princomp}}), sPCA (performed using \code{\link[mixOmics]{spca}}), PCoA (performed using \code{\link[ape]{pcoa}}, \code{\link[ade4]{dudi.pco}} or \code{\link[labdsv]{pco}}) and COA (performed using \code{\link[ade4]{dudi.coa}}).
+Total variance explained by axes is given for PCA (performed using \code{\link[ade4]{dudi.pca}}, \code{\link{prcomp}} or \code{\link{princomp}}), sPCA (performed using \code{\link[mixOmics]{spca}}), PCoA (performed using \code{\link[ape]{pcoa}}, \code{\link[ade4]{dudi.pco}} or \code{\link[labdsv]{pco}}) and COA (performed using \code{\link[ade4]{dudi.coa}}).
 
 Intergroup variance explained by axes is given for LDA (performed using \code{\link[MASS]{lda}} or \code{\link[ade4]{discrimin}}), PLS-DA (performed using \code{\link[mixOmics]{plsda}}) and CDA (performed using \code{\link[ade4]{discrimin.coa}}).
 
@@ -29,5 +29,5 @@ Note to users of \code{\link[MASS]{isoMDS}}: result of the wrapper \code{\link[l
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[ade4]{dudi.pca}}, \code{\link{prcomp}}, \code{\link[mixOmics]{pca}}, \code{\link{princomp}}, \code{\link[mixOmics]{spca}}, \code{\link[ape]{pcoa}}, \code{\link[ade4]{dudi.pco}}, \code{\link[labdsv]{pco}}, \code{\link[ade4]{dudi.coa}}, \code{\link[MASS]{lda}}, \code{\link[ade4]{discrimin}}, \code{\link[mixOmics]{plsda}}, \code{\link[ade4]{discrimin.coa}}, \code{\link[labdsv]{nmds}}, \code{\link[vegan]{monoMDS}}, \code{\link[vegan]{metaMDS}}
+\code{\link[ade4]{dudi.pca}}, \code{\link{prcomp}}, \code{\link{princomp}}, \code{\link[mixOmics]{spca}}, \code{\link[ape]{pcoa}}, \code{\link[ade4]{dudi.pco}}, \code{\link[labdsv]{pco}}, \code{\link[ade4]{dudi.coa}}, \code{\link[MASS]{lda}}, \code{\link[ade4]{discrimin}}, \code{\link[mixOmics]{plsda}}, \code{\link[ade4]{discrimin.coa}}, \code{\link[labdsv]{nmds}}, \code{\link[vegan]{monoMDS}}, \code{\link[vegan]{metaMDS}}
 }

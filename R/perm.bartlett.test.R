@@ -18,7 +18,7 @@ function(formula,data,nperm=999) {
     setTxtProgressBar(pb,round(i*100/nperm,0))
   }
   cat("\n")
-  pvalue <- min(length(which(K.perm <= K.ref)),length(which(K.perm >= K.ref)))*2/(nperm+1)
+  pvalue <- min(length(which(K.perm <= (K.ref+.Machine$double.eps/2))),length(which((K.perm+.Machine$double.eps/2) >= K.ref)))*2/(nperm+1)
   result <- list(method="Permutational Bartlett test of homogeneity of variances",data.name=dname,statistic=K.ref,
     permutations=nperm,p.value=pvalue)
   class(result) <- "htest"

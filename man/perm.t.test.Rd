@@ -27,6 +27,9 @@ a logical indicating whether you want a paired t-test.
 number of permutations.
 }
 }
+\details{
+The function deals with the limitted floating point precision, which can bias calculation of p-values based on discrete test statistic distribution.
+}
 \value{
   \item{statistic}{test statistics of the parametric test.}
   \item{permutations}{number of permutations.}

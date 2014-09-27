@@ -25,13 +25,13 @@ function(formula,data,ratio=1,alternative=c("two.sided","less","greater"),nperm=
   cat("\n")
   pvalue <- NULL
   if (alternative=="two.sided") {
-    pvalue <- min(length(which(F.perm <= F.ref)),length(which(F.perm >= F.ref)))*2/(nperm+1)
+    pvalue <- min(length(which(F.perm <= (F.ref+.Machine$double.eps/2))),length(which(F.perm >= F.ref)))*2/(nperm+1)
   }
   if (alternative=="less") {
-    pvalue <- length(which(F.perm <= F.ref))/(nperm+1)
+    pvalue <- length(which(F.perm <= (F.ref+.Machine$double.eps/2)))/(nperm+1)
     }
   if (alternative=="greater") {
-    pvalue <- length(which(F.perm >= F.ref))/(nperm+1)
+    pvalue <- length(which((F.perm+.Machine$double.eps/2) >= F.ref))/(nperm+1)
   }
   result <- list(method="Permutational F test to compare two variances",statistic=F.ref,permutations=nperm,
     p.value=pvalue,estimate=variance,null.value=ratio,alternative=alternative,data.name=dname)

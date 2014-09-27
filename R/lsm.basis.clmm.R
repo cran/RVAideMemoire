@@ -12,7 +12,7 @@ lsm.basis.clmm <- function(object,trms,xlev,grid,...) {
   X <- model.matrix(trms,m,contrasts.arg=contrasts)
   xint <- match("(Intercept)",colnames(X),nomatch=0L)
   if (xint>0L) {X <- X[,-xint,drop=FALSE]}
-  bhat <- c(object$beta,object$alpha)
+  bhat <- c(object$alpha,object$beta)
   H <- object$Hessian
   if (any(apply(object$Hessian,1,function(x) all(x==0)))) {
     H <- H[names(coef(object)),names(coef(object))]
@@ -25,7 +25,7 @@ lsm.basis.clmm <- function(object,trms,xlev,grid,...) {
   k <- length(object$alpha)
   j <- matrix(1,nrow=k,ncol=1)
   J <- matrix(1,nrow=nrow(X),ncol=1)
-  X <- cbind(kronecker(-j,X),kronecker(diag(1,k),J))
+  X <- cbind(kronecker(diag(1,k),J),kronecker(-j,X))
   link <- as.character(object$info$link)
   misc <- list(ylevs=list(cut=names(object$alpha)),tran=link,inv.lbl="cumprob")
   nbasis <- matrix(NA)

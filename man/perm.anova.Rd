@@ -39,6 +39,8 @@ For 3 factors, the formula can only be:
 \code{response ~ factor1 + factor2 | factor3} or
 
 \code{response ~ factor1 * factor2 | factor3}. The 2 factors are here fixed and crossed inside each level of the third, blocking (random), factor.
+
+The function deals with the limitted floating point precision, which can bias calculation of p-values based on discrete test statistic distribution.
 }
 \value{
   a data frame of class \code{"anova"}.

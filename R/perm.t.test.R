@@ -42,13 +42,13 @@ function(formula,data,alternative=c("two.sided","less","greater"),paired=FALSE,n
   cat("\n")
   pvalue <- NULL
   if (alternative=="two.sided") {
-    pvalue <- length(which(abs(t.perm) >= abs(t.ref)))/(nperm+1)
+    pvalue <- length(which((abs(t.perm)+.Machine$double.eps/2) >= abs(t.ref)))/(nperm+1)
   }
   if (alternative=="less") {
-    pvalue <- length(which(t.perm <= t.ref))/(nperm+1)
+    pvalue <- length(which(t.perm <= (t.ref+.Machine$double.eps/2)))/(nperm+1)
     }
   if (alternative=="greater") {
-    pvalue <- length(which(t.perm >= t.ref))/(nperm+1)
+    pvalue <- length(which((t.perm+.Machine$double.eps/2) >= t.ref))/(nperm+1)
   }
   result <- list(statistic=t.ref,permutations=nperm,p.value=pvalue,estimate=moy,alternative=alternative,
     method=method,data.name=dname,null.value=null.value)

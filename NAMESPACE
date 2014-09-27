@@ -2,7 +2,7 @@
 # les packages au chargement de RVAideMemoire) :
 #   - ade4 : add.scatter.eig, inertia.dudi, S.label, s.class, scatterutil.sub
 #   - boot : boot
-#   - lme4 : fixef, getME, isLMM, VarCorr
+#   - lme4 : fixef, getME, glmer, isLMM, VarCorr
 #   - MASS : lda
 #   - mixOmics : perf, plsda, vip
 #   - multcomp : contrMat, glht, adjusted
@@ -54,6 +54,7 @@ export(Anova.clm,Anova.clmm,
   seq2,
   spearman.ci,
   user.cont,
+  wald.ptheo.test,
   wilcox.paired.multcomp,
   wilcox.paired.rating.multcomp,
   wilcox.rating.test,
@@ -68,23 +69,6 @@ S3method(lsm.basis,clm)
 S3method(lsm.basis,clmm)
 S3method(median,factor)
 S3method(model.matrix,clmm)
-S3method(MVA.synt,dudi)
-S3method(MVA.synt,dudi.pca)
-S3method(MVA.synt,prcomp)
-S3method(MVA.synt,princomp)
-S3method(MVA.synt,spca)
-S3method(MVA.synt,pcoa)
-S3method(MVA.synt,dudi.pco)
-S3method(MVA.synt,pco)
-S3method(MVA.synt,nmds)
-S3method(MVA.synt,monoMDS)
-S3method(MVA.synt,metaMDS)
-S3method(MVA.synt,metaMDS.default)
-S3method(MVA.synt,metaMDS.monoMDS)
-S3method(MVA.synt,dudi.coa)
-S3method(MVA.synt,lda)
-S3method(MVA.synt,discrimin)
-S3method(MVA.synt,plsda)
 S3method(predict,least.rect)
 S3method(print,byf.test)
 S3method(print,chisq.exp)

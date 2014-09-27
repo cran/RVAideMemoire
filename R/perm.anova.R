@@ -64,7 +64,7 @@ function(resp,fact1,variables,nperm) {
     setTxtProgressBar(pb,round(i*100/nperm,0))
   }
   cat("\n")
-  pvalue <- length(which(F.perm >= F.ref))/(nperm+1)
+  pvalue <- length(which((F.perm+.Machine$double.eps/2) >= F.ref))/(nperm+1)
   tab[1,"Pr(>F)"] <- format(pvalue,digits=5,nsmall=5)
   return(list(tab=tab))
 }
@@ -90,8 +90,8 @@ function(resp,fact1,fact2,variables,nperm) {
     setTxtProgressBar(pb,round(i*100/nperm,0))
   }
   cat("\n")
-  pvalue1 <- length(which(F1.perm >= F1.ref))/(nperm+1)
-  pvalue2 <- length(which(F2.perm >= F2.ref))/(nperm+1)
+  pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+  pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
   tab[1:2,"Pr(>F)"] <- format(c(pvalue1,pvalue2),digits=5,nsmall=5)
   return(list(tab=tab))
 }
@@ -125,9 +125,9 @@ function(resp,fact1,fact2,variables,nperm) {
 	setTxtProgressBar(pb,round(i*100/nperm,0))
     }
     cat("\n")
-    pvalue1 <- length(which(F1.perm >= F1.ref))/(nperm+1)
-    pvalue2 <- length(which(F2.perm >= F2.ref))/(nperm+1)
-    pvalue3 <- length(which(F3.perm >= F3.ref))/(nperm+1)
+    pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+    pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
+    pvalue3 <- length(which((F3.perm+.Machine$double.eps/2) >= F3.ref))/(nperm+1)
     tab[1:3,"Pr(>F)"] <- format(c(pvalue1,pvalue2,pvalue3),digits=5,nsmall=5)
   }
   return(list(tab=tab))
@@ -162,8 +162,8 @@ function(resp,fact1,fact2,nest.f2,variables,nperm) {
     setTxtProgressBar(pb,round(i*100/nperm,0))
   }
   cat("\n")
-  pvalue1 <- length(which(F1.perm >= F1.ref))/(nperm+1)
-  pvalue2 <- length(which(F2.perm >= F2.ref))/(nperm+1)
+  pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+  pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
   tab[1:2,"Pr(>F)"] <- format(c(pvalue1,pvalue2),digits=5,nsmall=5)
   if (tapply(resp,fact2,length)[1]==1) {
     warning("only 1 observation per level of '",variables[3],"', permutation of '",variables[2],"' only")
@@ -192,7 +192,7 @@ function(resp,fact1,fact2,variables,nperm) {
     setTxtProgressBar(pb,round(i*100/nperm,0))
   }
   cat("\n")
-  pvalue <- length(which(F1.perm >= F1.ref))/(nperm+1)
+  pvalue <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
   tab[1,"Pr(>F)"] <- format(pvalue,digits=5,nsmall=5)
   return(list(tab=tab))
 }
@@ -220,8 +220,8 @@ function(resp,fact1,fact2,fact3,variables,nperm) {
     setTxtProgressBar(pb,round(i*100/nperm,0))
   }
   cat("\n")
-  pvalue1 <- length(which(F1.perm >= F1.ref))/(nperm+1)
-  pvalue2 <- length(which(F2.perm >= F2.ref))/(nperm+1)
+  pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+  pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
   tab[1:2,"Pr(>F)"] <- format(c(pvalue1,pvalue2),digits=5,nsmall=5)
   return(list(tab=tab))
 }
@@ -254,9 +254,9 @@ function(resp,fact1,fact2,fact3,variables,nperm) {
     setTxtProgressBar(pb,round(i*100/nperm,0))
   }
   cat("\n")
-  pvalue1 <- length(which(F1.perm >= F1.ref))/(nperm+1)
-  pvalue2 <- length(which(F2.perm >= F2.ref))/(nperm+1)
-  pvalue3 <- length(which(F1F2.perm >= F1F2.ref))/(nperm+1)
+  pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+  pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
+  pvalue3 <- length(which((F1F2.perm+.Machine$double.eps/2) >= F1F2.ref))/(nperm+1)
   tab[1:3,"Pr(>F)"] <- format(c(pvalue1,pvalue2,pvalue3),digits=5,nsmall=5)
   return(list(tab=tab))
 }

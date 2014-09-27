@@ -27,6 +27,9 @@ a character string specifying the alternative hypothesis, must be one of \code{"
 number of permutations.
 }
 }
+\details{
+The function deals with the limitted floating point precision, which can bias calculation of p-values based on discrete test statistic distribution.
+}
 \value{
   \item{method}{name of the test.}
   \item{statistic}{test statistics of the parametric test.}
