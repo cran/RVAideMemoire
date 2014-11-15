@@ -32,7 +32,7 @@ require(ordinal)
 require(lsmeans)
 
 model <- clm(rating~contact*temp,data=wine)
-LSM <- lsmeans(model,~contact:temp|cut)
+LSM <- lsmeans(model,~contact:temp|cut,mode="linear.predictor")
 
 # Probabilities
 rating.lsmeans(LSM)

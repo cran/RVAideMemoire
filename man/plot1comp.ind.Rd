@@ -7,7 +7,8 @@ Plot of indiviuals and their class on a single axis (component)
 Represent indivual points on a single axis (usually a factorial component) and add their class, respecting to a given factor.
 }
 \usage{
-plot1comp.ind(dfxy, fac, axis = 1, col = 1:nlevels(fac), cex = 1, box = TRUE)
+plot1comp.ind(dfxy, fac, axis = 1, col = 1:nlevels(fac), legend = TRUE,
+  pos.legend = "topright", ...)
 }
 \arguments{
   \item{dfxy}{
@@ -20,13 +21,16 @@ a factor giving the class of each individual.
 axis to be represented (the first by default).
 }
   \item{col}{
-a vector of colors (one value per class of the factor).
+a vector of colors (one value per class of the factor). Use numbers to display transparent colors.
 }
-  \item{cex}{
-size of class names.
+  \item{legend}{
+logical. If \code{TRUE} a legend is added to the graph.
 }
-  \item{box}{
-logical, should a box to be drawn around class names?
+  \item{pos.legend}{
+position of the legend, if necessary. See \code{\link{legend}}.
+}
+  \item{...}{
+further graphical arguments. See \code{\link{par}}.
 }
 }
 \author{
@@ -40,5 +44,5 @@ require(MASS)
 data(iris)
 LDA <- lda(iris[,1:4],iris$Species)
 LDA.form <- LDA.format(LDA)
-plot1comp.ind(LDA.form$li,LDA.form$grouping,col=1:3)
+plot1comp.ind(LDA.form$li,LDA.form$grouping)
 }

@@ -1,8 +1,10 @@
 MVA.synt <-
 function(x) {
   res <- list()
-  if (inherits(x,"dudi")) {				# PCA/PCoA/COA: dudi.pca(), dudi.pco() and dudi.coa() from ade4
-    if (inherits(x,"pca") | inherits(x,"pco") | inherits(x,"coa")) {
+  if (inherits(x,"dudi")) {				# PCA/PCoA/COA/MCA/Mix/Hillsmith: dudi.pca(), 
+    if (inherits(x,"pca") | inherits(x,"pco") | # dudi.pco(), dudi.coa(), dudi.acm(), dudi.mix()
+	inherits(x,"coa") | inherits(x,"acm") |	# and dudi.hillsmith() from ade4
+	inherits(x,"mix")) {
 	res$crit <- "total variance (%)"
 	vars <- ade4::inertia.dudi(x)$TOT
 	vars.each <- round(100*c(vars[1,"ratio"],diff(vars$ratio)),2)

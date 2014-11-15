@@ -7,7 +7,7 @@ Histogram for factor levels
 Draw a histogram of a numeric variable per level of a factor.
 }
 \usage{
-byf.hist(formula, data, ...)
+byf.hist(formula, data, sep = FALSE, density = TRUE)
 }
 \arguments{
   \item{formula}{
@@ -16,8 +16,11 @@ a formula of the form \code{a ~ b} where \code{a} gives the data values and \cod
   \item{data}{
 an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
 }
-  \item{...}{
-other arguments to pass to \code{\link{hist}}.
+  \item{sep}{
+logical. If \code{TRUE} a histogram is displayed per level of the factor. If \code{FALSE} all levels are displayed on the same histogram.
+}
+  \item{density}{
+logical. If \code{TRUE} density polygons are displayed, if \code{FALSE} classical counts are displayed.
 }
 }
 \author{

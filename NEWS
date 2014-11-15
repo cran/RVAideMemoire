@@ -1,0 +1,7 @@
+version 0.9-41 (15-11-2014)
+  - lsm.basis.clm and lsm.basis.clmm removed (now dealt in a much powerful manner by the 'lsmeans' package)
+  - DA.var removed (the MVA.synt function of this package does the same job and is more generic)
+  - fc.multcomp removed (comparison of slopes dealt in a much powerful manner by the 'lsmeans' package)
+  - plot1comp.ind rewritten to display a more easy-to-interpret graph
+  - byf.normhist removed (not very useful and nearly same thing now done by byf.hist)
+  - MVA.synt extended to MCA and mix analyses
