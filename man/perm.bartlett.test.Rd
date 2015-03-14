@@ -4,7 +4,7 @@
 Permutational Bartlett's test of homogeneity of variances
 }
 \description{
-Perform a permutational Bartlett's test of homogeneity of k variances.
+Performs a permutational Bartlett's test of homogeneity of k variances.
 }
 \usage{
 perm.bartlett.test(formula, data, nperm = 999)
@@ -21,7 +21,7 @@ number of permutations.
 }
 }
 \details{
-The function deals with the limitted floating point precision, which can bias calculation of p-values based on discrete test statistic distribution.
+The function deals with the limitted floating point precision, which can bias calculation of p-values based on a discrete test statistic distribution.
 }
 \value{
   \item{method}{name of the test.}

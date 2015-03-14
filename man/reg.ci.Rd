@@ -4,7 +4,7 @@
 Confidence intervals of a simple linear regression
 }
 \description{
-Compute and add to a graph the confidence interval of a simple regression line or of individual values.
+Computes and add to a graph the confidence interval of a simple regression line or of individual values.
 }
 \usage{
 reg.ci(model, conf.level = 0.95, type = c("mean", "ind"), ...)

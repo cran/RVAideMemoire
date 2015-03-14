@@ -4,7 +4,7 @@
 Histogram for factor levels
 }
 \description{
-Draw a histogram of a numeric variable per level of a factor.
+Draws a histogram of a numeric variable per level of a factor.
 }
 \usage{
 byf.hist(formula, data, sep = FALSE, density = TRUE)

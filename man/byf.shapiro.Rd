@@ -4,7 +4,7 @@
 Shapiro-Wilk test for factor levels
 }
 \description{
-Perform a Shapiro-Wilk test on a numeric variable per level of a factor.
+Performs a Shapiro-Wilk test on a numeric variable per level of a factor.
 }
 \usage{
 byf.shapiro(formula, data)

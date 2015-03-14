@@ -4,7 +4,7 @@
 Re-formating LDA data
 }
 \description{
-Re-format data obtained from \code{\link[MASS]{lda}}, especially to get coordinates of individuals on factorial plans and correlation between original variables and LDA components.
+Re-formats data obtained from \code{\link[MASS]{lda}}, especially to get coordinates of individuals on factorial plans and correlation between original variables and LDA components.
 }
 \usage{
 LDA.format(model)

@@ -4,7 +4,7 @@
 Coefficient of variation
 }
 \description{
-Compute the coefficient of variation of a vector.
+Computes the coefficient of variation of a vector.
 }
 \usage{
 cv(x, abs = TRUE, pc = TRUE)

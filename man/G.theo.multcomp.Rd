@@ -4,7 +4,7 @@
 Pairwise comparisons after a G-test for given probabilities
 }
 \description{
-Perform pairwise comparisons after a global G-test for given probabilities.
+Performs pairwise comparisons after a global G-test for given probabilities.
 }
 \usage{
 G.theo.multcomp(x, p = rep(1/length(x), length(x)), p.method = "fdr")
@@ -20,6 +20,9 @@ theoretical proportions.
 method for p-values correction. See help of \code{\link{p.adjust}}.
 }
 }
+\details{
+Since a G-test is an approximate test, an exact test is preferable when the number of individuals is small (200 is a reasonable minimum). See \code{\link[RVAideMemoire]{multinomial.theo.multcomp}} in that case.
+}
 \value{
   \item{method}{name of the test.}
   \item{data.name}{a character string giving the name(s) of the data.}
@@ -34,11 +37,11 @@ method for p-values correction. See help of \code{\link{p.adjust}}.
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link{G.test}}
+\code{\link{G.test}}, \code{\link[RVAideMemoire]{multinomial.test}}, \code{\link[RVAideMemoire]{multinomial.theo.multcomp}}
 }
 \examples{
-counts <- c(5,15,23,8,14)
-p.theo <- c(0.1,0.4,0.3,0.15,0.05)
+counts <- c(49,30,63,59)
+p.theo <- c(0.2,0.1,0.45,0.25)
 G.test(counts,p=p.theo)
 G.theo.multcomp(counts,p=p.theo)
 }

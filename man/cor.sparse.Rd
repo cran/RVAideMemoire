@@ -4,7 +4,7 @@
 Correlation between variables and components in sparse multivariate analyses
 }
 \description{
-Calculate correlation between variables and components in sparse multivariate analyses (either obtained from \code{\link[mixOmics]{spca}}, \code{\link[mixOmics]{sipca}} or \code{\link[mixOmics]{splsda}}).
+Calculates correlation between variables and components in sparse multivariate analyses (either obtained from \code{\link[mixOmics]{spca}}, \code{\link[mixOmics]{sipca}} or \code{\link[mixOmics]{splsda}}).
 }
 \usage{
 cor.sparse(x)
@@ -21,9 +21,10 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link[mixOmics]{spca}}, \code{\link[mixOmics]{sipca}}, \code{\link[mixOmics]{plsda}}
 }
 \examples{
-# sPCA model
+# sPCA
 require(mixOmics)
 data(liver.toxicity)
+
 spca.rat <- spca(liver.toxicity$gene,ncomp=2,keepX=rep(20,2))
 cor.sparse(spca.rat)
 }

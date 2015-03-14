@@ -4,14 +4,14 @@
 Plot of the factorial maps of a correlation circle
 }
 \description{
-Performs the scatter diagram of a correlation circle. The function is a copy of \code{\link[ade4]{s.corcircle}} including 3 new arguments: \code{boxes}, \code{col} and \code{lwd}.
+Performs the scatter diagram of a correlation circle. The function is a copy of \code{\link[ade4]{s.corcircle}} including 6 new arguments: \code{boxes}, \code{arrows}, \code{col}, \code{lwd} and \code{cpoint}.
 }
 \usage{
 s.corcircle2(dfxy, xax = 1, yax = 2, label = row.names(df), 
-  clabel = rep(1,nrow(dfxy)), grid = TRUE, sub = "", csub = 1,
-  possub = "bottomleft", cgrid = 0, fullcircle = TRUE, box = FALSE,
-  add.plot = FALSE, boxes = FALSE, col = rep("black", nrow(dfxy)),
- lwd = rep(1,nrow(dfxy)))
+  clabel = 1, grid = TRUE, sub = "", csub = 1, possub = "bottomleft",
+  cgrid = 0, fullcircle = TRUE, box = FALSE, add.plot = FALSE,
+  circle = TRUE, boxes = FALSE, arrows = TRUE, col = "black", lwd = 1,
+  cpoint = 0.8)
 }
 \arguments{
   \item{dfxy}{
@@ -53,14 +53,23 @@ a logical value indicating whether a box should be drawn.
   \item{add.plot}{
 if TRUE uses the current graphics window.
 }
+  \item{circle}{
+a logical value indicating whether the circle should be drawn.
+}
   \item{boxes}{
 a logical value indicating whether a box should be drawn around labels.
+}
+  \item{arrows}{
+a logical value indicating whether arrows should be drawn (if \code{FALSE}, points are displayed).
 }
   \item{col}{
 a vector of colors (unique value or one value per arrow).
 }
   \item{lwd}{
 a vector of line widths (unique value or one value per arrow).
+}
+  \item{cpoint}{
+a vector of point sizes (unique value or one value per arrow).
 }
 }
 

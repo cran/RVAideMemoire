@@ -4,7 +4,7 @@
 Permutational Pearson's correlation test
 }
 \description{
-Perform a permutational Pearson's product-moment correlation test.
+Performs a permutational Pearson's product-moment correlation test.
 }
 \usage{
 perm.cor.test(x, y, alternative = c("two.sided", "less", "greater"), nperm = 999)
@@ -21,7 +21,7 @@ number of permutations.
 }
 }
 \details{
-The function deals with the limitted floating point precision, which can bias calculation of p-values based on discrete test statistic distribution.
+The function deals with the limitted floating point precision, which can bias calculation of p-values based on a discrete test statistic distribution.
 }
 \value{
   \item{method}{name of the test.}

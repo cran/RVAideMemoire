@@ -4,7 +4,7 @@
 Plot of indiviuals and their class on a single axis (component)
 }
 \description{
-Represent indivual points on a single axis (usually a factorial component) and add their class, respecting to a given factor.
+Represents indivual points on a single axis (usually a factorial component) and add their class, respecting to a given factor.
 }
 \usage{
 plot1comp.ind(dfxy, fac, axis = 1, col = 1:nlevels(fac), legend = TRUE,

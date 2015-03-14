@@ -4,7 +4,7 @@
 Permutational test for the discriminant ability of the factor in PLS-DA
 }
 \description{
-Perform a permutational test based on the classification error rate of a PLS-DA model, to test for the discriminant ability of the factor.
+Performs a permutational test based on the classification error rate of a PLS-DA, to test for the discriminant ability of the factor.
 }
 \usage{
 PLSDA.test(model, pred.method = c("mahalanobis.dist", "centroids.dist", "max.dist"),
@@ -28,6 +28,8 @@ number of permutations.
 Data have to be balanced to perform the test. The function automatically takes care of it by taking equal number of individuals in each class of the factor, randomly chosen for each class and in each permutation. The number of individuals kept is equal to the number of individuals in the smallest class.
 
 To compare classification error rates of the original and permuted models, classification error rate of the original model must be obtained with balanced data. The function does this by randomly choosing equal number of individuals in each class (as in the permutation process). However, to avoid basing the test on an original classification error rate obtained from non representative individuals, the process is repeated 30 times and the mean of these 30 values is considered as the classification error rate of the original model.
+
+The function deals with the limitted floating point precision, which can bias calculation of p-values based on a discrete test statistic distribution.
 }
 \value{
   \item{method}{a character string giving the name of the test.}
@@ -54,6 +56,7 @@ Maxime Hervé <mx.herve@gmail.com>
 
 require(mixOmics)
 data(yeast)
+
 X <- t(yeast$data)
 Y <- yeast$strain.cond
 model <- plsda(X,Y)

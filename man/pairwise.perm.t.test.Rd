@@ -4,7 +4,7 @@
 Pairwise permutational t tests
 }
 \description{
-Perform pairwise comparisons between group levels with corrections for multiple testing.
+Performs pairwise comparisons between group levels with corrections for multiple testing.
 }
 \usage{
 pairwise.perm.t.test(resp, fact, p.method = "fdr", paired = FALSE,
@@ -29,6 +29,9 @@ a character string specifying the alternative hypothesis, must be one of \code{"
   \item{nperm}{
 number of permutations.
 }
+}
+\details{
+The function deals with the limitted floating point precision, which can bias calculation of p-values based on a discrete test statistic distribution.
 }
 \value{
   \item{method}{a character string indicating what type of t-tests were performed.}

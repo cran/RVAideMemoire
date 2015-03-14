@@ -4,7 +4,7 @@
 Cramer's association coefficient
 }
 \description{
-Compute the Cramer's association coefficient between 2 nominal variables, its confidence interval (by bootstraping) and tests for its significance.
+Computes the Cramér's association coefficient between 2 nominal variables, its confidence interval (by bootstraping) and tests for its significance.
 }
 \usage{
 cramer.test(x, y, nrep = 1000, conf.level = 0.95)
@@ -29,7 +29,7 @@ confidence level.
   \item{parameter}{test degrees of freedom.}
   \item{p.value}{test p-value.}
   \item{data.name}{a character string giving the names of the data.}
-  \item{estimate}{Cramer's coefficient.}
+  \item{estimate}{Cramér's coefficient.}
   \item{conf.level}{confidence level.}
   \item{rep}{number of replicates.}
   \item{conf.int}{confidence interval.}

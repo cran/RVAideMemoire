@@ -4,7 +4,7 @@
 Graphical help to number of components selection in PLS-DA
 }
 \description{
-Draw a graph with classification error rate (obtained from cross-validation with the M-fold method) and proportion of intergroup variance explained from one to any possible components included in a given PLS-DA model. This helps to choose the number of components to be kept in the model.
+Draws a graph with classification error rate (obtained from cross-validation with the M-fold method) and proportion of intergroup variance explained from one to any possible components included in a given PLS-DA. This helps to choose the number of components to be kept in the model.
 }
 \usage{
 PLSDA.ncomp(X, Y, pred.method = c("mahalanobis.dist", "centroids.dist", "max.dist"),
@@ -39,6 +39,7 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 require(mixOmics)
 data(yeast)
+
 X <- t(yeast$data)
 Y <- yeast$strain.cond
 # PLSDA.ncomp(X,Y)

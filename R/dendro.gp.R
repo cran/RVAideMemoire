@@ -6,7 +6,7 @@ dendro.gp <- function(dend) {
   par(mfrow=c(1,2))
   plot(dend,hang=-1)
   rect.hclust(dend,k=k)
-  xlab <- paste("Number of groups (best value from dendrogram: ",k,")",sep="")
+  xlab <- paste("Number of groups\n(best value from dendrogram: ",k,")",sep="")
   g <- barplot(d,xlab=xlab,ylab="Difference in agglomeration index with the next level",
     names.arg=2:length(dend$height))
   demi <- (g[2]-g[1])/2

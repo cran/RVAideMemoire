@@ -1,5 +1,8 @@
-perm.t.test <-
-function(formula,data,alternative=c("two.sided","less","greater"),paired=FALSE,nperm=999) {
+perm.t.test <- function(x,...) {
+  UseMethod("perm.t.test")
+}
+
+perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","greater"),paired=FALSE,nperm=999,...) {
   if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
   m <- match.call()
   if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
@@ -54,4 +57,16 @@ function(formula,data,alternative=c("two.sided","less","greater"),paired=FALSE,n
     method=method,data.name=dname,null.value=null.value)
   class(result) <- "htest"
   return(result)
+}
+
+perm.t.test.default <- function(x,y,paired=FALSE,...) {
+  if (!is.numeric(y)) {stop(paste(deparse(substitute(y)),"must be numeric"))}
+  response <- c(x,y)
+  fact <- factor(rep(LETTERS[1:2],c(length(x),length(y))))
+  test <- perm.t.test(response~fact,paired=paired,...)
+  test$data.name <- paste(deparse(substitute(x)),"and",deparse(substitute(y)))
+  if (!paired) {
+    names(test$estimate) <- c(paste("mean of",deparse(substitute(x))),paste("mean of",deparse(substitute(y))))
+  }
+  return(test)
 }

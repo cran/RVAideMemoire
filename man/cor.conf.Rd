@@ -4,7 +4,7 @@
 Equality of a Pearson's linear correlation coefficient to a given value
 }
 \description{
-Perform a test for equality of a Pearson's linear correlation coefficient to a given value.
+Performs a test for equality of a Pearson's linear correlation coefficient to a given value.
 }
 \usage{
 cor.conf(var1, var2, theo)

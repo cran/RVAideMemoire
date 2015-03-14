@@ -4,7 +4,7 @@
 Pairwise comparisons after a chi-squared goodness-of-fit test
 }
 \description{
-Perform pairwise comparisons after a global chi-squared goodness-of-fit test.
+Performs pairwise comparisons after a global chi-squared goodness-of-fit test.
 }
 \usage{
 chisq.multcomp(x, p.method = "fdr")
@@ -17,6 +17,9 @@ numeric vector (counts).
 method for p-values correction. See help of \code{\link{p.adjust}}.
 }
 }
+\details{
+Since a chi-squared test is an approximate test, an exact test is preferable when the number of individuals is small (200 is a reasonable minimum). See \code{\link[RVAideMemoire]{multinomial.multcomp}} in that case.
+}
 \value{
   \item{method}{name of the test.}
   \item{data.name}{a character string giving the name(s) of the data.}
@@ -27,10 +30,10 @@ method for p-values correction. See help of \code{\link{p.adjust}}.
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link{chisq.test}}
+\code{\link{chisq.test}}, \code{\link[RVAideMemoire]{multinomial.test}}, \code{\link[RVAideMemoire]{multinomial.multcomp}}
 }
 \examples{
-counts <- c(5,15,23,8,14)
+counts <- c(49,30,63,59)
 chisq.test(counts)
 chisq.multcomp(counts)
 }

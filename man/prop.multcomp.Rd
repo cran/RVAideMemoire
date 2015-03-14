@@ -4,14 +4,14 @@
 Pairwise comparisons after a test for given proportions
 }
 \description{
-Perform pairwise comparisons after a global test for given proportions, by using exact binomial tests.
+Performs pairwise comparisons after a global test for given proportions, by using exact binomial tests.
 }
 \usage{
 prop.multcomp(x, p, p.method = "fdr")
 }
 \arguments{
   \item{x}{
-conitngency table.
+contingency table.
 }
   \item{p}{
 theoretical proportions.
@@ -36,10 +36,10 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link{prop.test}}
 }
 \examples{
-proportions <- sample(c(0,1),60,replace=TRUE)
-populations <- sample(LETTERS[1:3],60,replace=TRUE)
+proportions <- sample(c(0,1),200,replace=TRUE)
+populations <- sample(LETTERS[1:3],200,replace=TRUE)
 tab.cont <- table(populations,proportions)
-p.theo <- c(0.2,0.5,0.7)
+p.theo <- c(0.4,0.5,0.7)
 prop.test(tab.cont,p=p.theo)
 prop.multcomp(tab.cont,p=p.theo)
 }

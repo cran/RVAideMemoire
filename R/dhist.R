@@ -1,8 +1,7 @@
 dhist <- function(x,fac,col,legend,pos.legend,xlab,...) {
   ymax <- integer(nlevels(fac))
   for (i in 1:nlevels(fac)) {
-    ymax[i] <- suppressWarnings(max(hist(x[as.numeric(fac)==i],
-	freq=FALSE,plot=FALSE)$density))
+    ymax[i] <- max(density(x[as.numeric(fac)==i])$y)
   }
   h <- suppressWarnings(hist(x,freq=FALSE,plot=FALSE))
   plot(0,xlim=range(h$breaks),ylim=c(0,max(ymax)),xlab=xlab,

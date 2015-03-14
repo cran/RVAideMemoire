@@ -4,7 +4,7 @@
 Standard error of the mean
 }
 \description{
-Compute the standard error of the mean of a vector.
+Computes the standard error of the mean of a vector.
 }
 \usage{
 se(x)

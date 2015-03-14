@@ -4,7 +4,7 @@
 User defined contrasts for LSMeans
 }
 \description{
-Return a function usable by \code{\link[lsmeans]{lsmeans}} for user defined contrasts.
+Returns a function usable by \code{\link[lsmeans]{lsmeans}} for user defined contrasts.
 }
 \usage{
 user.cont(cont)

@@ -3,7 +3,7 @@ function(dudi.obj,xax=1,yax=2,csub=2,possub="topleft",...){
   def.par <- par(no.readonly=TRUE)
   on.exit(par(def.par))
   tabcomplet <- eval(as.list(dudi.obj$call)[[2]],sys.frame(0))
-  indexation <- dudi.obj$index=="f"
+  indexation <- which(dudi.obj$index=="f" | dudi.obj$index=="o")
   oritab <- as.data.frame(tabcomplet[,indexation])
   colnames(oritab) <- colnames(tabcomplet)[indexation]
   nvar <- ncol(oritab)

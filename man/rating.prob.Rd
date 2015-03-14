@@ -1,11 +1,10 @@
 \name{rating.prob}
 \alias{rating.prob}
-\alias{rating.prob}
 \title{
 Observed rating frequencies
 }
 \description{
-Compute observed rating frequencies per level of a factor, in various formats.
+Computes observed rating frequencies per level of a factor, in various formats.
 }
 \usage{
 rating.prob(x, g, type = c("prob", "cumprob", "class"))

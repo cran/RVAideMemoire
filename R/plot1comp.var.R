@@ -2,7 +2,7 @@ plot1comp.var <- function(dfxy,axis=1,cex=1) {
   opar <- par()
   on.exit(suppressWarnings(par(opar)))
   n <- nrow(dfxy)
-  par(mar=c(5,max(nchar(rownames(dfxy)))/2,4,2))
+  par(mar=c(5,6,4,2))
   plot(dfxy[,axis],1:n,xlim=c(-1,1),xlab=paste("Correlation with axis",axis),ylab="",cex=0,axes=FALSE)
   box()
   axis(1)

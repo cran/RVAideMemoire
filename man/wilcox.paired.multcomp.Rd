@@ -4,7 +4,7 @@
 Non parametric pairwise comparisons for paired data
 }
 \description{
-Perform non parametric pairwise comparisons of paired samples by Wilcoxon signed rank tests for paired data.
+Performs non parametric pairwise comparisons of paired samples by Wilcoxon signed rank tests for paired data.
 }
 \usage{
 wilcox.paired.multcomp(formula, data, p.method = "fdr")

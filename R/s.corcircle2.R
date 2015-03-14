@@ -28,11 +28,17 @@ scatterutil.eti.circ2 <- function (x,y,label,clabel,origin=c(0,0),boxes=TRUE,col
   }
 }
 
-s.corcircle2 <- function (dfxy,xax=1,yax=2,label=row.names(df),clabel=rep(1,nrow(dfxy)),
+s.corcircle2 <- function (dfxy,xax=1,yax=2,label=row.names(df),clabel=1,
   grid=TRUE,sub="",csub=1,possub="bottomleft",cgrid=0,fullcircle=TRUE,box=FALSE,
-  add.plot=FALSE,boxes=FALSE,col=rep("black",nrow(dfxy)),lwd=rep(1,nrow(dfxy))) {
+  add.plot=FALSE,circle=TRUE,boxes=FALSE,arrows=TRUE,col="black",lwd=1,cpoint=0.8) {
+  if (length(clabel)>1 & length(clabel)!=nrow(dfxy)) {stop("incorrect number of character sizes")}
   if (length(col)>1 & length(col)!=nrow(dfxy)) {stop("incorrect number of colors")}
   if (length(lwd)>1 & length(lwd)!=nrow(dfxy)) {stop("incorrect number of line widths")}
+  if (length(cpoint)>1 & length(cpoint)!=nrow(dfxy)) {stop("incorrect number of point sizes")}
+  if (length(clabel)==1) {clabel <- rep(clabel,nrow(dfxy))}
+  if (length(col)==1) {col <- rep(col,nrow(dfxy))}
+  if (length(lwd)==1) {lwd <- rep(lwd,nrow(dfxy))}
+  if (length(cpoint)==1) {cpoint <- rep(cpoint,nrow(dfxy))}
   arrow1 <- function(x0,y0,x1,y1,len=0.1,ang=15,edge,col,lwd) {
     d0 <- sqrt((x0-x1)^2 + (y0-y1)^2)
     if (d0 < 1e-07) return(invisible())
@@ -44,7 +50,10 @@ s.corcircle2 <- function (dfxy,xax=1,yax=2,label=row.names(df),clabel=rep(1,nrow
 	if (edge) arrows(x0,y0,x1,y1,angle=ang,length=len,lwd=lwd,col=col)
     }
   }
-  scatterutil.circ <- function(cgrid,h,grid,lwd=1) {
+  point1 <- function(x,y,col,cex) {
+    points(x,y,pch=16,col=col,cex=cex)
+  }
+  scatterutil.circ <- function(cgrid,h,grid,lwd=1,circle) {
     cc <- seq(from=-1,to=1,by=h)
     col <- "lightgray"
     if (grid) {
@@ -56,7 +65,7 @@ s.corcircle2 <- function (dfxy,xax=1,yax=2,label=row.names(df),clabel=rep(1,nrow
 	  segments(a1,x,a2,x,col=col,lwd=lwd)
 	}
     }
-    symbols(0,0,circles=1,inches=FALSE,add=TRUE)
+    if (circle) {symbols(0,0,circles=1,inches=FALSE,add=TRUE)}
     segments(-1,0,1,0)
     segments(0,-1,0,1)
     if (cgrid<=0 | !grid) return(invisible())
@@ -79,7 +88,13 @@ s.corcircle2 <- function (dfxy,xax=1,yax=2,label=row.names(df),clabel=rep(1,nrow
   x <- df[,xax]
   y <- df[,yax]
   if (add.plot) {
-    for (i in 1:length(x)) arrow1(0,0,x[i],y[i],len=0.1,ang=15,edge=TRUE,col=col[i],lwd=lwd[i])
+    for (i in 1:length(x)) {
+	if (arrows) {
+	  arrow1(0,0,x[i],y[i],len=0.1,ang=15,edge=TRUE,col=col[i],lwd=lwd[i])
+	} else {
+	  point1(x[i],y[i],col=col[i],cex=cpoint[i])
+	}
+    }
     if (any(clabel>0)) scatterutil.eti.circ2(x,y,label=label,clabel=clabel,col=col,boxes=boxes)
     return(invisible())
   }
@@ -97,8 +112,14 @@ s.corcircle2 <- function (dfxy,xax=1,yax=2,label=row.names(df),clabel=rep(1,nrow
   x1 <- c(x1-diff(range(x1)/20),x1+diff(range(x1))/20)
   y1 <- c(y1-diff(range(y1)/20),y1+diff(range(y1))/20)
   plot(x1,y1,type="n",ylab="",asp=1,xaxt="n",yaxt="n",frame.plot=FALSE)
-  scatterutil.circ(cgrid=cgrid,h=0.2,grid=grid)
-  for (i in 1:length(x)) arrow1(0,0,x[i],y[i],len=0.1,ang=15,edge=TRUE,col=col[i],lwd=lwd[i])
+  scatterutil.circ(cgrid=cgrid,h=0.2,grid=grid,circle=circle)
+  for (i in 1:length(x)) {
+    if (arrows) {
+	arrow1(0,0,x[i],y[i],len=0.1,ang=15,edge=TRUE,col=col[i],lwd=lwd[i])
+    } else {
+	point1(x[i],y[i],col=col[i],cex=cpoint[i])
+    }
+  }
   if (any(clabel>0)) scatterutil.eti.circ2(x,y,label=label,clabel=clabel,origin,col=col,boxes=boxes)
   if (csub>0) ade4::scatterutil.sub(sub,csub,possub)
   if (box) box()

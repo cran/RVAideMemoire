@@ -4,7 +4,7 @@
 Survivor curve
 }
 \description{
-Plot the survivor curve (log(survivors) against time) of a dataset to check for constancy of hazard.
+Plots the survivor curve (log(survivors) against time) of a dataset to check for constancy of hazard.
 }
 \usage{
 plotsurvivors(x, status = rep(1, length(x)))

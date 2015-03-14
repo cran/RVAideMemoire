@@ -4,7 +4,7 @@ function (model,shapiro=FALSE) {
     stop(paste("for mixed models please update 'lmer' to version > 1.0 (actual: ",
 	packageVersion("lme4"),")",sep=""))
   }
-  if ("lm"%in%class(model) & !"manova"%in%class(model)) {
+  if ("lm"%in%class(model) & !"mlm"%in%class(model)) {
     if (!"glm"%in%class(model)) {
 	model.residuals <- rstudent(model)
 	res.lab <- "Externally studentized residuals"
@@ -79,7 +79,7 @@ function (model,shapiro=FALSE) {
   } else if (any(c("survreg","least.rect")%in%class(model))) {
     model.residuals <- residuals(model)
     res.lab <- "Residuals"
-  } else if ("manova"%in%class(model)) {
+  } else if ("mlm"%in%class(model)) {
   } else {
     stop("model not recognized")
   }
@@ -90,7 +90,7 @@ function (model,shapiro=FALSE) {
   }
   opar <- par(no.readonly=TRUE)
   on.exit(par(opar))
-  if (!"manova"%in%class(model)) {
+  if (!"mlm"%in%class(model)) {
     par(mfrow=c(1,2))
     plot(fit,model.residuals,xlab="Fitted values",ylab=res.lab,main=paste(res.lab,"vs fitted"))
     abline(h=0,col="grey",lty=3)

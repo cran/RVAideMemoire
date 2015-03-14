@@ -10,12 +10,18 @@ function(y,blocks=NULL,p=0.5) {
   nameb <- if (length(callb)>1) {
     paste0(callb[2],callb[1],callb[3])
   } else {as.character(callb)}
-  y <- as.numeric(factor(y))-1
+  y <- if (is.vector(y)) {
+    as.numeric(factor(y))-1
+  } else {
+    as.matrix(y)
+  }
   if (!is.null(blocks)) {
     model <- lme4::glmer(y~1+(1|blocks),family="binomial")
+    p.est <- c("probability of success"=unique(predict(model,type="response",re.form=NA)))
     dname <- paste0(namey," and ",nameb)
   } else {
     model <- glm(y~1,family="binomial")
+    p.est <- c("probability of success"=unique(predict(model,type="response")))
     dname <- namey
   }
   int.theo <- log(p/(1-p))
@@ -24,7 +30,6 @@ function(y,blocks=NULL,p=0.5) {
   int.se <- summ$coefficients["(Intercept)","Std. Error"]
   z <- c(z=(int.moy-int.theo)/int.se)
   pval <- min(pnorm(z),pnorm(z,lower.tail=FALSE))*2
-  p.est <- c("probability of success"=sum(y,na.rm=TRUE)/length(na.omit(y)))
   null <- c("probability of success"=p)
   res <- list(statistic=z,p.value=pval,estimate=p.est,null.value=null,
     alternative="two.sided",method="Wald test",data.name=dname)

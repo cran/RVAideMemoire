@@ -40,6 +40,6 @@ function(var1,var2,var3,var4,alpha=0.05,conf.level=0.95,theo=0){
 	"          and equality to given value ",theo,sep="")
     result$common <- tab.com
   }
-  class(result) <- "RVtest"
+  class(result) <- if (p>alpha) {"RVtest"} else {"htest"}
   return(result)
 }

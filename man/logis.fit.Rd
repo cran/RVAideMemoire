@@ -4,7 +4,7 @@
 Graphical adujstment of a simple binary logistic regression to data
 }
 \description{
-Cut the data into intervals, compute the response probability and its standard error for each interval and add the results to the regression curve. No test is performed but this permits to have a graphical idea of the adjustment of the model to the data.
+Cuts the data into intervals, compute the response probability and its standard error for each interval and add the results to the regression curve. No test is performed but this permits to have a graphical idea of the adjustment of the model to the data.
 }
 \usage{
 logis.fit(model, int = 5, ...)

@@ -4,7 +4,7 @@
 QQ-plot for factor levels
 }
 \description{
-Draw a multivariate QQ-plot of numeric variables per level of a factor.
+Draws a multivariate QQ-plot of numeric variables per level of a factor.
 }
 \usage{
 byf.mqqnorm(formula, data)

@@ -4,4 +4,33 @@ version 0.9-41 (15-11-2014)
   - fc.multcomp removed (comparison of slopes dealt in a much powerful manner by the 'lsmeans' package)
   - plot1comp.ind rewritten to display a more easy-to-interpret graph
   - byf.normhist removed (not very useful and nearly same thing now done by byf.hist)
-  - MVA.synt extended to MCA and mix analyses
+  - MVA.synt extended to MCA and mixed analyses
+
+version 0.9-45 (13-03-2015)
+  - histograms with density polygons improved
+  - G.test, G.multcomp and G.theo.multcomp modified to deal with 0 values (but warning that it should not be done)
+  - new functions multinomial.test, multinomial.multcomp and multinomial.theo.multcomp (exact multinomial goodness-of-fit test and pairwise comparisons)
+  - chisq.bintest splitted into chisq.bintest and fisher.bintest (chi-square and Fisher's exact tests for comparing response probabilities)
+  - new function G.bintest (G test for comparing response probabilities)
+  - new functions chisq.theo.bintest, chisq.bin.exp and prop.bin.multcomp (comparison of response probabilities to theoretical values)
+  - new function fp.test (Fligner-Policello test)
+  - new function CvM.test (two-sample Cramer-von Mises test)
+  - new method for perm.t.test
+  - new method for perm.var.test
+  - new functions pcor and pcor.test (equivalents to cor and cor.test for (semi-)partial correlation)
+  - new function pairwise.to.groups (conversion of a pairwise-comparison matrix to letters showing significantly different factor levels)
+  - "mlm" models are now dealt properly by plotresid
+  - pairwise.manova removed (dealt in a much powerful manner by the 'lsmeans' package)
+  - new function pairwise.perm.manova (pairwise comparisons using permutational MANOVAs)
+  - wald.ptheo.test accepts 2-column matrices as response
+  - new function adonis.II (wrapper to adonis of the 'vegan' package but for type II tests)
+  - new predict method for "coadisc" objects (Correspondence Discriminant Analysis performed with discrimin.coa from 'ade4')
+  - DA.valid and DA.confusion can now handle "coadisc" objects (Correspondence Discriminant Analysis performed with discrimin.coa from 'ade4')
+  - new arguments arrows in s.corcircle2
+  - new function scat.cr ("correlation" of variables to axes in MCA or mix analyses)
+  - MVA.synt extended to NSCA
+  - wilcox.signtest now computes the confidence interval of the Hodges-Lehmann estimator (and this estimator)
+  - new functions mood.medtest (Mood's median test) and pairwise.mood.medtest
+  - new function prop.multinom.test (pairwise comparisons of proportions based on multinomial log-linear models)
+  - wilcox.rating.signtest, wilcox.rating.test, kruskal.rating.test, friedman.rating.test, pairwise.wilcox.rating.test and wilcox.paired.rating.multcomp removed (these tests can be problematic with ratings, CLMs (package 'ordinal') are much better)
+  - new function back.lsmeans (back-transformation of LSMeans and SE interval)

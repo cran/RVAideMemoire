@@ -47,7 +47,7 @@ function (x,y,nrep=1000,conf.level=0.95) {
   test <- suppressWarnings(chisq.test(tab.cont))
   nval <- 0
   names(nval) <- "association"
-  result <- list(method="Cramer's association coefficient",statistic=test$statistic,parameter=test$parameter,
+  result <- list(method="Cram\u00E9r's association coefficient",statistic=test$statistic,parameter=test$parameter,
     p.value=test$p.value,data.name=data.name,estimate=v,conf.level=conf.level,rep=nrep,conf.int=cint,
     alternative="two.sided",null.value=nval)
   class(result) <- "htest"

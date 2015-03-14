@@ -4,7 +4,7 @@
 Least rectangles linear regression
 }
 \description{
-Fit a least rectangle linear regression, possibly for each level of a factor.
+Fits a least rectangle linear regression, possibly for each level of a factor.
 }
 \usage{
 least.rect(formula, data, conf.level = 0.95, theo = 1)

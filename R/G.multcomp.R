@@ -4,7 +4,11 @@ function (x,p.method="fdr") {
   fun.p <- function(i,j) {
     xi <- x[i]
     xj <- x[j]
-    G.test(c(xi,xj))$p.value
+    if (xi==0 & xj==0) {
+	NA
+    } else {
+	G.test(c(xi,xj))$p.value
+    }
   }
   tab.p <- pairwise.table(fun.p,as.character(x),p.adjust.method=p.method)
   call <- match.call()

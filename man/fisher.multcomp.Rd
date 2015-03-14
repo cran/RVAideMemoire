@@ -1,10 +1,10 @@
 \name{fisher.multcomp}
 \alias{fisher.multcomp}
 \title{
-Pairwise comparisons after a test for independence of 2 categorical variables
+Pairwise comparisons using Fisher's exact test
 }
 \description{
-Perform pairwise comparisons after a test for independence of 2 categorical variables, by using a Fisher's exact test on each possible 2x2 table.
+Performs pairwise comparisons after a comparison of proportions or after a test for independence of 2 categorical variables, by using a Fisher's exact test.
 }
 \usage{
 fisher.multcomp(tab.cont, p.method = "fdr")
@@ -17,6 +17,9 @@ contingency table.
 method for p-values correction. See help of \code{\link{p.adjust}}.
 }
 }
+\details{
+Since chi-squared and G tests are approximate tests, exact tests are preferable when the number of individuals is small (200 is a reasonable minimum).
+}
 \value{
   \item{method}{name of the test.}
   \item{data.name}{a character string giving the name(s) of the data.}
@@ -27,11 +30,18 @@ method for p-values correction. See help of \code{\link{p.adjust}}.
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link{chisq.test}}, \code{\link{fisher.test}}
+\code{\link{chisq.test}}, \code{\link{prop.test}}, \code{\link{fisher.test}}
 }
 \examples{
-tab.cont <- as.table(matrix(c(25,10,12,6,15,14,9,16,9),ncol=3,dimnames=list(c("fair",
+# 2-column contingency table: comparison of proportions
+tab.cont1 <- matrix(c(17,23,12,24,20,10),ncol=2,dimnames=list(c("Control",
+  "Treatment1","Treatment2"),c("Alive","Dead")),byrow=TRUE)
+fisher.test(tab.cont1)
+fisher.multcomp(tab.cont1)
+
+# 3-column contingency table: independence test
+tab.cont2 <- as.table(matrix(c(25,10,12,6,15,14,9,16,9),ncol=3,dimnames=list(c("fair",
   "dark","russet"),c("blue","brown","green"))))
-chisq.test(tab.cont)
-fisher.multcomp(tab.cont)
+fisher.test(tab.cont2)
+fisher.multcomp(tab.cont2)
 }

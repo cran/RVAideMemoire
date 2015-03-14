@@ -4,7 +4,7 @@
 Comparison of several Pearson's linear correlation coefficients
 }
 \description{
-Perform comparisons of several Pearson's linear correlation coefficients.
+Performs comparisons of several Pearson's linear correlation coefficients.
 If no difference, the function returns the common correlation coefficient, its confidence interval and test for its equality to a given value.
 If difference is significative, the functions performs pairwise comparisons between coefficients.
 }

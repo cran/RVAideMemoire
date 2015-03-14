@@ -1,10 +1,13 @@
-perm.var.test <-
-function(formula,data,ratio=1,alternative=c("two.sided","less","greater"),nperm=999) {
+perm.var.test <- function(x,...) {
+  UseMethod("perm.var.test")
+}
+
+perm.var.test.formula <- function(formula,data,alternative=c("two.sided","less","greater"),nperm=999,...) {
   if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
   m <- match.call()
   if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
   m[[1]] <- as.name("model.frame")
-  m$ratio <- m$alternative <- m$nperm <- NULL
+  m$alternative <- m$nperm <- NULL
   mf <- eval(m,parent.frame())
   dname <- paste(paste(names(mf)[1],paste(names(mf)[2:ncol(mf)],collapse=":"),sep=" by "),"\n",nperm," permutations",sep="")
   resp <- mf[,1]
@@ -37,4 +40,13 @@ function(formula,data,ratio=1,alternative=c("two.sided","less","greater"),nperm=
     p.value=pvalue,estimate=variance,null.value=ratio,alternative=alternative,data.name=dname)
   class(result) <- "htest"
   return(result)
+}
+
+perm.var.test.default <- function(x,y,...) {
+  if (!is.numeric(y)) {stop(paste(deparse(substitute(y)),"must be numeric"))}
+  response <- c(x,y)
+  fact <- factor(rep(LETTERS[1:2],c(length(x),length(y))))
+  test <- perm.var.test(response~fact,...)
+  test$data.name <- paste(deparse(substitute(x)),"and",deparse(substitute(y)))
+  return(test)
 }

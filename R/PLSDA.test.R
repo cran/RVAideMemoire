@@ -9,7 +9,7 @@ function(model,pred.method=c("mahalanobis.dist","centroids.dist","max.dist"),M=1
   if (!pred.method%in%c("max.dist","centroids.dist","mahalanobis.dist")) {stop("distance criterion not recognized")}
   if (M<=1) {stop("invalid number of folds (must be > 1)")}
   data.name <- paste(deparse(substitute(model)),"\nMethod: Mfold (",M," groups)\nDistance criterion: ",
-    ifelse(pred.method=="mahalanobis.dist","mahalanobis distance",ifelse(pred.method=="centroids.dist","centroids distance",
+    ifelse(pred.method=="mahalanobis.dist","Mahalanobis distance",ifelse(pred.method=="centroids.dist","centroids distance",
     "maximum distance")),"\nAxes: ",model$ncomp,"\n",nperm," permutations",sep="")
   X <- model$X
   Y <- character(nrow(X))
@@ -60,7 +60,7 @@ function(model,pred.method=c("mahalanobis.dist","centroids.dist","max.dist"),M=1
     setTxtProgressBar(pb,round(i*100/nperm,0))
   }
   cat("\n")
-  pval <- 1-length(which(pc.perm>=pc.ref))/(nperm+1)
+  pval <- 1-length(which((pc.perm+.Machine$double.eps/2) >= pc.ref))/(nperm+1)
   result <- list(method="Permutational test for the discriminant ability of the factor in PLS-DA",data.name=data.name,
     p.value=pval,alternative="greater",null.value=null.value,estimate=estimate,pred.method=pred.method,M=M,
     permutations=nperm)

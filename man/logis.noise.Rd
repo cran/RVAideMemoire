@@ -4,7 +4,7 @@
 Creating a nls model for logistic regression from fitted values of a glm model
 }
 \description{
-Add some noise to the fitted values of a \code{\link{glm}} model to create a \code{\link{nls}} model for logistic regression (creating a \code{\link{nls}} model from exact fitted values can not be done, see help of \code{\link{nls}}).
+Adds some noise to the fitted values of a \code{\link{glm}} model to create a \code{\link{nls}} model for logistic regression (creating a \code{\link{nls}} model from exact fitted values can not be done, see help of \code{\link{nls}}).
 }
 \usage{
 logis.noise(model, intensity = 25)

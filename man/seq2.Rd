@@ -4,7 +4,7 @@
 Sequence generation
 }
 \description{
-Generate a regular sequence from the minimum to the maximum of a vector.
+Generates a regular sequence from the minimum to the maximum of a vector.
 }
 \usage{
 seq2(x, int = 999)

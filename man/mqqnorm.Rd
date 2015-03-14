@@ -4,7 +4,7 @@
 Multivariate normality QQ-Plot
 }
 \description{
-Draw a QQ-plot to assess multivariate normality.
+Draws a QQ-plot to assess multivariate normality.
 }
 \usage{
 mqqnorm(x, main = "Multi-normal Q-Q Plot")

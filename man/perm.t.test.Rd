@@ -1,16 +1,32 @@
 \name{perm.t.test}
 \alias{perm.t.test}
+\alias{perm.t.test.default}
+\alias{perm.t.test.formula}
 \title{
 Permutational Student's t-test
 }
 \description{
-Perform a permutational Student's t-test.
+Performs a permutational Student's t-test.
 }
 \usage{
-perm.t.test(formula, data, alternative = c("two.sided", "less", "greater"),
-  paired = FALSE, nperm = 999)
+
+perm.t.test(x, ...)
+
+\method{perm.t.test}{default}(x, y, paired = FALSE, ...)
+
+\method{perm.t.test}{formula}(formula, data, alternative = c("two.sided", "less", "greater"),
+  paired = FALSE, nperm = 999, ...)
 }
 \arguments{
+  \item{x}{
+a numeric vector of data values.
+}
+  \item{y}{
+a numeric vector of data values.
+}
+  \item{paired}{
+a logical indicating whether you want a paired t-test.
+}
   \item{formula}{
 a formula of the form \code{a ~ b} where \code{a} gives the data values and \code{b} a factor with 2 levels giving the corresponding groups.
 }
@@ -20,15 +36,15 @@ an optional data frame containing the variables in the formula \code{formula}. B
   \item{alternative}{
 a character string specifying the alternative hypothesis, must be one of \code{"two.sided"} (default), \code{"greater"} or \code{"less"}.
 }
-\item{paired}{
-a logical indicating whether you want a paired t-test.
-}
   \item{nperm}{
 number of permutations.
 }
+  \item{\dots}{
+further arguments to be passed to or from other methods.
+}
 }
 \details{
-The function deals with the limitted floating point precision, which can bias calculation of p-values based on discrete test statistic distribution.
+The function deals with the limitted floating point precision, which can bias calculation of p-values based on a discrete test statistic distribution.
 }
 \value{
   \item{statistic}{test statistics of the parametric test.}

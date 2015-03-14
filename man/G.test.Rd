@@ -4,7 +4,7 @@
 G-test
 }
 \description{
-Perfom a G-test on a contingency table or a vector of counts.
+Perfoms a G-test on a contingency table or a vector of counts.
 }
 \usage{
 G.test(x, p = rep(1/length(x), length(x)))
@@ -30,12 +30,16 @@ The function works as \code{\link{chisq.test}} :
 
 - if \code{x} is a vector and theoretical proportions are given, equality of counts to theoretical counts (given by theoretical proportions) is tested
 
-- if \code{x} is a matrix, equality of proportion of successes between populations is tested.
+- if \code{x} is a matrix with two coloums, equality of proportion of successes between populations is tested.
+
+- if \code{x} is a matrix with more than two coloums, independence of rows and columns is tested.
+
+Since a G-test is an approximate test, an exact test is preferable when the number of individuals is small (200 is a reasonable minimum). See \code{\link[RVAideMemoire]{multinomial.test}} in that case with a vector, \code{\link{fisher.test}} with a matrix.
 }
 \value{
   \item{method}{name of the test.}
   \item{statistic}{test statistics.}
-  \item{parameter}{test degrees of freedom}
+  \item{parameter}{test degrees of freedom.}
   \item{p.value}{p-value.}
   \item{data.name}{a character string giving the name(s) of the data.}
   \item{observed}{the observed counts.}
@@ -45,9 +49,9 @@ The function works as \code{\link{chisq.test}} :
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link{chisq.test}}, \code{\link{G.multcomp}}, \code{\link{G.theo.multcomp}}, \code{\link{pairwise.G.test}}
+\code{\link{chisq.test}}, \code{\link[RVAideMemoire]{multinomial.test}}, \code{\link{fisher.test}} \code{\link{G.multcomp}}, \code{\link{G.theo.multcomp}}, \code{\link{pairwise.G.test}}
 }
 \examples{
-counts <- c(5,15,23,8,14)
+counts <- c(49,30,63,59)
 G.test(counts)
 }

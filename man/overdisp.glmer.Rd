@@ -4,7 +4,7 @@
 Estimation of overdispersion with \code{\link[lme4]{glmer}} models
 }
 \description{
-Estimate residual deviance and residual degrees of freedom to check for overdispersion with \code{\link[lme4]{glmer}} models. This function is directly comming from \code{http://glmm.wikidot.com/faq}.
+Estimates residual deviance and residual degrees of freedom to check for overdispersion with \code{\link[lme4]{glmer}} models. This function is directly comming from \code{http://glmm.wikidot.com/faq}.
 }
 \usage{
 overdisp.glmer(model)

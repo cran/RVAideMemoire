@@ -4,7 +4,7 @@
 Confidence interval of a Spearman's rank correlation coefficient
 }
 \description{
-Compute the confidence interval of a Spearman's rank correlation coefficient by bootstraping.
+Computes the confidence interval of a Spearman's rank correlation coefficient by bootstraping.
 }
 \usage{
 spearman.ci(var1, var2, nrep = 1000, conf.level = 0.95)
@@ -20,7 +20,7 @@ nuermic verctor (second variable).
 number of replicates for bootstraping.
 }
   \item{conf.level}{
-confidence level.
+confidence level of the interval.
 }
 }
 \value{

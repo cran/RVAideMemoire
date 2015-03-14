@@ -4,7 +4,7 @@
 Cochran's Q test
 }
 \description{
-Perform the Cochran's Q test for unreplicated randomized block design experiments with a binary response variable and paired data. If the p-value of the test is significant, the function performs pairwise comparisons by using the Wilcoxon sign test.
+Performs the Cochran's Q test for unreplicated randomized block design experiments with a binary response variable and paired data. If the p-value of the test is significant, the function performs pairwise comparisons by using the Wilcoxon sign test.
 }
 \usage{
 cochran.qtest(formula, data, alpha = 0.05, p.method = "fdr")
@@ -22,6 +22,9 @@ significance level to compute pairwise comparisons.
   \item{p.method}{
 method for p-values correction. See help of \code{\link{p.adjust}}.
 }
+}
+\details{
+If the response is a 0/1 variable, the probability of the '1' group is tested. In any other cases, the response is transformed into a factor and the probability of the second level is tested.
 }
 \value{
   \item{method.test}{a character string giving the name of the global test computed.}

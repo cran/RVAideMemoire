@@ -1,32 +1,58 @@
 \name{wilcox.signtest}
 \alias{wilcox.signtest}
+\alias{wilcox.signtest.default}
+\alias{wilcox.signtest.formula}
 \title{
 Wilcoxon sign test
 }
 \description{
-Perform a Wilcoxon sign test to compare medians of two small paired samples or one median to a given value.
+Performs a Wilcoxon sign test to compare medians of two paired samples or one median to a given value.
 }
 \usage{
-wilcox.signtest(x, data, mu = 0)
+
+wilcox.signtest(x, ...)
+
+\method{wilcox.signtest}{default}(x, y = NULL, mu = 0, conf.level = 0.95, ...)
+
+\method{wilcox.signtest}{formula}(formula, data, subset, ...)
 }
 \arguments{
   \item{x}{
-either a formula of the form \code{a ~ b} where \code{a} gives the data values and \code{b} a factor with 2 levels giving the corresponding groups (comparison of two medians); or a numeric vector (comparison of one median to a given value).
+a numeric vector of data values.
 }
-  \item{data}{
-an optional data frame containing the variables in the formula \code{x} (if \code{x} is a formula). By default the variables are taken from \code{environment(x)}. Not used if \code{x} is a numeric vector.
+  \item{y}{
+an optional numeric vector of data values (for paired two-sample test).
 }
   \item{mu}{
-theoretical median.
+theoretical median (one-sample test) or theoretical median of \code{x-y} differences.
 }
+  \item{conf.level}{
+confidence level of the interval.
+}
+  \item{formula}{
+a formula of the form \code{a ~ b}, where \code{a} and \code{b} give the data values and corresponding groups.
+}
+  \item{data}{
+an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
+}
+  \item{subset}{
+an optional vector specifying a subset of observations to be used.
+}
+  \item{...}{
+further arguments to be passed to or from other methods.
+}
+}
+\details{
+If zeroes (i.e. null differences with \code{mu}) are present, the median of the data different from \code{mu} is tested in the one-sample situation; the median of the \code{x-y} differences different from \code{mu} in the two-sample situation.
 }
 \value{
-  \item{method}{a character string indicating what type of test was performed.}
+  \item{method}{a character string indicating the name of the test.}
   \item{data.name}{a character string giving the name(s) of the data.}
   \item{null.value}{the specified hypothesized value of the median or median difference depending on the test performed.}
-  \item{p.value}{p-value of the test.}
-  \item{estimate}{the estimated median or difference in medians depending on the test performed.}
+  \item{p.value}{the p-value of the test.}
   \item{alternative}{a character string giving the alternative hypothesis, always \code{"two.sided"}}
+  \item{estimate}{the estimated median or median of \code{x-y} differences, depending on the test performed.}
+  \item{conf.int}{a confidence interval for the median tested.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

@@ -4,14 +4,14 @@
 Wald test for comparison of a proportion to a theoretical value
 }
 \description{
-Perform a Wald test for comparison of a proportion to a theoretical value.
+Performs a Wald test for comparison of a proportion to a theoretical value.
 }
 \usage{
 wald.ptheo.test(y, blocks = NULL, p = 0.5)
 }
 \arguments{
   \item{y}{
-binary response. \code{y} can be a numeric vector or a factor, with only two possible values (except NA).
+either a binary response (numeric vector or factor, with only two possible values except NA) or a two-column matrix with the columns giving the numbers of successes (left) and failures (right).
 }
   \item{blocks}{
 optional blocking (random) factor.
@@ -23,7 +23,11 @@ hypothesized probability of success.
 \details{
 The function builds a logistic (mixed) regression and applies a Wald test to compare the estimated value of the intercept to its theoretical value under H0.
 
-If no blocking factor is present, the exact binomial test performed by \code{\link{binom.test}} must be preferred since it is an exact test, whereas the Wald test is an approximate test.
+If the response is a 0/1 vector, the probability of the '1' group is tested. With other vectors, the response is transformed into a factor and the probability of the second level is tested.
+
+If the response is a two-column matrix, the probability of the left column is tested.
+
+If the reponse is a vector and no blocking factor is present, the exact binomial test performed by \code{\link{binom.test}} should be preferred since it is an exact test, whereas the Wald test is an approximate test.
 }
 \value{
   \item{method}{name of the test.}

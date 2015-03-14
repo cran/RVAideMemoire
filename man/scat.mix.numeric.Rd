@@ -4,7 +4,7 @@
 Representation of numeric variables in Hill and Smith mix analysis
 }
 \description{
-Represent numeric variables of a Hill and Smith mix analysis as in PCA. The function is based on \code{\link[ade4]{s.corcircle}}.
+Represents numeric variables of a Hill and Smith mix analysis as in PCA. The function is based on \code{\link[ade4]{s.corcircle}}.
 }
 \usage{
 scat.mix.numeric(obj.dudi, xax = 1, yax = 2, ...)
@@ -34,6 +34,7 @@ Stéphane Champely
 }
 \examples{
 require(ade4)
+
 # Fictive dataset
 age <- sample(15:60,50,replace=TRUE)
 sex <- sample(c("M","F"),50,replace=TRUE)
@@ -43,6 +44,7 @@ eyes <- sample(c("Blue","Green","Brown"),50,replace=TRUE)
 weight <- sample(50:85,50,replace=TRUE)
 hand <- sample(c("Left.handed","Right.handed"),50,replace=TRUE)
 tab <- data.frame(age,sex,size,weight,hand,eyes,hair)
+
 amix <- dudi.hillsmith(tab,scannf=FALSE,nf=2)
 scat.mix.numeric(amix)
 }

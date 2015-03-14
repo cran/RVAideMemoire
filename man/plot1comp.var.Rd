@@ -4,7 +4,7 @@
 Plot of correlation between predictor variables and a single component
 }
 \description{
-Represent correlations between predictor variables and a single axis (usually a factorial component).
+Represents correlations between predictor variables and a single axis (usually a factorial component).
 }
 \usage{
 plot1comp.var(dfxy, axis = 1, cex = 1)

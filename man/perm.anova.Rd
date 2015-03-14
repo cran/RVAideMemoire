@@ -4,7 +4,7 @@
 Permutational Analysis of Variance
 }
 \description{
-Perform a permutational analysis of variance for 1 to 3 factors. For 2 and 3 factors, experiment design must be balanced. For 2 factors, the factors can be crossed with or without interaction, or nested. The second factor can be a blocking (random) factor. For 3 factors, design is restricted to 2 fixed factors crossed (with or without interaction) inside blocks (third factor).
+Performs a permutational analysis of variance for 1 to 3 factors. For 2 and 3 factors, experiment design must be balanced. For 2 factors, the factors can be crossed with or without interaction, or nested. The second factor can be a blocking (random) factor. For 3 factors, design is restricted to 2 fixed factors crossed (with or without interaction) inside blocks (third factor).
 }
 \usage{
 perm.anova(formula, nest.f2 = c("fixed", "random"), data, nperm = 999)
@@ -40,7 +40,7 @@ For 3 factors, the formula can only be:
 
 \code{response ~ factor1 * factor2 | factor3}. The 2 factors are here fixed and crossed inside each level of the third, blocking (random), factor.
 
-The function deals with the limitted floating point precision, which can bias calculation of p-values based on discrete test statistic distribution.
+The function deals with the limitted floating point precision, which can bias calculation of p-values based on a discrete test statistic distribution.
 }
 \value{
   a data frame of class \code{"anova"}.

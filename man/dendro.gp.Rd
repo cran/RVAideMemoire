@@ -4,7 +4,7 @@
 Dendrogram and number of groups to be chosen
 }
 \description{
-Draw a dendrogram and an additional bar plot helping to choose the number of groups to be retained (based on the dendrogram).
+Draws a dendrogram and an additional bar plot helping to choose the number of groups to be retained (based on the dendrogram).
 }
 \usage{
 dendro.gp(dend)
