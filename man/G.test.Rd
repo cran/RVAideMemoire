@@ -32,7 +32,7 @@ The function works as \code{\link{chisq.test}} :
 
 - if \code{x} is a matrix with two coloums, equality of proportion of successes between populations is tested.
 
-- if \code{x} is a matrix with more than two coloums, independence of rows and columns is tested.
+- if \code{x} is a matrix with more than two columns, independence of rows and columns is tested.
 
 Since a G-test is an approximate test, an exact test is preferable when the number of individuals is small (200 is a reasonable minimum). See \code{\link[RVAideMemoire]{multinomial.test}} in that case with a vector, \code{\link{fisher.test}} with a matrix.
 }

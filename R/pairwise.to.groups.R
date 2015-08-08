@@ -1,3 +1,5 @@
+# multcompView : multcompLetters
+
 pairwise.to.groups <-
 function(pairwise.test,component="p.value",alpha=0.05) {
   mat <- pairwise.test[[component]]

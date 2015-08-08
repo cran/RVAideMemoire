@@ -1,3 +1,5 @@
+# mixOmics : vip
+
 PLSDA.VIP <- function(model,graph=FALSE) {
   if (packageVersion("mixOmics")<"5.0.2") {
     stop(paste("you must update 'mixOmics' to version >= 5.0.2 (actual: ",

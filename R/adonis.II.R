@@ -1,3 +1,5 @@
+# vegan : adonis
+
 adonis.II <- function(formula,data=NULL,...) {
   f <- formula
   left <- formula[[2]]

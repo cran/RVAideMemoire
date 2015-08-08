@@ -1,5 +1,5 @@
 back.lsmeans <- function(lsm,transform=c("log","logit","sqrt","inverse"),base=exp(1),
-  add=0) {
+  add=0,ord=FALSE,decreasing=TRUE) {
   transform <- match.arg(transform)
   if ("list" %in% class(summary(lsm))) {
     lsm <- summary(lsm)$lsmeans
@@ -14,7 +14,7 @@ back.lsmeans <- function(lsm,transform=c("log","logit","sqrt","inverse"),base=ex
   }
   moy <- lsm$lsmean
   es <- lsm$SE
-  res <- data.frame(a=f,SE.inf=moy-es,Moy=moy,SE.sup=moy+es)
+  res <- data.frame(a=f,SE.inf=moy-es,Mean=moy,SE.sup=moy+es)
   colnames(res)[1] <- paste(colnames(lsm[1:(col-1)]),collapse=":")
   res[,-1] <- if (transform=="log") {
     base^res[,-1]-1
@@ -33,5 +33,6 @@ back.lsmeans <- function(lsm,transform=c("log","logit","sqrt","inverse"),base=ex
     res$SE.inf <- SE2
     res$SE.sup <- SE1
   }
+  if (ord) {res <- res[order(res$Mean,decreasing=decreasing),]}
   return(res)
 }

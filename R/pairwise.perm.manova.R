@@ -12,7 +12,6 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
     }
     multcomp <- pairwise.table(fun.p,levels(fact),p.adjust.method=p.method)
     method <- "permutational MANOVAs on a distance matrix"
-
   } else {
     if (nrow(resp)!=length(fact)) {
 	stop(paste("'",deparse(substitute(resp)),"' and '",deparse(substitute(fact)),

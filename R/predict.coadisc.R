@@ -1,3 +1,5 @@
+# ade4 : as.dudi, dist.quant
+
 predict.coadisc <-
 function(object,newdata,dim=object$nf,method=c("mahalanobis", "euclidian"),...) {
   if (dim>object$nf) {stop("'dim' > number of dimensions in CDA")}

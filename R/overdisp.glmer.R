@@ -1,3 +1,5 @@
+# lme4 : fixef, VarCorr
+
 overdisp.glmer <- function(model) {
   ## From http://glmm.wikidot.com/faq
   ## number of variance parameters in 

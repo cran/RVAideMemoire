@@ -1,3 +1,5 @@
+# nnet : multinom
+
 prop.multinom.test <- function(x,p.method="fdr") {
   dname <- deparse(substitute(x))
   if (is.data.frame(x)) {x <- as.matrix(x)}

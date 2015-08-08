@@ -17,10 +17,10 @@ function(x,y,alternative=c("two.sided","less","greater"),nperm=999) {
   cat("\n")
   pvalue <- NULL
   if (alternative=="two.sided") {
-    pvalue <- length(which((abs(t.perm)+.Machine$double.eps/2) >= abs(t.ref)))/(nperm+1)
+    pvalue <- 2*min(length(which((t.perm-.Machine$double.eps/2) <= t.ref))/(nperm+1),length(which((t.perm+.Machine$double.eps/2) >= t.ref))/(nperm+1))
   }
   if (alternative=="less") {
-    pvalue <- length(which(t.perm <= (t.ref+.Machine$double.eps/2)))/(nperm+1)
+    pvalue <- length(which((t.perm-.Machine$double.eps/2) <= t.ref))/(nperm+1)
     }
   if (alternative=="greater") {
     pvalue <- length(which((t.perm+.Machine$double.eps/2) >= t.ref))/(nperm+1)

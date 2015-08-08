@@ -1,44 +1,51 @@
 # Importés directement dans le code des fonctions (évite de charger tous
 # les packages au chargement de RVAideMemoire) :
-#   - ade4 : add.scatter.eig, as.dudi, discrimin.coa, dist.quant, inertia.dudi, S.label, s.class, scatterutil.sub
+#   - ade4 : as.dudi, dist.quant
 #   - boot : boot
 #   - cramer : cramer.test
 #   - lme4 : fixef, getME, glmer, isLMM, VarCorr
-#   - MASS : lda
-#   - mixOmics : perf, plsda, vip
+#   - MASS : lda, qda
+#   - mixOmics : vip
 #   - multcompView : multcompLetters
 #   - nnet : multinom
+#   - pls : cppls, plsr
 #   - pspearman : pspearman
 #   - statmod : qresiduals
 #   - vegan : adonis
 
 importFrom(ade4,randtest)
 importFrom(car,Anova,qqPlot)
-importFrom(stats,median,model.matrix)
+importFrom(graphics,abline,arrows,axis,barplot,box,hist,dotchart,legend,lines,mosaicplot,mtext,panel.smooth,par,
+  plot,points,polygon,rect,rug,segments,strheight,strwidth,symbols,text,title)
+importFrom(grDevices,chull,col2rgb,n2mfrow,palette,rgb)
+importFrom(stats,aggregate,anova,as.dist,as.formula,bartlett.test,binom.test,chisq.test,complete.cases,cor,cor.test,
+  cov,delete.response,density,dist,dmultinom,family,fisher.test,fitted,formula,glm,lm,lm.influence,logLik,mahalanobis,
+  median,model.frame,model.matrix,model.response,na.omit,p.adjust,pairwise.prop.test,pairwise.table,pbeta,pbinom,
+  pchisq,pnorm,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,rect.hclust,relevel,resid,residuals,rnorm,rstudent,
+  runif,sd,setNames,shapiro.test,t.test,terms,update,update.formula,var,var.test,wilcox.test)
+importFrom(utils,combn,packageVersion,setTxtProgressBar,txtProgressBar)
 
-export(adonis.II,
+export(
+  byf.normhist,cor.sparse,DA.confusion,DA.valid,DA.var,fc.multcomp,friedman.rating.test,kruskal.rating.test,
+    pairwise.wilcox.rating.test,plot1comp.ind,plot1comp.var,PLSDA.ncomp,PLSDA.test,s.corcircle2,scat.mix.categorical,
+    scat.mix.numeric,scatter.coa2,wilcox.rating.signtest,wilcox.rating.test,
+  adonis.II,
   Anova.clm,Anova.clmm,
   back.lsmeans,
   bootstrap,
-  byf.hist,byf.mqqnorm,byf.mshapiro,byf.normhist,byf.qqnorm,byf.shapiro,
+  byf.hist,byf.mqqnorm,byf.mshapiro,byf.qqnorm,byf.shapiro,
   chisq.bintest,chisq.bin.exp,chisq.exp,chisq.multcomp,chisq.theo.bintest,chisq.theo.multcomp,
   cochran.qtest,
   cor.2comp,cor.conf,cor.multcomp,
-  cor.sparse,
   cox.resid,
   cramer.test,
   cv,
   CvM.test,
-  DA.confusion,DA.valid,DA.var,
   dendro.gp,
-  fc.multcomp,
   fisher.bintest,fisher.multcomp,
   fp.test,
-  friedman.rating.test,
   G.bintest,G.multcomp,G.test,G.theo.multcomp,
   ind.contrib,
-  kruskal.rating.test,
-  LDA.format,
   least.rect,
   logis.fit,logis.noise,
   mod,
@@ -46,33 +53,33 @@ export(adonis.II,
   mqqnorm,
   mshapiro.test,
   multinomial.multcomp,multinomial.test,multinomial.theo.multcomp,
+  MVA.anova,
+  MVA.cmv,MVA.cv,MVA.test,
+  MVA.plot,MVA.scoreplot,MVA.loadplot,MVA.corplot,MVA.biplot,MVA.pairplot,MVA.trajplot,
   MVA.synt,
   overdisp.glmer,
-  pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.perm.t.test,pairwise.wilcox.rating.test,
+  pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.perm.t.test,
   pairwise.to.groups,
   pcor, pcor.test,
   perm.anova,perm.bartlett.test,perm.cor.test,perm.t.test,perm.var.test,
-  plot1comp.ind,plot1comp.var,
   plotresid,
   plotsurvivors,
-  PLSDA.ncomp,PLSDA.test,PLSDA.VIP,
+  PLSDA.VIP,
   prop.bin.multcomp,prop.multcomp,
-  prop.multinom.test,
+  prop.multinom,prop.multinom.test,
   rating.lsmeans,rating.prob,
   reg.ci,
-  scat.cr,scat.mix.categorical,scat.mix.numeric,
-  scatter.coa2,
-  s.corcircle2,
+  scat.cr,
   se,
   seq2,
   spearman.ci,
+  splitf,
   user.cont,
   wald.ptheo.test,
   wilcox.paired.multcomp,
   wilcox.paired.rating.multcomp,
-  wilcox.rating.test,
-  wilcox.rating.signtest,
-  wilcox.signtest)
+  wilcox.signtest,
+  wmean)
 
 S3method(fp.test,default)
 S3method(fp.test,formula)
@@ -85,12 +92,15 @@ S3method(perm.var.test,default)
 S3method(perm.var.test,formula)
 S3method(predict,coadisc)
 S3method(predict,least.rect)
+S3method(predict,MVA.cv)
+S3method(predict,MVA.cmv)
 S3method(print,byf.test)
 S3method(print,chisq.exp)
-S3method(print,DA.confusion)
-S3method(print,DA.valid)
 S3method(print,least.rect)
+S3method(print,MVA.cmv)
+S3method(print,MVA.cv)
 S3method(print,MVA.synt)
+S3method(print,MVA.test.mult)
 S3method(print,PLSDA.VIP)
 S3method(print,RV.multcomp)
 S3method(print,RVtest)

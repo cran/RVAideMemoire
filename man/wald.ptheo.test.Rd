@@ -21,7 +21,7 @@ hypothesized probability of success.
 }
 }
 \details{
-The function builds a logistic (mixed) regression and applies a Wald test to compare the estimated value of the intercept to its theoretical value under H0.
+The function builds a logistic (mixed) regression and applies a Wald test to compare the estimated value of the intercept to its theoretical value under H0. Eventual overdispersion is taken into account, by using a quasi-binomial law in case of no blocks or by introducing an individual-level random factor if blocks are present.
 
 If the response is a 0/1 vector, the probability of the '1' group is tested. With other vectors, the response is transformed into a factor and the probability of the second level is tested.
 
@@ -37,6 +37,7 @@ If the reponse is a vector and no blocking factor is present, the exact binomial
   \item{estimate}{the estimated proportion (calculated without taking into account the blocking factor, if present).}
   \item{alternative}{a character string describing the alternative hypothesis, always \code{"two.sided"}.}
   \item{null.value}{the value of the proportion under the null hypothesis.}
+  \item{parameter}{the degrees of freedom for the t-statistic, only whith overdispersion and no blocks.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

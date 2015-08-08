@@ -8,7 +8,7 @@ Back-transforms LSMeans (produced by \code{\link[lsmeans]{lsmeans}}) when the mo
 }
 \usage{
 back.lsmeans(lsm, transform = c("log", "logit", "sqrt", "inverse"), base = exp(1),
-  add=0)
+  add = 0, ord = FALSE, decreasing = TRUE)
 }
 \arguments{
   \item{lsm}{
@@ -21,7 +21,13 @@ transformation applied to the response variable before building the model on whi
 the base with respect to which the logarithm transformation was computed (if \code{transform="log"}). Defaults to \emph{e}=\code{exp(1)}.
 }
   \item{add}{
-value added to \emph{x} before computing the transformation, if needed (\emph{e.g.} \code{1} if the initial transformation was \emph{log(x+1)}).
+value to be added to \emph{x} before computing the transformation, if needed (\emph{e.g.} \code{1} if the initial transformation was \emph{log(x+1)}).
+}
+  \item{ord}{
+logical indicating if back-transformed LSMeans should be ordered.
+}
+  \item{decreasing}{
+logical indicating in which order back-transformed LSMeans should be ordered, if \code{order=TRUE}.
 }
 }
 \author{

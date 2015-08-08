@@ -4,30 +4,51 @@
 Synthesis quality of multivariate analyses
 }
 \description{
-Gives a simple estimator of the quality of the (descriptive) synthesis performed by a wide range of multivariate analyses. See 'Details' for a list of analyses covered. 
+Gives a simple estimator of the quality of the (descriptive) synthesis performed by a wide range of multivariate analyses.
 }
 \usage{
-MVA.synt(x)
+MVA.synt(x, rows = 5)
 }
 \arguments{
   \item{x}{
-an object of class \code{"dudi.pca"}, \code{"prcomp"}, \code{"princomp"}, \code{"spca"}, \code{"pcoa"}, \code{"dudi.pco"}, \code{"pco"}, \code{"nmds"}, \code{"monoMDS"}, \code{"metaMDS"}, \code{"dudi.coa"}, \code{"dudi.nsc"}, \code{dudi.acm}, \code{dudi.mix}, \code{dudi.hillsmith}, \code{"lda"}, \code{"discrimin"} or \code{"plsda"} (see 'Details').
+  a multivariate analysis (see Details).
+}
+  \item{rows}{
+  maximum number of axes to print in the output.
 }
 }
 \details{
-Total variance explained by axes is given for PCA (performed using \code{\link[ade4]{dudi.pca}}, \code{\link{prcomp}} or \code{\link{princomp}}), sPCA (performed using \code{\link[mixOmics]{spca}}), PCoA (performed using \code{\link[ape]{pcoa}}, \code{\link[ade4]{dudi.pco}} or \code{\link[labdsv]{pco}}), COA (performed using \code{\link[ade4]{dudi.coa}}), NSCA (performed using \code{\link[ade4]{dudi.nsc}}), MCA (performed using \code{\link[ade4]{dudi.acm}}) and mix analysis (performed using \code{\link[ade4]{dudi.mix}} or \code{\link[ade4]{dudi.hillsmith}}).
+Many multivariate analyses are supported, from various packages. The list will progressively get longer (and additional criteria will be given).
 
-Intergroup variance explained by axes is given for LDA (performed using \code{\link[MASS]{lda}} or \code{\link[ade4]{discrimin}}), PLS-DA (performed using \code{\link[mixOmics]{plsda}}) and CDA (performed using \code{\link[ade4]{discrimin.coa}}).
+- PCA: \code{\link{prcomp}}, \code{\link{princomp}}, \code{\link[ade4]{dudi.pca}}, \code{\link[vegan]{rda}}, \code{\link[mixOmics]{pca}}, \code{\link[labdsv]{pca}}: \% of total variance explained by each axis.
 
-Global stress is given for NMDS (performed using \code{\link[labdsv]{nmds}}, \code{\link[vegan]{monoMDS}} or \code{\link[vegan]{metaMDS}}). In all cases, stress is between 0 and 1.
+- sPCA: \code{\link[mixOmics]{spca}}: \% of total variance explained by each axis.
 
-Note to users of \code{\link{cmdscale}}: result of the wrapper \code{\link[labdsv]{pco}} is covered by \code{MVA.synt}.
+- IPCA: \code{\link[mixOmics]{ipca}}: kurtosis of each axis.
 
-Note to users of \code{\link[MASS]{isoMDS}}: result of the wrapper \code{\link[labdsv]{nmds}} is covered by \code{MVA.synt}.
+- sIPCA: \code{\link[mixOmics]{sipca}}: kurtosis of each axis.
+
+- PCoA: \code{\link{cmdscale}} (with \code{eig=TRUE}), \code{\link[ade4]{dudi.pco}}, \code{\link[vegan]{wcmdscale}} (with \code{eig=TRUE}), \code{\link[vegan]{capscale}}, \code{\link[labdsv]{pco}}, \code{\link[ape]{pcoa}}: \% of total variance explained by each axis.
+
+- nMDS: \code{\link[vegan]{monoMDS}}, \code{\link[vegan]{metaMDS}}, \code{\link[labdsv]{nmds}}, \code{\link[MASS]{isoMDS}}: stress.
+
+- LDA: \code{\link[MASS]{lda}}, \code{\link[ade4]{discrimin}}: \% of intergroup variance explained by each axis.
+
+- PLS-DA (PLS2 on a dummy-coded factor): \code{\link[mixOmics]{plsda}}: \% of intergroup variance explained by each axis.
+
+- CPPLS: \code{\link[pls]{mvr}}: \% of X and Y variances explained by each axis.
+
+- PLSR: \code{\link[pls]{mvr}}, \code{\link[plsRglm]{plsR}}: \% of X and Y variances explained by each axis (only Y for the moment with \code{\link[plsRglm]{plsR}}).
+
+- PCR: \code{\link[pls]{mvr}}: \% of X and Y variances explained by each axis.
+
+- CDA: \code{\link[ade4]{discrimin}}, \code{\link[ade4]{discrimin.coa}}: \% of intergroup variance explained by each axis.
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
 }
-\seealso{
-\code{\link[ade4]{dudi.pca}}, \code{\link{prcomp}}, \code{\link{princomp}}, \code{\link[mixOmics]{spca}}, \code{\link[ape]{pcoa}}, \code{\link[ade4]{dudi.pco}}, \code{\link[labdsv]{pco}}, \code{\link[ade4]{dudi.coa}}, \code{\link[ade4]{dudi.nsc}}, \code{\link[ade4]{dudi.acm}}, \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{dudi.hillsmith}}, \code{\link[MASS]{lda}}, \code{\link[ade4]{discrimin}}, \code{\link[mixOmics]{plsda}}, \code{\link[ade4]{discrimin.coa}}, \code{\link[labdsv]{nmds}}, \code{\link[vegan]{monoMDS}}, \code{\link[vegan]{metaMDS}}
+\examples{
+data(iris)
+PCA <- prcomp(iris[,1:4])
+MVA.synt(PCA,"scores")
 }

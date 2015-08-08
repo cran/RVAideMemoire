@@ -1,3 +1,5 @@
+# boot : boot
+
 bootstrap <-
 function(x,fun,nrep=1000,conf.level=0.95,...){
   simul <- boot::boot(x,fun,R=nrep,...)

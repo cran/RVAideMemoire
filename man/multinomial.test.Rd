@@ -28,7 +28,7 @@ Since chi-squared and G tests are approximate tests, exact tests are preferable 
 
 Be aware that the calculation time increases with the number of individuals (i.e. the sum of \code{x}) and the number of groups (i.e. the length of \code{x}).
 
-An exact multinomial test with two groups is strictly the same than an exact binomial test.
+An exact multinomial test with two groups is strictly the same as an exact binomial test.
 }
 \value{
   \item{method}{name of the test.}

@@ -1,3 +1,6 @@
+# lme4 : getME, isLMM
+# statmod : qresiduals
+
 plotresid <-
 function (model,shapiro=FALSE) {
   if ("mer" %in% class(model)) {

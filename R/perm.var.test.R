@@ -28,10 +28,10 @@ perm.var.test.formula <- function(formula,data,alternative=c("two.sided","less",
   cat("\n")
   pvalue <- NULL
   if (alternative=="two.sided") {
-    pvalue <- min(length(which(F.perm <= (F.ref+.Machine$double.eps/2))),length(which(F.perm >= F.ref)))*2/(nperm+1)
+    pvalue <- 2*min(length(which((F.perm-.Machine$double.eps/2) <= (F.ref)))/(nperm+1),length(which((F.perm+.Machine$double.eps/2) >= F.ref))/(nperm+1))
   }
   if (alternative=="less") {
-    pvalue <- length(which(F.perm <= (F.ref+.Machine$double.eps/2)))/(nperm+1)
+    pvalue <- length(which((F.perm-.Machine$double.eps/2) <= (F.ref)))/(nperm+1)
     }
   if (alternative=="greater") {
     pvalue <- length(which((F.perm+.Machine$double.eps/2) >= F.ref))/(nperm+1)

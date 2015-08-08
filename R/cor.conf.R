@@ -12,7 +12,7 @@ function(var1,var2,theo) {
   zeta <- 0.5*log((1+theo)/(1-theo))
   u.obs <- abs(z-zeta)*sqrt(length(var1.2)-3)
   names(u.obs) <- "U"
-  p <- min(pnorm(u.obs,0,1),pnorm(u.obs,0,1,lower.tail=FALSE))*2
+  p <- 2*min(pnorm(u.obs,0,1),pnorm(u.obs,0,1,lower.tail=FALSE))
   met <- "Equality of a Pearson's linear correlation coefficient to a given value"
   alternative <- "two.sided"
   nval <- theo

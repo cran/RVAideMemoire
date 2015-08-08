@@ -1,3 +1,5 @@
+# cramer : cramer.test
+
 CvM.test <- function(x,y,...) {
   dname <- paste(deparse(substitute(x)),"and",deparse(substitute(y)))
   test <- cramer::cramer.test(x,y,...)

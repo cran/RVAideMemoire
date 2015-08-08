@@ -4,7 +4,7 @@
 Tests for (semi-)partial association/correlation between paired samples
 }
 \description{
-Test for (semi-)partial association between paired samples while controlling for other variables, using one of Pearson's product moment correlation coefficient or Spearman's \emph{rho}.
+Tests for (semi-)partial association between paired samples while controlling for other variables, using one of Pearson's product moment correlation coefficient or Spearman's \emph{rho}.
 }
 \usage{
 pcor.test(x, y, z, semi = FALSE, conf.level = 0.95, nrep = 1000,

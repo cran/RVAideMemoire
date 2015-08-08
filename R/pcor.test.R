@@ -1,3 +1,6 @@
+# boot : boot
+# pspearman : pspearman
+
 pcor.test <-
 function(x,y,z,semi=FALSE,conf.level=0.95,nrep=1000,method=c("pearson","spearman")) {
   method <- match.arg(method)
@@ -5,7 +8,7 @@ function(x,y,z,semi=FALSE,conf.level=0.95,nrep=1000,method=c("pearson","spearman
     if (is.null(names(z))) {
 	call.z <-match.call()$z
 	if (length(call.z)==(length(z)+1)) {
-	  names(z) <- unlist(lapply(call.z,as.character))[-1]
+	  names(z) <- unlist(lapply(call.z,function(a) as.character(a)[length(as.character(a))]))[-1]
 	} else {
 	  names(z) <- paste0("V",1:length(z))
 	}
@@ -14,7 +17,7 @@ function(x,y,z,semi=FALSE,conf.level=0.95,nrep=1000,method=c("pearson","spearman
   }
   if (is.vector(z)) {
     z <- as.data.frame(z)
-    colnames(z) <- as.character(match.call()$z)
+    colnames(z) <- as.character(match.call()$z)[length(as.character(match.call()$z))]
   }
   tab <- data.frame(x,y,z)
   tab <- tab[complete.cases(tab),]

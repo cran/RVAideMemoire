@@ -14,7 +14,7 @@ PLSDA.VIP(model, graph = FALSE)
 object of class \code{"plsda"} (from \code{\link[mixOmics]{plsda}}).
 }
   \item{graph}{
-logical: should VIP scores be printed?
+logical: should VIP scores be displayed?
 }
 }
 \value{

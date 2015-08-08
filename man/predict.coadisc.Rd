@@ -13,7 +13,7 @@ Predicts class of the grouping factor based on a Correspondence Discriminant Ana
 }
 \arguments{
   \item{object}{
-object of class inheriting from "coadisc".
+object of class inheriting from \code{"coadisc"}.
 }
   \item{newdata}{
 contingency table (either a \code{"matrix"}, \code{"table"} or \code{"data.frame"} object) giving new individuals (one row per individual).

@@ -1,178 +1,334 @@
-MVA.synt <-
-function(x) {
-  res <- list()
-  if (inherits(x,"dudi")) {				# PCA/PCoA/COA/NSCA/MCA/Mix/Hillsmith: dudi.pca(), 
-    if (inherits(x,"pca") | inherits(x,"pco") | # dudi.pco(), dudi.coa(), dudi.nsc, dudi.acm(), dudi.mix()
-	inherits(x,"coa") | inherits(x,"acm") |	# and dudi.hillsmith() from ade4
-	inherits(x,"mix") | inherits(x,"nsc")) {
-	res$crit <- "total variance (%)"
-	vars <- ade4::inertia.dudi(x)$TOT
-	vars.each <- round(100*c(vars[1,"ratio"],diff(vars$ratio)),2)
-	vars.tot <- round(100*vars$ratio,2)
-	res$tab <- data.frame(Axis=1:nrow(vars),Proportion=vars.each,Cumulative=vars.tot)
-	res$ncomp <- x$nf
-    }
-  } else if (inherits(x,"spca")) {			# sPCA: spca() from mixOmics
-    res$crit <- "total variance (%)"
-    vars <- c(x$varX[1],diff(x$varX))
-    vars.each <- round(100*vars,2)
-    vars.tot <- round(100*cumsum(vars),2)
-    res$tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.tot)
-    res$ncomp <- length(vars)
-    res$keep <- x$keepX
-  } else if (inherits(x,"prcomp")) {		# PCA: prcomp()
-    res$crit <- "total variance (%)"
-    vars <- summary(x)$importance
-    vars.each <- round(100*vars["Proportion of Variance",],2)
-    vars.tot <- round(100*vars["Cumulative Proportion",],2)
-    res$tab <- data.frame(Axis=1:ncol(vars),Proportion=vars.each,Cumulative=vars.tot)
-    res$ncomp <- ncol(vars)
-  } else if (inherits(x,"princomp")) {		# PCA: princomp()
-    res$crit <- "total variance (%)"
-    vars <- summary(x)$sdev^2
-    vars <- vars/sum(vars)
-    vars.each <- round(100*vars,2)
-    vars.tot <- round(100*cumsum(vars),2)
-    res$tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.tot)
-    res$ncomp <- length(vars)
-  } else if (inherits(x,"pcoa")) {			# PCoA: pcoa() from ape
-    res$crit <- "total variance (%)"
-    vars.each <- if ("Rel_corr_eig" %in% colnames(x$values)) {
-	round(100*x$values$Rel_corr_eig,2)
-    } else {
-	round(100*x$values$Relative_eig,2)
-    }
-    vars.tot <- if ("Cum_corr_eig" %in% colnames(x$values)) {
-	round(100*x$values$Cum_corr_eig,2)
-    } else {
-	round(100*x$values$Cumul_eig,2)
-    }
-    res$tab <- data.frame(Axis=1:length(vars.each),Proportion=vars.each,Cumulative=vars.tot)
-    res$ncomp <- as.numeric(readline("Number of components to be retained: "))
-  } else if (inherits(x,"pco")) {			# PCoA: pco() from labdsv (wrapper to cmdscale())
-    res$crit <- "total variance (%)"
-    vars.each <- round(100*x$eig/sum(x$eig),2)
-    vars.tot <- round(cumsum(vars.each),2)
-    res$tab <- data.frame(Axis=1:length(vars.each),Proportion=vars.each,Cumulative=vars.tot)
-    res$ncomp <- ncol(x$points)
-  } else if (inherits(x,"nmds")) {			# NMDS: nmds() from labdsv (wrapper to isoMDS() from MASS)
-    res$crit <- "stress"
-    res$ncomp <- ncol(x$points)
-    res$stress <- round(x$stress/100,3)
-  } else if (inherits(x,"monoMDS")) {		# NMDS: monoMDS() from vegan
-    res$crit <- "stress"
-    res$ncomp <- x$ndim
-    res$stress <- round(x$stress,3)
-  } else if (inherits(x,"metaMDS")) {		# NMDS: metaMDS() from vegan
-    res$crit <- "stress"
-    if (inherits(x,"monoMDS")) {
-	res$ncomp <- x$ndim
-	res$stress <- round(x$stress,3)
-    } else {
-	res$ncomp <- x$ndim
-	res$stress <- round(x$stress/100,3)
-    }
-  } else if (inherits(x,"lda")) {			# LDA: lda() from MASS
-    model <- LDA.format(x)
-    Y <- model$grouping
-    if (nlevels(Y) == 2) {stop("only 2 levels, hence 1 axis -> 100% of variance explained by this axis")}
-    res$crit <- "intergroup variance (%)"
-    res$ncomp <- ncol(model$li)
-    ncomp.tot <- res$ncomp
-    coord <- model$li
-    weights <- table(Y)
-    means <- aggregate(coord,list(Y=Y),mean)[,-1]
-    col.means <- matrix(0,ncol=ncomp.tot,nrow=1,dimnames=list(1,paste("comp",1:ncomp.tot,sep="")))
-    for (i in 1:ncomp.tot) {
-	col.means[1,i] <- sum(means[,i]*weights)/sum(weights)
-    }
-    vars <- matrix(0,ncol=ncomp.tot,nrow=1,dimnames=list(1,paste("comp",1:ncomp.tot,sep="")))
-    for (i in 1:ncomp.tot) {
-	vars[1,i] <- sum((means[,i]-col.means[1,i])^2*weights)/sum(weights)
-    }
-    vars.each <- round(as.vector(100*vars/sum(vars)),2)
-    vars.tot <- round(cumsum(vars.each),2)
-    res$tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.tot)
-  } else if (inherits(x,"discrimin")) {		# LDA/CDA: discrimin() from ade4
-    appel <- as.list(x$call)
-    Y <- eval.parent(appel$fac)
-    if (nlevels(Y) == 2) {stop("only 2 levels, hence 1 axis -> 100% of variance explained by this axis")}
-    res$crit <- "intergroup variance (%)"
-    res$ncomp <- x$nf
-    call2 <- x$call
-    call2$nf <- nlevels(Y)-1
-    call2$scannf <- FALSE
-    x2 <- eval.parent(call2)
-    ncomp.tot <- call2$nf
-    coord <- x2$li
-    weights <- table(Y)
-    means <- aggregate(coord,list(Y=Y),mean)[,-1]
-    col.means <- matrix(0,ncol=ncomp.tot,nrow=1,dimnames=list(1,paste("comp",1:ncomp.tot,sep="")))
-    for (i in 1:ncomp.tot) {
-	col.means[1,i] <- sum(means[,i]*weights)/sum(weights)
-    }
-    vars <- matrix(0,ncol=ncomp.tot,nrow=1,dimnames=list(1,paste("comp",1:ncomp.tot,sep="")))
-    for (i in 1:ncomp.tot) {
-	vars[1,i] <- sum((means[,i]-col.means[1,i])^2*weights)/sum(weights)
-    }
-    vars.each <- round(as.vector(100*vars/sum(vars)),2)
-    vars.tot <- round(cumsum(vars.each),2)
-    res$tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.tot)
-  } else if (inherits(x,"plsda")) {			# PLS-DA: plsda() from mixOmics
-    if (packageVersion("mixOmics")<"5.0.2") {
-	stop(paste("you must update 'mixOmics' to version >= 5.0.2 (actual: ",
-	  packageVersion("mixOmics"),")",sep=""))
-    }
-    X <- x$X
-    Y <- character(nrow(X))
-    for (i in 1:length(Y)) {
-	if (any(x$ind.mat[i,]!=0)) {
-	  Y[i] <- x$names$Y[which(x$ind.mat[i,]==1)]
+# pls: R2
+
+#  - Total variance:
+#     * PCA (dudi.pca[ade4],prcomp[stats],princomp[stats],pca[mixOmics],pca[labdsv],rda[vegan])
+#     * sPCA (spca[mixOmics])
+#     * PCoA (dudi.pco[ade4],pcoa[ape],pco[labdsv],cmdscale[stats]°,wcmdscale[vegan]°,capscale[vegan])
+#		° if computed with 'eig=TRUE'
+#	  Does not take into account imaginary axes
+#
+#  - Intergroup variance:
+#     * LDA (lda[MASS],discrimin[ade4])
+#     * PLS-DA (plsda[mixOmics])
+#     * CDA (discrimin[ade4],discrimin.coa[ade4])
+#
+#  - X variance + Y variance:
+#	* CPPLS (mvr[pls])
+#	* PLSR (mvr[pls],plsR[plsRglm] !que Y!, !!! pls[mixOmics])
+#	* PCR (mvr[pls])
+#
+#  - Kurtosis:
+#	* IPCA (ipca[mixOmics])
+#	* sIPCA (sipca[mixOmics])
+#
+#  - Stress:
+#	* nMDS (isoMDS[MASS],monoMDS[vegan],metaMDS[vegan],nmds[labdsv])
+
+
+print.MVA.synt <- function(x,...) {
+  for (i in 1:(length(x)-1)) {
+    x.i <- x[[i]]
+    cat(paste0("Criterion: ",x.i$crit,"\n"))
+    if ("tab" %in% names(x.i)) {
+	if (x$rows>nrow(x.i$tab)) {
+	  rows <- nrow(x.i$tab)
 	} else {
-	  Y[i] <- NA
+	  rows <- x$rows
 	}
+	tab <- x.i$tab
+	if ("Proportion" %in% colnames(tab)) {tab[,"Proportion"] <- round(tab[,"Proportion"],2)}
+	if ("Cumulative" %in% colnames(tab)) {tab[,"Cumulative"] <- round(tab[,"Cumulative"],2)}
+	if ("Kurtosis" %in% colnames(tab)) {tab[,"Kurtosis"] <- round(tab[,"Kurtosis"],2)}
+	print(tab[1:rows,],row.names=FALSE)
     }
-    Y <- factor(Y)
-    if (any(is.na(Y))) {
-	X <- X[-which(is.na(Y)),]
-	Y <- na.omit(Y)
+    if ("stress" %in% names(x.i)) {
+	cat(paste0("Stress: ",round(x.i$stress,4),"\n"))
     }
-    res$crit <- "intergroup variance (%)"
-    res$ncomp <- ncomp <- x$ncomp
-    ncomp.tot <- ncol(X)
-    model2 <- mixOmics::plsda(X,Y,ncomp=ncomp.tot)
-    coord <- model2$variates$X
-    weights <- table(Y)
-    means <- aggregate(coord,list(Y=Y),mean)[,-1]
-    col.means <- matrix(0,ncol=ncomp.tot,nrow=1,dimnames=list(1,paste("comp",1:ncomp.tot,sep="")))
-    for (i in 1:ncomp.tot) {
-	col.means[1,i] <- sum(means[,i]*weights)/sum(weights)
-    }
-    vars <- matrix(0,ncol=ncomp.tot,nrow=1,dimnames=list(1,paste("comp",1:ncomp.tot,sep="")))
-    for (i in 1:ncomp.tot) {
-	vars[1,i] <- sum((means[,i]-col.means[1,i])^2*weights)/sum(weights)
-    }
-    vars.each <- round(as.vector(100*vars/sum(vars)),2)
-    vars.tot <- round(cumsum(vars.each),2)
-    res$tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.tot)
+    cat("\n")
   }
+}
+
+MVA.synt <- function(x,rows=5) {
+  x <- MVA.ident(x)
+  res <- MVA.get.synt(x)
+  res$rows <- rows
   class(res) <- "MVA.synt"
   return(res)
 }
 
-print.MVA.synt <- function(x,...) {
-  cat(paste0("Criterion: ",x$crit,"\n"))
-  if ("keep" %in% names(x)) {
-    cat(paste0("Number of variables retained: ",paste(x$keep,collapse=","),"\n"))
-  }
-  if ("tab" %in% names(x)) {
-    cat("\n")
-    print(x$tab[1:x$ncomp,],row.names=FALSE)
-  }
-  if ("stress" %in% names(x)) {
-    cat(paste0("Axes: ",x$ncomp,"\n"))
-    cat(paste0("Stress: ",x$stress,"\n"))
-  }
+MVA.get.synt <- function(x,...) {
+  UseMethod("MVA.get.synt")
 }
+
+MVA.get.synt.default <- function(x,...) {
+  stop("unknown multivariate analysis")
+}
+
+MVA.get.synt.PCA.ade4 <- MVA.get.synt.PCoA.ade4 <- function(x,...) {
+  res <- list()
+  vars <- x$eig
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.PCA.prcomp <- function(x,...) {
+  res <- list()
+  vars <- summary(x)$importance
+  vars.each <- 100*vars["Proportion of Variance",]
+  vars.cum <- 100*vars["Cumulative Proportion",]
+  tab <- data.frame(Axis=1:ncol(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.PCA.princomp <- function(x,...) {
+  res <- list()
+  vars <- summary(x)$sdev^2
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.PCA.mixOmics <- function(x,...) {
+  res <- list()
+  vars <- x$sdev
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.PCA.labdsv <- function(x,...) {
+  res <- list()
+  vars <- x$sdev^2
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.PCA.vegan <- function(x,...) {
+  res <- list()
+  vars <- x$CA$eig
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.sPCA.mixOmics <- function(x,...) {
+  res <- list()
+  vars.each <- 100*c(x$varX[1],diff(x$varX))
+  vars.cum <- 100*x$varX
+  tab <- data.frame(Axis=1:length(vars.each),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.IPCA.mixOmics <- MVA.get.synt.sIPCA.mixOmics <- function(x,...) {
+  res <- list()
+  kurt <- x$kurtosis
+  tab <- data.frame(Axis=1:length(kurt),Kurtosis=kurt)
+  res[[1]] <- list(crit="kurtosis",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.PCoA.ape <- function(x,...) {
+  res <- list()
+  val <- if ("Cum_corr_eig" %in% colnames(x$values)) {
+    x$values$Cum_corr_eig
+  } else {
+    x$values$Cumul_eig
+  }
+  vars.each <- 100*c(val[1],diff(val))
+  vars.cum <- 100*val
+  tab <- data.frame(Axis=1:length(vars.each),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.PCoA.labdsv <- function(x,...) {
+  res <- list()
+  vars <- x$eig
+  vars[vars<0] <- 0
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.PCoA.stats <- function(x,...) {
+  if (!"eig" %in% names(x) || is.null(x$eig)) {
+    stop("no eigenvalues available, compute the analysis with 'eig=TRUE'")
+  }
+  res <- list()
+  vars <- x$eig
+  vars[vars<0] <- 0
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.PCoA.vegan <- function(x,...) {
+  res <- list()
+  if ("CA" %in% names(x)) {
+    vars <- x$CA$eig
+
+  } else {
+    if (!"eig" %in% names(x) || is.null(x$eig)) {
+	stop("no eigenvalues available, compute the analysis with 'eig=TRUE'")
+    }
+    vars <- x$eig
+    vars[vars<0] <- 0
+  }
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total variance (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.nMDS.mono.vegan <- function(x,...) {
+  res <- list()
+  res[[1]] <- list(crit="stress",stress=x$stress)
+  return(res)
+}
+
+MVA.get.synt.nMDS.iso.vegan <- MVA.get.synt.nMDS.MASS <-
+MVA.get.synt.nMDS.labdsv <- function(x,...) {
+  res <- list()
+  res[[1]] <- list(crit="stress",stress=x$stress/100)
+  return(res)
+}
+
+MVA.get.synt.LDA.MASS <- function(x,...) {
+  res <- list()
+  form <- LDA.format(x)
+  sco <- form$li
+#  tot.inert <- inertia(sco)
+#  tot.ax <- apply(sco,2,function(y) inertia(as.data.frame(y)))
+#  tot.vars <- tot.ax/tot.inert
+#  tot.vars.each <- 100*tot.vars
+#  tot.vars.cum <- 100*cumsum(tot.vars)
+#  tot.tab <- data.frame(Axis=1:length(tot.vars),Proportion=tot.vars.each,Cumulative=tot.vars.cum)
+#  res[[1]] <- list(crit="total variance (%)",tab=tot.tab)
+  Y <- form$grouping
+  gp.n <- table(Y)
+  gp.means <- as.data.frame(aggregate(sco~Y,FUN=mean)[,-1])
+  gp.inert <- inertia(gp.means,w=gp.n)
+  gp.ax <- apply(gp.means,2,function(y) inertia(as.data.frame(y),w=gp.n))
+  gp.vars <- gp.ax/gp.inert
+  gp.vars.each <- 100*gp.vars
+  gp.vars.cum <- 100*cumsum(gp.vars)
+  gp.tab <- data.frame(Axis=1:length(gp.vars),Proportion=gp.vars.each,Cumulative=gp.vars.cum)
+  res[[1]] <- list(crit="intergroup variance (%)",tab=gp.tab)
+  return(res)
+}
+
+MVA.get.synt.LDA.ade4 <- MVA.get.synt.CDA.ade4 <- function(x,...) {
+  res <- list()
+  Y <- eval(x$call$fac)
+  x <- update(x,scannf=FALSE,nf=nlevels(Y)-1)
+  sco <- x$li
+#  tot.inert <- inertia(sco)
+#  tot.ax <- apply(sco,2,function(y) inertia(as.data.frame(y)))
+#  tot.vars <- tot.ax/tot.inert
+#  tot.vars.each <- 100*tot.vars
+#  tot.vars.cum <- 100*cumsum(tot.vars)
+#  tot.tab <- data.frame(Axis=1:length(tot.vars),Proportion=tot.vars.each,Cumulative=tot.vars.cum)
+#  res[[1]] <- list(crit="total variance (%)",tab=tot.tab)
+  gp.n <- table(Y)
+  gp.means <- as.data.frame(aggregate(as.matrix(sco)~Y,FUN=mean)[,-1])
+  gp.inert <- inertia(gp.means,w=gp.n)
+  gp.ax <- apply(gp.means,2,function(y) inertia(as.data.frame(y),w=gp.n))
+  gp.vars <- gp.ax/gp.inert
+  gp.vars.each <- 100*gp.vars
+  gp.vars.cum <- 100*cumsum(gp.vars)
+  gp.tab <- data.frame(Axis=1:length(gp.vars),Proportion=gp.vars.each,Cumulative=gp.vars.cum)
+  res[[1]] <- list(crit="intergroup variance (%)",tab=gp.tab)
+  return(res)
+}
+
+MVA.get.synt.PLSDA.mixOmics <- function(x,...) {
+  res <- list()
+  x <- update(x,ncomp=ncol(x$X))
+  sco <- x$variates$X
+#  tot.inert <- inertia(sco)
+#  tot.ax <- apply(sco,2,function(y) inertia(as.data.frame(y)))
+#  tot.vars <- tot.ax/tot.inert
+#  tot.vars.each <- 100*tot.vars
+#  tot.vars.cum <- 100*cumsum(tot.vars)
+#  tot.tab <- data.frame(Axis=1:length(tot.vars),Proportion=tot.vars.each,Cumulative=tot.vars.cum)
+#  res[[1]] <- list(crit="total variance (%)",tab=tot.tab)
+  Y <- eval(x$call$Y)
+  gp.n <- table(Y)
+  gp.means <- as.data.frame(aggregate(as.matrix(sco)~Y,FUN=mean)[,-1])
+  gp.inert <- inertia(gp.means,w=gp.n)
+  gp.ax <- apply(gp.means,2,function(y) inertia(as.data.frame(y),w=gp.n))
+  gp.vars <- gp.ax/gp.inert
+  gp.vars.each <- 100*gp.vars
+  gp.vars.cum <- 100*cumsum(gp.vars)
+  gp.tab <- data.frame(Axis=1:length(gp.vars),Proportion=gp.vars.each,Cumulative=gp.vars.cum)
+  res[[1]] <- list(crit="intergroup variance (%)",tab=gp.tab)
+  return(res)
+}
+
+MVA.get.synt.CPPLS.pls <- MVA.get.synt.PLSR.pls <-
+MVA.get.synt.PCR.pls <- function(x,...) {
+  res <- list()
+  Y.vars <- 100*drop(pls::R2(x,intercept=FALSE,estimate="train")$val)
+  if (is.matrix(Y.vars)) {
+    crit <- "Y cumulative total variance (%)"
+    Y.vars <- round(as.data.frame(t(Y.vars)),2)
+    Y.tab <- as.data.frame(cbind(Axis=1:nrow(Y.vars),Y.vars))
+  } else {
+    crit <- "Y total variance (%)"
+    Y.vars.each <- c(Y.vars[1],diff(Y.vars))
+    Y.vars.cum <- Y.vars
+    Y.tab <- data.frame(Axis=1:length(Y.vars),Proportion=Y.vars.each,Cumulative=Y.vars.cum)
+  }
+  res[[1]] <- list(crit=crit,tab=Y.tab)
+  X.vars <- x$Xvar/x$Xtotvar
+  X.vars.each <- 100*X.vars
+  X.vars.cum <- 100*cumsum(X.vars)
+  X.tab <- data.frame(Axis=1:length(X.vars),Proportion=X.vars.each,Cumulative=X.vars.cum)
+  res[[2]] <- list(crit="X total variance (%)",tab=X.tab)
+  return(res)
+}
+
+MVA.get.synt.PLSR.plsRglm <- function(x,...) {		# !!!! manque la variance de X
+  res <- list()
+  Y.vars <- as.vector(cor(x$dataY,x$tt,use="pairwise")^2)
+  Y.vars.each <- 100*Y.vars
+  Y.vars.cum <- 100*cumsum(Y.vars)
+  Y.tab <- data.frame(Axis=1:length(Y.vars),Proportion=Y.vars.each,Cumulative=Y.vars.cum)
+  res[[1]] <- list(crit="Y total variance (%)",tab=Y.tab)
+#  X.vars <- x$Xvar/x$Xtotvar
+#  X.vars.each <- 100*X.vars
+#  X.vars.cum <- 100*cumsum(X.vars)
+#  X.tab <- data.frame(Axis=1:length(X.vars),Proportion=X.vars.each,Cumulative=X.vars.cum)
+#  res[[2]] <- list(crit="X total variance (%)",tab=X.tab)
+  return(res)
+}
+
 
 

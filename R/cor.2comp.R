@@ -15,7 +15,7 @@ function(var1,var2,var3,var4,alpha=0.05,conf.level=0.95,theo=0){
   z2 <- 0.5*log((1+r2)/(1-r2))
   u.obs <- abs(z1-z2)/sqrt(1/(length(var1.2)-3)+1/(length(var3.2)-3))
   names(u.obs) <- "U"
-  p <- min(pnorm(u.obs,0,1),pnorm(u.obs,0,1,lower.tail=FALSE))*2
+  p <- 2*min(pnorm(u.obs,0,1),pnorm(u.obs,0,1,lower.tail=FALSE))
   met <- "Comparison of 2 Pearson's linear correlation coefficients"
   nval <- 0
   names(nval) <- "difference in coefficients"
