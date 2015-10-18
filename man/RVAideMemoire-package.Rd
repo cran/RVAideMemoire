@@ -12,8 +12,8 @@ Contains diverse more or less complicated functions, written to simplify user's 
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9-50\cr
-Date: \tab 2015-08-08\cr
+Version: \tab 0.9-51\cr
+Date: \tab 2015-10-17\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }

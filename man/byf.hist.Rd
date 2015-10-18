@@ -7,7 +7,7 @@ Histogram for factor levels
 Draws a histogram of a numeric variable per level of a factor.
 }
 \usage{
-byf.hist(formula, data, sep = FALSE, density = TRUE)
+byf.hist(formula, data, sep = FALSE, density = TRUE, xlab = NULL, ylab = NULL)
 }
 \arguments{
   \item{formula}{
@@ -21,6 +21,12 @@ logical. If \code{TRUE} a histogram is displayed per level of the factor. If \co
 }
   \item{density}{
 logical. If \code{TRUE} density polygons are displayed, if \code{FALSE} classical counts are displayed.
+}
+  \item{xlab}{
+label for x-axis (name of the response variable as default).
+}
+  \item{ylab}{
+label for y-axis ("Density" or "Frequency" as default, depending on the type of histogram).
 }
 }
 \author{

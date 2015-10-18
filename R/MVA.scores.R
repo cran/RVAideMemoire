@@ -183,7 +183,7 @@ MVA.get.scores.COA.vegan <- function(x,xax,yax,scaling,set,...) {
    scal <- sqrt(1/(1-slam^2))
     wa <- sweep(wa,2,scal,"*")
   }
-  ro <- wa
+  ro <- as.data.frame(wa)
   v <- x$CA$v[,c(xax,yax),drop=FALSE]
   scal <- list(1,slam,sqrt(slam))[[abs(scaling)]]
   v <- sweep(v,2,scal,"*")

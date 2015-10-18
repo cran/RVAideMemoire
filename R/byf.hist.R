@@ -1,14 +1,16 @@
-byf.hist <- function(formula,data,sep=FALSE,density=TRUE) {
+byf.hist <- function(formula,data,sep=FALSE,density=TRUE,xlab=NULL,ylab=NULL) {
   if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
   m <- match.call(expand.dots=FALSE)
   m$sep <- m$density <- NULL
   if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
   m[[1]] <- as.name("model.frame")
-  m$... <- NULL
+  m$... <- m$xlab <- m$ylab <- NULL
   mf <- eval(m,parent.frame())
   dname <- c(names(mf)[1],paste(names(mf)[2:ncol(mf)],collapse=":"))
   resp <- mf[,1]
   fact <- interaction(mf[,2:ncol(mf)],sep=":")
+  if (is.null(xlab)) {xlab <- dname[1]}
+  if (is.null(ylab)) {ylab <- "Density"}
   if (sep) {
     opar <- par(no.readonly=TRUE)
     on.exit(par(opar))
@@ -17,8 +19,8 @@ byf.hist <- function(formula,data,sep=FALSE,density=TRUE) {
 	for (i in 1:nlevels(fact)) {
 	  y <- resp[as.numeric(fact)==i]
 	  h <- suppressWarnings(hist(y,freq=FALSE,plot=FALSE))
-	  plot(0,xlim=range(h$breaks),ylim=c(0,max(h$density)),xlab=dname[1],
-	    ylab="Density",main=levels(fact)[i],cex=0)
+	  plot(0,xlim=range(h$breaks),ylim=c(0,max(h$density)),xlab=xlab,
+	    ylab=ylab,main=levels(fact)[i],cex=0)
 	  dens <- density(y)
 	  col <- col2rgb(palette()[i])
 	  col2 <- rgb(col[1,],col[2,],col[3,],alpha=0.4*255,maxColorValue=255)
@@ -28,13 +30,13 @@ byf.hist <- function(formula,data,sep=FALSE,density=TRUE) {
     } else {
 	for (i in 1:nlevels(fact)) {
 	  y <- resp[as.numeric(fact)==i]
-	  hist(y,xlab=dname[1],main=levels(fact)[i])
+	  hist(y,xlab=xlab,main=levels(fact)[i])
 	}
     }
   } else {
     if (density) {
 	dhist(resp,fac=fact,col=1:nlevels(fact),legend=TRUE,pos.legend="topright",
-	  xlab=dname[1])
+	  xlab=xlab,ylab=ylab)
     } else {
 	nlev <- nlevels(fact)
 	couleurs <- 1:nlev
@@ -45,7 +47,7 @@ byf.hist <- function(formula,data,sep=FALSE,density=TRUE) {
 	  dens[i] <- max(hist(x.i,plot=FALSE)$counts)
 	}
 	x.1 <- resp[as.numeric(fact)==1]
-	hist(x.1,xlab=dname[1],density=10,angle=angles[1],col=couleurs[1],
+	hist(x.1,xlab=xlab,ylab=ylab,density=10,angle=angles[1],col=couleurs[1],
 	  xlim=range(resp),ylim=c(0,max(dens)),main="")
 	box()
 	for (i in 2:nlev) {

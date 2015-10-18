@@ -55,3 +55,8 @@ version 0.9-50 (08-08-2015)
   - new function MVA.anova (wrapper to anova.cca of the 'vegan' package but for type II tests)
   - perm.t.test corrected for the computation of p-values (underestimated in some particular cases when using a two tailed test)
   - MVA.synt rewritten
+
+version 0.9-51 (17-10-2015)
+  - small bugs corrected in MVA.plot
+  - plotresid rewritten, new support for gls models
+  - new arguments xlab and ylab in byf.hist

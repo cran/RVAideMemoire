@@ -9,10 +9,14 @@ MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
   call.sco <- as.call(arg.sco)
   lims <- eval(call.sco)
   constr <- inherits(x,c("CCA.vegan","CCA.ade4","RDA.vegan","RDA.ade4"))
-  nc <- try(suppressWarnings(MVA.cor(x,xax,yax,cor.set,space)),silent=TRUE)
-  if (inherits(nc,"try-error") && constr) {
-    constraints <- "f"
-    cor.set <- 2
+  if (constr) {
+    constr.type <- MVA.constr(x)
+    if (constr.type=="n") {
+	constraints <- "n"
+    } else if (constr.type=="f") {
+	constraints <- "f"
+	cor.set <- 2
+    }
   }
   if (!constr) {
     corr <- suppressWarnings(MVA.cor(x,xax,yax,cor.set,space)$corr)
@@ -29,8 +33,7 @@ MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
     call.cor <- as.call(arg.cor)
     eval(call.cor)
   } else {
-    constraints <- match.arg(constraints)
-    if (constraints %in% c("nf","n")) {
+    if (constraints=="n") {
 	corr <- suppressWarnings(MVA.cor(x,xax,yax,cor.set,space)$corr)
 	left <- min(corr[,1])/lims$xlim[1]
 	right <- max(corr[,1])/lims$xlim[2]
@@ -46,7 +49,7 @@ MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
 	eval(call.cor)
     }
     if (constraints %in% c("nf","f")) {
-	if (constraints=="f") {
+	if (constraints=="nf") {
 	  corr <- suppressWarnings(MVA.cor(x,xax,yax,cor.set,space)$corr)
 	  left <- min(corr[,1])/lims$xlim[1]
 	  right <- max(corr[,1])/lims$xlim[2]
@@ -99,6 +102,41 @@ MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
   }
 }
 
+MVA.constr <- function(x,...) {
+  UseMethod("MVA.constr")
+}
+
+MVA.constr.CCA.vegan <- MVA.constr.RDA.vegan <- function(x,...) {
+  constr <- if ("formula" %in% names(x$call)) {
+    as.data.frame(model.frame(x))
+  } else {
+    as.data.frame(eval(x$call$Y))
+  }
+  type <- logical(ncol(constr))
+  for (i in 1:ncol(constr)) {type[i] <- is.factor(constr[,i])}
+  res <- if (all(!type)) {"n"} else
+    if (all(type)) {"f"} else {"nf"}
+  return(res)
+}
+
+MVA.constr.CCA.ade4 <- function(x,...) {
+  constr <- as.data.frame(eval(x$call$sitenv))
+  type <- logical(ncol(constr))
+  for (i in 1:ncol(constr)) {type[i] <- is.factor(constr[,i])}
+  res <- if (all(!type)) {"n"} else
+    if (all(type)) {"f"} else {"nf"}
+  return(res)}
+
+MVA.constr.RDA.ade4 <- function(x,...) {
+  constr <- as.data.frame(eval(x$call$df))
+  type <- logical(ncol(constr))
+  for (i in 1:ncol(constr)) {type[i] <- is.factor(constr[,i])}
+  res <- if (all(!type)) {"n"} else
+    if (all(type)) {"f"} else {"nf"}
+  return(res)
+}
+
+
 MVA.centr <- function(x,...) {
   UseMethod("MVA.centr")
 }
@@ -112,8 +150,8 @@ MVA.centr.CCA.vegan <- MVA.centr.RDA.vegan <- function(x,...) {
   type <- logical(ncol(constr))
   for (i in 1:ncol(constr)) {type[i] <- is.factor(constr[,i])}
   constr <- as.data.frame(constr[,type])
-  rownames(x$CCA$centroids)
   res <- list(fac=constr,lev=rownames(x$CCA$centroids))
+  return(res)
 }
 
 MVA.centr.CCA.ade4 <- function(x,...) {
@@ -126,6 +164,7 @@ MVA.centr.CCA.ade4 <- function(x,...) {
     lev <- c(lev,paste0(colnames(constr)[i],levels(constr[,i])))
   }
   res <- list(fac=constr,lev=lev)
+  return(res)
 }
 
 MVA.centr.RDA.ade4 <- function(x,...) {
@@ -138,5 +177,6 @@ MVA.centr.RDA.ade4 <- function(x,...) {
     lev <- c(lev,paste0(colnames(constr)[i],levels(constr[,i])))
   }
   res <- list(fac=constr,lev=lev)
+  return(res)
 }
 
