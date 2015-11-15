@@ -292,6 +292,7 @@ MVA.get.corr.RDA.vegan <- function(x,xax,yax,set,space,...) {
     warning("'set' re-set to 2 since 'set=1' (or '12') does not make sense in the unconstrained space")
   }
   sco <- MVA.scores(x,xax,yax,scaling=1,space=space)$coord
+  numX <- TRUE
   if (set==1) {
     indep.var <- if ("formula" %in% names(x$call)) {
 	as.data.frame(model.frame(x))
@@ -320,24 +321,24 @@ MVA.get.corr.RDA.vegan <- function(x,xax,yax,set,space,...) {
     }
     type <- logical(ncol(indep.var))
     for (i in 1:ncol(indep.var)) {type[i] <- is.numeric(indep.var[,i])}
-    if (all(!type)) {stop("only factor constraints, no correlation")}
-    if (!all(type)) {indep.var <- indep.var[,type]}
-    tab <- cor(indep.var,sco,use="pairwise")
-    if (is.null(rownames(tab))) {
-	rown <- as.character(x$call$Y)
-	rownames(tab) <- rown[length(rown)]
+    if (all(!type)) {
+	dep.var <- if (space==1) {x$CCA$Xbar} else {x$CA$Xbar}
+	tab <- as.data.frame(cor(dep.var,sco,use="pairwise"))
+	numX <- FALSE
+    } else {
+	if (!all(type)) {indep.var <- indep.var[,type]}
+	tab <- as.data.frame(tab)
+	X <- cor(indep.var,sco,use="pairwise")
+	Y <- cor(dep.var,sco,use="pairwise")
+	if (is.null(rownames(X))) {
+	  rown <- as.character(x$call$Y)
+	  rownames(X) <- rown[length(rown)]
+	}
+	colnames(Y) <- colnames(X)
+	tab <- as.data.frame(rbind(X,Y))
     }
-    tab <- as.data.frame(tab)
-    X <- cor(indep.var,sco,use="pairwise")
-    Y <- cor(dep.var,sco,use="pairwise")
-    if (is.null(rownames(X))) {
-	rown <- as.character(x$call$Y)
-	rownames(X) <- rown[length(rown)]
-    }
-    colnames(Y) <- colnames(X)
-    tab <- as.data.frame(rbind(X,Y))
   }
-  if (set==12) {
+  if (set==12 & numX) {
     res <- list(corr=tab)
     res$set <- factor(rep(c("X","Y"),c(nrow(X),nrow(Y))))
   } else {res <- tab}
@@ -346,6 +347,7 @@ MVA.get.corr.RDA.vegan <- function(x,xax,yax,set,space,...) {
 
 MVA.get.corr.RDA.ade4 <- function(x,set,...) {
   sco <- as.data.frame(x$li)
+  numX <- TRUE
   if (set==1) {
     indep.var <- as.data.frame(eval(x$call$df))
     type <- logical(ncol(indep.var))
@@ -359,14 +361,19 @@ MVA.get.corr.RDA.ade4 <- function(x,set,...) {
     indep.var <- as.data.frame(eval(x$call$df))
     type <- logical(ncol(indep.var))
     for (i in 1:ncol(indep.var)) {type[i] <- is.numeric(indep.var[,i])}
-    if (all(!type)) {stop("only factor constraints, no correlation")}
-    if (!all(type)) {indep.var <- indep.var[,type]}
-    X <- cor(indep.var,sco,use="pairwise")
-    Y <- cor(x$Y,sco,use="pairwise")
-    colnames(Y) <- colnames(X)
-    tab <- as.data.frame(rbind(X,Y))
+    if (all(!type)) {
+	tab <- as.data.frame(cor(x$Y,sco,use="pairwise"))
+	numX <- FALSE
+    } else {
+	if (!all(type)) {indep.var <- indep.var[,type]}
+	tab <- as.data.frame(tab)
+	X <- cor(indep.var,sco,use="pairwise")
+	Y <- cor(x$Y,sco,use="pairwise")
+	colnames(Y) <- colnames(X)
+	tab <- as.data.frame(rbind(X,Y))
+    }
   }
-  if (set==12) {
+  if (set==12 & numX) {
     res <- list(corr=tab)
     res$set <- factor(rep(c("X","Y"),c(nrow(X),nrow(Y))))
   } else {res <- tab}

@@ -60,3 +60,6 @@ version 0.9-51 (17-10-2015)
   - small bugs corrected in MVA.plot
   - plotresid rewritten, new support for gls models
   - new arguments xlab and ylab in byf.hist
+
+version 0.9-52 (15-11-2015)
+  - small bugs corrected in MVA.plot

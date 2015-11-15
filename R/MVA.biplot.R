@@ -1,5 +1,5 @@
 MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
-  cor.set=c(12,1,2),space=1,ratio=0.9,weights=1,constraints=c("nf","n","f"),
+  cor.set=c(12,1,2),space=1,ratio=0.9,weights=1,constraints=c("nf","n","f",NULL),
   sco.args=list(),cor.args=list(),f.col=1,f.cex=1) {
   coord <- MVA.scores(x,xax,yax,scaling,sco.set,space)$coord
   if (ncol(coord)==1) {stop("biplots cannot be drawn with only one dimension")}
@@ -9,7 +9,7 @@ MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
   call.sco <- as.call(arg.sco)
   lims <- eval(call.sco)
   constr <- inherits(x,c("CCA.vegan","CCA.ade4","RDA.vegan","RDA.ade4"))
-  if (constr) {
+  if (constr & !is.null(constraints)) {
     constr.type <- MVA.constr(x)
     if (constr.type=="n") {
 	constraints <- "n"
@@ -18,7 +18,7 @@ MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
 	cor.set <- 2
     }
   }
-  if (!constr) {
+  if (!constr | (constr & is.null(constraints))) {
     corr <- suppressWarnings(MVA.cor(x,xax,yax,cor.set,space)$corr)
     left <- min(corr[,1])/lims$xlim[1]
     right <- max(corr[,1])/lims$xlim[2]
@@ -49,21 +49,19 @@ MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
 	eval(call.cor)
     }
     if (constraints %in% c("nf","f")) {
-	if (constraints=="nf") {
-	  corr <- suppressWarnings(MVA.cor(x,xax,yax,cor.set,space)$corr)
-	  left <- min(corr[,1])/lims$xlim[1]
-	  right <- max(corr[,1])/lims$xlim[2]
-	  bottom <- min(corr[,2])/lims$ylim[1]
-	  top <- max(corr[,2])/lims$ylim[2]
-	  ratios <- c(left,right,bottom,top)
-	  rmax <- max(ratios)
-	  const <- 1/rmax*ratio
-	  arg.cor <- c(list(as.name("MVA.corplot"),x=x,xax=xax,yax=yax,
-	    space=space,set=cor.set,add=TRUE,add.const=const,xlab="",
-	    ylab="",circle=FALSE,intcircle=NULL,drawintaxes=FALSE),cor.args)
-	  call.cor <- as.call(arg.cor)
-	  eval(call.cor)
-	}
+	corr <- suppressWarnings(MVA.cor(x,xax,yax,cor.set,space)$corr)
+	left <- min(corr[,1])/lims$xlim[1]
+	right <- max(corr[,1])/lims$xlim[2]
+	bottom <- min(corr[,2])/lims$ylim[1]
+	top <- max(corr[,2])/lims$ylim[2]
+	ratios <- c(left,right,bottom,top)
+	rmax <- max(ratios)
+	const <- 1/rmax*ratio
+	arg.cor <- c(list(as.name("MVA.corplot"),x=x,xax=xax,yax=yax,
+	  space=space,set=cor.set,add=TRUE,add.const=const,xlab="",
+	  ylab="",circle=FALSE,intcircle=NULL,drawintaxes=FALSE),cor.args)
+	call.cor <- as.call(arg.cor)
+	eval(call.cor)
 	if (space==1) {
 	  if (length(weights)!=nrow(coord)) {
 	    if (length(weights)==1) {

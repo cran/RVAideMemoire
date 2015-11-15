@@ -9,7 +9,7 @@ Displays a biplot of a multivariate analysis. This just consists in superimposin
 \usage{
 MVA.biplot(x, xax = 1, yax = 2, scaling = 2, sco.set = c(12, 1, 2),
   cor.set = c(12, 1, 2), space = 1, ratio = 0.9, weights = 1,
-  constraints = c("nf", "n", "f"), sco.args = list(),
+  constraints = c("nf", "n", "f", NULL), sco.args = list(),
   cor.args = list(), f.col = 1, f.cex = 1)
 }
 \arguments{
@@ -41,7 +41,7 @@ MVA.biplot(x, xax = 1, yax = 2, scaling = 2, sco.set = c(12, 1, 2),
   only used with constrained analyses (RDA or CCA) where some constraints are factors. Individual weights, used to calculate barycenter positions.
 }
   \item{constraints}{
-  only used with constrained analyses (RDA or CCA). Type of constraints to display: quantitative (\code{"n"}), factors (\code{"f"}) or both (\code{"nf", default}).
+  only used with constrained analyses (RDA or CCA). Type of constraints to display: quantitative (\code{"n"}), factors (\code{"f"}), both (\code{"nf", default}) or none (\code{"NULL"}).
 }
   \item{sco.args}{
   list containing optional arguments to pass to \code{\link[RVAideMemoire]{MVA.scoreplot}}. All arguments are accepted.

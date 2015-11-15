@@ -1,6 +1,6 @@
-74db191f3fdf4a070fd2d6bd557d6bf4 *DESCRIPTION
+fc8484386e4a7494639a56b1f991beb4 *DESCRIPTION
 739164d776d41d80f88a30843fa52995 *NAMESPACE
-6186f1066a24fba66dc7fd91530bd073 *NEWS
+8826b281484dc75d4c80edf8b2051d0f *NEWS
 9369df93593f7fc76a1d5885268abe44 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
 ddceaf05955eb8bd698932e152948b08 *R/CvM.test.R
@@ -10,9 +10,9 @@ e53a7bf1673b14a90bba509177f88aaa *R/G.multcomp.R
 6f1650db9e640d17ef42c344d85b8b83 *R/G.theo.multcomp.R
 3317ec0cffa282202b1d39e2b3f284b8 *R/LDA.format.R
 84adaa0cfeede27bea58a82b29a84cb5 *R/MVA.anova.R
-02b1633c80a8cd87b966144f3c484dab *R/MVA.biplot.R
+fe84bff1ab247b8fcbad821b0d9218f3 *R/MVA.biplot.R
 13023ce5c67bdab6c41c57be0d693922 *R/MVA.cmv.R
-3ef78da24f1ea69b128dd95a79991484 *R/MVA.cor.R
+2d6ffc7b65e4e9942b963781dea59de3 *R/MVA.cor.R
 fe4c55877a5d76d8a2cdbf2a26b44af1 *R/MVA.corplot.R
 d8f45f9812a7d6630251dbd46d4376a8 *R/MVA.cv.R
 ef53a805c476019b07529bda82afa802 *R/MVA.ident.R
@@ -107,7 +107,7 @@ d70b823399c7d10c97ee98d28d83f6de *R/summary.least.rect.R
 cf56ef4e0793a3f61ded7833859984ce *R/wilcox.paired.multcomp.R
 588714546f5b57bac4243ca8558b4b37 *R/wilcox.signtest.R
 3de4ac014037119e5dfe8a02e809f7ef *R/wmean.R
-8bf52db709c696a5c2c51379a253fa71 *R/zzz.R
+d0e4f99cffc5a42aca4c64bdac38885c *R/zzz.R
 a3ed2ef2d85eac6e18d6f925f5e607c0 *man/Anova.clm.Rd
 b8fc9e22252221ecd1ba737bad3e4603 *man/CvM.test.Rd
 0fa7409236b2b4735063f18c43e16384 *man/G.bintest.Rd
@@ -115,7 +115,7 @@ b8fc9e22252221ecd1ba737bad3e4603 *man/CvM.test.Rd
 30accb9e34b53852cf5488462285927d *man/G.test.Rd
 02340b6bc7ae0222a520f1fba9a89de0 *man/G.theo.multcomp.Rd
 15f58ddeeac260b8296c223f940ea8e3 *man/MVA.anova.Rd
-d41a02e1adb868bb7b1d1ab226573e7e *man/MVA.biplot.Rd
+791574f1e1c529432248a8de1396d2d1 *man/MVA.biplot.Rd
 f09b12af14f9cca8f502dc6c3b2e49e1 *man/MVA.cmv.Rd
 814ca9c16a41bf42ed314ce67e112882 *man/MVA.corplot.Rd
 e18fb661bdb849b8fd1caed9132be6f2 *man/MVA.cv.Rd
@@ -127,7 +127,7 @@ ae1230a267f71c644682a00a5fb6ec34 *man/MVA.plot.Rd
 b3dd5b8aa433f38b0b4f4e10b358f4b2 *man/MVA.test.Rd
 852071741a6e65fd0f8f3ab641f3ac9b *man/MVA.trajplot.Rd
 48a3852f472ed9e9a4db602c357500bb *man/PLSDA.VIP.Rd
-f823fb38bb69b38951d93e97191146d9 *man/RVAideMemoire-package.Rd
+2df3175e055deb263654226836a575c4 *man/RVAideMemoire-package.Rd
 e79c4cbba2fbc2a15b0b6259116ec9a6 *man/adonis.II.Rd
 23464e766e420804499773e539b29c56 *man/back.lsmeans.Rd
 b72310e5677570de6d202e63f5c9a435 *man/bootstrap.Rd
