@@ -98,11 +98,15 @@ MVA.get.synt.PCA.princomp <- function(x,...) {
 
 MVA.get.synt.PCA.mixOmics <- function(x,...) {
   res <- list()
+  comp <- x$ncomp
+  comp.max <- min(ncol(x$X),nrow(x$X)-1)
+  x <- update(x,ncomp=comp.max)
   vars <- x$sdev
   vars <- vars/sum(vars)
   vars.each <- 100*vars
   vars.cum <- 100*cumsum(vars)
   tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  tab <- tab[1:comp,]
   res[[1]] <- list(crit="total variance (%)",tab=tab)
   return(res)
 }
@@ -110,7 +114,7 @@ MVA.get.synt.PCA.mixOmics <- function(x,...) {
 MVA.get.synt.PCA.labdsv <- function(x,...) {
   res <- list()
   vars <- x$sdev^2
-  vars <- vars/sum(vars)
+  vars <- vars/x$totdev
   vars.each <- 100*vars
   vars.cum <- 100*cumsum(vars)
   tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
@@ -270,7 +274,11 @@ MVA.get.synt.LDA.ade4 <- MVA.get.synt.CDA.ade4 <- function(x,...) {
 
 MVA.get.synt.PLSDA.mixOmics <- function(x,...) {
   res <- list()
-  x <- update(x,ncomp=ncol(x$X))
+  nco <- ncol(x$X)
+  while(inherits(try(update(x,ncomp=nco),silent=TRUE),"try-error")) {
+    nco <- nco-1
+  }
+  x <- update(x,ncomp=nco)
   sco <- x$variates$X
 #  tot.inert <- inertia(sco)
 #  tot.ax <- apply(sco,2,function(y) inertia(as.data.frame(y)))

@@ -19,9 +19,9 @@ importFrom(graphics,abline,arrows,axis,barplot,box,hist,dotchart,legend,lines,mo
   plot,points,polygon,rect,rug,segments,strheight,strwidth,symbols,text,title)
 importFrom(grDevices,chull,col2rgb,n2mfrow,palette,rgb)
 importFrom(stats,aggregate,anova,as.dist,as.formula,bartlett.test,binom.test,chisq.test,complete.cases,cor,cor.test,
-  cov,delete.response,density,dist,dmultinom,family,fisher.test,fitted,formula,glm,lm,lm.influence,logLik,mahalanobis,
-  median,model.frame,model.matrix,model.response,na.omit,p.adjust,pairwise.prop.test,pairwise.table,pbeta,pbinom,
-  pchisq,pnorm,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,rect.hclust,relevel,resid,residuals,rnorm,rstudent,
+  cov,delete.response,density,dist,dmultinom,family,fisher.test,fitted,formula,glm,kruskal.test,lm,lm.influence,logLik,
+  mahalanobis,median,model.frame,model.matrix,model.response,na.omit,p.adjust,pairwise.prop.test,pairwise.table,pbeta,
+  pbinom,pchisq,pnorm,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,rect.hclust,relevel,resid,residuals,rnorm,rstudent,
   runif,sd,setNames,shapiro.test,t.test,terms,update,update.formula,var,var.test,wilcox.test)
 importFrom(utils,combn,packageVersion,setTxtProgressBar,txtProgressBar)
 
@@ -53,6 +53,7 @@ export(
   mqqnorm,
   mshapiro.test,
   multinomial.multcomp,multinomial.test,multinomial.theo.multcomp,
+  multtest,
   MVA.anova,
   MVA.cmv,MVA.cv,MVA.test,
   MVA.plot,MVA.scoreplot,MVA.loadplot,MVA.corplot,MVA.biplot,MVA.pairplot,MVA.trajplot,
@@ -90,6 +91,7 @@ S3method(perm.t.test,default)
 S3method(perm.t.test,formula)
 S3method(perm.var.test,default)
 S3method(perm.var.test,formula)
+S3method(plot,multtest)
 S3method(predict,coadisc)
 S3method(predict,least.rect)
 S3method(predict,MVA.cv)
@@ -97,6 +99,7 @@ S3method(predict,MVA.cmv)
 S3method(print,byf.test)
 S3method(print,chisq.exp)
 S3method(print,least.rect)
+S3method(print,multtest)
 S3method(print,MVA.cmv)
 S3method(print,MVA.cv)
 S3method(print,MVA.synt)

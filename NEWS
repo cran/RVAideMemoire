@@ -63,3 +63,7 @@ version 0.9-51 (17-10-2015)
 
 version 0.9-52 (15-11-2015)
   - small bugs corrected in MVA.plot
+
+version 0.9-53 (28-02-2016)
+  - small bugs corrected in MVA.synt
+  - new function multtest (univariate comparison of groups for multiple variables)
