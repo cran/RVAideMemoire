@@ -129,7 +129,15 @@ MVA.scoreplot.byfac <- function(coord,x,barycenters,stars,contours,weights,xlab,
   labels,main.pos,main.cex,fac.lab,fac.cex,legend,legend.pos,legend.title,legend.lab,legend.col,legend.pch,
   legend.ptcex,legend.cex,drawintaxes,xlim,ylim,keepmar) {
   oritab <- eval.parent(as.list(x$call)[[2]])
-  if (inherits(MVA.ident(x),"Mix.ade4")) {oritab <- oritab[,which(x$index %in% c("f","o"))]}
+  if (inherits(MVA.ident(x),"Mix.ade4")) {
+    varnames <- colnames(oritab)
+    if (length(which(x$index %in% c("f","o")))==0) {stop("no factor in the analysis")}
+    oritab <- oritab[,which(x$index %in% c("f","o"))]
+    if (!is.data.frame(oritab)) {
+	oritab <- as.data.frame(oritab)
+	colnames(oritab) <- varnames[which(x$index %in% c("f","o"))]
+    }
+  }
   nf <- ncol(oritab)
   if (length(legend.col)==1) {legend.col <- rep(legend.col[1],max(apply(oritab,2,function(y) nlevels(factor(y)))))}
   oldmfrow <- par()$mfrow

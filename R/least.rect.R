@@ -1,5 +1,5 @@
 least.rect <-
-function(formula,data,conf.level=0.95,theo=1){
+function(formula,data,conf.level=0.95,theo=1,adj=TRUE){
   if (missing(formula)) {stop("missing formula")}
   if (length(formula[[3]])==3) {
     if (formula[[3]][[1]]!=as.name("|")) {
@@ -12,7 +12,7 @@ function(formula,data,conf.level=0.95,theo=1){
   m$formula <- formula
   if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
   m[[1]] <- as.name("model.frame")
-  m$conf.level <- m$theo <- NULL
+  m$conf.level <- m$theo <- m$adj <- NULL
   mf <- na.omit(eval(m,parent.frame()))
   dname <- names(mf)
   lr <- function(x,y,conf.level=conf.level,theo=theo) {
@@ -46,6 +46,14 @@ function(formula,data,conf.level=0.95,theo=1){
     result <- list(coef=coeffs,res=res,fit=fit,conf.int=conf.int,comp=conform,corr=corr.tab)
     return(result)
   }
+  if (ncol(mf)>2) {
+    if (ncol(mf)==3) {
+	if (length(formula[[3]][[3]])!=1) {stop("incorrect formula")}
+	if (!is.factor(mf[,3])) {stop("incorrect factor")}
+	mf <- droplevels(mf)
+	if (nlevels(mf[,3])==1) {mf <- mf[,-3]}
+    } else {stop("incorrect formula")}
+  }
   if (ncol(mf)==2) {
     mod <- lr(mf[,2],mf[,1],conf.level=conf.level,theo=theo)
     coef <- mod$coef
@@ -55,10 +63,8 @@ function(formula,data,conf.level=0.95,theo=1){
     comp <- mod$comp
     corr <- mod$corr
     multiple <- FALSE
-  } else if (ncol(mf)==3) {
-    if (length(formula[[3]][[3]])!=1) {stop("incorrect formula")}
-    if (!is.factor(mf[,3])) {stop("incorrect factor")}
-    lev <- levels(droplevels(mf[,3]))
+  } else {
+    lev <- levels(mf[,3])
     nlev <- length(lev)
     coef <- data.frame("(Intercept)"=integer(nlev),x=integer(nlev),row.names=lev,check.names=FALSE)
     colnames(coef)[2] <- dname[2]
@@ -72,7 +78,12 @@ function(formula,data,conf.level=0.95,theo=1){
     multiple <- TRUE
     for (i in 1:nlev) {
 	tab <- subset(mf,as.numeric(mf[,3])==i)
-	mod <- lr(tab[,2],tab[,1],conf.level=conf.level,theo=theo)
+	cl <- if (adj) {
+	  1-((1-conf.level)/nlev)
+	} else {
+	  conf.level
+	}
+	mod <- lr(tab[,2],tab[,1],conf.level=cl,theo=theo)
 	coef[i,] <- mod$coef
 	res.temp <- mod$res
 	names(res.temp) <- rep(lev[i],length(res.temp))
@@ -86,10 +97,14 @@ function(formula,data,conf.level=0.95,theo=1){
 	corr[i,] <- mod$corr[1,]
     }
     m <- match.call()
-  } else {stop("incorrect formula")}
+    if (adj) {
+	comp[,"Pr(>|t|)"] <- p.adjust(comp[,"Pr(>|t|)"],method="bonferroni")
+	corr[,"Pr(>|t|)"] <- p.adjust(corr[,"Pr(>|t|)"],method="bonferroni")
+    }
+  }
   m[[1]] <- as.name("least.rect")
   result <- list(coefficients=coef,residuals=res,fitted.values=fit,call=m,model=mf,conf.level=conf.level,
-    conf.int=conf.int,theo=theo,comp=comp,corr=corr,multiple=multiple)
+    conf.int=conf.int,theo=theo,comp=comp,corr=corr,multiple=multiple,adj=adj)
   class(result) <- "least.rect"
   return(result)
 }
@@ -101,4 +116,41 @@ print.least.rect <- function(x,...) {
   print(x$coefficients)
   cat("\n")
 }
+
+summary.least.rect <- function(object,...) {
+  cat("\nCall:\n")
+  print(object$call)
+  cat("\nResiduals:\n")
+  print(summary(object$residuals),digits=3)
+  if (object$multiple && object$adj) {
+    cat("\nCoefficients and Bonferroni-adjusted ",100*object$conf.level,"% confidence interval:\n",sep="")
+  } else {
+    cat("\nCoefficients and ",100*object$conf.level,"% confidence interval:\n",sep="")
+  }
+  if (!object$multiple) {
+    print(object$conf.int,digits=5)
+  } else {
+    for (i in dimnames(object$conf.int)[[3]]) {
+	cat(" ",i,"\n")
+	print(object$conf.int[,,i])
+    }
+  }
+  if (object$multiple && object$adj) {
+    cat("\nEquality of the slope",ifelse(object$multiple,"s","")," to ",object$theo,
+	" (Bonferroni-adjusted p-value):\n",sep="")
+  } else {
+    cat("\nEquality of the slope",ifelse(object$multiple,"s","")," to ",object$theo,":\n",sep="")
+  }
+  printCoefmat(object$comp,na.print="",P.values=TRUE,has.Pvalue=TRUE)
+  if (object$multiple && object$adj) {
+    cat("\nPearson's linear correlation coefficient",ifelse(object$multiple,"s",""),
+	" (Bonferroni-adjusted ",100*object$conf.level,"% confidence interval and p-value):\n",sep="")
+  } else {
+    cat("\nPearson's linear correlation coefficient",ifelse(object$multiple,"s",""),
+	" (",100*object$conf.level,"% confidence interval):\n",sep="")
+  }
+  printCoefmat(object$corr,na.print="",P.values=TRUE,has.Pvalue=TRUE)
+  cat("\n")
+}
+
 

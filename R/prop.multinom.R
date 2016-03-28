@@ -14,7 +14,7 @@ prop.multinom <- function(x) {
   names(prop) <- names(std.err) <- lab
   if (is.matrix(x)) {
     for (i in 1:length(lab)) {
-	mod <- glm(cbind(x[,i],rowSums(x[,c(1:length(lab))[-i]]))~1,family="quasibinomial")
+	mod <- glm(cbind(x[,i],rowSums(as.data.frame(x[,c(1:length(lab))[-i]])))~1,family="quasibinomial")
 	pred <- predict(mod,type="response",se.fit=TRUE)
 	prop[i] <- unique(pred$fit)
 	std.err[i] <- unique(pred$se.fit)

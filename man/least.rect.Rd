@@ -7,7 +7,7 @@ Least rectangles linear regression
 Fits a least rectangle linear regression, possibly for each level of a factor.
 }
 \usage{
-least.rect(formula, data, conf.level = 0.95, theo = 1)
+least.rect(formula, data, conf.level = 0.95, theo = 1, adj = TRUE)
 }
 \arguments{
   \item{formula}{
@@ -22,6 +22,9 @@ confidence level.
   \item{theo}{
 theoretical value of the slope. If several regression are fitted, the same value is used for all comparisons of slope vs. theoretical value.
 }
+  \item{adj}{
+logical indicating if, in case of several regressions fitted, confidence intervals and p-values should be Bonferroni-corrected for multiple testing.
+}
 }
 \value{
   \item{coefficients}{regression parameters.}
@@ -35,6 +38,7 @@ theoretical value of the slope. If several regression are fitted, the same value
   \item{comp}{data frame of results for equality of the slope(s) to the theoretical value.}
   \item{corr}{data frame of results for significativity of the correlation coefficient(s).}
   \item{multiple}{logical, \code{TRUE} if several regressions are fitted.}
+  \item{adj}{logical, \code{TRUE} if confidence intervals and p-values are corrected for multiple testing (only if several regressions are fitted).}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

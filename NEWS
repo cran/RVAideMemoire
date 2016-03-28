@@ -1,10 +1,42 @@
-version 0.9-41 (15-11-2014)
-  - lsm.basis.clm and lsm.basis.clmm removed (now dealt in a much powerful manner by the 'lsmeans' package)
-  - DA.var removed (the MVA.synt function of this package does the same job and is more generic)
-  - fc.multcomp removed (comparison of slopes dealt in a much powerful manner by the 'lsmeans' package)
-  - plot1comp.ind rewritten to display a more easy-to-interpret graph
-  - byf.normhist removed (not very useful and nearly same thing now done by byf.hist)
-  - MVA.synt extended to MCA and mixed analyses
+version 0.9-54 (28-03-2016)
+  - small bugs corrected in MVA.plot
+  - new argument 'adj' in least.rect (correction of confidence intervals and p-values for multiple testing)
+  - new function spearman.cor.multcomp (computation of adjusted confidence interval of Spearman's correlation coefficients for multiple comparisons)
+  - small bug corrected in prop.multinom
+  - new function dummy (creation of dummy responses from a factor)
+
+version 0.9-53 (28-02-2016)
+  - small bugs corrected in MVA.synt
+  - new function multtest (univariate comparison of groups for multiple variables)
+
+version 0.9-52 (15-11-2015)
+  - small bugs corrected in MVA.plot
+
+version 0.9-51 (17-10-2015)
+  - small bugs corrected in MVA.plot
+  - plotresid rewritten, new support for gls models
+  - new arguments xlab and ylab in byf.hist
+
+version 0.9-50 (08-08-2015)
+  - wald.ptheo.test now deals with overdispersion
+  - new function prop.multinom (computation of proportions and SE based on a multinomial log-linear model)
+  - new function wmean (weighted arithmetic mean)
+  - plot1comp.ind, plot1comp.var, s.corcircle2, scat.mix.categorical, scat.mix.numeric and scatter.coa2 removed (the MVA.plot function of this package does the same job and is more generic)
+  - new function splitf (random splitting of data frame, respecting the relative proportions of levels of a factor)
+  - new function MVA.cmv (cross model validation)
+  - new function MVA.cv (cross validation)
+  - DA.confusion and DA.valid removed (the MVA.cmv and MVA.cv functions of this package do the same job and are more generic)
+  - new predict methods for "MVA.cv" and "MVA.cmv" objects
+  - new function MVA.test (significance test based on cross (model) validation)
+  - PLSDA.test removed (the MVA.test function of this package does the same job and is more generic)
+  - PLSDA.ncomp removed (not really useful and the mvr function of the 'pls' package does nearly the same job)
+  - new function MVA.plot (various plots for multivariate analyses)
+  - cor.sparse removed (the MVA.plot function of this package does the same job and is more generic)
+  - LDA.format not exported anymore (the MVA.plot function of this package does the same job and is more generic)
+  - new arguments 'ord' and 'decreasing' in back.lsmeans
+  - new function MVA.anova (wrapper to anova.cca of the 'vegan' package but for type II tests)
+  - perm.t.test corrected for the computation of p-values (underestimated in some particular cases when using a two tailed test)
+  - MVA.synt rewritten
 
 version 0.9-45 (13-03-2015)
   - histograms with density polygons improved
@@ -35,35 +67,10 @@ version 0.9-45 (13-03-2015)
   - wilcox.rating.signtest, wilcox.rating.test, kruskal.rating.test, friedman.rating.test, pairwise.wilcox.rating.test and wilcox.paired.rating.multcomp removed (these tests can be problematic with ratings, CLMs (package 'ordinal') are much better)
   - new function back.lsmeans (back-transformation of LSMeans and SE interval)
 
-version 0.9-50 (08-08-2015)
-  - wald.ptheo.test now deals with overdispersion
-  - new function prop.multinom (computation of proportions and SE based on a multinomial log-linear model)
-  - new function wmean (weighted arithmetic mean)
-  - plot1comp.ind, plot1comp.var, s.corcircle2, scat.mix.categorical, scat.mix.numeric and scatter.coa2 removed (the MVA.plot function of this package does the same job and is more generic)
-  - new function splitf (random splitting of data frame, respecting the relative proportions of levels of a factor)
-  - new function MVA.cmv (cross model validation)
-  - new function MVA.cv (cross validation)
-  - DA.confusion and DA.valid removed (the MVA.cmv and MVA.cv functions of this package do the same job and are more generic)
-  - new predict methods for "MVA.cv" and "MVA.cmv" objects
-  - new function MVA.test (significance test based on cross (model) validation)
-  - PLSDA.test removed (the MVA.test function of this package does the same job and is more generic)
-  - PLSDA.ncomp removed (not really useful and the mvr function of the 'pls' package does nearly the same job)
-  - new function MVA.plot (various plots for multivariate analyses)
-  - cor.sparse removed (the MVA.plot function of this package does the same job and is more generic)
-  - LDA.format not exported anymore (the MVA.plot function of this package does the same job and is more generic)
-  - new arguments 'ord' and 'decreasing' in back.lsmeans
-  - new function MVA.anova (wrapper to anova.cca of the 'vegan' package but for type II tests)
-  - perm.t.test corrected for the computation of p-values (underestimated in some particular cases when using a two tailed test)
-  - MVA.synt rewritten
-
-version 0.9-51 (17-10-2015)
-  - small bugs corrected in MVA.plot
-  - plotresid rewritten, new support for gls models
-  - new arguments xlab and ylab in byf.hist
-
-version 0.9-52 (15-11-2015)
-  - small bugs corrected in MVA.plot
-
-version 0.9-53 (28-02-2016)
-  - small bugs corrected in MVA.synt
-  - new function multtest (univariate comparison of groups for multiple variables)
+version 0.9-41 (15-11-2014)
+  - lsm.basis.clm and lsm.basis.clmm removed (now dealt in a much powerful manner by the 'lsmeans' package)
+  - DA.var removed (the MVA.synt function of this package does the same job and is more generic)
+  - fc.multcomp removed (comparison of slopes dealt in a much powerful manner by the 'lsmeans' package)
+  - plot1comp.ind rewritten to display a more easy-to-interpret graph
+  - byf.normhist removed (not very useful and nearly same thing now done by byf.hist)
+  - MVA.synt extended to MCA and mixed analyses

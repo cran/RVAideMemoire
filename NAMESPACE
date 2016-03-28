@@ -42,6 +42,7 @@ export(
   cv,
   CvM.test,
   dendro.gp,
+  dummy,
   fisher.bintest,fisher.multcomp,
   fp.test,
   G.bintest,G.multcomp,G.test,G.theo.multcomp,
@@ -73,7 +74,7 @@ export(
   scat.cr,
   se,
   seq2,
-  spearman.ci,
+  spearman.ci,spearman.cor.multcomp,
   splitf,
   user.cont,
   wald.ptheo.test,
@@ -107,6 +108,7 @@ S3method(print,MVA.test.mult)
 S3method(print,PLSDA.VIP)
 S3method(print,RV.multcomp)
 S3method(print,RVtest)
+S3method(print,spearman.cor.multcomp)
 S3method(summary,least.rect)
 S3method(wilcox.signtest,default)
 S3method(wilcox.signtest,formula)
