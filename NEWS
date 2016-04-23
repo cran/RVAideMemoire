@@ -1,3 +1,10 @@
+version 0.9-55 (23-04-2016)
+  - function multtest renamed multtest.gp
+  - new function multtest.cor (correlation test for multiple variables)
+  - new function loc.slp (slope of a hand-defined line)
+  - new function coord.proj (coordinates of projected points)
+  - functions MVA.scores, MVA.cor and MVA.load are now visible
+
 version 0.9-54 (28-03-2016)
   - small bugs corrected in MVA.plot
   - new argument 'adj' in least.rect (correction of confidence intervals and p-values for multiple testing)

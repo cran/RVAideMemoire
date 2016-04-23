@@ -1,4 +1,4 @@
-multtest <- function(tab,fac,test=c("param","perm","rank"),transform=c("none","sqrt","log"),
+multtest.gp <- function(tab,fac,test=c("param","perm","rank"),transform=c("none","sqrt","log"),
   add=0,p.method="fdr",ordered=TRUE,...) {
   test <- match.arg(test)
   transform <- match.arg(transform)
@@ -22,8 +22,8 @@ multtest <- function(tab,fac,test=c("param","perm","rank"),transform=c("none","s
   } else {
     if (nlev>2) {"kw"} else {"mww"}
   }
-  test.f <- switch(test,anova=multtest.anova,t=multtest.t,perm.anova=multtest.perm.anova,
-    perm.t=multtest.perm.t,kw=multtest.kw,mww=multtest.mww)
+  test.f <- switch(test,anova=multtest.gp.anova,t=multtest.gp.t,perm.anova=multtest.gp.perm.anova,
+    perm.t=multtest.gp.perm.t,kw=multtest.gp.kw,mww=multtest.gp.mww)
   tab.res <- test.f(tab,fac,...)
   tab.res$P.value <- p.adjust(tab.res$P.value,method=p.method)
   tab.res[,3] <- integer(ncol(tab))
@@ -34,11 +34,11 @@ multtest <- function(tab,fac,test=c("param","perm","rank"),transform=c("none","s
   colnames(tab.res)[3] <- " "
   if (ordered) {tab.res <- tab.res[order(tab.res$P.value),]}
   res <- list(tab=tab.res,p.method=p.method,labs=levels(fac))
-  class(res) <- c("multtest","list")
+  class(res) <- c("multtest","multtest.gp","list")
   return(res)
 }
 
-multtest.anova <- function(tab,fac,...) {
+multtest.gp.anova <- function(tab,fac,...) {
   nvar <- ncol(tab)
   lab <- colnames(tab)
   res <- data.frame(F=integer(nvar),P.value=integer(nvar),row.names=lab)
@@ -51,7 +51,7 @@ multtest.anova <- function(tab,fac,...) {
   return(res)
 }
 
-multtest.t <- function(tab,fac,...) {
+multtest.gp.t <- function(tab,fac,...) {
   nvar <- ncol(tab)
   lab <- colnames(tab)
   res <- data.frame(t=integer(nvar),P.value=integer(nvar),row.names=lab)
@@ -63,7 +63,7 @@ multtest.t <- function(tab,fac,...) {
   return(res)
 }
 
-multtest.perm.anova <- function(tab,fac,...) {
+multtest.gp.perm.anova <- function(tab,fac,...) {
   nvar <- ncol(tab)
   lab <- colnames(tab)
   res <- data.frame(F=integer(nvar),P.value=integer(nvar),row.names=lab)
@@ -75,7 +75,7 @@ multtest.perm.anova <- function(tab,fac,...) {
   return(res)
 }
 
-multtest.perm.t <- function(tab,fac,...) {
+multtest.gp.perm.t <- function(tab,fac,...) {
   nvar <- ncol(tab)
   lab <- colnames(tab)
   res <- data.frame(t=integer(nvar),P.value=integer(nvar),row.names=lab)
@@ -87,7 +87,7 @@ multtest.perm.t <- function(tab,fac,...) {
   return(res)
 }
 
-multtest.kw <- function(tab,fac,...) {
+multtest.gp.kw <- function(tab,fac,...) {
   nvar <- ncol(tab)
   lab <- colnames(tab)
   res <- data.frame(Chi2=integer(nvar),P.value=integer(nvar),row.names=lab)
@@ -99,7 +99,7 @@ multtest.kw <- function(tab,fac,...) {
   return(res)
 }
 
-multtest.mww <- function(tab,fac,...) {
+multtest.gp.mww <- function(tab,fac,...) {
   nvar <- ncol(tab)
   lab <- colnames(tab)
   res <- data.frame(W=integer(nvar),P.value=integer(nvar),row.names=lab)
@@ -116,7 +116,7 @@ print.multtest <- function(x,...) {
   cat(paste("\nP value adjustment method:",x$p.method,"\n"))
 }
 
-plot.multtest <- function(x,signif=FALSE,alpha=0.05,xlab="Group",ylab="Mean (+/- SE) value",
+plot.multtest.gp <- function(x,signif=FALSE,alpha=0.05,xlab="Group",ylab="Mean (+/- SE) value",
   titles=NULL,groups=NULL,...) {
   rows <- if (signif) {
     which(x$tab$P.value<=alpha)

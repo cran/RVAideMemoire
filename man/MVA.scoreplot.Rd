@@ -169,7 +169,7 @@ Many multivariate analyses are supported, from various packages:
 
 - Mix analysis: \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{dudi.hillsmith}}.
 
-- COA: \code{\link[ade4]{dudi.coa}}, \code{\link[vegan]{cca}}. Set 1 is rows, set 2 is columns. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set. \code{scaling} can be defined for \code{\link[vegan]{rda}} (see \code{\link[vegan]{scores.cca}}).
+- COA: \code{\link[ade4]{dudi.coa}}, \code{\link[vegan]{cca}}. Set 1 is rows, set 2 is columns. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set. \code{scaling} can be defined for \code{\link[vegan]{cca}} (see \code{\link[vegan]{scores.cca}}).
 
 - DCOA: \code{\link[ade4]{dudi.dec}}. Set 1 is rows, set 2 is columns. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set.
 

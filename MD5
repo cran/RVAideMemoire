@@ -1,6 +1,6 @@
-c5fa6a88a029bec2e060d181379da3b7 *DESCRIPTION
-ab04cc649c3a3c629bc5ec5d7fba4a5c *NAMESPACE
-21f06c300258a9c752b25d1a495ae986 *NEWS
+cb51d25afd775011393239d1cdbad9d4 *DESCRIPTION
+ee11eaa8ab324d0492a0ad203733948e *NAMESPACE
+1a950af294dca450e3ae81558c2eb1d4 *NEWS
 9369df93593f7fc76a1d5885268abe44 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
 ddceaf05955eb8bd698932e152948b08 *R/CvM.test.R
@@ -21,7 +21,7 @@ f24b3ec86f9e7c1a6e77e8257c8e3e7e *R/MVA.loadplot.R
 fa3f4f39240707d3b4524a712c1f12c3 *R/MVA.pairplot.R
 25c13f45c3a816bae8882c12b8a419ce *R/MVA.plot.R
 ae16178672df2d54aae3ac49a64aaa34 *R/MVA.scoreplot.R
-e67cb8735397a70cf511ab16f4877b74 *R/MVA.scores.R
+cc2b597fd6b4227d04ad1005781687da *R/MVA.scores.R
 ae2b42afc612e850b0ad5c3b2e31d5b2 *R/MVA.synt.R
 525553f3a8d0cbef7c0f2c2de2944ad6 *R/MVA.test.R
 15dfafcc195284420305956e200a35be *R/MVA.trajplot.R
@@ -42,6 +42,7 @@ a0860cd475cdbb67b75710c50b9ce36e *R/chisq.theo.bintest.R
 e449779c41d5f9c9baf8166ad0229fa3 *R/chisq.theo.multcomp.R
 37bd6973ff5edf3d0949329152c9dc44 *R/ci.R
 e98b24a62efced546a67f96cee3a38dc *R/cochran.qtest.R
+4181f159759faf006327b847b9ecaadd *R/coord.proj.R
 ceab5a44a24abd40ab46a9c581ebe4d5 *R/cor.2comp.R
 d2425076d8962b6f9c0cacc15d6c8dc2 *R/cor.conf.R
 b796d0f45a2f1192a2be8fdb9980e137 *R/cor.multcomp.R
@@ -58,6 +59,7 @@ ffa51cdc89d589130691ca87f06f8d24 *R/fp.test.R
 621aa859246caf1ea5e8e3304a956ff2 *R/ind.contrib.R
 f480fd3a143ac8c15d0b806ff99ad929 *R/inertia.R
 0523d37ad5fc9c2cb8015e78901dae11 *R/least.rect.R
+8d5a265e9332e7556464920fe7b69e54 *R/loc.slp.R
 a85ceae9f1ce98046012eba40d810f90 *R/logis.fit.R
 130a831f1f39d18fbaf00164cae2a284 *R/logis.noise.R
 d7705c7482b3e53448c19994b45b413f *R/median.factor.R
@@ -68,7 +70,8 @@ a579afaed20d1c73c5bf7cbd5f3dd7b8 *R/mshapiro.test.R
 e9b8718d4442fea32b442be65bb82380 *R/multinomial.multcomp.R
 af32eaf5e5295699306ed2307b55c125 *R/multinomial.test.R
 4cfb048f4f03e033359d3b08f051678c *R/multinomial.theo.multcomp.R
-3ec0f35a0c08f63c102f6dfcfa05922b *R/multtest.R
+988f45b7dc96a9d92e49e9e261bd8e0d *R/multtest.cor.R
+8122db80b4906df8ec81a268dfb45683 *R/multtest.gp.R
 94ce40fb20a71fe1c5d866dbcce78794 *R/overdisp.glmer.R
 0cada605742d9277e43f6a7cf08d4a33 *R/pairwise.G.test.R
 1e0825f5d78e6a8cd75d370df94e182e *R/pairwise.mood.medtest.R
@@ -109,7 +112,7 @@ b56765189ca08f2754f6f03a9c918928 *R/splitf.R
 cf56ef4e0793a3f61ded7833859984ce *R/wilcox.paired.multcomp.R
 588714546f5b57bac4243ca8558b4b37 *R/wilcox.signtest.R
 3de4ac014037119e5dfe8a02e809f7ef *R/wmean.R
-6c5bf9a09e7c00a25461d1313abcf16e *R/zzz.R
+efca3342714fbdda771b44fb428c6abc *R/zzz.R
 a3ed2ef2d85eac6e18d6f925f5e607c0 *man/Anova.clm.Rd
 b8fc9e22252221ecd1ba737bad3e4603 *man/CvM.test.Rd
 0fa7409236b2b4735063f18c43e16384 *man/G.bintest.Rd
@@ -119,17 +122,20 @@ b8fc9e22252221ecd1ba737bad3e4603 *man/CvM.test.Rd
 15f58ddeeac260b8296c223f940ea8e3 *man/MVA.anova.Rd
 791574f1e1c529432248a8de1396d2d1 *man/MVA.biplot.Rd
 f09b12af14f9cca8f502dc6c3b2e49e1 *man/MVA.cmv.Rd
+39c0f1d28022ed5eb7a4e36a62a5259f *man/MVA.cor.Rd
 814ca9c16a41bf42ed314ce67e112882 *man/MVA.corplot.Rd
 e18fb661bdb849b8fd1caed9132be6f2 *man/MVA.cv.Rd
+50374eb4f459174f36aa4f6d3914c08e *man/MVA.load.Rd
 4a21ae4d1ef7a0f533e4a3fb4e295a1d *man/MVA.loadplot.Rd
 618bdfd6e381a7694fd967e5863839af *man/MVA.pairplot.Rd
 ae1230a267f71c644682a00a5fb6ec34 *man/MVA.plot.Rd
-59e36cf472a1d0bca014ccfc2cea3ba1 *man/MVA.scoreplot.Rd
+ede83cb6a97d0b6c833d9a55f11ba000 *man/MVA.scoreplot.Rd
+22b7759121b2faa6e6135ef6f7d63f9c *man/MVA.scores.Rd
 4402b6ce4a7604f732b3866042d2f5dc *man/MVA.synt.Rd
 b3dd5b8aa433f38b0b4f4e10b358f4b2 *man/MVA.test.Rd
 852071741a6e65fd0f8f3ab641f3ac9b *man/MVA.trajplot.Rd
 48a3852f472ed9e9a4db602c357500bb *man/PLSDA.VIP.Rd
-bdd177a216812a0c57fbcf3af4c3dec2 *man/RVAideMemoire-package.Rd
+4d2e8b8820f078b91a3569489ffe5e74 *man/RVAideMemoire-package.Rd
 e79c4cbba2fbc2a15b0b6259116ec9a6 *man/adonis.II.Rd
 23464e766e420804499773e539b29c56 *man/back.lsmeans.Rd
 b72310e5677570de6d202e63f5c9a435 *man/bootstrap.Rd
@@ -145,6 +151,7 @@ dafcdd073363ad8bf8b1e0261f8431bf *man/chisq.multcomp.Rd
 366fab9b1a2e02af47eb6ed4e771e97b *man/chisq.theo.bintest.Rd
 3ffd20e266f4adc5da8ce81dc1366d65 *man/chisq.theo.multcomp.Rd
 9943f5bfe62aa47925e3a8775587e1c6 *man/cochran.qtest.Rd
+e4553ab9f52070515ea7f1c9b32c8df3 *man/coord.proj.Rd
 3eef70c2f5fad622bf5307d563a80c99 *man/cor.2comp.Rd
 d5c4aaaed3cb52510fbf81eeb028729e *man/cor.conf.Rd
 178630c994d75c80fc0ade0c033ded97 *man/cor.multcomp.Rd
@@ -159,6 +166,7 @@ aac47b274c4bfe4dbd28aac383e10456 *man/fisher.multcomp.Rd
 3b0c7068619d2a347cb7dc5190933ad2 *man/fp.test.Rd
 699e228dbbf8ab80a5393f6d8e0e4485 *man/ind.contrib.Rd
 9a419b7bc683c4b66187f73b0fc3225a *man/least.rect.Rd
+948c06f0ef46d71130bcf7c82e6e2cf7 *man/loc.slp.Rd
 24919a1972cfaebe71b70098395c7376 *man/logis.fit.Rd
 60816ec42b0d27419df9117b0d3d10c3 *man/logis.noise.Rd
 806ba6d4169198dba40f3d4810070e8f *man/mod.Rd
@@ -168,7 +176,8 @@ e51532fa94233ad8864b73573e6fe401 *man/mshapiro.test.Rd
 cd7e3704a6739b0a6cd5800fd3bf6093 *man/multinomial.multcomp.Rd
 fba4d851155010f11d93df27edadd59e *man/multinomial.test.Rd
 0fcc83815c4310d6d6ac7010782a7f54 *man/multinomial.theo.multcomp.Rd
-04f5e23d5d7f64bcefa215bf5a5ae150 *man/multtest.Rd
+525c4ee683807897b9c6bd31d3ecfec8 *man/multtest.cor.Rd
+31449ba23e78002aec4a15b52451531e *man/multtest.gp.Rd
 fadfd6d14c5edefed6e666021903f868 *man/overdisp.glmer.Rd
 397307c5368cd9943d62eef5e12cc363 *man/pairwise.G.test.Rd
 17413ced645fa3b42b7ec84da1f0b808 *man/pairwise.mood.medtest.Rd

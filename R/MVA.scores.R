@@ -1,4 +1,4 @@
-MVA.scores <- function(x,xax=1,yax=2,scaling=2,set=12,space=1,...) {
+MVA.scores <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,...) {
   if (length(set)!=1) {set <- 12}
   if (!set %in% c(12,1,2)) {stop("wrong 'set'")}
   x <- MVA.ident(x)

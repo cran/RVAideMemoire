@@ -1,6 +1,6 @@
-\name{multtest}
-\alias{multtest}
-\alias{plot.multtest}
+\name{multtest.gp}
+\alias{multtest.gp}
+\alias{plot.multtest.gp}
 \title{
 Univariate comparison of groups for multiple variables
 }
@@ -8,11 +8,11 @@ Univariate comparison of groups for multiple variables
 Performs group comparisons for multiple variables using parametric, permutational or rank tests, and corrects p-values. Gives also group means and standards errors for each variable.
 }
 \usage{
-multtest(tab, fac, test = c("param", "perm", "rank"),
+multtest.gp(tab, fac, test = c("param", "perm", "rank"),
   transform = c("none", "sqrt", "log"), add = 0, p.method = "fdr",
   ordered = TRUE, ...)
 
-\method{plot}{multtest}(x, signif = FALSE, alpha = 0.05,
+\method{plot}{multtest.gp}(x, signif = FALSE, alpha = 0.05,
   xlab = "Group", ylab = "Mean (+/- SE) value", titles = NULL,
   groups = NULL, ...)
 }
@@ -39,7 +39,7 @@ method for p-values correction. See help of \code{\link{p.adjust}}.
 logical indicating if variables should be ordered based on p-values.
 }
   \item{x}{
-object returned from \code{multtest}.
+object returned from \code{multtest.gp}.
 }
   \item{signif}{
 logical indicating if only variables with significant P-value should be plotted.
@@ -60,7 +60,7 @@ titles of the graphs (name of the variables by default).
 names of the bars (levels of \code{fac} by default).
 }
   \item{\dots}{
-additional arguments to testing functions in \code{multtest} (especially for \code{var.equal} in \code{\link{t.test}} and \code{nperm} in \code{\link[RVAideMemoire]{perm.anova}} and \code{\link[RVAideMemoire]{perm.t.test}}) and to \code{\link{barplot}} in \code{plot}.
+additional arguments to testing functions in \code{multtest.gp} (especially for \code{var.equal} in \code{\link{t.test}} and \code{nperm} in \code{\link[RVAideMemoire]{perm.anova}} and \code{\link[RVAideMemoire]{perm.t.test}}) and to \code{\link{barplot}} in \code{plot}.
 }
 }
 \details{
@@ -74,6 +74,6 @@ Maxime Hervé <mx.herve@gmail.com>
 }
 \examples{
 data(iris)
-mult <- multtest(iris[,1:4],iris$Species)
+mult <- multtest.gp(iris[,1:4],iris$Species)
 plot(mult)
 }

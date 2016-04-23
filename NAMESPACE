@@ -15,7 +15,7 @@
 
 importFrom(ade4,randtest)
 importFrom(car,Anova,qqPlot)
-importFrom(graphics,abline,arrows,axis,barplot,box,hist,dotchart,legend,lines,mosaicplot,mtext,panel.smooth,par,
+importFrom(graphics,abline,arrows,axis,barplot,box,hist,dotchart,legend,lines,locator,mosaicplot,mtext,panel.smooth,par,
   plot,points,polygon,rect,rug,segments,strheight,strwidth,symbols,text,title)
 importFrom(grDevices,chull,col2rgb,n2mfrow,palette,rgb)
 importFrom(stats,aggregate,anova,as.dist,as.formula,bartlett.test,binom.test,chisq.test,complete.cases,cor,cor.test,
@@ -36,6 +36,7 @@ export(
   byf.hist,byf.mqqnorm,byf.mshapiro,byf.qqnorm,byf.shapiro,
   chisq.bintest,chisq.bin.exp,chisq.exp,chisq.multcomp,chisq.theo.bintest,chisq.theo.multcomp,
   cochran.qtest,
+  coord.proj,
   cor.2comp,cor.conf,cor.multcomp,
   cox.resid,
   cramer.test,
@@ -48,15 +49,17 @@ export(
   G.bintest,G.multcomp,G.test,G.theo.multcomp,
   ind.contrib,
   least.rect,
+  loc.slp,
   logis.fit,logis.noise,
   mod,
   mood.medtest,
   mqqnorm,
   mshapiro.test,
   multinomial.multcomp,multinomial.test,multinomial.theo.multcomp,
-  multtest,
+  multtest.gp,multtest.cor,
   MVA.anova,
   MVA.cmv,MVA.cv,MVA.test,
+  MVA.cor,MVA.load,MVA.scores,
   MVA.plot,MVA.scoreplot,MVA.loadplot,MVA.corplot,MVA.biplot,MVA.pairplot,MVA.trajplot,
   MVA.synt,
   overdisp.glmer,
@@ -92,7 +95,8 @@ S3method(perm.t.test,default)
 S3method(perm.t.test,formula)
 S3method(perm.var.test,default)
 S3method(perm.var.test,formula)
-S3method(plot,multtest)
+S3method(plot,multtest.gp)
+S3method(plot,multtest.cor)
 S3method(predict,coadisc)
 S3method(predict,least.rect)
 S3method(predict,MVA.cv)
