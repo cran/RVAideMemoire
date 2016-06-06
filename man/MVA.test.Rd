@@ -7,7 +7,7 @@ Significance test based on cross (model) validation
 Performs a permutational significance test based on cross (model) validation with different PLS and/or discriminant analyses. See \code{\link[RVAideMemoire]{MVA.cv}} and \code{\link[RVAideMemoire]{MVA.cmv}} for more details about how cross (model) validation is performed.
 }
 \usage{
-MVA.test(X, Y, cmv = FALSE, ncomp = 5, kout = 7, kinn = 8, model = c("PLSR",
+MVA.test(X, Y, cmv = FALSE, ncomp = 8, kout = 7, kinn = 6, model = c("PLSR",
   "CPPLS", "PLS-DA", "PPLS-DA", "LDA", "QDA", "PLS-DA/LDA", "PLS-DA/QDA",
   "PPLS-DA/LDA","PPLS-DA/QDA"), Q2diff = 0.05, lower = 0.5, upper = 0.5,
   Y.add = NULL, weights = rep(1, nrow(X)), set.prior = FALSE,
@@ -25,13 +25,13 @@ the dependent variable(s): numeric vector, data frame of quantitative variables 
 a logical indicating if the values (Q2 or NMC) should be generated through cross-validation (classical K-fold process) or cross model validation (inner + outer loops).
 }
   \item{ncomp}{
-an integer giving the number of components to be used to generate all submodels (cross-validation) or the maximal number of components to be tested in the inner loop (cross model validation). Does not concern LDA and QDA.
+an integer giving the number of components to be used to generate all submodels (cross-validation) or the maximal number of components to be tested in the inner loop (cross model validation).   Can be re-set internally if needed. Does not concern LDA and QDA.
 }
   \item{kout}{
-an integer giving the number of folds (cross-validation) or the number of folds in the outer loop (cross-model validation).
+an integer giving the number of folds (cross-validation) or the number of folds in the outer loop (cross-model validation).  Can be re-set internally if needed.
 }
   \item{kinn}{
-an integer giving the number of folds in the inner loop (cross model validation only).
+an integer giving the number of folds in the inner loop (cross model validation only).  Can be re-set internally if needed. Cannot be \code{> kout}.
 }
   \item{model}{
 the model to be fitted.
@@ -103,5 +103,5 @@ data(yarn)
 
 # PPLS-DA coupled to LDA
 data(mayonnaise)
-\dontrun{MVA.test(mayonnaise$NIR,factor(mayonnaise$oil.type),model="PPLS-DA/LDA",crit.inn="NMC")}
+\dontrun{MVA.test(mayonnaise$NIR,factor(mayonnaise$oil.type),model="PPLS-DA/LDA")}
 }

@@ -39,20 +39,21 @@ print.MVA.cmv <- function(x,...) {
   cat("\n")
 }
 
-MVA.cmv <- function(X,Y,repet=10,kout=7,kinn=8,ncomp=8,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","PLS-DA/LDA",
+MVA.cmv <- function(X,Y,repet=10,kout=7,kinn=6,ncomp=8,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","PLS-DA/LDA",
   "PLS-DA/QDA","PPLS-DA/LDA","PPLS-DA/QDA"),crit.inn=c("RMSEP","Q2","NMC"),Q2diff=0.05,lower=0.5,upper=0.5,
   Y.add=NULL,weights=rep(1,nrow(X)),set.prior=FALSE,crit.DA=c("plug-in","predictive","debiased"),...) {
   model <- match.arg(model)
   crit.inn <- match.arg(crit.inn)
   crit.DA <- match.arg(crit.DA)
+  if (kinn>kout) {stop("'kinn' must be < 'kout'")}
   type <- if (model %in% c("PLSR","CPPLS")) {"quant"} else {
     if (model %in% c("PLS-DA","PPLS-DA")) {"qual1"} else {"qual2"}
   }
   if (type=="quant" & is.factor(Y)) {
     if (model=="PLSR") {
-	warning("'model' re-set to 'PLS-DA' and 'crit.inn' to 'NMC'")
+	warning("'model' re-set to 'PLS-DA' and 'kinn' to 'NMC'")
     } else {
-	warning("'model' re-set to 'PPLS-DA' and 'crit.inn' to 'NMC'")
+	warning("'model' re-set to 'PPLS-DA' and 'kinn' to 'NMC'")
     }
     model <- ifelse(model=="PLSR","PLS-DA","PPLS-DA")
     type <- "qual1"
@@ -61,17 +62,19 @@ MVA.cmv <- function(X,Y,repet=10,kout=7,kinn=8,ncomp=8,model=c("PLSR","CPPLS","P
   if (type=="quant") {
     if (!crit.inn %in% c("RMSEP","Q2")) {stop("'crit.inn' must be 'RMSEP' or 'Q2'")}
   } else {
-    if (!crit.inn %in% c("NMC")) {warning("'crit.inn' re-set to 'NMC'")}
+    if (crit.inn!="NMC") warning("'crit.inn' re-set to 'NMC'")
     crit.inn <- "NMC"
   }
+  fac.Y <- FALSE
   if (is.factor(Y)) {
+    fac.Y <- TRUE
     Yfac <- Y
     lev <- paste0("Y.",levels(Y))
     Y <- I(model.matrix(~Y-1))
   }
   X <- as.matrix(as.data.frame(X))
   Y <- as.matrix(as.data.frame(Y))
-  if (is.factor(Y)) {colnames(Y) <- lev}
+  if (fac.Y) {colnames(Y) <- lev}
   prior <- NULL
   if (set.prior) {
     mweights <- tapply(weights,Yfac,mean)
@@ -118,12 +121,11 @@ MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,model,crit.inn,Q2diff,lower,
 	rest.set.X <- as.matrix(as.data.frame(rest.set[,col.X]))
 	rownames(rest.set) <- 1:nrow(rest.set)
 	val.sets.list <- split(rest.set,sample(gl(kinn,1,nrow(rest.set))))
-	if (j==1) {
-	  nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
-	  if (ncomp>=nmax) {
-	    ncomp <- nmax-1
-	    warning(paste0("'ncomp' re-set to ",ncomp))
-	  }
+	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
+	if (ncomp>=nmax) {
+	  ncomp2 <- nmax-1
+	} else {
+	  ncomp2 <- ncomp
 	}
 	pred.inn <- list()
 	length(pred.inn) <- ncomp
@@ -198,6 +200,9 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,model,crit.inn,lower,
   whole.set <- as.data.frame(cbind(weights,Y.add,Y,X))
   rownames(whole.set) <- 1:nrow(whole.set)
   trueclass <- apply(Y,1,function(x) {colnames(Y)[which(x==1)]})
+  kout2 <- findk(whole.set,trueclass,kout)
+  if (kout2!=kout) {warning(paste("'kout' re-set to",kout2))}
+  kout <- kout2
   col.Yadd <- if (!is.null(Y.add)) {2:(2+ncol(Y.add)-1)} else {NULL}
   col.Y <- if (!is.null(Y.add)) {(2+ncol(Y.add)):(2+ncol(Y.add)+ncol(Y)-1)} else {2:(2+ncol(Y)-1)}
   col.X <- if (!is.null(Y.add)) {(2+ncol(Y.add)+ncol(Y)):ncol(whole.set)} else {(2+ncol(Y)):ncol(whole.set)}
@@ -225,15 +230,17 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,model,crit.inn,lower,
 	rest.set.X <- as.matrix(as.data.frame(rest.set[,col.X]))
 	rest.set.trueclass <- trueclass[-as.numeric(rownames(test.set))]
 	rownames(rest.set) <- names(rest.set.trueclass) <- 1:nrow(rest.set)
+	kinn2 <- findk(rest.set,rest.set.trueclass,kinn)
+	if (kinn2!=kinn) {warning(paste("'kinn' re-set to",kinn2))}
+	kinn <- kinn2
 	val.sets.list <- splitf(rest.set,factor(rest.set.trueclass),kinn)
-	if (j==1) {
-	  nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
-	  if (ncomp>=nmax) {
-	    ncomp <- nmax-1
-	    warning(paste0("'ncomp' re-set to ",ncomp))
-	  }
+	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
+	if (ncomp>=nmax) {
+	  ncomp2 <- nmax-1
+	} else {
+	  ncomp2 <- ncomp
 	}
-	pred.inn <- matrix("",nrow=nrow(rest.set),ncol=ncomp,dimnames=list(rownames(rest.set),1:ncomp))
+	pred.inn <- matrix("",nrow=nrow(rest.set),ncol=ncomp2,dimnames=list(rownames(rest.set),1:ncomp2))
 	for (k in 1:kinn) {
 	  val.set <- val.sets.list[[k]]
 	  val.set.X <- as.matrix(as.data.frame(val.set[,col.X]))
@@ -243,13 +250,13 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,model,crit.inn,lower,
 	  train.set.Y <- as.matrix(as.data.frame(train.set[,col.Y]))
 	  train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
 	  model.kinn <- if (model=="PLS-DA") {
-	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp,...)
+	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp2,...)
 	  } else {
 	    if (!is.null(Y.add)) {
-		pls::cppls(train.set.Y~train.set.X,ncomp=ncomp,lower=lower,upper=upper,Y.add=train.set.Yadd,
+		pls::cppls(train.set.Y~train.set.X,ncomp=ncomp2,lower=lower,upper=upper,Y.add=train.set.Yadd,
 		  weights=train.set.weights,...)
 	    } else {
-		pls::cppls(train.set.Y~train.set.X,ncomp=ncomp,lower=lower,upper=upper,weights=train.set.weights,...)
+		pls::cppls(train.set.Y~train.set.X,ncomp=ncomp2,lower=lower,upper=upper,weights=train.set.weights,...)
 	    }
 	  }
 	  pred.inn.dummy <- predict(model.kinn,newdata=val.set.X)
@@ -286,6 +293,9 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,model,crit.inn,l
   whole.set <- as.data.frame(cbind(weights,Y.add,Y,X))
   rownames(whole.set) <- 1:nrow(whole.set)
   trueclass <- as.character(Yfac)
+  kout2 <- findk(whole.set,trueclass,kout)
+  if (kout2!=kout) {warning(paste("'kout' re-set to",kout2))}
+  kout <- kout2
   col.Yadd <- if (!is.null(Y.add)) {2:(2+ncol(Y.add)-1)} else {NULL}
   col.Y <- if (!is.null(Y.add)) {(2+ncol(Y.add)):(2+ncol(Y.add)+ncol(Y)-1)} else {2:(2+ncol(Y)-1)}
   col.X <- if (!is.null(Y.add)) {(2+ncol(Y.add)+ncol(Y)):ncol(whole.set)} else {(2+ncol(Y)):ncol(whole.set)}
@@ -314,15 +324,17 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,model,crit.inn,l
 	rest.set.trueclass <- trueclass[-as.numeric(rownames(test.set))]
 	rest.set.Yfac <- Yfac[-as.numeric(rownames(test.set))]
 	rownames(rest.set) <- names(rest.set.trueclass) <- 1:nrow(rest.set)
+	kinn2 <- findk(rest.set,rest.set.trueclass,kinn)
+	if (kinn2!=kinn) {warning(paste("'kinn' re-set to",kinn2))}
+	kinn <- kinn2
 	val.sets.list <- splitf(rest.set,factor(rest.set.trueclass),kinn)
-	if (j==1) {
-	  nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
-	  if (ncomp>=nmax) {
-	    ncomp <- nmax-1
-	    warning(paste0("'ncomp' re-set to ",ncomp))
-	  }
+	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
+	if (ncomp>=nmax) {
+	  ncomp2 <- nmax-1
+	} else {
+	  ncomp2 <- ncomp
 	}
-	pred.inn <- matrix("",nrow=nrow(rest.set),ncol=ncomp,dimnames=list(rownames(rest.set),1:ncomp))
+	pred.inn <- matrix("",nrow=nrow(rest.set),ncol=ncomp2,dimnames=list(rownames(rest.set),1:ncomp2))
 	for (k in 1:kinn) {
 	  val.set <- val.sets.list[[k]]
 	  val.set.X <- as.matrix(as.data.frame(val.set[,col.X]))
@@ -333,18 +345,18 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,model,crit.inn,l
 	  train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
 	  train.set.Yfac <- rest.set.Yfac[-as.numeric(rownames(val.set))]
 	  model.kinn.temp <- if (model %in% c("PLS-DA/LDA","PLS-DA/QDA")) {
-	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp,...)
+	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp2,...)
 	  } else {
 	    if (!is.null(Y.add)) {
-		pls::cppls(train.set.Y~train.set.X,ncomp=ncomp,lower=lower,upper=upper,Y.add=train.set.Yadd,
+		pls::cppls(train.set.Y~train.set.X,ncomp=ncomp2,lower=lower,upper=upper,Y.add=train.set.Yadd,
 		  weights=train.set.weights,...)
 	    } else {
-		pls::cppls(train.set.Y~train.set.X,ncomp=ncomp,lower=lower,upper=upper,weights=train.set.weights,...)
+		pls::cppls(train.set.Y~train.set.X,ncomp=ncomp2,lower=lower,upper=upper,weights=train.set.weights,...)
 	    }
 	  }
 	  models.kinn <- list()
-	  length(models.kinn) <- ncomp
-	  for (l in 1:ncomp) {
+	  length(models.kinn) <- ncomp2
+	  for (l in 1:ncomp2) {
 	    models.kinn[[l]] <- if (model %in% c("PLS-DA/LDA","PPLS-DA/LDA")) {
 		if (!is.null(prior)) {
 		  MASS::lda(as.matrix(model.kinn.temp$scores[,1:l]),train.set.Yfac,prior=prior,tol=1.0e-8)

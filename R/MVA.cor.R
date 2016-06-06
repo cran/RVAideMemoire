@@ -327,7 +327,6 @@ MVA.get.corr.RDA.vegan <- function(x,xax,yax,set,space,...) {
 	numX <- FALSE
     } else {
 	if (!all(type)) {indep.var <- indep.var[,type]}
-	tab <- as.data.frame(tab)
 	X <- cor(indep.var,sco,use="pairwise")
 	Y <- cor(dep.var,sco,use="pairwise")
 	if (is.null(rownames(X))) {
@@ -366,7 +365,6 @@ MVA.get.corr.RDA.ade4 <- function(x,set,...) {
 	numX <- FALSE
     } else {
 	if (!all(type)) {indep.var <- indep.var[,type]}
-	tab <- as.data.frame(tab)
 	X <- cor(indep.var,sco,use="pairwise")
 	Y <- cor(x$Y,sco,use="pairwise")
 	colnames(Y) <- colnames(X)

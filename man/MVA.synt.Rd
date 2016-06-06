@@ -32,6 +32,12 @@ Many multivariate analyses are supported, from various packages. The list will p
 
 - nMDS: \code{\link[vegan]{monoMDS}}, \code{\link[vegan]{metaMDS}}, \code{\link[labdsv]{nmds}}, \code{\link[MASS]{isoMDS}}: stress.
 
+- RDA: \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan]{rda}}: \% of constrained and unconstrained total variance, \% of constrained variance explained by constrained axes (\code{\link[ade4]{pcaiv}} and \code{\link[vegan]{rda}}), \% of unconstrained variance explained by unconstrained axes (\code{\link[ade4]{pcaivortho}} and \code{\link[vegan]{rda}}).
+
+- COA: \code{\link[ade4]{dudi.coa}}, \code{\link[vegan]{cca}}: \% of total inertia explained by each axis.
+
+- CCA: \code{\link[ade4]{cca}}, \code{\link[vegan]{cca}}: \% of constrained and unconstrained total inertia, \% of constrained inertia explained by constrained axes, \% of unconstrained inertia explained by unconstrained axes (\code{\link[vegan]{cca}} only).
+
 - LDA: \code{\link[MASS]{lda}}, \code{\link[ade4]{discrimin}}: \% of intergroup variance explained by each axis.
 
 - PLS-DA (PLS2 on a dummy-coded factor): \code{\link[mixOmics]{plsda}}: \% of intergroup variance explained by each axis.

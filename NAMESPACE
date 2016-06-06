@@ -13,7 +13,7 @@
 #   - statmod : qresiduals
 #   - vegan : adonis
 
-importFrom(ade4,randtest)
+importFrom(ade4,dudi.coa,randtest)
 importFrom(car,Anova,qqPlot)
 importFrom(graphics,abline,arrows,axis,barplot,box,hist,dotchart,legend,lines,locator,mosaicplot,mtext,panel.smooth,par,
   plot,points,polygon,rect,rug,segments,strheight,strwidth,symbols,text,title)

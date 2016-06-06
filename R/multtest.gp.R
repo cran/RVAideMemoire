@@ -3,6 +3,7 @@ multtest.gp <- function(tab,fac,test=c("param","perm","rank"),transform=c("none"
   test <- match.arg(test)
   transform <- match.arg(transform)
   tab <- as.data.frame(tab)
+  fac <- droplevels(factor(fac))
   nlev <- nlevels(fac)
   if (nlev<2) {stop("at least 2 groups are needed")}
   gp.mean <- as.matrix(t(aggregate(as.matrix(tab)~fac,FUN=mean,na.rm=TRUE))[-1,])
@@ -116,12 +117,17 @@ print.multtest <- function(x,...) {
   cat(paste("\nP value adjustment method:",x$p.method,"\n"))
 }
 
-plot.multtest.gp <- function(x,signif=FALSE,alpha=0.05,xlab="Group",ylab="Mean (+/- SE) value",
+plot.multtest.gp <- function(x,signif=FALSE,alpha=0.05,vars=NULL,xlab="Group",ylab="Mean (+/- SE) value",
   titles=NULL,groups=NULL,...) {
   rows <- if (signif) {
     which(x$tab$P.value<=alpha)
   } else {
     1:nrow(x$tab)
+  }
+  rows <- if (is.null(vars)) {
+    1:length(rows)
+  } else {
+    vars
   }
   tab2 <- x$tab[rows,]
   n <- length(rows)
@@ -139,7 +145,7 @@ plot.multtest.gp <- function(x,signif=FALSE,alpha=0.05,xlab="Group",ylab="Mean (
 	ylim=c(ymin,ymax),...)
     arrows(g,m-s,g,m+s,code=3,angle=90,length=0.06)
     ypval <- ifelse(any(m+s>0),1.2*max(m+s),1.2*min(m-s))
-    P <- ifelse(tab2$P.value[i]<0.0001,"P < 0.0001",paste("P =",tab2$P.value[i]))
+    P <- ifelse(tab2$P.value[i]<0.0001,"P < 0.0001",paste("P =",round(tab2$P.value[i],4)))
     text(mean(g),ypval,P)
   }
 }

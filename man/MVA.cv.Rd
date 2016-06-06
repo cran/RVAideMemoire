@@ -7,7 +7,7 @@ Cross validation
 Performs cross validation with different PLS and/or discriminant analyses.
 }
 \usage{
-MVA.cv(X, Y, repet = 10, k = 7, ncomp = 5, model = c("PLSR","CPPLS",
+MVA.cv(X, Y, repet = 10, k = 7, ncomp = 8, model = c("PLSR","CPPLS",
   "PLS-DA", "PPLS-DA", "LDA", "QDA", "PLS-DA/LDA", "PLS-DA/QDA", "PPLS-DA/LDA",
   "PPLS-DA/QDA"), lower = 0.5, upper = 0.5, Y.add = NULL, weights = rep(1,
   nrow(X)), set.prior = FALSE, crit.DA = c("plug-in", "predictive",
@@ -21,10 +21,10 @@ a data frame of independent variables.
 the dependent variable(s): numeric vector, data frame of quantitative variables or factor.
 }
   \item{repet}{
-an integer giving the number of times the whole 2CV procedure has to be repeated.
+an integer giving the number of times the whole procedure has to be repeated.
 }
   \item{k}{
-an integer giving the number of folds.
+an integer giving the number of folds (can be re-set internally if needed).
 }
   \item{ncomp}{
 an integer giving the number of components to be used for all models except LDA and QDA (can be re-set depending on the size of the train sets).
@@ -89,5 +89,5 @@ data(yarn)
 
 # PPLS-DA coupled to LDA
 data(mayonnaise)
-\dontrun{MVA.cv(mayonnaise$NIR,factor(mayonnaise$oil.type),model="PPLS-DA/LDA",crit.inn="NMC")}
+\dontrun{MVA.cv(mayonnaise$NIR,factor(mayonnaise$oil.type),model="PPLS-DA/LDA")}
 }

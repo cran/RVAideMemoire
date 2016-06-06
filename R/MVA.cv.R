@@ -38,7 +38,7 @@ print.MVA.cv <- function(x,...) {
   cat("\n")
 }
 
-MVA.cv <- function(X,Y,repet=10,k=7,ncomp=5,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","LDA","QDA","PLS-DA/LDA",
+MVA.cv <- function(X,Y,repet=10,k=7,ncomp=8,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","LDA","QDA","PLS-DA/LDA",
   "PLS-DA/QDA","PPLS-DA/LDA","PPLS-DA/QDA"),lower=0.5,upper=0.5,Y.add=NULL,weights=rep(1,nrow(X)),set.prior=FALSE,
   crit.DA=c("plug-in","predictive","debiased"),...) {
   model <- match.arg(model)
@@ -55,14 +55,16 @@ MVA.cv <- function(X,Y,repet=10,k=7,ncomp=5,model=c("PLSR","CPPLS","PLS-DA","PPL
     model <- ifelse(model=="PLSR","PLS-DA","PPLS-DA")
     type <- "qual1"
   }
+  fac.Y <- FALSE
   if (is.factor(Y)) {
+    fac.Y <- TRUE
     Yfac <- Y
     lev <- paste0("Y.",levels(Y))
     Y <- I(model.matrix(~Y-1))
   }
   X <- as.matrix(as.data.frame(X))
   Y <- as.matrix(as.data.frame(Y))
-  if (is.factor(Y)) {colnames(Y) <- lev}
+  if (fac.Y) {colnames(Y) <- lev}
   prior <- NULL
   if (set.prior) {
     mweights <- tapply(weights,Yfac,mean)
@@ -104,13 +106,12 @@ MVA.cv.quant <- function(X,Y,repet,k,ncomp,model,lower,upper,Y.add,weights,...) 
 	train.set.weights <- train.set$weights
 	train.set.Yadd <- train.set[,col.Yadd]
 	train.set.Y <- as.matrix(as.data.frame(train.set[,col.Y]))
-	if (j==1) {
+#	if (j==1) {
 	  nmax <- min(c(nrow(train.set)-max(unlist(lapply(test.sets.list.k,nrow))),ncol(X)+1))
 	  if (ncomp>=nmax) {
 	    ncomp <- nmax-1
-	    warning(paste0("'ncomp' re-set to ",ncomp))
 	  }
-	}
+#	}
 	model.k <- if (model=="PLSR") {
 	  pls::plsr(train.set.Y~train.set.X,ncomp=ncomp,...)
 	} else {
@@ -135,6 +136,9 @@ MVA.cv.qual1 <- function(X,Y,Yfac,groups,repet,k,ncomp,model,lower,upper,Y.add,w
   whole.set <- as.data.frame(cbind(weights,Y.add,Y,X))
   rownames(whole.set) <- 1:nrow(whole.set)
   trueclass <- apply(Y,1,function(x) {colnames(Y)[which(x==1)]})
+  k2 <- findk(whole.set,trueclass,k)
+  if (k2!=k) {warning(paste("'k' re-set to",k2))}
+  k <- k2
   levels(Yfac) <- unique(trueclass)
   col.Yadd <- if (!is.null(Y.add)) {2:(2+ncol(Y.add)-1)} else {NULL}
   col.Y <- if (!is.null(Y.add)) {(2+ncol(Y.add)):(2+ncol(Y.add)+ncol(Y)-1)} else {2:(2+ncol(Y)-1)}
@@ -160,16 +164,15 @@ MVA.cv.qual1 <- function(X,Y,Yfac,groups,repet,k,ncomp,model,lower,upper,Y.add,w
 	train.set.Yfac <- Yfac[-as.numeric(rownames(test.set))]
 	train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
 	train.set.trueclass <- trueclass[-as.numeric(rownames(test.set))]
-	if (j==1) {
-	  if (model %in% c("PLS-DA","PPLS-DA")) {
-	    nmax <- min(c(nrow(train.set)-max(unlist(lapply(test.sets.list.k,nrow))),ncol(X)+1))
-	    if (ncomp>=nmax) {
-		ncomp <- nmax-1
-		warning(paste0("'ncomp' re-set to ",ncomp))
-	    }
+	if (model %in% c("PLS-DA","PPLS-DA")) {
+	  nmax <- min(c(nrow(train.set),ncol(X)+1))
+	  if (ncomp>=nmax) {
+	    ncomp2 <- nmax-1
 	  } else {
-	    ncomp <- nlevels(Yfac)-1
+	    ncomp2 <- ncomp
 	  }
+	} else {
+	  ncomp2 <- nlevels(Yfac)-1
 	}
 	model.k <- if (model=="LDA") {
 	  if (!is.null(prior)) {
@@ -184,20 +187,20 @@ MVA.cv.qual1 <- function(X,Y,Yfac,groups,repet,k,ncomp,model,lower,upper,Y.add,w
 	    MASS::qda(as.matrix(train.set.X),train.set.Yfac,tol=1.0e-8)
 	  }
 	} else if (model=="PLS-DA") {
-	  pls::plsr(train.set.Y~train.set.X,ncomp=ncomp,...)
+	  pls::plsr(train.set.Y~train.set.X,ncomp=ncomp2,...)
 	} else {
 	  if (!is.null(Y.add)) {
-	    pls::cppls(train.set.Y~train.set.X,ncomp=ncomp,lower=lower,upper=upper,Y.add=train.set.Yadd,
+	    pls::cppls(train.set.Y~train.set.X,ncomp=ncomp2,lower=lower,upper=upper,Y.add=train.set.Yadd,
 		weights=train.set.weights,...)
 	  } else {
-	    pls::cppls(train.set.Y~train.set.X,ncomp=ncomp,lower=lower,upper=upper,weights=train.set.weights,...)
+	    pls::cppls(train.set.Y~train.set.X,ncomp=ncomp2,lower=lower,upper=upper,weights=train.set.weights,...)
 	  }
 	}
 	models.list[[i*k-(k-j)]] <- model.k
 	if (model %in% c("LDA","QDA")) {
 	  pred.lev <- as.character(predict(model.k,newdata=test.set.X,method=crit.DA)$class)
 	} else {
-	  pred.dummy <- predict(model.k,newdata=test.set.X,ncomp=ncomp)
+	  pred.dummy <- predict(model.k,newdata=test.set.X,ncomp=ncomp2)
 	  pred.lev <- apply(pred.dummy,1,function(x) {colnames(Y)[which.max(x)]})
 	}
 	pred[as.numeric(rownames(test.set))] <- pred.lev
@@ -206,7 +209,7 @@ MVA.cv.qual1 <- function(X,Y,Yfac,groups,repet,k,ncomp,model,lower,upper,Y.add,w
     rate <- 1-sum(pred.correct)/length(pred.correct)
     NMC[i] <- rate
   }
-  return(list(model=model,type="qual1",repet=repet,k=k,ncomp=ncomp,crit.DA=crit.DA,groups=groups,
+  return(list(model=model,type="qual1",repet=repet,k=k,ncomp=ncomp2,crit.DA=crit.DA,groups=groups,
     models.list=models.list,NMC=NMC))
 }
 
@@ -214,6 +217,9 @@ MVA.cv.qual2 <- function(X,Y,Yfac,groups,repet,k,ncomp,model,lower,upper,Y.add,w
   whole.set <- as.data.frame(cbind(weights,Y.add,Y,X))
   rownames(whole.set) <- 1:nrow(whole.set)
   trueclass <- as.character(Yfac)
+  k2 <- findk(whole.set,trueclass,k)
+  if (k2!=k) {warning(paste("'k' re-set to",k2))}
+  k <- k2
   col.Yadd <- if (!is.null(Y.add)) {2:(2+ncol(Y.add)-1)} else {NULL}
   col.Y <- if (!is.null(Y.add)) {(2+ncol(Y.add)):(2+ncol(Y.add)+ncol(Y)-1)} else {2:(2+ncol(Y)-1)}
   col.X <- if (!is.null(Y.add)) {(2+ncol(Y.add)+ncol(Y)):ncol(whole.set)} else {(2+ncol(Y)):ncol(whole.set)}
@@ -238,21 +244,20 @@ MVA.cv.qual2 <- function(X,Y,Yfac,groups,repet,k,ncomp,model,lower,upper,Y.add,w
 	train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
 	train.set.trueclass <- trueclass[-as.numeric(rownames(test.set))]
 	train.set.Yfac <- Yfac[-as.numeric(rownames(test.set))]
-	if (j==1) {
-	  nmax <- min(c(nrow(train.set)-max(unlist(lapply(test.sets.list.k,nrow))),ncol(X)+1))
-	  if (ncomp>=nmax) {
-	    ncomp <- nmax-1
-	    warning(paste0("'ncomp' re-set to ",ncomp))
-	  }
+	nmax <- min(c(nrow(train.set),ncol(X)+1))
+	if (ncomp>=nmax) {
+	  ncomp2 <- nmax-1
+	} else {
+	  ncomp2 <- ncomp
 	}
 	model.k.temp <- if (model %in% c("PLS-DA/LDA","PLS-DA/QDA")) {
-	  pls::plsr(train.set.Y~train.set.X,ncomp=ncomp,...)
+	  pls::plsr(train.set.Y~train.set.X,ncomp=ncomp2,...)
 	} else {
 	  if (!is.null(Y.add)) {
-	    pls::cppls(train.set.Y~train.set.X,ncomp=ncomp,lower=lower,upper=upper,Y.add=train.set.Yadd,
+	    pls::cppls(train.set.Y~train.set.X,ncomp=ncomp2,lower=lower,upper=upper,Y.add=train.set.Yadd,
 		weights=train.set.weights,...)
 	  } else {
-	    pls::cppls(train.set.Y~train.set.X,ncomp=ncomp,lower=lower,upper=upper,weights=train.set.weights,...)
+	    pls::cppls(train.set.Y~train.set.X,ncomp=ncomp2,lower=lower,upper=upper,weights=train.set.weights,...)
 	  }
 	}
 	models.list1[[i*k-(k-j)]] <- model.k.temp
@@ -277,7 +282,7 @@ MVA.cv.qual2 <- function(X,Y,Yfac,groups,repet,k,ncomp,model,lower,upper,Y.add,w
     rate <- 1-sum(pred.correct)/length(pred.correct)
     NMC[i] <- rate
   }
-  return(list(model=model,type="qual2",repet=repet,k=k,ncomp=ncomp,crit.DA=crit.DA,groups=groups,
+  return(list(model=model,type="qual2",repet=repet,k=k,ncomp=ncomp2,crit.DA=crit.DA,groups=groups,
     models1.list=models.list1,models2.list=models.list2,NMC=NMC))
 }
 

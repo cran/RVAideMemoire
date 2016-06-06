@@ -25,7 +25,7 @@ predict.MVA.cmv <- predict.MVA.cv <- function(object,newdata,conf.level=0.95,cri
     pred1 <- lapply(object$models1.list,function(x) predict(x,newdata,type="scores"))
     pred2 <- list()
     for (i in 1:length(pred1)) {pred2[[i]] <- predict(object$models2.list[[i]],pred1[[i]],method=crit.DA)$class}
-    pred2 <- do.call("cbind",pred2)
+    pred2 <- do.call("cbind.data.frame",pred2)
     ta <- list()
     for (i in 1:nrow(pred2)) {ta[[i]] <- table(unlist(pred2[i,]))}
     group <- unlist(lapply(ta,function(x) names(x)[which.max(x)[1]]))

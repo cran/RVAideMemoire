@@ -9,7 +9,7 @@ print.MVA.test.mult <- function(x,digits=4,...) {
   invisible(x)
 }
 
-MVA.test <- function(X,Y,cmv=FALSE,ncomp=5,kout=7,kinn=8,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","LDA",
+MVA.test <- function(X,Y,cmv=FALSE,ncomp=8,kout=7,kinn=6,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","LDA",
   "QDA","PLS-DA/LDA","PLS-DA/QDA","PPLS-DA/LDA","PPLS-DA/QDA"),Q2diff=0.05,lower=0.5,upper=0.5,Y.add=NULL,
   weights=rep(1,nrow(X)),set.prior=FALSE,crit.DA=c("plug-in","predictive","debiased"),p.method="fdr",nperm=999,
   ...) {
@@ -67,6 +67,7 @@ MVA.test <- function(X,Y,cmv=FALSE,ncomp=5,kout=7,kinn=8,model=c("PLSR","CPPLS",
 	stat.perm[i+1] <- if(cv.ref$type=="quant") {as.vector(cv.perm$Q2)} else {as.vector(cv.perm$NMC)}
     }
   }
+  cat("\n")
   if (cv.ref$type=="quant") {
     if (ncol(as.data.frame(Y))==1) {
 	pvalue <- length(which((stat.perm+.Machine$double.eps/2) >= ref))/(nperm+1)

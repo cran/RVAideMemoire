@@ -15,6 +15,7 @@ splitf <- function(set,fac,k) {
     res[[i]] <- set[ind,]
   }
   res[[k]] <- set[unlist(wl),]
+  res <- Filter(function(x) {dim(x)[1]>0}, res)
   return(res)
 }
 

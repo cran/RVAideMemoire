@@ -1,3 +1,8 @@
+version 0.9-56 (06-06-2016)
+  - MVA.synt extended to COA, RDA, CCA
+  - new argument 'vars' in multtest.gp and plotting method optimized
+  - splitf, MVA.cv, MVA.cmv, MVA.test optimized
+
 version 0.9-55 (23-04-2016)
   - function multtest renamed multtest.gp
   - new function multtest.cor (correlation test for multiple variables)

@@ -13,8 +13,8 @@ multtest.gp(tab, fac, test = c("param", "perm", "rank"),
   ordered = TRUE, ...)
 
 \method{plot}{multtest.gp}(x, signif = FALSE, alpha = 0.05,
-  xlab = "Group", ylab = "Mean (+/- SE) value", titles = NULL,
-  groups = NULL, ...)
+  vars = NULL, xlab = "Group", ylab = "Mean (+/- SE) value",
+  titles = NULL, groups = NULL, ...)
 }
 \arguments{
   \item{tab}{
@@ -46,6 +46,9 @@ logical indicating if only variables with significant P-value should be plotted.
 }
   \item{alpha}{
 significance threshold.
+}
+  \item{vars}{
+numeric vector giving variables to plot (rows of \code{x}). Default to all, which can lead to errors if too many variables.
 }
   \item{xlab}{
 legend of the x axis.

@@ -7,7 +7,7 @@ Cross model validation
 Performs cross model validation (2CV) with different PLS analyses.
 }
 \usage{
-MVA.cmv(X, Y, repet = 10, kout = 7, kinn = 8, ncomp = 8, model = c("PLSR",
+MVA.cmv(X, Y, repet = 10, kout = 7, kinn = 6, ncomp = 8, model = c("PLSR",
   "CPPLS", "PLS-DA", "PPLS-DA", "PLS-DA/LDA", "PLS-DA/QDA", "PPLS-DA/LDA",
   "PPLS-DA/QDA"), crit.inn = c("RMSEP", "Q2", "NMC"), Q2diff = 0.05,
   lower = 0.5, upper = 0.5, Y.add = NULL, weights = rep(1, nrow(X)),
@@ -24,10 +24,10 @@ the dependent variable(s): numeric vector, data frame of quantitative variables 
 an integer giving the number of times the whole 2CV procedure has to be repeated.
 }
   \item{kout}{
-an integer giving the number of folds in the outer loop.
+an integer giving the number of folds in the outer loop (can be re-set internally if needed).
 }
   \item{kinn}{
-an integer giving the number of folds in the inner loop.
+an integer giving the number of folds in the inner loop (can be re-set internally if needed). Cannot be \code{> kout}.
 }
   \item{ncomp}{
 an integer giving the maximal number of components to be tested in the inner loop (can be re-set depending on the size of the train sets).

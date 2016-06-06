@@ -136,7 +136,7 @@ MVA.corplot.2comp <- function(corr,xlab,ylab,main,circle,intcircle,points,ident,
   lim <- max(abs(corr))
   if (lim<1) {lim <- 1}
   if (!add) {
-    par(mar=c(3,3,1,1))
+    par(mar=c(3,3,3,3))
     plot(corrx,corry,xlim=c(-lim,lim),ylim=c(-lim,lim),type="n",axes=FALSE,xlab="",ylab="",xaxs="i",
 	yaxs="i")
   } else {

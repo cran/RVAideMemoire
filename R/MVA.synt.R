@@ -1,3 +1,4 @@
+# ade4: dudi.coa
 # pls: R2
 
 #  - Total variance:
@@ -6,6 +7,23 @@
 #     * PCoA (dudi.pco[ade4],pcoa[ape],pco[labdsv],cmdscale[stats]°,wcmdscale[vegan]°,capscale[vegan])
 #		° if computed with 'eig=TRUE'
 #	  Does not take into account imaginary axes
+#     * RDA (pcaiv[ade4],pcaivortho[ade4],rda[vegan])
+#
+#  - Total inertia:
+#	* COA (dudi.coa[ade4],cca[vegan])
+#     * CCA (cca[ade4],cca[vegan])
+#
+#  - Constrained variance:
+#     * RDA (pcaiv[ade4],rda[vegan])
+#
+#  - Unconstrained variance:
+#     * RDA (pcaivortho[ade4],rda[vegan])
+#
+#  - Constrained inertia:
+#     * CCA (cca[ade4],cca[vegan])
+#
+#  - Unconstrained inertia:
+#     * CCA (cca[vegan])
 #
 #  - Intergroup variance:
 #     * LDA (lda[MASS],discrimin[ade4])
@@ -224,6 +242,130 @@ MVA.get.synt.nMDS.labdsv <- function(x,...) {
   return(res)
 }
 
+MVA.get.synt.COA.ade4 <- function(x,...) {
+  res <- list()
+  vars <- x$eig
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total inertia (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.COA.vegan <- function(x,...) {
+  res <- list()
+  vars <- x$CA$eig
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[1]] <- list(crit="total inertia (%)",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.RDA.ade4 <- function(x,...) {
+  res <- list()
+  appel <- as.list(x$call)
+  dudi <- eval.parent(appel$dudi)
+  vars1 <- c(sum(x$eig)/sum(dudi$eig),1-(sum(x$eig)/sum(dudi$eig)))
+  vars1.each <- 100*vars1
+  vars1.cum <- cumsum(vars1.each)
+  tab1 <- data.frame(" "=c("Constrained","Unconstrained"),Proportion=vars1.each,
+    Cumulative=vars1.cum,check.names=FALSE)
+  res[[1]] <- list(crit="total variance (%)",tab=tab1)
+  vars2 <- x$eig
+  vars2 <- vars2/sum(vars2)
+  vars2.each <- 100*vars2
+  vars2.cum <- 100*cumsum(vars2)
+  tab2 <- data.frame(Axis=1:length(vars2),Proportion=vars2.each,Cumulative=vars2.cum)
+  res[[2]] <- list(crit="constrained variance (%)",tab=tab2)
+  return(res)
+}
+
+MVA.get.synt.RDAortho.ade4 <- function(x,...) {
+  res <- list()
+  appel <- as.list(x$call)
+  dudi <- eval.parent(appel$dudi)
+  vars1 <- c(1-(sum(x$eig)/sum(dudi$eig)),sum(x$eig)/sum(dudi$eig))
+  vars1.each <- 100*vars1
+  vars1.cum <- cumsum(vars1.each)
+  tab1 <- data.frame(" "=c("Constrained","Unconstrained"),Proportion=vars1.each,
+    Cumulative=vars1.cum,check.names=FALSE)
+  res[[1]] <- list(crit="total variance (%)",tab=tab1)
+  vars2 <- x$eig
+  vars2 <- vars2/sum(vars2)
+  vars2.each <- 100*vars2
+  vars2.cum <- 100*cumsum(vars2)
+  tab2 <- data.frame(Axis=1:length(vars2),Proportion=vars2.each,Cumulative=vars2.cum)
+  res[[2]] <- list(crit="unconstrained variance (%)",tab=tab2)
+  return(res)
+}
+
+MVA.get.synt.RDA.vegan <- function(x,...) {
+  res <- list()
+  tot.var <- x$tot.chi
+  vars1 <- c(x$pCCA$tot.chi,x$CCA$tot.chi,x$CA$tot.chi)/tot.var
+  vars1.each <- 100*vars1
+  vars1.cum <- cumsum(vars1.each)
+  cols <- c(if(!is.null(x$pCCA$tot.chi)) {"Conditional"},"Constrained","Unconstrained")
+  tab1 <- data.frame(" "=cols,Proportion=vars1.each,Cumulative=vars1.cum,check.names=FALSE)
+  res[[1]] <- list(crit="total variance (%)",tab=tab1)
+  vars2 <- x$CCA$eig/x$CCA$tot.chi
+  vars2.each <- 100*vars2
+  vars2.cum <- cumsum(vars2.each)
+  tab2 <- data.frame(Axis=1:length(vars2.each),Proportion=vars2.each,Cumulative=vars2.cum)
+  res[[2]] <- list(crit="constrained variance (%)",tab=tab2)
+  vars3 <- x$CA$eig/x$CA$tot.chi
+  vars3.each <- 100*vars3
+  vars3.cum <- cumsum(vars3.each)
+  tab3 <- data.frame(Axis=1:length(vars3.each),Proportion=vars3.each,Cumulative=vars3.cum)
+  res[[3]] <- list(crit="unconstrained variance (%)",tab=tab3)
+  return(res)
+}
+
+MVA.get.synt.CCA.ade4 <- function(x,...) {
+  res <- list()
+  appel <- as.list(x$call)
+  spe <- eval.parent(appel$sitspe)
+  coa <- ade4::dudi.coa(spe,scannf=FALSE)
+  vars1 <- c(sum(x$eig)/sum(coa$eig),1-(sum(x$eig)/sum(coa$eig)))
+  vars1.each <- 100*vars1
+  vars1.cum <- cumsum(vars1.each)
+  tab1 <- data.frame(" "=c("Constrained","Unconstrained"),Proportion=vars1.each,
+    Cumulative=vars1.cum,check.names=FALSE)
+  res[[1]] <- list(crit="total inertia (%)",tab=tab1)
+  vars2 <- x$eig
+  vars2 <- vars2/sum(vars2)
+  vars2.each <- 100*vars2
+  vars2.cum <- 100*cumsum(vars2)
+  tab2 <- data.frame(Axis=1:length(vars2),Proportion=vars2.each,Cumulative=vars2.cum)
+  res[[2]] <- list(crit="constrained inertia (%)",tab=tab2)
+  return(res)
+}
+
+MVA.get.synt.CCA.vegan <- function(x,...) {
+  res <- list()
+  tot.var <- x$tot.chi
+  vars1 <- c(x$pCCA$tot.chi,x$CCA$tot.chi,x$CA$tot.chi)/tot.var
+  vars1.each <- 100*vars1
+  vars1.cum <- cumsum(vars1.each)
+  cols <- c(if(!is.null(x$pCCA$tot.chi)) {"Conditional"},"Constrained","Unconstrained")
+  tab1 <- data.frame(" "=cols,Proportion=vars1.each,Cumulative=vars1.cum,check.names=FALSE)
+  res[[1]] <- list(crit="total inertia (%)",tab=tab1)
+  vars2 <- x$CCA$eig/x$CCA$tot.chi
+  vars2.each <- 100*vars2
+  vars2.cum <- cumsum(vars2.each)
+  tab2 <- data.frame(Axis=1:length(vars2.each),Proportion=vars2.each,Cumulative=vars2.cum)
+  res[[2]] <- list(crit="constrained inertia (%)",tab=tab2)
+  vars3 <- x$CA$eig/x$CA$tot.chi
+  vars3.each <- 100*vars3
+  vars3.cum <- cumsum(vars3.each)
+  tab3 <- data.frame(Axis=1:length(vars3.each),Proportion=vars3.each,Cumulative=vars3.cum)
+  res[[3]] <- list(crit="unconstrained inertia (%)",tab=tab3)
+  return(res)
+}
+
 MVA.get.synt.LDA.MASS <- function(x,...) {
   res <- list()
   form <- LDA.format(x)
@@ -306,8 +448,11 @@ MVA.get.synt.PCR.pls <- function(x,...) {
   Y.vars <- 100*drop(pls::R2(x,intercept=FALSE,estimate="train")$val)
   if (is.matrix(Y.vars)) {
     crit <- "Y cumulative total variance (%)"
-    Y.vars <- round(as.data.frame(t(Y.vars)),2)
-    Y.tab <- as.data.frame(cbind(Axis=1:nrow(Y.vars),Y.vars))
+    Y.vars <- as.data.frame(t(Y.vars))
+    tot.vars.cum <- rowSums(Y.vars)/ncol(Y.vars)
+    tot.vars.each <- c(tot.vars.cum[1],diff(tot.vars.cum))
+    Y.tab <- as.data.frame(cbind(Axis=1:nrow(Y.vars),Total.Proportion=round(tot.vars.each,2),
+	Total.Cumulative=round(tot.vars.cum,2),round(Y.vars,2)))
   } else {
     crit <- "Y total variance (%)"
     Y.vars.each <- c(Y.vars[1],diff(Y.vars))
