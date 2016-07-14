@@ -11,7 +11,7 @@ multinomial.test(x, p = rep(1/length(x), length(x)))
 }
 \arguments{
   \item{x}{
-numeric vector (counts).
+numeric vector (counts). Can also be a factor; in that case \code{table(x)} is used as counts.
 }
   \item{p}{
 theoretical proportions (optional).

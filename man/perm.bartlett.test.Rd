@@ -7,7 +7,7 @@ Permutational Bartlett's test of homogeneity of variances
 Performs a permutational Bartlett's test of homogeneity of k variances.
 }
 \usage{
-perm.bartlett.test(formula, data, nperm = 999)
+perm.bartlett.test(formula, data, nperm = 999, progress = TRUE)
 }
 \arguments{
   \item{formula}{
@@ -18,6 +18,9 @@ an optional data frame containing the variables in the formula \code{formula}. B
 }
   \item{nperm}{
 number of permutations.
+}
+  \item{progress}{
+logical indicating if the progress bar should be displayed.
 }
 }
 \details{

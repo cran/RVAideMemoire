@@ -9,20 +9,21 @@ print.MVA.test.mult <- function(x,digits=4,...) {
   invisible(x)
 }
 
-MVA.test <- function(X,Y,cmv=FALSE,ncomp=8,kout=7,kinn=6,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","LDA",
+MVA.test <- function(X,Y,cmv=FALSE,ncomp=8,kout=7,kinn=6,scale=TRUE,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","LDA",
   "QDA","PLS-DA/LDA","PLS-DA/QDA","PPLS-DA/LDA","PPLS-DA/QDA"),Q2diff=0.05,lower=0.5,upper=0.5,Y.add=NULL,
   weights=rep(1,nrow(X)),set.prior=FALSE,crit.DA=c("plug-in","predictive","debiased"),p.method="fdr",nperm=999,
-  ...) {
+  progress=TRUE,...) {
   model <- match.arg(model)
+  if (model %in% c("LDA","QDA") & cmv) {stop("LDA and QDA alone only if cmv = FALSE")}
   dname <- paste0(deparse(substitute(X))," and ",deparse(substitute(Y)),"\nModel: ",model,
     "\n",ncomp," components",ifelse(cmv," maximum",""),"\n",nperm," permutations")
   if (!cmv) {
     testname <- "Permutational test based on cross-validation"
-    cv.ref <- MVA.cv(X,Y,repet=20,k=kout,ncomp=ncomp,model=model,lower=lower,upper=upper,Y.add=Y.add,
+    cv.ref <- MVA.cv(X,Y,repet=20,k=kout,ncomp=ncomp,scale=scale,model=model,lower=lower,upper=upper,Y.add=Y.add,
 	weights=weights,set.prior=set.prior,crit.DA=crit.DA,...)
   } else {
     testname <- "Permutational test based on cross model validation"
-    cv.ref <- MVA.cmv(X,Y,repet=20,kout=kout,kinn=kinn,ncomp=ncomp,model=model,crit.inn=ifelse(is.factor(Y),"NMC","Q2"),
+    cv.ref <- MVA.cmv(X,Y,repet=20,kout=kout,kinn=kinn,ncomp=ncomp,scale=scale,model=model,crit.inn=ifelse(is.factor(Y),"NMC","Q2"),
 	Q2diff=Q2diff,lower=lower,upper=upper,Y.add=Y.add,weights=weights,set.prior=set.prior,crit.DA=crit.DA,...)
   }
   if(cv.ref$type=="quant") {
@@ -39,24 +40,24 @@ MVA.test <- function(X,Y,cmv=FALSE,ncomp=8,kout=7,kinn=6,model=c("PLSR","CPPLS",
     stat.perm <- numeric(nperm+1)
     stat.perm[1] <- ref
   }
-  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
+  if (progress) {pb <- txtProgressBar(min=0,max=100,initial=0,style=3)}
   for(i in 1:nperm) {
-    setTxtProgressBar(pb,round(i*100/nperm,0))
+    if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
     if (!cmv) {
 	if (cv.ref$type=="quant" & ncol(as.data.frame(Y))>1) {
-	  cv.perm <- MVA.cv(X,Y[sample(1:nrow(Y)),],repet=1,k=kout,ncomp=ncomp,model=model,lower=lower,upper=upper,
+	  cv.perm <- MVA.cv(X,Y[sample(1:nrow(Y)),],repet=1,k=kout,ncomp=ncomp,scale=scale,model=model,lower=lower,upper=upper,
 	    Y.add=Y.add,weights=weights,set.prior=set.prior,crit.DA=crit.DA,...)
 	} else {
-	  cv.perm <- suppressWarnings(MVA.cv(X,sample(Y),repet=1,k=kout,ncomp=ncomp,model=model,lower=lower,
+	  cv.perm <- suppressWarnings(MVA.cv(X,sample(Y),repet=1,k=kout,ncomp=ncomp,scale=scale,model=model,lower=lower,
 	    upper=upper,Y.add=Y.add,weights=weights,set.prior=set.prior,crit.DA=crit.DA,...))
 	}
     } else {
 	if (cv.ref$type=="quant" & ncol(as.data.frame(Y))>1) {
-	  cv.perm <- MVA.cmv(X,Y[sample(1:nrow(Y)),],repet=1,kout=kout,kinn=kinn,ncomp=ncomp,model=model,
+	  cv.perm <- MVA.cmv(X,Y[sample(1:nrow(Y)),],repet=1,kout=kout,kinn=kinn,ncomp=ncomp,scale=scale,model=model,
 	    crit.inn=ifelse(is.factor(Y),"NMC","Q2"),Q2diff=Q2diff,lower=lower,upper=upper,
 	    Y.add=Y.add,weights=weights,set.prior=set.prior,crit.DA=crit.DA,...)
 	} else {
-	  cv.perm <- suppressWarnings(MVA.cmv(X,sample(Y),repet=1,kout=kout,kinn=kinn,ncomp=ncomp,model=model,
+	  cv.perm <- suppressWarnings(MVA.cmv(X,sample(Y),repet=1,kout=kout,kinn=kinn,ncomp=ncomp,scale=scale,model=model,
 	    crit.inn=ifelse(is.factor(Y),"NMC","Q2"),Q2diff=Q2diff,lower=lower,upper=upper,Y.add=Y.add,
 	    weights=weights,set.prior=set.prior,crit.DA=crit.DA,...))
 	}
@@ -67,7 +68,7 @@ MVA.test <- function(X,Y,cmv=FALSE,ncomp=8,kout=7,kinn=6,model=c("PLSR","CPPLS",
 	stat.perm[i+1] <- if(cv.ref$type=="quant") {as.vector(cv.perm$Q2)} else {as.vector(cv.perm$NMC)}
     }
   }
-  cat("\n")
+  if (progress) {cat("\n")}
   if (cv.ref$type=="quant") {
     if (ncol(as.data.frame(Y))==1) {
 	pvalue <- length(which((stat.perm+.Machine$double.eps/2) >= ref))/(nperm+1)

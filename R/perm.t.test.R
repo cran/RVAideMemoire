@@ -2,12 +2,12 @@ perm.t.test <- function(x,...) {
   UseMethod("perm.t.test")
 }
 
-perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","greater"),paired=FALSE,nperm=999,...) {
+perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","greater"),paired=FALSE,nperm=999,progress=TRUE,...) {
   if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
   m <- match.call()
   if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
   m[[1]] <- as.name("model.frame")
-  m$alternative <- m$paired <- m$nperm <- NULL
+  m$alternative <- m$paired <- m$nperm <- m$progress <- NULL
   mf <- eval(m,parent.frame())
   dname <- paste(paste(names(mf)[1],paste(names(mf)[2:ncol(mf)],collapse=":"),sep=" by "),"\n",nperm," permutations",sep="")
   resp <- mf[,1]
@@ -22,14 +22,14 @@ perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","g
   t.ref <- t.test(resp~fact,var.equal=TRUE,alternative=alternative,paired=paired)$statistic
   t.perm <- numeric(nperm+1)
   t.perm[1] <- t.ref
-  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
+  if (progress) {pb <- txtProgressBar(min=0,max=100,initial=0,style=3)}
   if (!paired) {
     method <- "Permutational Two Sample t-test"
     moy <- tapply(resp,fact,mean)
     names(moy) <- paste("mean in group ",levels(fact),sep="")
     for(i in 1:nperm) {
 	t.perm[i+1] <- t.test(sample(resp)~fact,var.equal=TRUE,alternative=alternative,paired=FALSE)$statistic
-	setTxtProgressBar(pb,round(i*100/nperm,0))
+	if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
     }
   } else {
     method <- "Permutational Paired t-test"
@@ -39,7 +39,7 @@ perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","g
     for (i in 1:nperm) {
 	resp.perm <- t(apply(resp2,1,sample))
 	t.perm[i+1] <- t.test(resp.perm[,1],resp.perm[,2],alternative=alternative,paired=TRUE)$statistic
-	setTxtProgressBar(pb,round(i*100/nperm,0))
+	if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
     }
   }
   cat("\n")
@@ -53,6 +53,7 @@ perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","g
   if (alternative=="greater") {
     pvalue <- length(which((t.perm+.Machine$double.eps/2) >= t.ref))/(nperm+1)
   }
+  if (pvalue>1) {pvalue <- 1}
   result <- list(statistic=t.ref,permutations=nperm,p.value=pvalue,estimate=moy,alternative=alternative,
     method=method,data.name=dname,null.value=null.value)
   class(result) <- "htest"

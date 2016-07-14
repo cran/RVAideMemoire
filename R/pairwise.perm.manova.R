@@ -1,5 +1,7 @@
+# vegan : adonis
+
 pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-Lawley","Roy","Spherical"),
-  nperm=999,p.method="fdr") {
+  nperm=999,progress=TRUE,p.method="fdr") {
   call <- match.call()
   dname <- paste0(deparse(call$resp)," by ",deparse(substitute(fact)),"\n",nperm," permutations")
   if ("dist" %in% class(resp)) {
@@ -23,7 +25,7 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
     fun.p <- function(i,j) {
 	resp2 <- resp[as.numeric(fact)%in%c(i,j),]
 	fact2 <- droplevels(fact[as.numeric(fact)%in%c(i,j)])
-	perm.manova(resp2,fact2,test=test,nperm=nperm)
+	perm.manova(resp2,fact2,test=test,nperm=nperm,progress)
     }
     multcomp <- pairwise.table(fun.p,levels(fact),p.adjust.method=p.method)
     method <- paste0("permutational MANOVAs (test: ",test,")")
@@ -33,19 +35,19 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
   return(result)
 }
 
-perm.manova <- function(resp,fact,test,nperm) {
+perm.manova <- function(resp,fact,test,nperm,progress) {
   manova.ref <- anova(lm(resp~fact),test=test)
   stat <- ifelse(test!="Spherical","approx F","F")
   F.ref <- manova.ref[2,stat]
   F.perm <- numeric(nperm+1)
   F.perm[1] <- F.ref
-  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
+  if (progress) {pb <- txtProgressBar(min=0,max=100,initial=0,style=3)}
   for (i in 1:nperm) {
     manova.perm <- anova(lm(resp[sample(1:nrow(resp)),]~fact),test=test)
     F.perm[i+1] <- manova.perm[2,stat]
-    setTxtProgressBar(pb,round(i*100/nperm,0))
+    if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
   }
-  cat("\n")
+  if (progress) {cat("\n")}
   pvalue <- length(which((F.perm+.Machine$double.eps/2) >= F.ref))/(nperm+1)
   return(pvalue)
 }

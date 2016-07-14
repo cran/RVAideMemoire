@@ -5,7 +5,7 @@ function(y,blocks=NULL,p=0.5) {
   if (p<=0 | p>=1) {stop("wrong p: 0 < p < 1")}
   namey <- deparse(substitute(y))
   nameb <- deparse(substitute(blocks))
-  y <- if (is.vector(y)) {
+  y <- if (is.vector(y) | is.factor(y)) {
     as.numeric(factor(y))-1
   } else {
     as.matrix(y)

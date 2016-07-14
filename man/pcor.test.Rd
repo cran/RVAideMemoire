@@ -60,7 +60,7 @@ set.seed(1444)
 x <- 1:30
 y <- 1:30+rnorm(30,0,2)
 z1 <- runif(30,0,4)
-z2 <- 30:1+rnorm(30,03)
+z2 <- 30:1+rnorm(30,0,3)
 pcor.test(x,y,z1)
 pcor.test(x,y,list(z1,z2))
 }

@@ -7,7 +7,8 @@ Permutational Analysis of Variance
 Performs a permutational analysis of variance for 1 to 3 factors. For 2 and 3 factors, experiment design must be balanced. For 2 factors, the factors can be crossed with or without interaction, or nested. The second factor can be a blocking (random) factor. For 3 factors, design is restricted to 2 fixed factors crossed (with or without interaction) inside blocks (third factor).
 }
 \usage{
-perm.anova(formula, nest.f2 = c("fixed", "random"), data, nperm = 999)
+perm.anova(formula, nest.f2 = c("fixed", "random"), data, nperm = 999,
+  progress = TRUE)
 }
 \arguments{
   \item{formula}{
@@ -21,6 +22,9 @@ an optional data frame containing the variables in the formula \code{formula}. B
 }
   \item{nperm}{
 number of permutations.
+}
+  \item{progress}{
+logical indicating if the progress bar should be displayed.
 }
 }
 \details{

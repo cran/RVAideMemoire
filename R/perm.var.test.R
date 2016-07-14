@@ -2,12 +2,12 @@ perm.var.test <- function(x,...) {
   UseMethod("perm.var.test")
 }
 
-perm.var.test.formula <- function(formula,data,alternative=c("two.sided","less","greater"),nperm=999,...) {
+perm.var.test.formula <- function(formula,data,alternative=c("two.sided","less","greater"),nperm=999,progress=TRUE,...) {
   if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
   m <- match.call()
   if (is.matrix(eval(m$data,parent.frame()))) {m$data <- as.data.frame(m$data)}
   m[[1]] <- as.name("model.frame")
-  m$alternative <- m$nperm <- NULL
+  m$alternative <- m$nperm <- m$progress <- NULL
   mf <- eval(m,parent.frame())
   dname <- paste(paste(names(mf)[1],paste(names(mf)[2:ncol(mf)],collapse=":"),sep=" by "),"\n",nperm," permutations",sep="")
   resp <- mf[,1]
@@ -20,10 +20,10 @@ perm.var.test.formula <- function(formula,data,alternative=c("two.sided","less",
   F.ref <- var.test(resp~fact,ratio=ratio,alternative=alternative)$statistic
   F.perm <- numeric(nperm+1)
   F.perm[1] <- F.ref
-  pb <- txtProgressBar(min=0,max=100,initial=0,style=3)
+  if (progress) {pb <- txtProgressBar(min=0,max=100,initial=0,style=3)}
   for(i in 1:nperm) {
     F.perm[i+1] <- var.test(sample(resp)~fact,ratio=ratio,alternative=alternative)$statistic
-    setTxtProgressBar(pb,round(i*100/nperm,0))
+    if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
   }
   cat("\n")
   pvalue <- NULL
@@ -36,6 +36,7 @@ perm.var.test.formula <- function(formula,data,alternative=c("two.sided","less",
   if (alternative=="greater") {
     pvalue <- length(which((F.perm+.Machine$double.eps/2) >= F.ref))/(nperm+1)
   }
+  if (pvalue>1) {pvalue <- 1}
   result <- list(method="Permutational F test to compare two variances",statistic=F.ref,permutations=nperm,
     p.value=pvalue,estimate=variance,null.value=ratio,alternative=alternative,data.name=dname)
   class(result) <- "htest"

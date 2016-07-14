@@ -34,6 +34,8 @@ Many multivariate analyses are supported, from various packages. The list will p
 
 - RDA: \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan]{rda}}: \% of constrained and unconstrained total variance, \% of constrained variance explained by constrained axes (\code{\link[ade4]{pcaiv}} and \code{\link[vegan]{rda}}), \% of unconstrained variance explained by unconstrained axes (\code{\link[ade4]{pcaivortho}} and \code{\link[vegan]{rda}}).
 
+- db-RDA (or CAP): \code{\link[vegan]{capscale}}, \code{\link[vegan]{dbrda}}:  \% of constrained and unconstrained total inertia, \% of constrained inertia explained by constrained axes, \% of unconstrained inertia explained by unconstrained axes.
+
 - COA: \code{\link[ade4]{dudi.coa}}, \code{\link[vegan]{cca}}: \% of total inertia explained by each axis.
 
 - CCA: \code{\link[ade4]{cca}}, \code{\link[vegan]{cca}}: \% of constrained and unconstrained total inertia, \% of constrained inertia explained by constrained axes, \% of unconstrained inertia explained by unconstrained axes (\code{\link[vegan]{cca}} only).

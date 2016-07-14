@@ -14,10 +14,24 @@ prop.multinom <- function(x) {
   names(prop) <- names(std.err) <- lab
   if (is.matrix(x)) {
     for (i in 1:length(lab)) {
-	mod <- glm(cbind(x[,i],rowSums(as.data.frame(x[,c(1:length(lab))[-i]])))~1,family="quasibinomial")
+	In <- x[,i]
+	Out <- if (ncol(x)>2) {
+	  if (nrow(x)==1) {
+	    sum(x[,-i])
+	  } else {
+	    rowSums(x[,-i])
+	  }
+	} else {
+	  if (nrow(x)==1) {
+	    x[,-i]
+	  } else {
+	    t(t(x[,-i]))
+	  }
+	}
+	mod <- glm(cbind(In,Out)~1,family="quasibinomial")
 	pred <- predict(mod,type="response",se.fit=TRUE)
 	prop[i] <- unique(pred$fit)
-	std.err[i] <- unique(pred$se.fit)
+	std.err[i] <- if (nrow(x)>1) {unique(pred$se.fit)} else {se(In,In+Out)}
     }
   } else {
     for (i in 1:length(lab)) {

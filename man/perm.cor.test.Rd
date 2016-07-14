@@ -7,7 +7,8 @@ Permutational Pearson's correlation test
 Performs a permutational Pearson's product-moment correlation test.
 }
 \usage{
-perm.cor.test(x, y, alternative = c("two.sided", "less", "greater"), nperm = 999)
+perm.cor.test(x, y, alternative = c("two.sided", "less", "greater"),
+  nperm = 999, progress = TRUE)
 }
 \arguments{
   \item{x, y}{
@@ -18,6 +19,9 @@ a character string specifying the alternative hypothesis, must be one of \code{"
 }
   \item{nperm}{
 number of permutations.
+}
+  \item{progress}{
+logical indicating if the progress bar should be displayed.
 }
 }
 \details{

@@ -7,11 +7,11 @@ Cross validation
 Performs cross validation with different PLS and/or discriminant analyses.
 }
 \usage{
-MVA.cv(X, Y, repet = 10, k = 7, ncomp = 8, model = c("PLSR","CPPLS",
-  "PLS-DA", "PPLS-DA", "LDA", "QDA", "PLS-DA/LDA", "PLS-DA/QDA", "PPLS-DA/LDA",
-  "PPLS-DA/QDA"), lower = 0.5, upper = 0.5, Y.add = NULL, weights = rep(1,
-  nrow(X)), set.prior = FALSE, crit.DA = c("plug-in", "predictive",
-  "debiased"), ...)
+MVA.cv(X, Y, repet = 10, k = 7, ncomp = 8, scale = TRUE, model = c("PLSR",
+  "CPPLS", "PLS-DA", "PPLS-DA", "LDA", "QDA", "PLS-DA/LDA", "PLS-DA/QDA",
+  "PPLS-DA/LDA", "PPLS-DA/QDA"), lower = 0.5, upper = 0.5, Y.add = NULL,
+  weights = rep(1, nrow(X)), set.prior = FALSE, crit.DA = c("plug-in",
+  "predictive", "debiased"), ...)
 }
 \arguments{
   \item{X}{
@@ -28,6 +28,9 @@ an integer giving the number of folds (can be re-set internally if needed).
 }
   \item{ncomp}{
 an integer giving the number of components to be used for all models except LDA and QDA (can be re-set depending on the size of the train sets).
+}
+  \item{scale}{
+logical indicating if data should be scaled (see Details).
 }
   \item{model}{
 the model to be fitted (see Details).
@@ -58,6 +61,8 @@ other arguments to pass to \code{\link[pls]{plsr}} (PLSR, PLS-DA) or \code{\link
 When a discriminant analysis is used (\code{"PLS-DA"}, \code{"PPLS-DA"}, \code{"LDA"}, \code{"QDA"}, \code{"PLS-DA/LDA"}, \code{"PLS-DA/QDA"}, \code{"PPLS-DA/LDA"} or \code{"PPLS-DA/QDA"}), the training sets are generated in respect to the relative proportions of the levels of \code{Y} in the original data set (see \code{\link[RVAideMemoire]{splitf}}).
 
 \code{"PLS-DA"} is considered as PLS2 on a dummy-coded response. For a PLS-DA based on the CPPLS algorithm, use \code{"PPLS-DA"} with \code{lower} and \code{upper} limits of the power parameters set to \code{0.5}.
+
+If \code{scale = TRUE}, the scaling is done as this: for each step of the validation loop (i.e. \code{k} steps), the training set is pre-processed by centering and unit-variance scaling. Means and standard deviations of variables in the training set are then used to scale the test set.
 }
 \value{
   \item{model}{model used.}

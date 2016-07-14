@@ -39,7 +39,7 @@ print.MVA.cmv <- function(x,...) {
   cat("\n")
 }
 
-MVA.cmv <- function(X,Y,repet=10,kout=7,kinn=6,ncomp=8,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","PLS-DA/LDA",
+MVA.cmv <- function(X,Y,repet=10,kout=7,kinn=6,ncomp=8,scale=TRUE,model=c("PLSR","CPPLS","PLS-DA","PPLS-DA","PLS-DA/LDA",
   "PLS-DA/QDA","PPLS-DA/LDA","PPLS-DA/QDA"),crit.inn=c("RMSEP","Q2","NMC"),Q2diff=0.05,lower=0.5,upper=0.5,
   Y.add=NULL,weights=rep(1,nrow(X)),set.prior=FALSE,crit.DA=c("plug-in","predictive","debiased"),...) {
   model <- match.arg(model)
@@ -81,15 +81,15 @@ MVA.cmv <- function(X,Y,repet=10,kout=7,kinn=6,ncomp=8,model=c("PLSR","CPPLS","P
     prior <- as.vector(mweights/sum(mweights))
   }
   fun <- switch(type,quant=MVA.cmv.quant,qual1=MVA.cmv.qual1,qual2=MVA.cmv.qual2)
-  res <- if (type=="quant") {fun(X,Y,repet,kout,kinn,ncomp,model,crit.inn,Q2diff,lower,upper,Y.add,
-    weights,...)} else if (type=="qual1") {fun(X,Y,groups=levels(Yfac),repet,kout,kinn,ncomp,model,crit.inn,lower,
-    upper,Y.add,weights,...)} else {fun(X,Y,Yfac,groups=levels(Yfac),repet,kout,kinn,ncomp,model,crit.inn,lower,upper,
+  res <- if (type=="quant") {fun(X,Y,repet,kout,kinn,ncomp,scale,model,crit.inn,Q2diff,lower,upper,Y.add,
+    weights,...)} else if (type=="qual1") {fun(X,Y,groups=levels(Yfac),repet,kout,kinn,ncomp,scale,model,crit.inn,lower,
+    upper,Y.add,weights,...)} else {fun(X,Y,Yfac,groups=levels(Yfac),repet,kout,kinn,ncomp,scale,model,crit.inn,lower,upper,
     Y.add,weights,prior,crit.DA=crit.DA,...)}
   class(res) <- c("list","MVA.cmv")
   return(res)
 }
 
-MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,model,crit.inn,Q2diff,lower,upper,Y.add,weights,...) {
+MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,scale,model,crit.inn,Q2diff,lower,upper,Y.add,weights,...) {
   whole.set <- as.data.frame(cbind(weights,Y.add,Y,X))
   rownames(whole.set) <- 1:nrow(whole.set)
   col.Yadd <- if (!is.null(Y.add)) {2:(2+ncol(Y.add)-1)} else {NULL}
@@ -121,6 +121,11 @@ MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,model,crit.inn,Q2diff,lower,
 	rest.set.X <- as.matrix(as.data.frame(rest.set[,col.X]))
 	rownames(rest.set) <- 1:nrow(rest.set)
 	val.sets.list <- split(rest.set,sample(gl(kinn,1,nrow(rest.set))))
+	if (scale) {
+	  rest.set.X <- scale(rest.set.X)
+	  test.set.X <- scale(test.set.X,center=attr(rest.set.X,"scaled:center"),
+	    scale=attr(rest.set.X,"scaled:scale"))
+	}
 	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
 	if (ncomp>=nmax) {
 	  ncomp2 <- nmax-1
@@ -138,6 +143,11 @@ MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,model,crit.inn,Q2diff,lower,
 	  train.set.Yadd <- train.set[,col.Yadd]
 	  train.set.Y <- as.matrix(as.data.frame(train.set[,col.Y]))
 	  train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
+	  if (scale) {
+	    train.set.X <- scale(train.set.X)
+	    val.set.X <- scale(val.set.X,center=attr(train.set.X,"scaled:center"),
+		scale=attr(train.set.X,"scaled:scale"))
+	  }
 	  model.kinn <- if (model=="PLSR") {
 	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp,...)
 	  } else {
@@ -196,7 +206,7 @@ MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,model,crit.inn,Q2diff,lower,
     models.list=models.list,RMSEP=RMSEP,Q2=Q2))
 }
 
-MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,model,crit.inn,lower,upper,Y.add,weights,...) {
+MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,lower,upper,Y.add,weights,...) {
   whole.set <- as.data.frame(cbind(weights,Y.add,Y,X))
   rownames(whole.set) <- 1:nrow(whole.set)
   trueclass <- apply(Y,1,function(x) {colnames(Y)[which(x==1)]})
@@ -289,7 +299,7 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,model,crit.inn,lower,
     models.list=models.list,NMC=NMC))
 }
 
-MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,model,crit.inn,lower,upper,Y.add,weights,prior,crit.DA,...) {
+MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,lower,upper,Y.add,weights,prior,crit.DA,...) {
   whole.set <- as.data.frame(cbind(weights,Y.add,Y,X))
   rownames(whole.set) <- 1:nrow(whole.set)
   trueclass <- as.character(Yfac)

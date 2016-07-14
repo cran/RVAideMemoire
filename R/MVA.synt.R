@@ -10,8 +10,9 @@
 #     * RDA (pcaiv[ade4],pcaivortho[ade4],rda[vegan])
 #
 #  - Total inertia:
-#	* COA (dudi.coa[ade4],cca[vegan])
+#     * COA (dudi.coa[ade4],cca[vegan])
 #     * CCA (cca[ade4],cca[vegan])
+#     * db-RDA (capscale[vegan])
 #
 #  - Constrained variance:
 #     * RDA (pcaiv[ade4],rda[vegan])
@@ -21,9 +22,11 @@
 #
 #  - Constrained inertia:
 #     * CCA (cca[ade4],cca[vegan])
+#     * db-RDA (capscale[vegan])
 #
 #  - Unconstrained inertia:
 #     * CCA (cca[vegan])
+#     * db-RDA (capscale[vegan])
 #
 #  - Intergroup variance:
 #     * LDA (lda[MASS],discrimin[ade4])
@@ -213,7 +216,6 @@ MVA.get.synt.PCoA.vegan <- function(x,...) {
   res <- list()
   if ("CA" %in% names(x)) {
     vars <- x$CA$eig
-
   } else {
     if (!"eig" %in% names(x) || is.null(x$eig)) {
 	stop("no eigenvalues available, compute the analysis with 'eig=TRUE'")
@@ -347,6 +349,28 @@ MVA.get.synt.CCA.ade4 <- function(x,...) {
 MVA.get.synt.CCA.vegan <- function(x,...) {
   res <- list()
   tot.var <- x$tot.chi
+  vars1 <- c(x$pCCA$tot.chi,x$CCA$tot.chi,x$CA$tot.chi)/tot.var
+  vars1.each <- 100*vars1
+  vars1.cum <- cumsum(vars1.each)
+  cols <- c(if(!is.null(x$pCCA$tot.chi)) {"Conditional"},"Constrained","Unconstrained")
+  tab1 <- data.frame(" "=cols,Proportion=vars1.each,Cumulative=vars1.cum,check.names=FALSE)
+  res[[1]] <- list(crit="total inertia (%)",tab=tab1)
+  vars2 <- x$CCA$eig/x$CCA$tot.chi
+  vars2.each <- 100*vars2
+  vars2.cum <- cumsum(vars2.each)
+  tab2 <- data.frame(Axis=1:length(vars2.each),Proportion=vars2.each,Cumulative=vars2.cum)
+  res[[2]] <- list(crit="constrained inertia (%)",tab=tab2)
+  vars3 <- x$CA$eig/x$CA$tot.chi
+  vars3.each <- 100*vars3
+  vars3.cum <- cumsum(vars3.each)
+  tab3 <- data.frame(Axis=1:length(vars3.each),Proportion=vars3.each,Cumulative=vars3.cum)
+  res[[3]] <- list(crit="unconstrained inertia (%)",tab=tab3)
+  return(res)
+}
+
+MVA.get.synt.dbRDA.vegan <- function(x,...) {
+  res <- list()
+  tot.var <- if(!is.null(x$CA$imaginary.chi)) {x$tot.chi-x$CA$imaginary.chi} else {x$tot.chi}
   vars1 <- c(x$pCCA$tot.chi,x$CCA$tot.chi,x$CA$tot.chi)/tot.var
   vars1.each <- 100*vars1
   vars1.cum <- cumsum(vars1.each)

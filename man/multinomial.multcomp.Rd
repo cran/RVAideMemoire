@@ -11,7 +11,7 @@ multinomial.multcomp(x, p.method = "fdr")
 }
 \arguments{
   \item{x}{
-numeric vector (counts).
+numeric vector (counts). Can also be a factor; in that case \code{table(x)} is used as counts.
 }
   \item{p.method}{
 method for p-values correction. See help of \code{\link{p.adjust}}.

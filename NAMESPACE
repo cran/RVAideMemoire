@@ -3,6 +3,7 @@
 #   - ade4 : as.dudi, dist.quant
 #   - boot : boot
 #   - cramer : cramer.test
+#   - dunn.test : dunn.test
 #   - lme4 : fixef, getME, glmer, isLMM, VarCorr
 #   - MASS : lda, qda
 #   - mixOmics : vip
@@ -11,19 +12,19 @@
 #   - pls : cppls, plsr
 #   - pspearman : pspearman
 #   - statmod : qresiduals
-#   - vegan : adonis
+#   - vegan : adonis, envfit
 
 importFrom(ade4,dudi.coa,randtest)
 importFrom(car,Anova,qqPlot)
 importFrom(graphics,abline,arrows,axis,barplot,box,hist,dotchart,legend,lines,locator,mosaicplot,mtext,panel.smooth,par,
   plot,points,polygon,rect,rug,segments,strheight,strwidth,symbols,text,title)
 importFrom(grDevices,chull,col2rgb,n2mfrow,palette,rgb)
-importFrom(stats,aggregate,anova,as.dist,as.formula,bartlett.test,binom.test,chisq.test,complete.cases,cor,cor.test,
-  cov,delete.response,density,dist,dmultinom,family,fisher.test,fitted,formula,glm,kruskal.test,lm,lm.influence,logLik,
-  mahalanobis,median,model.frame,model.matrix,model.response,na.omit,p.adjust,pairwise.prop.test,pairwise.table,pbeta,
-  pbinom,pchisq,pnorm,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,rect.hclust,relevel,resid,residuals,rnorm,rstudent,
-  runif,sd,setNames,shapiro.test,t.test,terms,update,update.formula,var,var.test,wilcox.test)
-importFrom(utils,combn,packageVersion,setTxtProgressBar,txtProgressBar)
+importFrom(stats,aggregate,anova,approxfun,as.dist,as.formula,bartlett.test,binom.test,chisq.test,complete.cases,confint,
+  cor,cor.test,cov,delete.response,density,dist,dmultinom,family,fisher.test,fitted,formula,glm,kruskal.test,lm,lm.influence,
+  logLik,mahalanobis,median,model.frame,model.matrix,model.response,na.omit,p.adjust,pairwise.prop.test,pairwise.table,pbeta,
+  pbinom,pchisq,pgeom,phyper,pnbinom,pnorm,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,rect.hclust,relevel,resid,
+  residuals,rnorm,rstudent,runif,sd,setNames,shapiro.test,t.test,terms,update,update.formula,var,var.test,wilcox.test)
+importFrom(utils,capture.output,combn,packageVersion,setTxtProgressBar,txtProgressBar)
 
 export(
   byf.normhist,cor.sparse,DA.confusion,DA.valid,DA.var,fc.multcomp,friedman.rating.test,kruskal.rating.test,
@@ -34,16 +35,19 @@ export(
   back.lsmeans,
   bootstrap,
   byf.hist,byf.mqqnorm,byf.mshapiro,byf.qqnorm,byf.shapiro,
+  cdf.discrete,
   chisq.bintest,chisq.bin.exp,chisq.exp,chisq.multcomp,chisq.theo.bintest,chisq.theo.multcomp,
   cochran.qtest,
+  cond.multinom,
   coord.proj,
   cor.2comp,cor.conf,cor.multcomp,
   cox.resid,
-  cramer.test,
+  cramer,cramer.test,
   cv,
   CvM.test,
   dendro.gp,
   dummy,
+  dunn.test,
   fisher.bintest,fisher.multcomp,
   fp.test,
   G.bintest,G.multcomp,G.test,G.theo.multcomp,
@@ -62,8 +66,9 @@ export(
   MVA.cor,MVA.load,MVA.scores,
   MVA.plot,MVA.scoreplot,MVA.loadplot,MVA.corplot,MVA.biplot,MVA.pairplot,MVA.trajplot,
   MVA.synt,
+  OR.multinom,
   overdisp.glmer,
-  pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.perm.t.test,
+  pairwise.factorfit,pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.MVA.test,pairwise.perm.t.test,
   pairwise.to.groups,
   pcor, pcor.test,
   perm.anova,perm.bartlett.test,perm.cor.test,perm.t.test,perm.var.test,
@@ -79,8 +84,9 @@ export(
   seq2,
   spearman.ci,spearman.cor.multcomp,
   splitf,
+  test.multinom,
   user.cont,
-  wald.ptheo.test,
+  wald.ptheo.test,wald.ptheo.multinom.test,
   wilcox.paired.multcomp,
   wilcox.paired.rating.multcomp,
   wilcox.signtest,

@@ -1,5 +1,5 @@
 pairwise.perm.t.test <- function(resp,fact,p.method="fdr",paired=FALSE,
-  alternative=c("two.sided","less","greater"),nperm=999) {
+  alternative=c("two.sided","less","greater"),nperm=999,progress=TRUE) {
   if (length(resp)!=length(fact)) {
     stop(paste("'",deparse(substitute(resp)),"' and '",deparse(substitute(fact)),
 	"' lengths differ",sep=""))
@@ -15,7 +15,7 @@ pairwise.perm.t.test <- function(resp,fact,p.method="fdr",paired=FALSE,
   fun.p <- function(i,j) {
     resp2 <- resp[as.numeric(fact)%in%c(i,j)]
     fact2 <- droplevels(fact[as.numeric(fact)%in%c(i,j)])
-    perm.t.test(resp2~fact2,alternative=alternative,paired=paired,nperm=nperm)$p.value
+    perm.t.test(resp2~fact2,alternative=alternative,paired=paired,nperm=nperm,progress=progress)$p.value
   }
   multcomp <- pairwise.table(fun.p,levels(fact),p.adjust.method=p.method)
   result <- list(method=method,data.name=data.name,p.value=multcomp,p.adjust.method=p.method,

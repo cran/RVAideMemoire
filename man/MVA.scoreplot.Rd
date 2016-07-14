@@ -179,7 +179,7 @@ Many multivariate analyses are supported, from various packages:
 
 - RDA (or PCAIV): \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan]{rda}}. With \code{\link[vegan]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}, the opposite for \code{\link[ade4]{pcaivortho}}. \code{scaling} can be defined for \code{\link[vegan]{rda}} (see \code{\link[vegan]{scores.rda}}).
 
-- db-RDA (or CAP): \code{\link[vegan]{capscale}}. Space 1 is constrained space, space 2 is unconstrained space.
+- db-RDA (or CAP): \code{\link[vegan]{capscale}}, \code{\link[vegan]{dbrda}}. Space 1 is constrained space, space 2 is unconstrained space.
 
 - CCA: \code{\link[ade4]{cca}}, \code{\link[vegan]{cca}}. With \code{\link[vegan]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{cca}}. Set 1 is rows, set 2 is columns. \code{scaling} can be defined for \code{\link[vegan]{cca}} (see \code{\link[vegan]{scores.cca}}).
 

@@ -2,6 +2,7 @@ multinomial.test <-
 function(x,p=rep(1/length(x),length(x))) {
   call <- match.call()
   data.name <- if(length(call$x)==1) {call$x} else {paste(call$x[1],"(",paste(call$x[-1],collapse=","),")",sep="")}
+  if (is.factor(x)) {x <- as.vector(table(x))}
   if (!is.vector(x)) {stop("'x' must be a vector")}
   if (sum(p)!=1) {stop("sum of probabilities must be 1")}
   if (length(x)!=length(p)) {stop("'x' and 'p' lengths differ")}

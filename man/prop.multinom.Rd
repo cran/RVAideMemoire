@@ -15,7 +15,7 @@ either a factor or a matrix with K columns giving the counts for each of the K c
 }
 }
 \details{
-The proportions can be computed through the \code{predict} function applied on a multinomial log-linear model (see \code{\link[nnet]{multinom}}). However, standard errors (or confidence intervals) cannot be obtained by this way. The present function uses differents GLMs (in each case considering one category vs. the sum of all others) to obtain proportions and standard errors. Overdispersion is taken into account by default, using a quasibinomial law in all GLMs built.
+The proportions can be computed through the \code{predict} function applied on a multinomial log-linear model (see \code{\link[nnet]{multinom}}). However, standard errors (or confidence intervals) cannot be obtained this way. The present function uses differents GLMs (in each case considering one category vs. the sum of all others) to obtain proportions and standard errors. Overdispersion is taken into account by default, using a quasibinomial law in all GLMs built.
 }
 \value{
   \item{probs}{the calculated proportions.}

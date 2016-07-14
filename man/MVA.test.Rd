@@ -7,12 +7,12 @@ Significance test based on cross (model) validation
 Performs a permutational significance test based on cross (model) validation with different PLS and/or discriminant analyses. See \code{\link[RVAideMemoire]{MVA.cv}} and \code{\link[RVAideMemoire]{MVA.cmv}} for more details about how cross (model) validation is performed.
 }
 \usage{
-MVA.test(X, Y, cmv = FALSE, ncomp = 8, kout = 7, kinn = 6, model = c("PLSR",
-  "CPPLS", "PLS-DA", "PPLS-DA", "LDA", "QDA", "PLS-DA/LDA", "PLS-DA/QDA",
-  "PPLS-DA/LDA","PPLS-DA/QDA"), Q2diff = 0.05, lower = 0.5, upper = 0.5,
-  Y.add = NULL, weights = rep(1, nrow(X)), set.prior = FALSE,
+MVA.test(X, Y, cmv = FALSE, ncomp = 8, kout = 7, kinn = 6, scale = TRUE,
+  model = c("PLSR", "CPPLS", "PLS-DA", "PPLS-DA", "LDA", "QDA", "PLS-DA/LDA",
+  "PLS-DA/QDA", "PPLS-DA/LDA","PPLS-DA/QDA"), Q2diff = 0.05, lower = 0.5,
+  upper = 0.5, Y.add = NULL, weights = rep(1, nrow(X)), set.prior = FALSE,
   crit.DA = c("plug-in", "predictive", "debiased"), p.method = "fdr",
-  nperm = 999,...)
+  nperm = 999, progress = TRUE, ...)
 }
 \arguments{
   \item{X}{
@@ -32,6 +32,9 @@ an integer giving the number of folds (cross-validation) or the number of folds 
 }
   \item{kinn}{
 an integer giving the number of folds in the inner loop (cross model validation only).  Can be re-set internally if needed. Cannot be \code{> kout}.
+}
+  \item{scale}{
+logical indicating if data should be scaled. See help of \code{\link[RVAideMemoire]{MVA.cv}} and \code{\link[RVAideMemoire]{MVA.cmv}}.
 }
   \item{model}{
 the model to be fitted.
@@ -62,6 +65,9 @@ method for p-values correction. See help of \code{\link{p.adjust}}.
 }
   \item{nperm}{
 number of permutations.
+}
+  \item{progress}{
+logical indicating if the progress bar should be displayed.
 }
   \item{...}{
 other arguments to pass to \code{\link[pls]{plsr}} (PLSR, PLS-DA) or \code{\link[pls]{cppls}} (CPPLS, PPLS-DA).

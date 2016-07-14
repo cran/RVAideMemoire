@@ -22,16 +22,8 @@ function (x,y,nrep=1000,conf.level=0.95) {
   if (!is.factor(var1)) {var1 <- factor(var1)}
   if (!is.factor(var2)) {var2 <- factor(var2)}
   nul <- as.numeric(row.names(table(c(which(is.na(var1)), which(is.na(var2))))))
-  var1.2 <- if (length(nul)>0) {
-    var1[-nul]
-  } else {
-    var1
-  }
-  var2.2 <- if (length(nul)>0) {
-    var2[-nul]
-  } else {
-    var2
-  }
+  var1.2 <- if (length(nul)>0) {var1[-nul]} else {var1}
+  var2.2 <- if (length(nul)>0) {var2[-nul]} else {var2}
   if (any(tapply(var1.2,var1.2,function(x) length(x)/length(var1.2))<0.05) |
     any(tapply(var2.2,var2.2,function(x) length(x)/length(var2.2))<0.05)) {
     warning("at least 1 level contains less than 5% of total number of individuals")

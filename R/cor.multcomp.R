@@ -28,7 +28,7 @@ function(var1,var2,fact,alpha=0.05,conf.level=0.95,theo=0,p.method="fdr"){
   names(nval) <- "difference in coefficients"
   result <- list(method.test=met,data.name=dname,statistic=chi2.obs,parameter=c("df"=nlevels(fact)-1),p.value=p,
     alternative="two.sided",null.value=nval,estimate=r,alpha=alpha)
-   if (p>alpha) {
+   if (p>alpha & nlevels(fact.2)>2) {
     r.com <- (exp(2*z.moy)-1)/(exp(2*z.moy)+1)
     z.moy.inf <- z.moy-qnorm((1+conf.level)/2,0,1)/sqrt(sum(n)-3*nlevels(fact))
     z.moy.sup <- z.moy+qnorm((1+conf.level)/2,0,1)/sqrt(sum(n)-3*nlevels(fact))

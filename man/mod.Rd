@@ -11,7 +11,7 @@ mod(x)
 }
 \arguments{
   \item{x}{
-numeric vector.
+vector (numeric, character or factor).
 }
 }
 \author{

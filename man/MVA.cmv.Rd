@@ -7,10 +7,10 @@ Cross model validation
 Performs cross model validation (2CV) with different PLS analyses.
 }
 \usage{
-MVA.cmv(X, Y, repet = 10, kout = 7, kinn = 6, ncomp = 8, model = c("PLSR",
-  "CPPLS", "PLS-DA", "PPLS-DA", "PLS-DA/LDA", "PLS-DA/QDA", "PPLS-DA/LDA",
-  "PPLS-DA/QDA"), crit.inn = c("RMSEP", "Q2", "NMC"), Q2diff = 0.05,
-  lower = 0.5, upper = 0.5, Y.add = NULL, weights = rep(1, nrow(X)),
+MVA.cmv(X, Y, repet = 10, kout = 7, kinn = 6, ncomp = 8, scale = TRUE,
+  model = c("PLSR", "CPPLS", "PLS-DA", "PPLS-DA", "PLS-DA/LDA", "PLS-DA/QDA",
+  "PPLS-DA/LDA", "PPLS-DA/QDA"), crit.inn = c("RMSEP", "Q2", "NMC"),
+  Q2diff = 0.05, lower = 0.5, upper = 0.5, Y.add = NULL, weights = rep(1, nrow(X)),
   set.prior = FALSE, crit.DA = c("plug-in", "predictive", "debiased"), ...)
 }
 \arguments{
@@ -31,6 +31,9 @@ an integer giving the number of folds in the inner loop (can be re-set internall
 }
   \item{ncomp}{
 an integer giving the maximal number of components to be tested in the inner loop (can be re-set depending on the size of the train sets).
+}
+  \item{scale}{
+logical indicating if data should be scaled (see Details).
 }
   \item{model}{
 the model to be fitted (see Details).
@@ -71,6 +74,13 @@ Cross model validation is detailed is Szymanska et al (2012). Some more details 
 - \code{"PLS-DA"} is considered as PLS2 on a dummy-coded response. For a PLS-DA based on the CPPLS algorithm, use \code{"PPLS-DA"} with \code{lower} and \code{upper} limits of the power parameters set to \code{0.5}.
 
 - if a second analysis is used (\code{"PLS-DA/LDA"}, \code{"PLS-DA/QDA"}, \code{"PPLS-DA/LDA"} or \code{"PPLS-DA/QDA"}), a LDA or QDA is built on scores of the first analysis (PLS-DA or PPLS-DA) also in the inner loop. The number of misclassifications, based on this second analysis, is used to choose the number of components.
+
+
+If \code{scale = TRUE}, the scaling is done as this:
+
+- for each step of the outer loop (i.e. \code{kout} steps), the rest set is pre-processed by centering and unit-variance scaling. Means and standard deviations of variables in the rest set are then used to scale the test set.
+
+- for each step of the inner loop (i.e. \code{kinn} steps), the training set is pre-processed by centering and unit-variance scaling. Means and standard deviations of variables in the training set are then used to scale the validation set.
 }
 \value{
   \item{model}{model used.}

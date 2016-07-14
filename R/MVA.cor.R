@@ -494,14 +494,14 @@ MVA.get.corr.2BsPLS.mixOmics <- MVA.get.corr.Multilevel.2BsPLS.mixOmics <- funct
 MVA.get.corr.rGCCA.mixOmics <- function(x,space,...) {
   if (!space %in% 1:length(x$variates)) {stop("wrong 'space'")}
   if (length(space)!=1) {space <- 1}
-  as.data.frame(cor(x$data[[space]],x$variates[[space]],use="pairwise"))
+  as.data.frame(cor(x$X[[space]],x$variates[[space]],use="pairwise"))
 }
 
 MVA.get.corr.sGCCA.mixOmics <- function(x,space,...) {
   if (!space %in% 1:length(x$variates)) {stop("wrong 'space'")}
   if (length(space)!=1) {space <- 1}
   keep.X <- apply(abs(x$loadings[[space]]),1,sum)>0
-  as.data.frame(cor(x$data[[space]],x$variates[[space]],use="pairwise")[keep.X,])
+  as.data.frame(cor(x$X[[space]],x$variates[[space]],use="pairwise")[keep.X,])
 }
 
 

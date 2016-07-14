@@ -50,16 +50,16 @@ MVA.class.prcomp <- function(x,...) {
 
 MVA.class.princomp <- function(x,...) {"PCA.princomp"}
 
-MVA.class.cca <- function(x,...) {
-  if (inherits(x,"dudi")) {res <- MVA.class.dudi(x)} else
+MVA.class.cca <- function (x,...) {
+  if (inherits(x,"dudi")) {res <- MVA.class.dudi(x)} else 
   if (inherits(x,"rda")) {
-    if (inherits(x,"capscale")) {
+    if (inherits(x,c("capscale","dbrda"))) {
 	if (is.null(x$CCA)) {res <- "PCoA.vegan"} else {res <- "dbRDA.vegan"}
     } else {
 	if (is.null(x$CCA)) {res <- "PCA.vegan"} else {res <- "RDA.vegan"}
     }
   } else {
-	if (is.null(x$CCA)) {res <- "COA.vegan"} else {res <- "CCA.vegan"}
+    if (is.null(x$CCA)) {res <- "COA.vegan"} else {res <- "CCA.vegan"}
   }
   return(res)
 }

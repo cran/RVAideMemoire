@@ -8,7 +8,8 @@ Performs pairwise comparisons between group levels with corrections for multiple
 }
 \usage{
 pairwise.perm.t.test(resp, fact, p.method = "fdr", paired = FALSE,
-  alternative = c("two.sided","less", "greater"), nperm = 999)
+  alternative = c("two.sided","less", "greater"), nperm = 999,
+  progress = TRUE)
 }
 \arguments{
   \item{resp}{
@@ -28,6 +29,9 @@ a character string specifying the alternative hypothesis, must be one of \code{"
 }
   \item{nperm}{
 number of permutations.
+}
+  \item{progress}{
+logical indicating if the progress bar should be displayed.
 }
 }
 \details{

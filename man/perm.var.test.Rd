@@ -15,7 +15,7 @@ perm.var.test(x, ...)
 \method{perm.var.test}{default}(x, y, ...)
 
 \method{perm.var.test}{formula}(formula, data, alternative = c("two.sided", "less",
-  "greater"), nperm = 999, ...)
+  "greater"), nperm = 999, progress = TRUE, ...)
 }
 \arguments{
   \item{x}{
@@ -35,6 +35,9 @@ a character string specifying the alternative hypothesis, must be one of \code{"
 }
   \item{nperm}{
 number of permutations.
+}
+  \item{progress}{
+logical indicating if the progress bar should be displayed.
 }
   \item{\dots}{
 further arguments to be passed to or from other methods.

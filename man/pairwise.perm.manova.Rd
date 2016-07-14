@@ -8,7 +8,8 @@ Performs pairwise comparisons between group levels with corrections for multiple
 }
 \usage{
 pairwise.perm.manova(resp, fact, test = c("Pillai", "Wilks",
-  "Hotelling-Lawley", "Roy", "Spherical"), nperm = 999, p.method = "fdr")
+  "Hotelling-Lawley", "Roy", "Spherical"), nperm = 999, 
+  progress = TRUE, p.method = "fdr")
 }
 \arguments{
   \item{resp}{
@@ -22,6 +23,9 @@ choice of test statistic when \code{resp} is a matrix (see \code{\link{anova.mlm
 }
   \item{nperm}{
 number of permutations.
+}
+  \item{progress}{
+logical indicating if the progress bar should be displayed.
 }
   \item{p.method}{
 method for p-values correction. See help of \code{\link{p.adjust}}.

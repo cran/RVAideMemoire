@@ -7,14 +7,18 @@ Pairwise comparisons after an exact multinomial test for given probabilities
 Performs pairwise comparisons after a global exact multinomial test for given probabilities. These comparisons are performed using exact binomial tests.
 }
 \usage{
-multinomial.theo.multcomp(x, p = rep(1/length(x), length(x)), p.method = "fdr")
+multinomial.theo.multcomp(x, p = rep(1/length(x), length(x)), prop = FALSE,
+  p.method = "fdr")
 }
 \arguments{
   \item{x}{
-numeric vector (counts).
+numeric vector (counts). Can also be a factor; in that case \code{table(x)} is used as counts.
 }
   \item{p}{
 theoretical proportions.
+}
+  \item{prop}{
+logical indicating if results should be printed as counts (\code{FALSE}) or proportions (\code{TRUE}).
 }
   \item{p.method}{
 method for p-values correction. See help of \code{\link{p.adjust}}.

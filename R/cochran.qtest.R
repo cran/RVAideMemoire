@@ -34,7 +34,7 @@ cochran.qtest <- function(formula,data,alpha=0.05,p.method="fdr") {
   names(p) <- NULL
   result <- list(method.test="Cochran's Q test",data.name=dname,statistic=Q,parameter=c("df"=k-1),alternative="two.sided",
     null.value=nval,p.value=p,estimate=proba,alpha=alpha)
-  if (p<alpha) {
+  if (p<alpha & nlevels(fact)>2) {
     fun.p <- function(i,j) {
 	signs <- apply(tab[,c(i,j)],1,diff)
 	binom.test(length(signs[signs>0]),length(signs[signs!=0]),0.5)$p.value

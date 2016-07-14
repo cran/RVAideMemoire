@@ -1,7 +1,7 @@
 \name{prop.multinom.test}
 \alias{prop.multinom.test}
 \title{
-Wald test for comparison of proportions
+Wald tests for comparison of proportions
 }
 \description{
 Performs pairwise comparisons of proportions when the number of classes is >= 2 with corrections for multiple testing.

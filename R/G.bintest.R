@@ -24,7 +24,7 @@ function(formula,data,alpha=0.05,p.method="fdr") {
   result$parameter <- test$parameter
   result$p.value <- test$p.value
   result$method.test <- "G-test"
-  if (test$p.value<alpha) {
+  if (test$p.value<alpha & nlevels(fact)>2) {
     result$p.adjust.method <- p.method
     result$p.value.multcomp <- pairwise.G.test(tab.cont,p.method=p.method)$p.value
     result$method.multcomp <- "G-tests"

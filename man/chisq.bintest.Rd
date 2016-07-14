@@ -7,7 +7,7 @@ Pearson's Chi-squared test for binary variables
 Performs a Pearson's Chi-squared test for comparing response probabilities (i.e. when the response variable is a binary variable). The function is in fact a wrapper to the chi-squared test for comparison of proportions on a contingency table. If the p-value of the test is significant, the function performs pairwise comparisons by using Pearson's Chi-squared tests.
 }
 \usage{
-chisq.bintest(formula, data, alpha = 0.05, p.method = "fdr")
+chisq.bintest(formula, data, correct = TRUE, alpha = 0.05, p.method = "fdr")
 }
 \arguments{
   \item{formula}{
@@ -15,6 +15,9 @@ a formula of the form \code{a ~ b}, where \code{a} and \code{b} give the data va
 }
   \item{data}{
 an optional data frame containing the variables in the formula \code{formula}. By default the variables are taken from \code{environment(formula)}.
+}
+  \item{correct}{
+a logical indicating whether to apply continuity correction when computing the test statistic for 2 by 2 tables. See help of \code{\link{chisq.test}}.
 }
   \item{alpha}{
 significance level to compute pairwise comparisons.

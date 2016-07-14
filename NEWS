@@ -1,3 +1,23 @@
+version 0.9-57 (14-07-2016)
+  - new function pairwise.factorfit (pairwise comparisons of groups displayed on a factorial map)
+  - MVA.anova extended to deal with partial CCA/RDA/db-RDA
+  - MVA.synt extended to db-RDA
+  - new argument 'correct' in chisq.bintest (continuity correction)
+  - new argument 'y' in se (standard error of a proportion)
+  - new function cdf.discrete (Cumulative Distribution Function of a known discrete distribution)
+  - prop.multinom corrected for 1-row matrices
+  - new function wald.ptheo.multinom.test (Wald tests for comparison of proportions to theoretical values)
+  - multinomial.test, multinomial.multcomp and multinomial.theo.multcomp accept factors as response
+  - new argument 'prop' in multinomial.theo.multcomp (results displayed as counts or proportions)
+  - new function dunn.test (Dunn's test)
+  - new function cramer (Cramér's association coefficient between 2 nominal variables)
+  - new argument 'progress' in all function performing permutation tests (display of the progress bar)
+  - new argument 'scale' in MVA.cv, MVA.cmv and MVA.test (scaling)
+  - new function pairwise.MVA.test (pairwise comparisons bases on cross (model) validation)
+  - new function cond.multinom (condition number of the Hessian matrix of a multinomial log-linear model)
+  - new function OR.multinom (odds ratios in multinomial regression)
+  - new function test.multinom (significance test in multinomial regression)
+
 version 0.9-56 (06-06-2016)
   - MVA.synt extended to COA, RDA, CCA
   - new argument 'vars' in multtest.gp and plotting method optimized
