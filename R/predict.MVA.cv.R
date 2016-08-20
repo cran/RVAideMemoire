@@ -14,17 +14,20 @@ predict.MVA.cmv <- predict.MVA.cv <- function(object,newdata,conf.level=0.95,cri
 	pred <- do.call("cbind",lapply(pred.dummy,function(x) as.data.frame(colnames(x)[apply(x,1,function(y) which.max(y))])))
 	colnames(pred) <- 1:ncol(pred)
     } else {
-	pred <- do.call("cbind",lapply(object$models.list,function(x) predict(x,newdata,method=crit.DA)$class))
+	pred <- do.call("cbind",lapply(object$models.list,function(x) as.character(predict(x,newdata,method=crit.DA)$class)))
     }
     ta <- list()
     for (i in 1:nrow(pred)) {ta[[i]] <- table(unlist(pred[i,]))}
-    group <- unlist(lapply(ta,function(x) names(x)[which.max(x)[1]]))
+    group <- factor(unlist(lapply(ta,function(x) names(x)[which.max(x)[1]])))
+    if (object$model %in% c("LDA","QDA")) {
+	levels(group) <- unlist(lapply(strsplit(levels(group),"Y."),function(x) x[2]))
+    }
     proba <- unlist(lapply(ta,function(x) x[which.max(x)[1]]/sum(x)))
     res <- data.frame(Group=group,Proba=proba)
   } else {
     pred1 <- lapply(object$models1.list,function(x) predict(x,newdata,type="scores"))
     pred2 <- list()
-    for (i in 1:length(pred1)) {pred2[[i]] <- predict(object$models2.list[[i]],pred1[[i]],method=crit.DA)$class}
+    for (i in 1:length(pred1)) {pred2[[i]] <- as.character(predict(object$models2.list[[i]],pred1[[i]],method=crit.DA)$class)}
     pred2 <- do.call("cbind.data.frame",pred2)
     ta <- list()
     for (i in 1:nrow(pred2)) {ta[[i]] <- table(unlist(pred2[i,]))}

@@ -8,7 +8,7 @@ Predicts class of the grouping factor based on a Correspondence Discriminant Ana
 }
 \usage{
 
-\method{predict}{coadisc}(object, newdata, dim=object$nf, method = c("mahalanobis", "euclidian"), ...)
+\method{predict}{coadisc}(object, newdata, method = c("mahalanobis", "euclidian"), ...)
 
 }
 \arguments{
@@ -17,9 +17,6 @@ object of class inheriting from \code{"coadisc"}.
 }
   \item{newdata}{
 contingency table (either a \code{"matrix"}, \code{"table"} or \code{"data.frame"} object) giving new individuals (one row per individual).
-}
-  \item{dim}{
-number of dimensions to be used for prediction.
 }
   \item{method}{
 distance metric to be used for prediction. In all cases the predicted class corresponds to the minimum distance between the new individual and the centroid of each class. Default is Mahalanobis distance.

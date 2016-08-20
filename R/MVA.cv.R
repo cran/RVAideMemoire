@@ -108,8 +108,7 @@ MVA.cv.quant <- function(X,Y,repet,k,ncomp,scale,model,lower,upper,Y.add,weights
 	train.set.Y <- as.matrix(as.data.frame(train.set[,col.Y]))
 	if (scale) {
 	  train.set.X <- scale(train.set.X)
-	  test.set.X <- scale(test.set.X,center=attr(train.set.X,"scaled:center"),
-	    scale=attr(train.set.X,"scaled:scale"))
+	  test.set.X <- stand(test.set.X,train.set.X)
 	}
 	nmax <- min(c(nrow(train.set)-max(unlist(lapply(test.sets.list.k,nrow))),ncol(X)+1))
 	if (ncomp>=nmax) {
@@ -169,8 +168,7 @@ MVA.cv.qual1 <- function(X,Y,Yfac,groups,repet,k,ncomp,scale,model,lower,upper,Y
 	train.set.trueclass <- trueclass[-as.numeric(rownames(test.set))]
 	if (scale) {
 	  train.set.X <- scale(train.set.X)
-	  test.set.X <- scale(test.set.X,center=attr(train.set.X,"scaled:center"),
-	    scale=attr(train.set.X,"scaled:scale"))
+	  test.set.X <- stand(test.set.X,train.set.X)
 	}
 	if (model %in% c("PLS-DA","PPLS-DA")) {
 	  nmax <- min(c(nrow(train.set),ncol(X)+1))
@@ -254,8 +252,7 @@ MVA.cv.qual2 <- function(X,Y,Yfac,groups,repet,k,ncomp,scale,model,lower,upper,Y
 	train.set.Yfac <- Yfac[-as.numeric(rownames(test.set))]
 	if (scale) {
 	  train.set.X <- scale(train.set.X)
-	  test.set.X <- scale(test.set.X,center=attr(train.set.X,"scaled:center"),
-	    scale=attr(train.set.X,"scaled:scale"))
+	  test.set.X <- stand(test.set.X,train.set.X)
 	}
 	nmax <- min(c(nrow(train.set),ncol(X)+1))
 	if (ncomp>=nmax) {

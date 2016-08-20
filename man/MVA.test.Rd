@@ -94,7 +94,7 @@ The function deals with the limitted floating point precision, which can bias ca
 Maxime Hervé <mx.herve@gmail.com>
 }
 \references{
-Westerhuis J, Hoefsloot HCJ, Smit S, Vis DJ, Smilde AK, van Velzen EJJ, van Duijnhoven JPM and van Dorsten FA (2012) Assessment of PLSDA cross validation. Metabolomics (2008) 4:81-89.
+Westerhuis J, Hoefsloot HCJ, Smit S, Vis DJ, Smilde AK, van Velzen EJJ, van Duijnhoven JPM and van Dorsten FA (2008) Assessment of PLSDA cross validation. Metabolomics 4:81-89.
 }
 \seealso{
 \code{\link[RVAideMemoire]{MVA.cv}}, \code{\link[RVAideMemoire]{MVA.cmv}}

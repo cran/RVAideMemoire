@@ -7,10 +7,11 @@ MVA.scores <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,...) {
     "PCoA.labdsv","PCoA.stats","PCoA.vegan","nMDS.MASS","nMDS.mono.vegan","nMDS.iso.vegan",
     "LDA.MASS","LDA.ade4","PLSDA.mixOmics","sPLSDA.mixOmics","CPPLS.pls","PLSR.pls",
     "PLSR.mixOmics","PLSR.plsRglm","sPLSR.mixOmics","PLSGLR.plsRglm","PCR.pls","CDA.ade4",
-    "NSCOA.ade4","MCA.ade4","Mix.ade4","RDA.ade4","RDAortho.ade4",
+    "NSCOA.ade4","MCA.ade4","Mix.ade4","RDA.ade4","RDAortho.ade4","GPA.FactoMineR",
     "Multilevel.sPLSDA.mixOmics","Multilevel.sPLSR.mixOmics"))) {MVA.get.scores(x)} else
     if (inherits(x,c("PCA.vegan"))) {MVA.get.scores(x,xax,yax,scaling)} else
-    if (inherits(x,c("COA.ade4","DCOA.ade4","PCIA.ade4","CCA.ade4","DPCoA.ade4"))) {MVA.get.scores(x,set)} else
+    if (inherits(x,c("COA.ade4","DCOA.ade4","PCIA.ade4","CCA.ade4","DPCoA.ade4",
+    "Procrustes.vegan"))) {MVA.get.scores(x,set)} else
     if (inherits(x,c("COA.vegan"))) {MVA.get.scores(x,xax,yax,scaling,set)} else
     if (inherits(x,c("RDA.vegan","dbRDA.vegan"))) {MVA.get.scores(x,xax,yax,scaling,space)} else
     if (inherits(x,c("CCA.vegan"))) {MVA.get.scores(x,xax,yax,scaling,set,space)} else
@@ -55,6 +56,9 @@ MVA.scores <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,...) {
   } else if (inherits(x,c("CIA.ade4"))) {
     colnames(res.temp)[1] <- paste("Coinertia axis",xax)
     if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Coinertia axis",yax)}
+  } else if (inherits(x,c("Procrustes.vegan"))) {
+    colnames(res.temp)[1] <- paste("Comp.",xax,"(X)")
+    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Comp.",yax,"(X)")}
   } else {
     colnames(res.temp)[1] <- paste("Comp.",xax)
     if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Comp.",yax)}
@@ -218,6 +222,31 @@ MVA.get.scores.PCIA.ade4 <- function(x,set,...) {
     res <- list(coord=tab)
     res$set <- gl(2,nrow(x$scorX),labels=c("X","Y"))
   } else {res <- tab}
+  return(res)
+}
+
+MVA.get.scores.Procrustes.vegan <- function(x,set,...) {
+  if (set==1) {
+    tab <- as.data.frame(x$X)
+  } else if (set==2) {
+    tab <- as.data.frame(x$Yrot)
+  } else {
+    X <- x$X
+    Y <- x$Yrot
+    colnames(Y) <- colnames(X)
+    rownames(X) <- paste0("X.",rownames(x$X))
+    rownames(Y) <- paste0("Y.",rownames(x$Yrot))
+    tab <- as.data.frame(rbind(X,Y))
+  }
+  if (set==12) {
+    res <- list(coord=tab)
+    res$set <- factor(rep(c("X","Y"),c(nrow(x$X),nrow(x$Yrot))))
+  } else {res <- tab}
+  return(res)
+}
+
+MVA.get.scores.GPA.FactoMineR <- function(x,...) {
+  res <- as.data.frame(x$consensus)
   return(res)
 }
 

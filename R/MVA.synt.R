@@ -8,46 +8,83 @@
 #		° if computed with 'eig=TRUE'
 #	  Does not take into account imaginary axes
 #     * RDA (pcaiv[ade4],pcaivortho[ade4],rda[vegan])
+#     * db-RDA (capscale[vegan],dbrda[vegan])
+#     * GPA (GPA[FactoMineR])
+#     * RGCCA (wrapper.rgcca[mixOmics],rgcca[RGCCA])
+#
+#  - Consensus variance:
+#     * GPA (GPA[FactoMineR])
+#
+#  - Residual variance:
+#     * GPA (GPA[FactoMineR])
 #
 #  - Total inertia:
 #     * COA (dudi.coa[ade4],cca[vegan])
 #     * CCA (cca[ade4],cca[vegan])
-#     * db-RDA (capscale[vegan])
+#     * MCA (dudi.acm[ade4])
+#     * Mix analysis (dudi.mix[ade4],dudi.hillsmith[ade4])
 #
 #  - Constrained variance:
 #     * RDA (pcaiv[ade4],rda[vegan])
+#     * db-RDA (capscale[vegan],dbrda[vegan])
 #
 #  - Unconstrained variance:
 #     * RDA (pcaivortho[ade4],rda[vegan])
+#     * db-RDA (capscale[vegan],dbrda[vegan])
 #
 #  - Constrained inertia:
 #     * CCA (cca[ade4],cca[vegan])
-#     * db-RDA (capscale[vegan])
 #
 #  - Unconstrained inertia:
 #     * CCA (cca[vegan])
-#     * db-RDA (capscale[vegan])
 #
-#  - Intergroup variance:
-#     * LDA (lda[MASS],discrimin[ade4])
-#     * PLS-DA (plsda[mixOmics])
-#     * CDA (discrimin[ade4],discrimin.coa[ade4])
+#  - Co-inertia:
+#     * CIA (coinertia[ade4])
 #
 #  - X variance + Y variance:
-#	* CPPLS (mvr[pls])
-#	* PLSR (mvr[pls],plsR[plsRglm] !que Y!, !!! pls[mixOmics])
-#	* PCR (mvr[pls])
+#     * CPPLS (mvr[pls])
+#     * PLSR (mvr[pls],plsR[plsRglm] !que Y!, !!! pls[mixOmics])
+#     * PCR (mvr[pls])
+#
+#  - Square covariance:
+#     * 2B-PLS (pls[mixOmics])
+#
+#  - Correlation between pairs of axes:
+#     * 2B-PLS (pls[mixOmics])
+#     * CCorA (CCorA[vegan],rcc[mixOmics])
+#     * rCCorA (rcc[mixOmics])
+#     * CIA (coinertia[ade4])
+#     * RGCCA (wrapper.rgcca[mixOmics],rgcca[RGCCA])
 #
 #  - Kurtosis:
-#	* IPCA (ipca[mixOmics])
-#	* sIPCA (sipca[mixOmics])
+#     * IPCA (ipca[mixOmics])
+#     * sIPCA (sipca[mixOmics])
 #
 #  - Stress:
-#	* nMDS (isoMDS[MASS],monoMDS[vegan],metaMDS[vegan],nmds[labdsv])
+#     * nMDS (isoMDS[MASS],monoMDS[vegan],metaMDS[vegan],nmds[labdsv])
+#
+#  - RV coefficient:
+#     * CIA (coinertia[ade4])
+#
+#  - m2:
+#     * PCIA (procuste[ade4])
 
 
 print.MVA.synt <- function(x,...) {
+  if ("cors" %in% names(x)) {
+    to.print <- min(length(x$cors),x$rows)
+    for (i in 1:to.print) {
+	x.i <- x$cors[[i]]
+	cat(paste0("Criterion: ",x.i$crit,"\n"))
+	print(round(x.i$tab,4))
+	cat("\n")
+    }
+  }
+  if ("RV" %in% names(x)) {
+    cat(paste0("RV coefficient: ",round(x$RV,4),"\n\n"))
+  }
   for (i in 1:(length(x)-1)) {
+    if (i==1) {if (names(x)[[1]] %in% c("cors","RV")) {next}}
     x.i <- x[[i]]
     cat(paste0("Criterion: ",x.i$crit,"\n"))
     if ("tab" %in% names(x.i)) {
@@ -57,10 +94,24 @@ print.MVA.synt <- function(x,...) {
 	  rows <- x$rows
 	}
 	tab <- x.i$tab
-	if ("Proportion" %in% colnames(tab)) {tab[,"Proportion"] <- round(tab[,"Proportion"],2)}
-	if ("Cumulative" %in% colnames(tab)) {tab[,"Cumulative"] <- round(tab[,"Cumulative"],2)}
-	if ("Kurtosis" %in% colnames(tab)) {tab[,"Kurtosis"] <- round(tab[,"Kurtosis"],2)}
-	print(tab[1:rows,],row.names=FALSE)
+	if ("Kurtosis" %in% colnames(tab)) {
+	  tab[,"Kurtosis"] <- round(tab[,"Kurtosis"],2)
+	  print(tab[1:rows,],row.names=FALSE)
+	} else	if ("Proportion" %in% colnames(tab)) {
+	  tab[,"Proportion"] <- round(tab[,"Proportion"],2)
+	  if ("Cumulative" %in% colnames(tab)) {
+	    tab[,"Cumulative"] <- round(tab[,"Cumulative"],2)
+	    print(tab[1:rows,],row.names=FALSE)
+	  } else {
+	    print(tab,row.names=FALSE)
+	  }
+	} else if ("Correlation" %in% colnames(tab)) {
+	  tab[,"Correlation"] <- round(tab[,"Correlation"],4)
+	  print(tab[1:rows,],row.names=FALSE)
+	}
+    }
+    if ("m2" %in% names(x.i)) {
+	cat(paste0("m2: ",round(x.i$m2,4),"\n"))
     }
     if ("stress" %in% names(x.i)) {
 	cat(paste0("Stress: ",round(x.i$stress,4),"\n"))
@@ -244,7 +295,7 @@ MVA.get.synt.nMDS.labdsv <- function(x,...) {
   return(res)
 }
 
-MVA.get.synt.COA.ade4 <- function(x,...) {
+MVA.get.synt.COA.ade4 <- MVA.get.synt.MCA.ade4 <- MVA.get.synt.Mix.ade4 <- function(x,...) {
   res <- list()
   vars <- x$eig
   vars <- vars/sum(vars)
@@ -376,93 +427,85 @@ MVA.get.synt.dbRDA.vegan <- function(x,...) {
   vars1.cum <- cumsum(vars1.each)
   cols <- c(if(!is.null(x$pCCA$tot.chi)) {"Conditional"},"Constrained","Unconstrained")
   tab1 <- data.frame(" "=cols,Proportion=vars1.each,Cumulative=vars1.cum,check.names=FALSE)
-  res[[1]] <- list(crit="total inertia (%)",tab=tab1)
+  res[[1]] <- list(crit="total variance (%)",tab=tab1)
   vars2 <- x$CCA$eig/x$CCA$tot.chi
   vars2.each <- 100*vars2
   vars2.cum <- cumsum(vars2.each)
   tab2 <- data.frame(Axis=1:length(vars2.each),Proportion=vars2.each,Cumulative=vars2.cum)
-  res[[2]] <- list(crit="constrained inertia (%)",tab=tab2)
+  res[[2]] <- list(crit="constrained variance (%)",tab=tab2)
   vars3 <- x$CA$eig/x$CA$tot.chi
   vars3.each <- 100*vars3
   vars3.cum <- cumsum(vars3.each)
   tab3 <- data.frame(Axis=1:length(vars3.each),Proportion=vars3.each,Cumulative=vars3.cum)
-  res[[3]] <- list(crit="unconstrained inertia (%)",tab=tab3)
+  res[[3]] <- list(crit="unconstrained variance (%)",tab=tab3)
+  return(res)
+}
+
+MVA.get.synt.CCorA.vegan <- function(x,...) {
+  res <- list()
+  cors <- x$CanCorr
+  tab <- data.frame(Axes=1:length(cors),Correlation=cors)
+  res[[1]] <- list(crit="correlation between pairs of axes",tab=tab)
   return(res)
 }
 
 MVA.get.synt.LDA.MASS <- function(x,...) {
-  res <- list()
-  form <- LDA.format(x)
-  sco <- form$li
-#  tot.inert <- inertia(sco)
-#  tot.ax <- apply(sco,2,function(y) inertia(as.data.frame(y)))
-#  tot.vars <- tot.ax/tot.inert
-#  tot.vars.each <- 100*tot.vars
-#  tot.vars.cum <- 100*cumsum(tot.vars)
-#  tot.tab <- data.frame(Axis=1:length(tot.vars),Proportion=tot.vars.each,Cumulative=tot.vars.cum)
-#  res[[1]] <- list(crit="total variance (%)",tab=tot.tab)
-  Y <- form$grouping
-  gp.n <- table(Y)
-  gp.means <- as.data.frame(aggregate(sco~Y,FUN=mean)[,-1])
-  gp.inert <- inertia(gp.means,w=gp.n)
-  gp.ax <- apply(gp.means,2,function(y) inertia(as.data.frame(y),w=gp.n))
-  gp.vars <- gp.ax/gp.inert
-  gp.vars.each <- 100*gp.vars
-  gp.vars.cum <- 100*cumsum(gp.vars)
-  gp.tab <- data.frame(Axis=1:length(gp.vars),Proportion=gp.vars.each,Cumulative=gp.vars.cum)
-  res[[1]] <- list(crit="intergroup variance (%)",tab=gp.tab)
-  return(res)
+  stop("rather use MVA.cv")
 }
 
-MVA.get.synt.LDA.ade4 <- MVA.get.synt.CDA.ade4 <- function(x,...) {
-  res <- list()
-  Y <- eval(x$call$fac)
-  x <- update(x,scannf=FALSE,nf=nlevels(Y)-1)
-  sco <- x$li
-#  tot.inert <- inertia(sco)
-#  tot.ax <- apply(sco,2,function(y) inertia(as.data.frame(y)))
-#  tot.vars <- tot.ax/tot.inert
-#  tot.vars.each <- 100*tot.vars
-#  tot.vars.cum <- 100*cumsum(tot.vars)
-#  tot.tab <- data.frame(Axis=1:length(tot.vars),Proportion=tot.vars.each,Cumulative=tot.vars.cum)
-#  res[[1]] <- list(crit="total variance (%)",tab=tot.tab)
-  gp.n <- table(Y)
-  gp.means <- as.data.frame(aggregate(as.matrix(sco)~Y,FUN=mean)[,-1])
-  gp.inert <- inertia(gp.means,w=gp.n)
-  gp.ax <- apply(gp.means,2,function(y) inertia(as.data.frame(y),w=gp.n))
-  gp.vars <- gp.ax/gp.inert
-  gp.vars.each <- 100*gp.vars
-  gp.vars.cum <- 100*cumsum(gp.vars)
-  gp.tab <- data.frame(Axis=1:length(gp.vars),Proportion=gp.vars.each,Cumulative=gp.vars.cum)
-  res[[1]] <- list(crit="intergroup variance (%)",tab=gp.tab)
-  return(res)
+MVA.get.synt.LDA.ade4 <- function(x,...) {
+  stop("rather use MVA.cv")
 }
 
 MVA.get.synt.PLSDA.mixOmics <- function(x,...) {
+  stop("rather use MVA.cmv")
+}
+
+MVA.get.synt.2BPLS.mixOmics <- function(x,...) {
   res <- list()
-  nco <- ncol(x$X)
-  while(inherits(try(update(x,ncomp=nco),silent=TRUE),"try-error")) {
-    nco <- nco-1
-  }
-  x <- update(x,ncomp=nco)
-  sco <- x$variates$X
-#  tot.inert <- inertia(sco)
-#  tot.ax <- apply(sco,2,function(y) inertia(as.data.frame(y)))
-#  tot.vars <- tot.ax/tot.inert
-#  tot.vars.each <- 100*tot.vars
-#  tot.vars.cum <- 100*cumsum(tot.vars)
-#  tot.tab <- data.frame(Axis=1:length(tot.vars),Proportion=tot.vars.each,Cumulative=tot.vars.cum)
-#  res[[1]] <- list(crit="total variance (%)",tab=tot.tab)
-  Y <- eval(x$call$Y)
-  gp.n <- table(Y)
-  gp.means <- as.data.frame(aggregate(as.matrix(sco)~Y,FUN=mean)[,-1])
-  gp.inert <- inertia(gp.means,w=gp.n)
-  gp.ax <- apply(gp.means,2,function(y) inertia(as.data.frame(y),w=gp.n))
-  gp.vars <- gp.ax/gp.inert
-  gp.vars.each <- 100*gp.vars
-  gp.vars.cum <- 100*cumsum(gp.vars)
-  gp.tab <- data.frame(Axis=1:length(gp.vars),Proportion=gp.vars.each,Cumulative=gp.vars.cum)
-  res[[1]] <- list(crit="intergroup variance (%)",tab=gp.tab)
+  covmat <- cov(x$X,x$Y)
+  eig <- svd(covmat)$d
+  vars.each <- 100*eig^2/sum(eig^2)
+  vars.cum <- cumsum(vars.each)
+  tab1 <- data.frame(Axes=1:length(vars.each),Proportion=vars.each,Cumulative=vars.cum)
+  tab1 <- tab1[1:x$ncomp,]
+  res[[1]] <- list(crit="square covariance (%)",tab=tab1)
+  cors <- diag(cor(x$variates$X,x$variates$Y))
+  tab2 <- data.frame(Axes=1:length(cors),Correlation=cors)
+  res[[2]] <- list(crit="correlation between pairs of axes",tab=tab2)
+  return(res)
+}
+
+MVA.get.synt.rCCorA.mixOmics <- function(x,...) {
+  res <- list()
+  cors <- x$cor
+  tab <- data.frame(Axes=1:length(cors),Correlation=cors)
+  tab <- tab[1:x$ncomp,]
+  res[[1]] <- list(crit="correlation between pairs of axes",tab=tab)
+  return(res)
+}
+
+MVA.get.synt.GPA.FactoMineR <- function(x,...) {
+  res <- list()
+  PANOVA1 <- x$PANOVA$dimension
+  nrow1 <- nrow(PANOVA1)
+  vars1.each <- PANOVA1["Total",c("Consensus","residus")]
+  vars1.cum <- cumsum(vars1.each)
+  tab1 <- data.frame(" "=c("Consensus","Residual"),Proportion=vars1.each,Cumulative=vars1.cum,check.names=FALSE)
+  res[[1]] <- list(crit="total variance (%)",tab=tab1)
+  vars2.each <- PANOVA1[-nrow1,"Consensus"]
+  vars2.cum <- cumsum(vars2.each)
+  tab2 <- data.frame(Axis=1:length(vars2.each),Proportion=vars2.each,Cumulative=vars2.cum)
+  res[[2]] <- list(crit="total variance (%)",tab=tab2)
+  vars3.each <- 100*PANOVA1[-nrow1,"Consensus"]/PANOVA1["Total","Consensus"]
+  vars3.cum <- cumsum(vars3.each)
+  tab3 <- data.frame(Axis=1:length(vars3.each),Proportion=vars3.each,Cumulative=vars3.cum)
+  res[[3]] <- list(crit="consensus variance (%)",tab=tab3)
+  PANOVA2 <- x$PANOVA$config
+  nrow2 <- nrow(PANOVA2)
+  vars4 <- 100*PANOVA2[-nrow2,"SSresidual"]/PANOVA2["sum","SSresidual"]
+  tab4 <- data.frame(" "=rownames(PANOVA2)[-nrow2],Proportion=vars4,check.names=FALSE)
+  res[[4]] <- list(crit="residual variance (%)",tab=tab4)
   return(res)
 }
 
@@ -507,5 +550,94 @@ MVA.get.synt.PLSR.plsRglm <- function(x,...) {		# !!!! manque la variance de X
   return(res)
 }
 
+MVA.get.synt.rGCCA.mixOmics <- function(x,...) {
+  res <- list()
+  nblock <- length(x$ncomp)
+  maxcomp <- max(x$ncomp)
+  sco <- x$variates
+  cors <- list()
+  for (i in 1:length(sco)) {
+    if (ncol(sco[[i]])<maxcomp) {
+	while(ncol(sco[[i]])<maxcomp) {sco[[i]] <- cbind(sco[[i]],rep(NA,nrow(sco[[i]])))}
+    }
+  }
+  for (i in 1:maxcomp) {
+    tab.cor <- cor(do.call("cbind",lapply(sco,function(x) x[,i])),use="pairwise")
+    rownames(tab.cor) <- colnames(tab.cor) <- paste0("Block",1:nblock)
+    if(!all(is.na(as.dist(tab.cor)))) {
+	cors[[i]] <- list(crit=paste("inter-block correlations - Axes",i),tab=as.dist(tab.cor))
+    }
+  }
+  res[[1]] <- cors
+  names(res)[[1]] <- "cors"
+  for (i in 1:nblock) {
+    vars <- x$AVE$AVE.X[[i]]
+    vars.each <- 100*vars
+    vars.cum <- cumsum(vars.each)
+    tab.vars <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+    res[[i+1]] <- list(crit=paste("intra-block total variance (%) - Block",i),tab=tab.vars)
+  }
+  return(res)
+}
+
+MVA.get.synt.rGCCA.RGCCA <- function(x,...) {
+  res <- list()
+  nblock <- length(x$ncomp)
+  maxcomp <- max(x$ncomp)
+  sco <- x$Y
+  for (i in 1:length(sco)) {
+    if (ncol(sco[[i]])<maxcomp) {
+	while(ncol(sco[[i]])<maxcomp) {sco[[i]] <- cbind(sco[[i]],rep(NA,nrow(sco[[i]])))}
+    }
+  }
+  cors <- list()
+  for (i in 1:maxcomp) {
+    tab.cor <- cor(do.call("cbind",lapply(sco,function(x) x[,i])),use="pairwise")
+    rownames(tab.cor) <- colnames(tab.cor) <- paste0("Block",1:nblock)
+    if(!all(is.na(as.dist(tab.cor)))) {
+	cors[[i]] <- list(crit=paste("inter-block correlations - Axes",i),tab=as.dist(tab.cor))
+    }
+  }
+  res[[1]] <- cors
+  names(res)[[1]] <- "cors"
+  for (i in 1:nblock) {
+    vars <- x$AVE$AVE_X[[i]]
+    vars.each <- 100*vars
+    vars.cum <- cumsum(vars.each)
+    tab.vars <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+    res[[i+1]] <- list(crit=paste("intra-block total variance (%) - Block",i),tab=tab.vars)
+  }
+  return(res)
+}
+
+MVA.get.synt.CIA.ade4 <- function(x,...) {
+  res <- list()
+  res$RV <- x$RV
+  vars <- x$eig
+  vars <- vars/sum(vars)
+  vars.each <- 100*vars
+  vars.cum <- 100*cumsum(vars)
+  tab <- data.frame(Axes=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+  res[[2]] <- list(crit="co-inertia (%)",tab=tab)
+  cors <- diag(cor(x$lX,x$lY))
+  tab2 <- data.frame(Axes=1:length(cors),Correlation=cors)
+  res[[3]] <- list(crit="correlation between pairs of axes",tab=tab2)
+  return(res)
+}
+
+MVA.get.synt.PCIA.ade4 <- function(x,...) {
+  res <- list()
+  X <- scale(x$tabX,scale=FALSE)
+  Y <- scale(x$tabY,scale=FALSE)
+  var1 <- apply(X,2,function(x) sum(x^2))
+  var2 <- apply(Y,2,function(x) sum(x^2))
+  tra1 <- sum(var1)
+  tra2 <- sum(var2)
+  X <- as.matrix(X/sqrt(tra1))
+  Y <- as.matrix(Y/sqrt(tra2))
+  m2 <- sum(svd(t(X) %*% Y)$d)
+  res[[1]] <- list(crit="m2",m2=m2)
+  return(res)
+}
 
 

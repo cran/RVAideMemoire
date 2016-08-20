@@ -4,24 +4,28 @@
 #     * sPCA (spca[mixOmics])
 #     * IPCA (ipca[mixOmics])
 #     * sIPCA (sipca[mixOmics])
-#	* LDA (lda[MASS],discrimin[ade4])
-#	* PLS-DA (plsda[mixOmics])
-#	* sPLS-DA (splsda[mixOmics])
-#	* Multilevel (s)PLS-DA (multilevel[mixOmics]) # mixOmics >= 5.0.4
-#	* CPPLS (mvr[pls])
-#	* PLSR (mvr[pls],pls[mixOmics],plsR[plsRglm])
-#	* sPLSR (spls[mixOmics])
-#	* Multilevel (s)PLSR (multilevel[mixOmics]) # mixOmics > 5.0.4
-#	* PLS-GLR (plsRglm[plsRglm])
-#	* PCR (mvr[pls])
-#	* CDA (discrimin.coa[ade4])
-#	* Non Symmetric COA (dudi.nsc[ade4]) # Pas corrélation
-#	* CCA (cca[vegan],cca[ade4])
+#     * LDA (lda[MASS],discrimin[ade4])
+#     * PLS-DA (plsda[mixOmics])
+#     * sPLS-DA (splsda[mixOmics])
+#     * Multilevel (s)PLS-DA (multilevel[mixOmics]) # mixOmics >= 5.0.4
+#     * CPPLS (mvr[pls])
+#     * PLSR (mvr[pls],pls[mixOmics],plsR[plsRglm])
+#     * sPLSR (spls[mixOmics])
+#     * Multilevel (s)PLSR (multilevel[mixOmics]) # mixOmics > 5.0.4
+#     * PLS-GLR (plsRglm[plsRglm])
+#     * PCR (mvr[pls])
+#     * CDA (discrimin.coa[ade4])
+#     * Non Symmetric COA (dudi.nsc[ade4]) # Pas corrélation
+#     * CCA (cca[vegan],cca[ade4])
+#     * db-RDA (capscale[vegan],dbrda[vegan])
+#     * GPA (GPA[FactoMineR])
 #  - Possibly separated for multiple factors:
 #     * Mix analysis (dudi.mix[ade4],dudi.hillsmith[ade4])
 #  - Constrained/unconstrained spaces:
 #     * 1 possible plot per space:
 #	    ¤ RDA (rda[vegan],pcaiv[ade4],pcaivortho[ade4])
+#  - Different data sets in the same space:
+#     * PCIA (procuste[ade4])
 #  - Spaces from different data sets:
 #	* 2 spaces (X and Y):
 #         ¤ CCorA (CCorA[vegan],rcc[mixOmics])

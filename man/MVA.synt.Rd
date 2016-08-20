@@ -18,7 +18,7 @@ MVA.synt(x, rows = 5)
 }
 }
 \details{
-Many multivariate analyses are supported, from various packages. The list will progressively get longer (and additional criteria will be given).
+Many multivariate analyses are supported, from various packages.
 
 - PCA: \code{\link{prcomp}}, \code{\link{princomp}}, \code{\link[ade4]{dudi.pca}}, \code{\link[vegan]{rda}}, \code{\link[mixOmics]{pca}}, \code{\link[labdsv]{pca}}: \% of total variance explained by each axis.
 
@@ -34,23 +34,35 @@ Many multivariate analyses are supported, from various packages. The list will p
 
 - RDA: \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan]{rda}}: \% of constrained and unconstrained total variance, \% of constrained variance explained by constrained axes (\code{\link[ade4]{pcaiv}} and \code{\link[vegan]{rda}}), \% of unconstrained variance explained by unconstrained axes (\code{\link[ade4]{pcaivortho}} and \code{\link[vegan]{rda}}).
 
-- db-RDA (or CAP): \code{\link[vegan]{capscale}}, \code{\link[vegan]{dbrda}}:  \% of constrained and unconstrained total inertia, \% of constrained inertia explained by constrained axes, \% of unconstrained inertia explained by unconstrained axes.
+- db-RDA (or CAP): \code{\link[vegan]{capscale}}, \code{\link[vegan]{dbrda}}:  \% of constrained and unconstrained total variance, \% of constrained variance explained by constrained axes, \% of unconstrained variance explained by unconstrained axes.
 
 - COA: \code{\link[ade4]{dudi.coa}}, \code{\link[vegan]{cca}}: \% of total inertia explained by each axis.
 
 - CCA: \code{\link[ade4]{cca}}, \code{\link[vegan]{cca}}: \% of constrained and unconstrained total inertia, \% of constrained inertia explained by constrained axes, \% of unconstrained inertia explained by unconstrained axes (\code{\link[vegan]{cca}} only).
 
-- LDA: \code{\link[MASS]{lda}}, \code{\link[ade4]{discrimin}}: \% of intergroup variance explained by each axis.
-
-- PLS-DA (PLS2 on a dummy-coded factor): \code{\link[mixOmics]{plsda}}: \% of intergroup variance explained by each axis.
-
 - CPPLS: \code{\link[pls]{mvr}}: \% of X and Y variances explained by each axis.
 
 - PLSR: \code{\link[pls]{mvr}}, \code{\link[plsRglm]{plsR}}: \% of X and Y variances explained by each axis (only Y for the moment with \code{\link[plsRglm]{plsR}}).
 
+- 2B-PLS: \code{\link[mixOmics]{pls}}: \% of X/Y square covariance explained by each pair of axes, correlation between each pair of axes (canonical correlations).
+
+- CCorA: \code{\link[vegan]{CCorA}}, \code{\link[mixOmics]{rcc}}: correlation between each pair of axes (canonical correlations).
+
+- rCCorA: \code{\link[mixOmics]{rcc}}: correlation between each pair of axes (canonical correlations).
+
 - PCR: \code{\link[pls]{mvr}}: \% of X and Y variances explained by each axis.
 
-- CDA: \code{\link[ade4]{discrimin}}, \code{\link[ade4]{discrimin.coa}}: \% of intergroup variance explained by each axis.
+- MCA: \code{\link[ade4]{dudi.acm}}: \% of total inertia explained by each axis.
+
+- Mix analysis: \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{dudi.hillsmith}}: \% of total inertia explained by each axis.
+
+- GPA: \code{\link[FactoMineR]{GPA}}: \% of consensus and residual variance, \% of total variance exlained by each axis, \% of consensus variance explained by each axis, \% of residual variance coming from each group of variables.
+
+- RGCCA: \code{\link[RGCCA]{rgcca}}, \code{\link[mixOmics]{wrapper.rgcca}}: \% of total intra-block variance explained by each axis, correlation between each pair of axes (canonical correlations).
+
+- CIA: \code{\link[ade4]{coinertia}}: RV coefficient, \% of co-inertia explained by each pair of axes, correlation between each pair of axes (canonical correlations).
+
+- PCIA: \code{\link[ade4]{procuste}}: m2.
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
@@ -58,5 +70,5 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 data(iris)
 PCA <- prcomp(iris[,1:4])
-MVA.synt(PCA,"scores")
+MVA.synt(PCA)
 }

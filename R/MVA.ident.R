@@ -137,6 +137,10 @@ MVA.class.procuste <- function(x,...) {"PCIA.ade4"}
 
 MVA.class.CCorA <- function(x,...) {"CCorA.vegan"}
 
+MVA.class.procrustes <- function(x,...) {"Procrustes.vegan"}
+
+MVA.class.GPA <- function(x,...) {"GPA.FactoMineR"}
+
 MVA.class.rcc <- function(x,...) {"rCCorA.mixOmics"}
 
 MVA.class.rgcca <- function(x,...) {

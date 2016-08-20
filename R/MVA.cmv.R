@@ -123,8 +123,7 @@ MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,scale,model,crit.inn,Q2diff,
 	val.sets.list <- split(rest.set,sample(gl(kinn,1,nrow(rest.set))))
 	if (scale) {
 	  rest.set.X <- scale(rest.set.X)
-	  test.set.X <- scale(test.set.X,center=attr(rest.set.X,"scaled:center"),
-	    scale=attr(rest.set.X,"scaled:scale"))
+	  test.set.X <- stand(test.set.X,rest.set.X)
 	}
 	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
 	if (ncomp>=nmax) {
@@ -145,8 +144,7 @@ MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,scale,model,crit.inn,Q2diff,
 	  train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
 	  if (scale) {
 	    train.set.X <- scale(train.set.X)
-	    val.set.X <- scale(val.set.X,center=attr(train.set.X,"scaled:center"),
-		scale=attr(train.set.X,"scaled:scale"))
+	    val.set.X <- stand(val.set.X,train.set.X)
 	  }
 	  model.kinn <- if (model=="PLSR") {
 	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp,...)
@@ -244,6 +242,10 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,
 	if (kinn2!=kinn) {warning(paste("'kinn' re-set to",kinn2))}
 	kinn <- kinn2
 	val.sets.list <- splitf(rest.set,factor(rest.set.trueclass),kinn)
+	if (scale) {
+	  rest.set.X <- scale(rest.set.X)
+	  test.set.X <- stand(test.set.X,rest.set.X)
+	}
 	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
 	if (ncomp>=nmax) {
 	  ncomp2 <- nmax-1
@@ -259,6 +261,10 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,
 	  train.set.Yadd <- train.set[,col.Yadd]
 	  train.set.Y <- as.matrix(as.data.frame(train.set[,col.Y]))
 	  train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
+	  if (scale) {
+	    train.set.X <- scale(train.set.X)
+	    val.set.X <- stand(val.set.X,train.set.X)
+	  }
 	  model.kinn <- if (model=="PLS-DA") {
 	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp2,...)
 	  } else {
@@ -338,6 +344,10 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit
 	if (kinn2!=kinn) {warning(paste("'kinn' re-set to",kinn2))}
 	kinn <- kinn2
 	val.sets.list <- splitf(rest.set,factor(rest.set.trueclass),kinn)
+	if (scale) {
+	  rest.set.X <- scale(rest.set.X)
+	  test.set.X <- stand(test.set.X,rest.set.X)
+	}
 	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
 	if (ncomp>=nmax) {
 	  ncomp2 <- nmax-1
@@ -353,6 +363,10 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit
 	  train.set.Yadd <- train.set[,col.Yadd]
 	  train.set.Y <- as.matrix(as.data.frame(train.set[,col.Y]))
 	  train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
+	  if (scale) {
+	    train.set.X <- scale(train.set.X)
+	    val.set.X <- stand(val.set.X,train.set.X)
+	  }
 	  train.set.Yfac <- rest.set.Yfac[-as.numeric(rownames(val.set))]
 	  model.kinn.temp <- if (model %in% c("PLS-DA/LDA","PLS-DA/QDA")) {
 	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp2,...)

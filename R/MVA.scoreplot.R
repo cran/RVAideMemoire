@@ -3,30 +3,32 @@
 #     * PCA (dudi.pca[ade4],prcomp[stats],princomp[stats]°,pca[mixOmics],pca[labdsv],rda[vegan])
 #		° if scores=TRUE
 #     * sPCA (spca[mixOmics])
-#	* IPCA (ipca[mixOmics])
-#	* sIPCA (sipca[mixOmics])
+#     * IPCA (ipca[mixOmics])
+#     * sIPCA (sipca[mixOmics])
 #     * PCoA (dudi.pco[ade4],pcoa[ape],pco[labdsv],cmdscale[stats]°,wcmdscale[vegan]°,capscale[vegan])
 #		° if computed with at least one non-default argument
-#	* nMDS (isoMDS[MASS],monoMDS[vegan],metaMDS[vegan],nmds[labdsv])
+#     * nMDS (isoMDS[MASS],monoMDS[vegan],metaMDS[vegan],nmds[labdsv])
 #     * LDA (lda[MASS],discrimin[ade4])
-#	* PLS-DA (plsda[mixOmics])
-#	* sPLS-DA (splsda[mixOmics])
-#	* Multilevel (s)PLS-DA (multilevel[mixOmics]) # mixOmics >= 5.0.4
-#	* CPPLS (mvr[pls])
-#	* PLSR (mvr[pls],pls[mixOmics],plsR[plsRglm])
-#	* sPLSR (spls[mixOmics])
-#	* Multilevel (s)PLSR (multilevel[mixOmics]) # mixOmics >= 5.0.4
-#	* PLS-GLR (plsRglm[plsRglm])
-#	* PCR (mvr[pls])
-#	* CDA (discrimin[ade4],discrimin.coa[ade4])
-#	* Non Symmetric COA (dudi.nsc[ade4])
+#     * PLS-DA (plsda[mixOmics])
+#     * sPLS-DA (splsda[mixOmics])
+#     * Multilevel (s)PLS-DA (multilevel[mixOmics]) # mixOmics >= 5.0.4
+#     * CPPLS (mvr[pls])
+#     * PLSR (mvr[pls],pls[mixOmics],plsR[plsRglm])
+#     * sPLSR (spls[mixOmics])
+#     * Multilevel (s)PLSR (multilevel[mixOmics]) # mixOmics >= 5.0.4
+#     * PLS-GLR (plsRglm[plsRglm])
+#     * PCR (mvr[pls])
+#     * CDA (discrimin[ade4],discrimin.coa[ade4])
+#     * Non Symmetric COA (dudi.nsc[ade4])
+#     * GPA (GPA[FactoMineR])
 #  - Possibly separated for multiple factors:
 #     * MCA (dudi.acm[ade4])
 #     * Mix analysis (dudi.mix[ade4],dudi.hillsmith[ade4])
 #  - Different sets of points in the same space:
-#	* COA (dudi.coa[ade4],cca[vegan])
-#	* Decentred COA (dudi.dec[ade4])
-#	* PCIA (procuste[ade4])
+#     * COA (dudi.coa[ade4],cca[vegan])
+#     * Decentred COA (dudi.dec[ade4])
+#     * PCIA (procuste[ade4])
+#     * Procrustes (procrustes[vegan])
 #     * DPCoA (dpcoa[ade4])
 #  - Constrained/unconstrained spaces:
 #     * 1 possible plot per space:
@@ -35,16 +37,16 @@
 #     * Rows and/or columns per space:
 #         ¤ CCA (cca[vegan],cca[ade4])
 #  - Spaces from different data sets:
-#	* 2 spaces (X and Y):
+#     * 2 spaces (X and Y):
 #         ¤ CCorA (CCorA[vegan])
-#	* 3 spaces (X, Y and "common"):
+#     * 3 spaces (X, Y and "common"):
 #	    ¤ CCorA (rcc[mixOmics])
 #	    ¤ rCCorA (rcc[mixOmics])
 #         ¤ CIA (coinertia[ade4])
 #	    ¤ 2B-PLS (pls[mixOmics])
 #	    ¤ 2B-sPLS (spls[mixOmics])
 #	    ¤ Multilevel 2B-(s)PLS (multilevel[mixOmics]) # mixOmics >= 5.0.4
-#	* >=2 spaces (including DA)
+#     * >=2 spaces (including DA)
 #	    ¤ rGCCA (rgcca[RGCCA],wrapper.rgcca[mixOmics])
 #	    ¤ sGCCA (sgcca[RGCCA],wrapper.sgcca[mixOmics])
 
@@ -61,8 +63,8 @@ MVA.scoreplot <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,byfac=TR
 	weights=rep(weights,nrow(coord))
     } else {stop("non-convenient 'weights' argument")}
   }
-  if ((inherits(x,c("COA.ade4","DCOA.ade4","CCA.ade4","COA.vegan","CCA.vegan","PCIA.ade4","DPCoA.ade4")) && set==12) |
-    (inherits(x,"CIA.ade4") && space==3 && set==12)) {
+  if ((inherits(x,c("COA.ade4","DCOA.ade4","CCA.ade4","COA.vegan","CCA.vegan","PCIA.ade4","DPCoA.ade4",
+    "Procrustes.vegan")) && set==12) | (inherits(x,"CIA.ade4") && space==3 && set==12)) {
     fac <- sco$set
     barycenters <- contours <- stars <- FALSE
     if (length(cex)==1) {cex <- c(1,0.7)}
@@ -100,7 +102,8 @@ MVA.scoreplot <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,byfac=TR
     MVA.scoreplot.byfac(coord,x,barycenters,stars,contours,weights,xlab,ylab,main,pch,cex,col,
 	points,labels,main.pos,main.cex,fac.lab,fac.cex,legend,legend.pos,legend.title,legend.lab,legend.col,
 	legend.pch,legend.ptcex,legend.cex,drawintaxes,xlim,ylim,keepmar)
-  } else if (inherits(x,c("COA.ade4","DCOA.ade4","CCA.ade4","COA.vegan","CCA.vegan","PCIA.ade4","DPCoA.ade4")) && ncol(coord)==1) {
+  } else if (inherits(x,c("COA.ade4","DCOA.ade4","CCA.ade4","COA.vegan","CCA.vegan","PCIA.ade4","DPCoA.ade4",
+    "Procrustes.vegan")) && ncol(coord)==1) {
     if (dhist) {
 	MVA.scoreplot.1comp.dhist(coord,fac,xlab,ylab,legend.col,legend,legend.pos,legend.title,legend.lab,
 	  drawextaxes,drawintaxes,main,xlim)

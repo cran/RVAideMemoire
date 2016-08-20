@@ -91,6 +91,7 @@ If \code{scale = TRUE}, the scaling is done as this:
   \item{crit.inn}{criterion used to choose the number of components in the inner loop.}
   \item{crit.DA}{criterion used to classify individuals of the test and validation sets.}
   \item{Q2diff}{threshold used if the number of components is chosen according to Q2.}
+  \item{groups}{levels of \code{Y} if it is a factor.}
   \item{models.list}{list of of models generated (\code{repet*kout} models), for PLSR, CPPLS, PLS-DA and PPLS-DA.}
   \item{models1.list}{list of of (P)PLS-DA models generated (\code{repet*kout} models), for PLS-DA/LDA, PLS-DA/QDA, PPLS-DA/LDA and PPLS-DA/QDA.}
   \item{models2.list}{list of of LDA/QDA models generated (\code{repet*kout} models), for PLS-DA/LDA, PLS-DA/QDA, PPLS-DA/LDA and PPLS-DA/QDA.}

@@ -1,15 +1,16 @@
 # Importés directement dans le code des fonctions (évite de charger tous
 # les packages au chargement de RVAideMemoire) :
-#   - ade4 : as.dudi, dist.quant
+#   - ade4 : as.dudi, dist.quant, discrimin.coa, dudi.coa
 #   - boot : boot
 #   - cramer : cramer.test
 #   - dunn.test : dunn.test
+#   - FactoMineR : GPA
 #   - lme4 : fixef, getME, glmer, isLMM, VarCorr
 #   - MASS : lda, qda
 #   - mixOmics : vip
 #   - multcompView : multcompLetters
 #   - nnet : multinom
-#   - pls : cppls, plsr
+#   - pls : cppls, plsr, R2
 #   - pspearman : pspearman
 #   - statmod : qresiduals
 #   - vegan : adonis, envfit
@@ -21,9 +22,9 @@ importFrom(graphics,abline,arrows,axis,barplot,box,hist,dotchart,legend,lines,lo
 importFrom(grDevices,chull,col2rgb,n2mfrow,palette,rgb)
 importFrom(stats,aggregate,anova,approxfun,as.dist,as.formula,bartlett.test,binom.test,chisq.test,complete.cases,confint,
   cor,cor.test,cov,delete.response,density,dist,dmultinom,family,fisher.test,fitted,formula,glm,kruskal.test,lm,lm.influence,
-  logLik,mahalanobis,median,model.frame,model.matrix,model.response,na.omit,p.adjust,pairwise.prop.test,pairwise.table,pbeta,
+  logLik,mahalanobis,manova,median,model.frame,model.matrix,model.response,na.omit,p.adjust,pairwise.prop.test,pairwise.table,pbeta,
   pbinom,pchisq,pgeom,phyper,pnbinom,pnorm,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,rect.hclust,relevel,resid,
-  residuals,rnorm,rstudent,runif,sd,setNames,shapiro.test,t.test,terms,update,update.formula,var,var.test,wilcox.test)
+  residuals,rnorm,rstudent,runif,sd,setNames,shapiro.test,summary.manova,t.test,terms,update,update.formula,var,var.test,wilcox.test)
 importFrom(utils,capture.output,combn,packageVersion,setTxtProgressBar,txtProgressBar)
 
 export(
@@ -35,12 +36,14 @@ export(
   back.lsmeans,
   bootstrap,
   byf.hist,byf.mqqnorm,byf.mshapiro,byf.qqnorm,byf.shapiro,
+  CDA.cv,CDA.test,
   cdf.discrete,
   chisq.bintest,chisq.bin.exp,chisq.exp,chisq.multcomp,chisq.theo.bintest,chisq.theo.multcomp,
   cochran.qtest,
   cond.multinom,
   coord.proj,
   cor.2comp,cor.conf,cor.multcomp,
+  cov.test,
   cox.resid,
   cramer,cramer.test,
   cv,
@@ -51,6 +54,7 @@ export(
   fisher.bintest,fisher.multcomp,
   fp.test,
   G.bintest,G.multcomp,G.test,G.theo.multcomp,
+  GPA.test,
   ind.contrib,
   least.rect,
   loc.slp,
@@ -67,8 +71,9 @@ export(
   MVA.plot,MVA.scoreplot,MVA.loadplot,MVA.corplot,MVA.biplot,MVA.pairplot,MVA.trajplot,
   MVA.synt,
   OR.multinom,
+  ord.rw,
   overdisp.glmer,
-  pairwise.factorfit,pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.MVA.test,pairwise.perm.t.test,
+  pairwise.CDA.test,pairwise.factorfit,pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.MVA.test,pairwise.perm.t.test,
   pairwise.to.groups,
   pcor, pcor.test,
   perm.anova,perm.bartlett.test,perm.cor.test,perm.t.test,perm.var.test,
@@ -84,7 +89,9 @@ export(
   seq2,
   spearman.ci,spearman.cor.multcomp,
   splitf,
+  stand,
   test.multinom,
+  to.dudi,
   user.cont,
   wald.ptheo.test,wald.ptheo.multinom.test,
   wilcox.paired.multcomp,
@@ -104,10 +111,12 @@ S3method(perm.var.test,formula)
 S3method(plot,multtest.gp)
 S3method(plot,multtest.cor)
 S3method(predict,coadisc)
+S3method(predict,CDA.cv)
 S3method(predict,least.rect)
 S3method(predict,MVA.cv)
 S3method(predict,MVA.cmv)
 S3method(print,byf.test)
+S3method(print,CDA.cv)
 S3method(print,chisq.exp)
 S3method(print,least.rect)
 S3method(print,multtest)

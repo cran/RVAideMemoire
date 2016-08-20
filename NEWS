@@ -1,3 +1,20 @@
+version 0.9-60 (20-08-2016)
+  - MVA.synt extended to MCA, mix analysis, GPA, 2B-PLS, CCorA, rCCorA, RGCCA, CIA and PCIA
+  - MVA.corplot extended to db-RDA
+  - new function stand (standardization of a data frame based on another data frame)
+  - intergroup variance removed from MVA.synt (not relevant)
+  - new function CDA.cv (cross validation for CDA)
+  - new predict methods for "CDA.cv" objects
+  - new function CDA.test (significance test for CDA)
+  - new function pairwise.CDA.test (pairwise comparisons for CDA)
+  - pairwise.factorfit corrected for CA and CCA computed with the vegan package
+  - new function to.dudi (conversion of some vegan analyses to ade4 format)
+  - MVA.scores (hence MVA.plot) extended to (Generalized) Procrustean superimposition
+  - MVA.cor (hence MVA.plot) extended to Generalized Procrustean superimposition
+  - new function GPA.test (significance test for GPA)
+  - new function cov.test (significance test for covariance)
+  - new function ord.rw (re-computation of an ordination using given row weights)
+
 version 0.9-57 (14-07-2016)
   - new function pairwise.factorfit (pairwise comparisons of groups displayed on a factorial map)
   - MVA.anova extended to deal with partial CCA/RDA/db-RDA

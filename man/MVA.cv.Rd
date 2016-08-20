@@ -67,10 +67,11 @@ If \code{scale = TRUE}, the scaling is done as this: for each step of the valida
 \value{
   \item{model}{model used.}
   \item{type}{type of model used.}
-  \item{repet}{number of times the whole 2CV procedure was repeated.}
+  \item{repet}{number of times the whole procedure was repeated.}
   \item{k}{number of folds.}
-  \item{k}{number of components used.}
+  \item{ncomp}{number of components used.}
   \item{crit.DA}{criterion used to classify individuals of the test sets.}
+  \item{groups}{levels of \code{Y} if it is a factor.}
   \item{models.list}{list of of models generated (\code{repet*k} models), for PLSR, CPPLS, PLS-DA, PPLS-DA, LDA and QDA.}
   \item{models1.list}{list of of (P)PLS-DA models generated (\code{repet*k} models), for PLS-DA/LDA, PLS-DA/QDA, PPLS-DA/LDA and PPLS-DA/QDA.}
   \item{models2.list}{list of of LDA/QDA models generated (\code{repet*k} models), for PLS-DA/LDA, PLS-DA/QDA, PPLS-DA/LDA and PPLS-DA/QDA.}

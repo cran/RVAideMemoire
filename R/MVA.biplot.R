@@ -8,6 +8,7 @@ MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
     scaling=scaling,space=space,set=sco.set,keepmar=TRUE),sco.args)
   call.sco <- as.call(arg.sco)
   lims <- eval(call.sco)
+  constraints <- match.arg(constraints)
   constr <- inherits(x,c("CCA.vegan","CCA.ade4","RDA.vegan","RDA.ade4"))
   if (constr & !is.null(constraints)) {
     constr.type <- MVA.constr(x)

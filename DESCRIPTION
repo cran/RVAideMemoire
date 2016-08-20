@@ -2,18 +2,19 @@ Encoding: latin1
 Package: RVAideMemoire
 Type: Package
 Title: Diverse Basic Statistical and Graphical Functions
-Version: 0.9-57
-Date: 2016-07-14
+Version: 0.9-60
+Date: 2016-08-20
 Author: Maxime Hervé
 Maintainer: Maxime Hervé <mx.herve@gmail.com>
-Imports: ade4, boot, car, cramer, dgof, dunn.test, graphics, grDevices,
-        lme4 (>= 1.0-4), MASS, mixOmics (>= 5.0.2), multcompView, nnet,
-        pls, pspearman, statmod, stats, utils, vegan
-Suggests: EMT, lsmeans, npsm, ordinal, survival
+Imports: ade4, boot, car, cramer, dunn.test, FactoMineR, graphics,
+        grDevices, lme4 (>= 1.0-4), MASS, mixOmics (>= 5.0.2),
+        multcompView, nnet, pls, pspearman, statmod, stats, utils,
+        vegan
+Suggests: dgof, EMT, lsmeans, npsm, ordinal, survival
 Description: Contains diverse more or less complicated functions, written to simplify user's life: simplifications of existing functions, basic but not implemented tests, easy-to-use tools, bridges between functions of different packages... All functions are presented in the French book 'Aide-memoire de statistique appliquee a la biologie', written by the same author and available on CRAN.
 License: GPL-2
 LazyLoad: yes
 NeedsCompilation: no
-Packaged: 2016-07-14 06:10:53 UTC; Maxime
+Packaged: 2016-08-20 09:25:28 UTC; Maxime
 Repository: CRAN
-Date/Publication: 2016-07-14 10:14:52
+Date/Publication: 2016-08-20 15:32:13

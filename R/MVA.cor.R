@@ -4,10 +4,10 @@ MVA.cor <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
   x <- MVA.ident(x)
   corr.temp <- if (inherits(x,c("PCA.ade4","PCA.mixOmics","sPCA.mixOmics","IPCA.mixOmics",
     "sIPCA.mixOmics","LDA.MASS","LDA.ade4","PLSDA.mixOmics","sPLSDA.mixOmics","Multilevel.sPLSDA.mixOmics",
-    "CDA.ade4","NSCOA.ade4","CCA.ade4","Mix.ade4","RDAortho.ade4"))) {MVA.get.corr(x)} else
+    "CDA.ade4","NSCOA.ade4","CCA.ade4","Mix.ade4","RDAortho.ade4","GPA.FactoMineR"))) {MVA.get.corr(x)} else
     if (inherits(x,c("PLSR.mixOmics","sPLSR.mixOmics","Multilevel.sPLSR.mixOmics","CPPLS.pls","PLSR.pls",
-    "PLSR.plsRglm","PLSGLR.plsRglm","PCR.pls","RDA.ade4"))) {MVA.get.corr(x,set)} else
-    if (inherits(x,c("PCA.vegan","CCA.vegan"))) {MVA.get.corr(x,xax,yax)} else
+    "PLSR.plsRglm","PLSGLR.plsRglm","PCR.pls","RDA.ade4","PCIA.ade4"))) {MVA.get.corr(x,set)} else
+    if (inherits(x,c("PCA.vegan","CCA.vegan","dbRDA.vegan"))) {MVA.get.corr(x,xax,yax)} else
     if (inherits(x,c("RDA.vegan"))) {MVA.get.corr(x,xax,yax,set,space)} else
     if (inherits(x,c("CCorA.vegan","rGCCA.mixOmics","sGCCA.mixOmics"))) {MVA.get.corr(x,space)} else
     if (inherits(x,c("CIA.ade4","rCCorA.mixOmics","2BPLS.mixOmics","2BsPLS.mixOmics",
@@ -302,11 +302,11 @@ MVA.get.corr.RDA.vegan <- function(x,xax,yax,set,space,...) {
     type <- logical(ncol(indep.var))
     for (i in 1:ncol(indep.var)) {type[i] <- is.numeric(indep.var[,i])}
     if (all(!type)) {stop("only factor constraints, no correlation")}
+    indep.var.names <- colnames(indep.var)[type]
     if (!all(type)) {indep.var <- indep.var[,type]}
     tab <- cor(indep.var,sco,use="pairwise")
     if (is.null(rownames(tab))) {
-	rown <- as.character(x$call$Y)
-	rownames(tab) <- rown[length(rown)]
+	rownames(tab) <- indep.var.names
     }
     tab <- as.data.frame(tab)
   } else if (set==2) {
@@ -322,16 +322,15 @@ MVA.get.corr.RDA.vegan <- function(x,xax,yax,set,space,...) {
     type <- logical(ncol(indep.var))
     for (i in 1:ncol(indep.var)) {type[i] <- is.numeric(indep.var[,i])}
     if (all(!type)) {
-	dep.var <- if (space==1) {x$CCA$Xbar} else {x$CA$Xbar}
 	tab <- as.data.frame(cor(dep.var,sco,use="pairwise"))
 	numX <- FALSE
     } else {
+	indep.var.names <- colnames(indep.var)[type]
 	if (!all(type)) {indep.var <- indep.var[,type]}
 	X <- cor(indep.var,sco,use="pairwise")
 	Y <- cor(dep.var,sco,use="pairwise")
 	if (is.null(rownames(X))) {
-	  rown <- as.character(x$call$Y)
-	  rownames(X) <- rown[length(rown)]
+	  rownames(X) <- indep.var.names
 	}
 	colnames(Y) <- colnames(X)
 	tab <- as.data.frame(rbind(X,Y))
@@ -382,6 +381,23 @@ MVA.get.corr.RDAortho.ade4 <- function(x,...) {
   as.data.frame(cor(eval(eval(x$call$dudi)$call$df),x$li,use="pairwise"))
 }
 
+MVA.get.corr.dbRDA.vegan <- function(x,xax,yax,...) {
+  sco <- MVA.scores(x,xax,yax,scaling=1,space=1)$coord
+  indep.var <- as.data.frame(model.frame(x))
+  type <- logical(ncol(indep.var))
+  for (i in 1:ncol(indep.var)) {type[i] <- is.numeric(indep.var[,i])}
+  if (all(!type)) {stop("only factor constraints, no correlation")}
+  indep.var.names <- colnames(indep.var)[type]
+  if (!all(type)) {indep.var <- indep.var[,type]}
+  tab <- cor(indep.var,sco,use="pairwise")
+  if (is.null(rownames(tab))) {
+    rownames(tab) <- indep.var.names
+  }
+  tab <- as.data.frame(tab)
+  res <- tab
+  return(res)
+}
+
 MVA.get.corr.CCorA.vegan <- function(x,space,...) {
   if (!space %in% c(1,2)) {stop("wrong 'space'")}
   if (length(space)!=1) {space <- 1}
@@ -420,6 +436,39 @@ MVA.get.corr.CIA.ade4 <- function(x,set,space,...) {
     res <- list(corr=tab)
     res$set <- factor(rep(c("X","Y"),c(nrow(X),nrow(Y))))
   } else {res <- tab}
+  return(res)
+}
+
+MVA.get.corr.PCIA.ade4 <- function(x,set,...) {
+  X <- x$tabX
+  Y <- x$tabY
+  sco.X <- x$scorX
+  sco.Y <- x$scorY
+  if (set==1) {
+    tab <- as.data.frame(cor(X,sco.X,use="pairwise"))
+  } else if (set==2) {
+    tab <- as.data.frame(cor(Y,sco.Y,use="pairwise"))
+  } else {
+    tab.X <- cor(X,sco.X,use="pairwise")
+    tab.Y <- cor(Y,sco.Y,use="pairwise")
+    colnames(tab.Y) <- colnames(tab.X)
+    tab <- as.data.frame(rbind(tab.X,tab.Y))
+  }
+  if (set==12) {
+    res <- list(corr=tab)
+    res$set <- factor(rep(c("X","Y"),c(nrow(tab.X),nrow(tab.Y))))
+  } else {res <- tab}
+  return(res)
+}
+
+MVA.get.corr.GPA.FactoMineR <- function(x,...) {
+  res <- do.call("rbind",x$correlations)
+  res <- as.data.frame(res,row.names=1:nrow(res))
+  rown <- c(NULL)
+  for (i in 1:length(x$correlations)) {
+    rown <- c(rown,paste0(rownames(x$RV)[i],".V",1:nrow(x$correlations[[i]])))
+  }
+  rownames(res) <- rown
   return(res)
 }
 
