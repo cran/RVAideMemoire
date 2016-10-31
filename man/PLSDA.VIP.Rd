@@ -32,5 +32,5 @@ require(mixOmics)
 data(yeast)
 
 model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond)
-\dontrun{PLSDA.VIP(model.PLSDA)}
+PLSDA.VIP(model.PLSDA)
 }

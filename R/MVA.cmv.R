@@ -1,6 +1,16 @@
 # pls : plsr,cppls
 # MASS : lda,qda
 
+verif.finite <- function(tab) {
+  finite <- apply(tab,2,function(x) all(is.finite(x)))
+  if (any(!finite)) {
+    w.infinite <- which(!finite)
+    for (i in 1:length(w.infinite)) {tab[,w.infinite[i]] <- rep(0,nrow(tab))}
+    attr(tab,"scaled:scale")[w.infinite] <- 1
+  }
+  return(tab)
+}
+
 print.MVA.cmv <- function(x,...) {
   cat("\n        Cross model validation (2CV)\n\n")
   cat(paste0("Model:"),x$model,"\n")
@@ -123,7 +133,9 @@ MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,scale,model,crit.inn,Q2diff,
 	val.sets.list <- split(rest.set,sample(gl(kinn,1,nrow(rest.set))))
 	if (scale) {
 	  rest.set.X <- scale(rest.set.X)
+	  res.set.X <- verif.finite(res.set.X)
 	  test.set.X <- stand(test.set.X,rest.set.X)
+	  test.set.X <- verif.finite(test.set.X)
 	}
 	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
 	if (ncomp>=nmax) {
@@ -144,7 +156,9 @@ MVA.cmv.quant <- function(X,Y,repet,kout,kinn,ncomp,scale,model,crit.inn,Q2diff,
 	  train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
 	  if (scale) {
 	    train.set.X <- scale(train.set.X)
+	    train.set.X <- verif.finite(train.set.X)
 	    val.set.X <- stand(val.set.X,train.set.X)
+	    val.set.X <- verif.finite(val.set.X)
 	  }
 	  model.kinn <- if (model=="PLSR") {
 	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp,...)
@@ -244,7 +258,9 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,
 	val.sets.list <- splitf(rest.set,factor(rest.set.trueclass),kinn)
 	if (scale) {
 	  rest.set.X <- scale(rest.set.X)
+	  rest.set.X <- verif.finite(rest.set.X)
 	  test.set.X <- stand(test.set.X,rest.set.X)
+	  test.set.X <- verif.finite(test.set.X)
 	}
 	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
 	if (ncomp>=nmax) {
@@ -263,7 +279,9 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,
 	  train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
 	  if (scale) {
 	    train.set.X <- scale(train.set.X)
+	    train.set.X <- verif.finite(train.set.X)
 	    val.set.X <- stand(val.set.X,train.set.X)
+	    val.set.X <- verif.finite(val.set.X)
 	  }
 	  model.kinn <- if (model=="PLS-DA") {
 	    pls::plsr(train.set.Y~train.set.X,ncomp=ncomp2,...)
@@ -346,7 +364,9 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit
 	val.sets.list <- splitf(rest.set,factor(rest.set.trueclass),kinn)
 	if (scale) {
 	  rest.set.X <- scale(rest.set.X)
+	  rest.set.X <- verif.finite(rest.set.X)
 	  test.set.X <- stand(test.set.X,rest.set.X)
+	  test.set.X <- verif.finite(test.set.X)
 	}
 	nmax <- min(c(nrow(rest.set)-max(unlist(lapply(val.sets.list,nrow))),ncol(X)+1))
 	if (ncomp>=nmax) {
@@ -365,7 +385,9 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit
 	  train.set.X <- as.matrix(as.data.frame(train.set[,col.X]))
 	  if (scale) {
 	    train.set.X <- scale(train.set.X)
+	    train.set.X <- verif.finite(train.set.X)
 	    val.set.X <- stand(val.set.X,train.set.X)
+	    val.set.X <- verif.finite(val.set.X)
 	  }
 	  train.set.Yfac <- rest.set.Yfac[-as.numeric(rownames(val.set))]
 	  model.kinn.temp <- if (model %in% c("PLS-DA/LDA","PLS-DA/QDA")) {

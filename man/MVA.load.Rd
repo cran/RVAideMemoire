@@ -46,15 +46,11 @@ Many multivariate analyses are supported, from various packages:
 
 - sPLS-DA (sPLS2 on a dummy-coded factor): \code{\link[mixOmics]{splsda}}. X space only.
 
-- Multilevel (s)PLS-DA ((s)PLS-DA on a dummy-coded factor): \code{\link[mixOmics]{multilevel}}. X space only. Package 'mixOmics' version >= 5.0.4.
-
 - CPPLS: \code{\link[pls]{mvr}}. X space only.
 
 - PLSR: \code{\link[pls]{mvr}}, \code{\link[mixOmics]{pls}}, \code{\link[plsRglm]{plsR}}. X space only.
 
 - sPLSR: \code{\link[mixOmics]{pls}}. X space only.
-
-- Multilevel (s)PLSR: \code{\link[mixOmics]{multilevel}}. X space only. Package 'mixOmics' version >= 5.0.4
 
 - PLS-GLR: \code{\link[plsRglm]{plsRglm}}.
 
@@ -81,8 +77,6 @@ Many multivariate analyses are supported, from various packages:
 - 2B-PLS: \code{\link[mixOmics]{pls}}. Space 1 is X, space 2 is Y.
 
 - 2B-sPLS: \code{\link[mixOmics]{pls}}. Space 1 is X, space 2 is Y.
-
-- Multilevel 2B-(s)PLS: \code{\link[mixOmics]{pls}}. Space 1 is X, space 2 is Y. Package 'mixOmics' version >= 5.0.4.
 
 - rGCCA: \code{\link[mixOmics]{wrapper.rgcca}}. Space can be 1 to n, the number of blocks (i.e. datasets).
 

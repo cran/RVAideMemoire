@@ -46,15 +46,11 @@ Many multivariate analyses are supported, from various packages:
 
 - sPLS-DA (sPLS2 on a dummy-coded factor): \code{\link[mixOmics]{splsda}}. X space only.
 
-- Multilevel (s)PLS-DA ((s)PLS-DA on a dummy-coded factor): \code{\link[mixOmics]{multilevel}}. X space only. Package 'mixOmics' version >= 5.0.4.
-
 - CPPLS: \code{\link[pls]{mvr}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only.
 
 - PLSR: \code{\link[pls]{mvr}}, \code{\link[mixOmics]{pls}}, \code{\link[plsRglm]{plsR}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only.
 
 - sPLSR: \code{\link[mixOmics]{pls}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only.
-
-- Multilevel (s)PLSR: \code{\link[mixOmics]{multilevel}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only. Package 'mixOmics' version >= 5.0.4
 
 - PLS-GLR: \code{\link[plsRglm]{plsRglm}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. Correlations are computed with Y on the link scale.
 
@@ -81,8 +77,6 @@ Many multivariate analyses are supported, from various packages:
 - 2B-PLS: \code{\link[mixOmics]{pls}}. Space 1 is X, space 2 is Y, space 3 is a "common" space in which coordinates are means of X and Y coordinates. In space 3, set 1 is X and set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set.
 
 - 2B-sPLS: \code{\link[mixOmics]{pls}}. Space 1 is X, space 2 is Y, space 3 is a "common" space in which coordinates are means of X and Y coordinates. In space 3, set 1 is X and set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set.
-
-- Multilevel 2B-(s)PLS: \code{\link[mixOmics]{pls}}. Space 1 is X, space 2 is Y, space 3 is a "common" space in which coordinates are means of X and Y coordinates. In space 3, set 1 is X and set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. Package 'mixOmics' version >= 5.0.4.
 
 - rGCCA: \code{\link[mixOmics]{wrapper.rgcca}}. Space can be 1 to n, the number of blocks (i.e. datasets).
 

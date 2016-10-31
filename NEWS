@@ -1,3 +1,6 @@
+version 0.9-61 (31-10-2016)
+  - MVA.cv and MVA.cmv corrected for errors provoked by scaling with nearly constant variables
+
 version 0.9-60 (20-08-2016)
   - MVA.synt extended to MCA, mix analysis, GPA, 2B-PLS, CCorA, rCCorA, RGCCA, CIA and PCIA
   - MVA.corplot extended to db-RDA
