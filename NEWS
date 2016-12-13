@@ -1,3 +1,6 @@
+version 0.9-62 (12-12-2016)
+  - se corrected for proportions
+
 version 0.9-61 (31-10-2016)
   - MVA.cv and MVA.cmv corrected for errors provoked by scaling with nearly constant variables
 

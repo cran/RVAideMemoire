@@ -1,6 +1,6 @@
-a1f907bd98aad18a6864695058bab2d4 *DESCRIPTION
+1ba3ed772a29ebc1783758398b9f0de6 *DESCRIPTION
 9302cc565512cf8f1798c4d41c64a069 *NAMESPACE
-2899d21137d91ca0b43628cc0fabd41c *NEWS
+6a85b029dd037335c175912a395d7d12 *NEWS
 9369df93593f7fc76a1d5885268abe44 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
 8febc0c51a8cb1af9015c80e86cb02ec *R/CDA.cv.R
@@ -117,7 +117,7 @@ e7517ca9f447b36c9103872f5bd753f5 *R/psignif.R
 a9189f640ab3985871a5d5fe12e0f26c *R/rating.prob.R
 1fbce233e2ffb74de0d9626b9edb4f16 *R/reg.ci.R
 25d2eb31789f941b81affbab95b7ff0e *R/scat.cr.R
-494a61e1ea99dfd7645a7260ff242b63 *R/se.R
+38e92a25c6495ffcd88b540f4c074f61 *R/se.R
 ab2d4b0688018683b423fc47137e8b0a *R/seq2.R
 4c6e7e2a448717ce20f5865b6d3b6cf2 *R/spearman.ci.R
 fce13f94f0efe027cefe374990b92821 *R/spearman.cor.multcomp.R
@@ -131,7 +131,7 @@ d9c9776fb86deb806dbb1417d1cb8b79 *R/test.multinom.R
 cf56ef4e0793a3f61ded7833859984ce *R/wilcox.paired.multcomp.R
 588714546f5b57bac4243ca8558b4b37 *R/wilcox.signtest.R
 3de4ac014037119e5dfe8a02e809f7ef *R/wmean.R
-0469dff6849a3a618be980aeb2cde11c *R/zzz.R
+d3ce7272d4fbd44a53915da027ac7df7 *R/zzz.R
 a3ed2ef2d85eac6e18d6f925f5e607c0 *man/Anova.clm.Rd
 4081dfdba7fc45e7eb1d540e0cda74b9 *man/CDA.cv.Rd
 0bff166421d31ef9f64d514ff65464c1 *man/CDA.test.Rd
@@ -158,7 +158,7 @@ e522a39ae0d4c0f306876a73c7b46cf6 *man/MVA.scoreplot.Rd
 852071741a6e65fd0f8f3ab641f3ac9b *man/MVA.trajplot.Rd
 2b25a585bcf6c26ecce2e2f4b07420c1 *man/OR.multinom.Rd
 48a3852f472ed9e9a4db602c357500bb *man/PLSDA.VIP.Rd
-42ea98e133a01c270613e125cb74fddd *man/RVAideMemoire-package.Rd
+41e9a8b8aaeb03fa14b92f667afc0537 *man/RVAideMemoire-package.Rd
 e79c4cbba2fbc2a15b0b6259116ec9a6 *man/adonis.II.Rd
 23464e766e420804499773e539b29c56 *man/back.lsmeans.Rd
 b72310e5677570de6d202e63f5c9a435 *man/bootstrap.Rd
@@ -236,7 +236,7 @@ d911934b2c28b269b1afd438018950b4 *man/prop.multinom.test.Rd
 ec5f3cd6fbf381c2a9dd9ad9f9027410 *man/rating.prob.Rd
 09a8ededc839198fa4e33a177a96a239 *man/reg.ci.Rd
 034b4ae1d2b8918256d2cd8c162e13a3 *man/scat.cr.Rd
-b90b0f4d79b65d7f04a8d6beeba371c9 *man/se.Rd
+6a3fa7544c1e27d30123ffe8ebc47120 *man/se.Rd
 a6a86667797c963adbf18ab98bef81b7 *man/seq2.Rd
 b08ee3b41a6776976d447268438e714b *man/spearman.ci.Rd
 31f480005db658b23eb99585525b0a41 *man/spearman.cor.multcomp.Rd

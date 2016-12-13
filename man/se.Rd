@@ -19,8 +19,6 @@ number of trials. If \code{NULL}, the standard error of the mean of \code{x} is 
 }
 \details{
 The function deals with missing values.
-
-For the standard error of a proportion, \code{y - 1} is used as denominator.
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

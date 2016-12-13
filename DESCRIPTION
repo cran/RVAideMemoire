@@ -2,8 +2,8 @@ Encoding: latin1
 Package: RVAideMemoire
 Type: Package
 Title: Diverse Basic Statistical and Graphical Functions
-Version: 0.9-61
-Date: 2016-10-31
+Version: 0.9-62
+Date: 2016-12-12
 Author: Maxime Hervé
 Maintainer: Maxime Hervé <mx.herve@gmail.com>
 Imports: ade4, boot, car, cramer, dunn.test, FactoMineR, graphics,
@@ -15,6 +15,6 @@ Description: Contains diverse more or less complicated functions, written to sim
 License: GPL-2
 LazyLoad: yes
 NeedsCompilation: no
-Packaged: 2016-10-31 17:08:54 UTC; Maxime
+Packaged: 2016-12-12 18:01:41 UTC; Maxime
 Repository: CRAN
-Date/Publication: 2016-10-31 22:37:03
+Date/Publication: 2016-12-13 07:56:54
