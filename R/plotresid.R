@@ -1,27 +1,29 @@
 # lme4 : getME, isLMM
-# statmod : qresiduals
 
 plotresid <- function(model,shapiro=FALSE) {
   res <- get.res(model)
   model.res <- res$residuals
   res.lab <- res$lab
+  res.norm <- res$norm
   model.fit <- get.fit(model)
   opar <- par(no.readonly=TRUE)
   on.exit(par(opar))
   if (!inherits(model,"mlm")) {
-    par(mfrow=c(1,2))
-    plot(model.fit,model.res,xlab="Fitted values",ylab=res.lab,main=paste(res.lab,"vs fitted"))
-    abline(h=0,col="grey",lty=3)
-    panel.smooth(model.fit,model.res)
-    qqPlot(model.res,lwd=1,grid=FALSE,xlab="Theoretical quantiles",ylab="Sample quantiles")
-    if (shapiro) {
-	shapiro.test(model.res)
+    if (!res.norm) {
+	plot(model.fit,model.res,xlab="Fitted values",ylab=res.lab,main=paste(res.lab,"vs. fitted"))
+	abline(h=0,col="grey",lty=3)
+	panel.smooth(model.fit,model.res)
+    } else {
+	par(mfrow=c(1,2))
+	plot(model.fit,model.res,xlab="Fitted values",ylab=res.lab,main=paste(res.lab,"vs. fitted"))
+	abline(h=0,col="grey",lty=3)
+	panel.smooth(model.fit,model.res)
+	qqPlot(model.res,lwd=1,grid=FALSE,xlab="Theoretical quantiles",ylab="Sample quantiles")
+	if (shapiro) {shapiro.test(model.res)}
     }
   } else {
     mqqnorm(model.res)
-    if (shapiro) {
-	mshapiro.test(model.res)
-    }
+    if (shapiro) {mshapiro.test(model.res)}
   }
 }
 
@@ -34,27 +36,28 @@ get.res.default <- function(x,...) {stop("unknown model")}
 get.res.lm <- function(x,...) {
   if (inherits(x,"mlm")) {get.res.mlm(x)} else
   if (inherits(x,"glm")) {get.res.glm(x)} else {
-    list(residuals=rstudent(x),lab="Externally studentized residuals")
+    list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
   }
 }
 
 get.res.mlm <- function(x,...) {
-  list(residuals=resid(x),lab="")
+  list(residuals=resid(x),lab="",norm=TRUE)
 }
 
 get.res.glm <- function(x,...) {
-  if (inherits(x,"negbin")) {get.res.negbin(x)} else {
-    laws <- c("poisson","quasipoisson","binomial","quasibinomial")
-    if (x$family[1] %in% laws) {
-	list(residuals=statmod::qresiduals(x),lab="Quantile residuals")
+  if (x$family$family=="gaussian") {
+    if (x$family$link=="identity") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
     } else {
-	list(residuals=rstudent(x),lab="Externally studentized residuals")
+	list(residuals=rstudent(x),lab="Externally studentized residuals",norm=TRUE)
+    }
+  } else {
+    if (x$family$link=="identity") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=FALSE)
+    } else {
+	list(residuals=rstudent(x),lab="Externally studentized residuals",norm=FALSE)
     }
   }
-}
-
-get.res.negbin <- function(x,...) {
-  list(residuals=statmod::qresiduals(x),lab="Quantile residuals")
 }
 
 get.res.mer <- function(x,...) {
@@ -63,60 +66,53 @@ get.res.mer <- function(x,...) {
 }
 
 get.res.glmmadmb <- function(x,...) {
-  list(residuals=x$resid,lab="Residuals")
-}
-
-get.res.merMod <- function(x,...) {
-  if (lme4::isLMM(x)) {
-    list(residuals=residuals(x),lab="Residuals")
-  } else {
-    fam <- family(x)$family
-    if (fam=="poisson") {
-	y <- lme4::getME(x,"y")
-	mu <- fitted(x)
-	a <- ppois(y-1,mu)
-	b <- ppois(y,mu)
-	u <- runif(n=length(y),min=a,max=b)
-	list(residuals=qnorm(u),lab="Quantile residuals")
-    } else if (fam=="binomial") {
-	p <- fitted(x)
-	y <- lme4::getME(x,"y")
-	mf <- model.frame(x)
-	if ("(weights)" %in% colnames(mf)) { 
-	  n <- mf$weights
-	} else {
-	  n <- rep(1,length(y))
-	}
-	y <- n*y
-	a <- pbinom(y-1,n,p)
-	b <- pbinom(y,n,p)
-	u <- runif(n=length(y),min=a,max=b)
-	list(residuals=qnorm(u),lab="Quantile residuals")
-    } else if (grepl("Negative Binomial",fam)) {
-	y <- lme4::getME(x,"y")
-	size <- x@theta
-	mu <- fitted(x)
-	p <- size/(mu+size)
-	a <- ifelse(y>0,pbeta(p,size,pmax(y,1)),0)
-	b <- pbeta(p,size,y+1)
-	u <- runif(n=length(y),min=a,max=b)
-	list(residuals=qnorm(u),lab="Quantile residuals")
+  if (x$family=="gaussian") {
+    if (x$link=="identity") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
     } else {
-	list(residuals=residuals(x),lab="Residuals")
+	list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=TRUE)
+    }
+  } else {
+    if (x$link=="identity") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=FALSE)
+    } else {
+	list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=FALSE)
     }
   }
 }
 
-get.res.lme <- get.res.nls <- get.res.gls <- function(x,...) {
-  list(residuals=resid(x,type="pearson"),lab="Standardized residuals")
+get.res.merMod <- function(x,...) {
+  if (lme4::isLMM(x)) {
+    list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
+  } else {
+    fam <- family(x)
+    if (fam$family=="gaussian") {
+	if (fam$link=="identity") {
+	  list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
+	} else {
+	  list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=TRUE)
+	}
+    } else {
+	if (fam$link=="identity") {
+	  list(residuals=residuals(x,type="response"),lab="Response residuals",norm=FALSE)
+	} else {
+	  list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=FALSE)
+	}
+    }
+  }
 }
 
-get.res.nlsList <- function(x,...) {
-  list(residuals=resid(x,type="pooled"),lab="Standardized residuals")
+get.res.lme <- get.res.nls <- get.res.gls <- get.res.lmList <- get.res.nlsList <- 
+get.res.lmList4 <- function(x,...) {
+  list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
 }
 
-get.res.survreg <- get.res.least.rect <- function(x,...) {
-  list(residuals=residuals(x),lab="Residuals")
+get.res.survreg <- function(x,...) {
+  list(residuals=residuals(x,type="deviance"),lab="Deviance residuals",norm=FALSE)
+}
+
+get.res.least.rect <- function(x,...) {
+  list(residuals=residuals(x),lab="Response residuals",norm=TRUE)
 }
 
 

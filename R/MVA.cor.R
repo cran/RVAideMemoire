@@ -462,11 +462,18 @@ MVA.get.corr.PCIA.ade4 <- function(x,set,...) {
 }
 
 MVA.get.corr.GPA.FactoMineR <- function(x,...) {
-  res <- do.call("rbind",x$correlations)
+  cor.list <- x$correlations
+  if ("averagecor" %in% names(cor.list)) {
+    to.keep <- (1:length(cor.list))[-which(names(cor.list)=="averagecor")]
+    cor.list2 <- list()
+    for (i in 1:length(to.keep)) {cor.list2[[i]] <- cor.list[[to.keep[i]]]}
+    cor.list <- cor.list2
+  }
+  res <- do.call("rbind",cor.list)
   res <- as.data.frame(res,row.names=1:nrow(res))
   rown <- c(NULL)
-  for (i in 1:length(x$correlations)) {
-    rown <- c(rown,paste0(rownames(x$RV)[i],".V",1:nrow(x$correlations[[i]])))
+  for (i in 1:length(cor.list)) {
+    rown <- c(rown,paste0(rownames(x$RV)[i],".V",1:nrow(cor.list[[i]])))
   }
   rownames(res) <- rown
   return(res)

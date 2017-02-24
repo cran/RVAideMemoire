@@ -7,7 +7,7 @@ Back-transformation of LSMeans
 Back-transforms LSMeans (produced by \code{\link[lsmeans]{lsmeans}}) when the model was built on a transformed response variable. This is typically the case when a LM(M) with \emph{log(x+1)} as response variable gives a better fitting than a GLM(M) for count data.
 }
 \usage{
-back.lsmeans(lsm, transform = c("log", "logit", "sqrt", "inverse"), base = exp(1),
+back.lsmeans(lsm, transform = c("log", "logit", "sqrt", "4rt", "inverse"), base = exp(1),
   add = 0, ord = FALSE, decreasing = TRUE)
 }
 \arguments{
@@ -15,7 +15,7 @@ back.lsmeans(lsm, transform = c("log", "logit", "sqrt", "inverse"), base = exp(1
 object returned by \code{\link[lsmeans]{lsmeans}}.
 }
   \item{transform}{
-transformation applied to the response variable before building the model on which \code{lsm} is based.
+transformation applied to the response variable before building the model on which \code{lsm} is based (\code{"4rt"} is fourth-root).
 }
   \item{base}{
 the base with respect to which the logarithm transformation was computed (if \code{transform="log"}). Defaults to \emph{e}=\code{exp(1)}.

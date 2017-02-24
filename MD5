@@ -1,6 +1,6 @@
-1ba3ed772a29ebc1783758398b9f0de6 *DESCRIPTION
-9302cc565512cf8f1798c4d41c64a069 *NAMESPACE
-6a85b029dd037335c175912a395d7d12 *NEWS
+1f3c3215cb333aa572a0a35e0fa4e3ae *DESCRIPTION
+f9e9f53b32628f0c2bcf6041806a9247 *NAMESPACE
+b4e9bda54cc66cdadbe3dfd50445d1fe *NEWS
 9369df93593f7fc76a1d5885268abe44 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
 8febc0c51a8cb1af9015c80e86cb02ec *R/CDA.cv.R
@@ -15,7 +15,7 @@ ed6ea511bc3a7cba845f7b0faecb9d03 *R/GPA.test.R
 395211d52fb7fece131acf345f413b96 *R/MVA.anova.R
 bd3eefade8c82a936067fb1971c89ffe *R/MVA.biplot.R
 2615d121329d85ab9ecea7209d176aa7 *R/MVA.cmv.R
-ce523f16a143846484b02ee15ca530cb *R/MVA.cor.R
+30fa66c4abf978539c1d28086ff2ef8e *R/MVA.cor.R
 f64bb99e5e89c39d8b0c261c4ff28110 *R/MVA.corplot.R
 132a553f50f4cc955a0ba78976279f36 *R/MVA.cv.R
 5612777f5b146b5f435ba2eee8cb0f2c *R/MVA.ident.R
@@ -31,7 +31,7 @@ fa9d58ddf6b066a85b277ec2df468e6f *R/MVA.synt.R
 719ea52dfab8e3d684eff82907b43fb7 *R/OR.multinom.R
 7ac3eb9a44beb8aec50a0c95f491f1c6 *R/PLSDA.VIP.R
 cd2f84dcd5308d64e846a8597cf717be *R/adonis.II.R
-4783498d7a552b66d46e331dcaacc9ba *R/back.lsmeans.R
+c7460da4f4e4586306c7e2eacce730a8 *R/back.lsmeans.R
 5e299359d95efb58fb62bc2cdfa4e3ee *R/bootstrap.R
 b37ba84845bac4c9391bf3dcdcd43097 *R/byf.hist.R
 f643699473e9914e339ede6cc9ca715a *R/byf.mqqnorm.R
@@ -99,7 +99,7 @@ d0db0d3208cd376194c77c9bd5258ca6 *R/perm.bartlett.test.R
 2f69cf72522099703ed3d73894e63ea8 *R/perm.cor.test.R
 e7cef57d5204094de7be0c509170b3fe *R/perm.t.test.R
 bb5166fd4a5c92b6dcc07ea506b4e85e *R/perm.var.test.R
-4d1882c9a7b0fad578ad76d052ec5a4d *R/plotresid.R
+2627e3c3f37fcf4fa7dbc1195ef78efd *R/plotresid.R
 6d962e640f9497378963d1018e0c74fe *R/plotsurvivors.R
 a709a98039c131117b720ab3f59bcc6a *R/predict.CDA.cv.R
 386c7d76b0b5d8f283d704108d0fd430 *R/predict.MVA.cv.R
@@ -131,7 +131,7 @@ d9c9776fb86deb806dbb1417d1cb8b79 *R/test.multinom.R
 cf56ef4e0793a3f61ded7833859984ce *R/wilcox.paired.multcomp.R
 588714546f5b57bac4243ca8558b4b37 *R/wilcox.signtest.R
 3de4ac014037119e5dfe8a02e809f7ef *R/wmean.R
-d3ce7272d4fbd44a53915da027ac7df7 *R/zzz.R
+3c789191e1db58300cfc26e20563ab0c *R/zzz.R
 a3ed2ef2d85eac6e18d6f925f5e607c0 *man/Anova.clm.Rd
 4081dfdba7fc45e7eb1d540e0cda74b9 *man/CDA.cv.Rd
 0bff166421d31ef9f64d514ff65464c1 *man/CDA.test.Rd
@@ -158,9 +158,9 @@ e522a39ae0d4c0f306876a73c7b46cf6 *man/MVA.scoreplot.Rd
 852071741a6e65fd0f8f3ab641f3ac9b *man/MVA.trajplot.Rd
 2b25a585bcf6c26ecce2e2f4b07420c1 *man/OR.multinom.Rd
 48a3852f472ed9e9a4db602c357500bb *man/PLSDA.VIP.Rd
-41e9a8b8aaeb03fa14b92f667afc0537 *man/RVAideMemoire-package.Rd
+d562f26226defb3985e9ffc1cd2ad879 *man/RVAideMemoire-package.Rd
 e79c4cbba2fbc2a15b0b6259116ec9a6 *man/adonis.II.Rd
-23464e766e420804499773e539b29c56 *man/back.lsmeans.Rd
+7e6d2c2be699929063bb70428125b535 *man/back.lsmeans.Rd
 b72310e5677570de6d202e63f5c9a435 *man/bootstrap.Rd
 ca77b3b6c7c84b831268d647f89f6792 *man/byf.hist.Rd
 bce1535e16aa45a4d265d3f9da40ec76 *man/byf.mqqnorm.Rd
@@ -223,7 +223,7 @@ de1ed55b8366c227184e137e20af8e59 *man/perm.anova.Rd
 65683200a0d10fc1b0e8e6ed0d5611cf *man/perm.cor.test.Rd
 ed103b1e3f7dd860b5c520b2f12fb7d3 *man/perm.t.test.Rd
 5363eb8c38d61faf39e86921ccbf3715 *man/perm.var.test.Rd
-dfc4faf663d536dd7170ef55656dea39 *man/plotresid.Rd
+a3b1e5db2015e355665b83e9b9d3f4d5 *man/plotresid.Rd
 c8ba06ce20fdeac88098efa0aac78db3 *man/plotsurvivors.Rd
 c1d9d495eacbddf316746c044f2a8ede *man/predict.CDA.cv.Rd
 aae042c9c2125f0e59cb0cbf956b0c30 *man/predict.MVA.cv.Rd

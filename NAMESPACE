@@ -12,7 +12,6 @@
 #   - nnet : multinom
 #   - pls : cppls, plsr, R2
 #   - pspearman : pspearman
-#   - statmod : qresiduals
 #   - vegan : adonis, envfit
 
 importFrom(ade4,dudi.coa,randtest)
