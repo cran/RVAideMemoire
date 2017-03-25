@@ -1,3 +1,8 @@
+version 0.9-64 (25-03-2017)
+  - plotresid extended to glmmPQL models
+  - new function pairwise.var.test (pairwise comparisons based on F-tests)
+  - new function pairwise.perm.var.test (pairwise comparisons based on permutational F-tests)
+
 version 0.9-63 (24-02-2017)
   - back.lsmeans corrected for log transformations, fourth-root transformation added
   - MVA.plot adapted for GPA
@@ -41,7 +46,7 @@ version 0.9-57 (14-07-2016)
   - new function cramer (Cramér's association coefficient between 2 nominal variables)
   - new argument 'progress' in all function performing permutation tests (display of the progress bar)
   - new argument 'scale' in MVA.cv, MVA.cmv and MVA.test (scaling)
-  - new function pairwise.MVA.test (pairwise comparisons bases on cross (model) validation)
+  - new function pairwise.MVA.test (pairwise comparisons based on cross (model) validation)
   - new function cond.multinom (condition number of the Hessian matrix of a multinomial log-linear model)
   - new function OR.multinom (odds ratios in multinomial regression)
   - new function test.multinom (significance test in multinomial regression)

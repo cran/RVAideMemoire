@@ -72,7 +72,7 @@ export(
   OR.multinom,
   ord.rw,
   overdisp.glmer,
-  pairwise.CDA.test,pairwise.factorfit,pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.MVA.test,pairwise.perm.t.test,
+  pairwise.CDA.test,pairwise.factorfit,pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.MVA.test,pairwise.perm.t.test,pairwise.var.test,pairwise.perm.var.test,
   pairwise.to.groups,
   pcor, pcor.test,
   perm.anova,perm.bartlett.test,perm.cor.test,perm.t.test,perm.var.test,

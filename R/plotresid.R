@@ -102,9 +102,32 @@ get.res.merMod <- function(x,...) {
   }
 }
 
-get.res.lme <- get.res.nls <- get.res.gls <- get.res.lmList <- get.res.nlsList <- 
+get.res.nls <- get.res.gls <- get.res.lmList <- get.res.nlsList <- 
 get.res.lmList4 <- function(x,...) {
   list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
+}
+
+get.res.lme <- function(x,...) {
+  if (inherits(x,"glmmPQL")) {get.res.glmmPQL(x)} else {
+    list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
+  }
+}
+
+get.res.glmmPQL <- function(x,...) {
+  fam <- x$family
+  if (fam$family=="gaussian") {
+    if (fam$link=="identity") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
+    } else {
+	list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=TRUE)
+    }
+  } else {
+    if (fam$link=="identity") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=FALSE)
+    } else {
+	list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=FALSE)
+    }
+  }
 }
 
 get.res.survreg <- function(x,...) {
