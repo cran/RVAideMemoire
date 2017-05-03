@@ -7,7 +7,7 @@
 #   - FactoMineR : GPA
 #   - lme4 : fixef, getME, glmer, isLMM, VarCorr
 #   - MASS : lda, qda
-#   - mixOmics : vip
+#   - mixOmics : vip, perf
 #   - multcompView : multcompLetters
 #   - nnet : multinom
 #   - pls : cppls, plsr, R2
@@ -25,6 +25,7 @@ importFrom(stats,aggregate,anova,approxfun,as.dist,as.formula,bartlett.test,bino
   pbinom,pchisq,pgeom,phyper,pnbinom,pnorm,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,rect.hclust,relevel,resid,
   residuals,rnorm,rstudent,runif,sd,setNames,shapiro.test,summary.manova,t.test,terms,update,update.formula,var,var.test,wilcox.test)
 importFrom(utils,capture.output,combn,packageVersion,setTxtProgressBar,txtProgressBar)
+importFrom(vegan,ordiYbar)
 
 export(
   byf.normhist,cor.sparse,DA.confusion,DA.valid,DA.var,fc.multcomp,friedman.rating.test,kruskal.rating.test,
@@ -48,6 +49,7 @@ export(
   cv,
   CvM.test,
   dendro.gp,
+  DIABLO.cv,DIABLO.test,
   dummy,
   dunn.test,
   fisher.bintest,fisher.multcomp,

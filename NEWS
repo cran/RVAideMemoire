@@ -1,3 +1,9 @@
+version 0.9-65 (03-05-2017)
+  - MVA.synt extended to DIABLO
+  - MVA.scores, MVA.cor, MVA.load (hence MVA.plot) extended to DIABLO
+  - new function DIABLO.cv (cross validation for DIABLO)
+  - new function DIABLO.test (significance test for DIABLO)
+
 version 0.9-64 (25-03-2017)
   - plotresid extended to glmmPQL models
   - new function pairwise.var.test (pairwise comparisons based on F-tests)

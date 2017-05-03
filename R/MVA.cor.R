@@ -9,7 +9,8 @@ MVA.cor <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
     "PLSR.plsRglm","PLSGLR.plsRglm","PCR.pls","RDA.ade4","PCIA.ade4"))) {MVA.get.corr(x,set)} else
     if (inherits(x,c("PCA.vegan","CCA.vegan","dbRDA.vegan"))) {MVA.get.corr(x,xax,yax)} else
     if (inherits(x,c("RDA.vegan"))) {MVA.get.corr(x,xax,yax,set,space)} else
-    if (inherits(x,c("CCorA.vegan","rGCCA.mixOmics","sGCCA.mixOmics"))) {MVA.get.corr(x,space)} else
+    if (inherits(x,c("CCorA.vegan","rGCCA.mixOmics","sGCCA.mixOmics","DIABLO.mixOmics",
+    "sDIABLO.mixOmics"))) {MVA.get.corr(x,space)} else
     if (inherits(x,c("CIA.ade4","rCCorA.mixOmics","2BPLS.mixOmics","2BsPLS.mixOmics",
     "Multilevel.2BsPLS.mixOmics"))) {MVA.get.corr(x,set,space)} else
     {MVA.get.corr(x)}
@@ -76,7 +77,7 @@ function(x,...) {as.data.frame(cor(x$X,x$x,use="pairwise"))}
 
 MVA.get.corr.PCA.vegan <- function(x,xax,yax,...) {
   sco <- MVA.scores(x,xax,yax,scaling=1)$coord
-  tab <- as.data.frame(cor(x$CA$Xbar,sco,use="pairwise"))
+  tab <- as.data.frame(cor(ordiYbar(x,"CA"),sco,use="pairwise"))
   return(tab)
 }
 
@@ -310,10 +311,10 @@ MVA.get.corr.RDA.vegan <- function(x,xax,yax,set,space,...) {
     }
     tab <- as.data.frame(tab)
   } else if (set==2) {
-    dep.var <- if (space==1) {x$CCA$Xbar} else {x$CA$Xbar}
+    dep.var <- if (space==1) {ordiYbar(x,"partial")} else {ordiYbar(x,"CA")}
     tab <- as.data.frame(cor(dep.var,sco,use="pairwise"))
   } else {
-    dep.var <- if (space==1) {x$CCA$Xbar} else {x$CA$Xbar}
+    dep.var <- if (space==1) {ordiYbar(x,"partial")} else {ordiYbar(x,"CA")}
     indep.var <- if ("formula" %in% names(x$call)) {
 	as.data.frame(model.frame(x))
     } else {
@@ -560,6 +561,18 @@ MVA.get.corr.sGCCA.mixOmics <- function(x,space,...) {
   as.data.frame(cor(x$X[[space]],x$variates[[space]],use="pairwise")[keep.X,])
 }
 
+MVA.get.corr.DIABLO.mixOmics <- function(x,space,...) {
+  if (!space %in% 1:(length(x$variates)-1)) {stop("wrong 'space'")}
+  if (length(space)!=1) {space <- 1}
+  as.data.frame(cor(x$X[[space]],x$variates[[space]],use="pairwise"))
+}
+
+MVA.get.corr.sDIABLO.mixOmics <- function(x,space,...) {
+  if (!space %in% 1:(length(x$variates)-1)) {stop("wrong 'space'")}
+  if (length(space)!=1) {space <- 1}
+  keep.X <- apply(abs(x$loadings[[space]]),1,sum)>0
+  as.data.frame(cor(x$X[[space]],x$variates[[space]],use="pairwise")[keep.X,])
+}
 
 
 

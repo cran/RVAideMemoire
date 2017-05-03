@@ -153,3 +153,6 @@ MVA.class.sgcca <- function(x,...) {
   return(res)
 }
 
+MVA.class.block.plsda <- function(x,...) {res <- "DIABLO.mixOmics"}
+
+MVA.class.block.splsda <- function(x,...) {res <- "sDIABLO.mixOmics"}

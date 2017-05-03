@@ -60,6 +60,8 @@ Many multivariate analyses are supported, from various packages.
 
 - RGCCA: \code{\link[RGCCA]{rgcca}}, \code{\link[mixOmics]{wrapper.rgcca}}: \% of total intra-block variance explained by each axis, correlation between each pair of axes (canonical correlations).
 
+- DIABLO: \code{\link[mixOmics]{block.plsda}}, \code{\link[mixOmics]{block.splsda}}: \% of total intra-block variance explained by each axis, correlation between each pair of axes (canonical correlations).
+
 - CIA: \code{\link[ade4]{coinertia}}: RV coefficient, \% of co-inertia explained by each pair of axes, correlation between each pair of axes (canonical correlations).
 
 - PCIA: \code{\link[ade4]{procuste}}: m2.

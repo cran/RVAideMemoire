@@ -17,7 +17,7 @@ MVA.scores <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,...) {
     if (inherits(x,c("CCA.vegan"))) {MVA.get.scores(x,xax,yax,scaling,set,space)} else
     if (inherits(x,c("CCorA.vegan","rCCorA.mixOmics","2BPLS.mixOmics","2BsPLS.mixOmics",
     "Multilevel.2BsPLS.mixOmics","rGCCA.RGCCA","rGCCA.mixOmics","sGCCA.RGCCA",
-    "sGCCA.mixOmics"))) {MVA.get.scores(x,space)} else
+    "sGCCA.mixOmics","DIABLO.mixOmics","sDIABLO.mixOmics"))) {MVA.get.scores(x,space)} else
     if (inherits(x,c("CIA.ade4"))) {MVA.get.scores(x,set,space)} else
     {MVA.get.scores(x)}
   coord <- if (is.data.frame(coord.temp)) {coord.temp} else {coord.temp[[1]]}
@@ -386,7 +386,8 @@ MVA.get.scores.rGCCA.RGCCA <- MVA.get.scores.sGCCA.RGCCA <- function(x,space,...
   return(res)
 }
 
-MVA.get.scores.rGCCA.mixOmics <- MVA.get.scores.sGCCA.mixOmics <- function(x,space,...) {
+MVA.get.scores.rGCCA.mixOmics <- MVA.get.scores.sGCCA.mixOmics <- 
+MVA.get.scores.DIABLO.mixOmics <- MVA.get.scores.sDIABLO.mixOmics <- function(x,space,...) {
   if (!space %in% 1:length(x$variates)) {stop("wrong 'space'")}
   if (length(space)!=1) {space <- 1}
   res <- as.data.frame(x$variates[[space]])

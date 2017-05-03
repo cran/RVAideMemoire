@@ -9,8 +9,8 @@ MVA.load <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
     "RDA.ade4","RDAortho.ade4"))) {MVA.get.loads(x)} else
     if (inherits(x,c("PCIA.ade4"))) {MVA.get.loads(x,set)} else
     if (inherits(x,c("RDA.vegan","CIA.ade4","rCCorA.mixOmics","2BPLS.mixOmics","2BsPLS.mixOmics",
-    "Multilevel.2BsPLS.mixOmics","rGCCA.RGCCA","rGCCA.mixOmics","sGCCA.RGCCA","sGCCA.mixOmics")))
-    {MVA.get.loads(x,space)} else
+    "Multilevel.2BsPLS.mixOmics","rGCCA.RGCCA","rGCCA.mixOmics","sGCCA.RGCCA","sGCCA.mixOmics",
+    "DIABLO.mixOmics","sDIABLO.mixOmics"))) {MVA.get.loads(x,space)} else
     {MVA.get.loads(x)}
   loads <- if (is.data.frame(loads.temp)) {loads.temp} else {loads.temp[[1]]}
   keep <- apply(abs(as.data.frame(loads[,c(xax,yax)])),1,sum)>0
@@ -166,6 +166,13 @@ MVA.get.loads.rGCCA.RGCCA <- MVA.get.loads.sGCCA.RGCCA <- function(x,space,...) 
 
 MVA.get.loads.rGCCA.mixOmics <- MVA.get.loads.sGCCA.mixOmics <- function(x,space,...) {
   if (!space %in% 1:length(x$variates)) {stop("wrong 'space'")}
+  if (length(space)!=1) {space <- 1}
+  res <- as.data.frame(x$loadings[[space]])
+  return(res)
+}
+
+MVA.get.loads.DIABLO.mixOmics <- MVA.get.loads.sDIABLO.mixOmics <- function(x,space,...) {
+  if (!space %in% 1:(length(x$variates)-1)) {stop("wrong 'space'")}
   if (length(space)!=1) {space <- 1}
   res <- as.data.frame(x$loadings[[space]])
   return(res)

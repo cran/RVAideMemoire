@@ -126,7 +126,6 @@ Many multivariate analyses are supported, from various packages:
 
 - sPLS-DA (sPLS2 on a dummy-coded factor): \code{\link[mixOmics]{splsda}}. X space only.
 
-
 - CPPLS: \code{\link[pls]{mvr}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only.
 
 - PLSR: \code{\link[pls]{mvr}}, \code{\link[mixOmics]{pls}}, \code{\link[plsRglm]{plsR}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only.
@@ -164,6 +163,8 @@ Many multivariate analyses are supported, from various packages:
 - rGCCA: \code{\link[mixOmics]{wrapper.rgcca}}. Space can be 1 to n, the number of blocks (i.e. datasets).
 
 - sGCCA: \code{\link[mixOmics]{wrapper.sgcca}}. Space can be 1 to n, the number of blocks (i.e. datasets).
+
+- DIABLO: \code{\link[mixOmics]{block.plsda}}, \code{\link[mixOmics]{block.splsda}}. Space can be 1 to n, the number of blocks (i.e. datasets).
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

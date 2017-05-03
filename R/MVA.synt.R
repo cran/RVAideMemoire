@@ -11,6 +11,7 @@
 #     * db-RDA (capscale[vegan],dbrda[vegan])
 #     * GPA (GPA[FactoMineR])
 #     * RGCCA (wrapper.rgcca[mixOmics],rgcca[RGCCA])
+#     * DIABLO (block.plsda[mixOmics],block.splsda[mixOmics])
 #
 #  - Consensus variance:
 #     * GPA (GPA[FactoMineR])
@@ -55,6 +56,7 @@
 #     * rCCorA (rcc[mixOmics])
 #     * CIA (coinertia[ade4])
 #     * RGCCA (wrapper.rgcca[mixOmics],rgcca[RGCCA])
+#     * DIABLO (block.plsda[mixOmics],block.splsda[mixOmics])
 #
 #  - Kurtosis:
 #     * IPCA (ipca[mixOmics])
@@ -591,6 +593,36 @@ MVA.get.synt.rGCCA.RGCCA <- function(x,...) {
     }
   }
   cors <- list()
+  for (i in 1:maxcomp) {
+    tab.cor <- cor(do.call("cbind",lapply(sco,function(x) x[,i])),use="pairwise")
+    rownames(tab.cor) <- colnames(tab.cor) <- paste0("Block",1:nblock)
+    if(!all(is.na(as.dist(tab.cor)))) {
+	cors[[i]] <- list(crit=paste("inter-block correlations - Axes",i),tab=as.dist(tab.cor))
+    }
+  }
+  res[[1]] <- cors
+  names(res)[[1]] <- "cors"
+  for (i in 1:nblock) {
+    vars <- x$AVE$AVE_X[[i]]
+    vars.each <- 100*vars
+    vars.cum <- cumsum(vars.each)
+    tab.vars <- data.frame(Axis=1:length(vars),Proportion=vars.each,Cumulative=vars.cum)
+    res[[i+1]] <- list(crit=paste("intra-block total variance (%) - Block",i),tab=tab.vars)
+  }
+  return(res)
+}
+
+MVA.get.synt.DIABLO.mixOmics <- MVA.get.synt.sDIABLO.mixOmics <- function(x,...) {
+  res <- list()
+  nblock <- length(x$ncomp)-1
+  maxcomp <- max(x$ncomp[1:nblock])
+  sco <- x$variates[1:nblock]
+  cors <- list()
+  for (i in 1:nblock) {
+    if (ncol(sco[[i]])<maxcomp) {
+	while(ncol(sco[[i]])<maxcomp) {sco[[i]] <- cbind(sco[[i]],rep(NA,nrow(sco[[i]])))}
+    }
+  }
   for (i in 1:maxcomp) {
     tab.cor <- cor(do.call("cbind",lapply(sco,function(x) x[,i])),use="pairwise")
     rownames(tab.cor) <- colnames(tab.cor) <- paste0("Block",1:nblock)

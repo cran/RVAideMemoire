@@ -4,7 +4,7 @@
 Significance test for CDA
 }
 \description{
-Performs a significance for correspondence discriminant analysis. See Details.
+Performs a significance test for correspondence discriminant analysis. See Details.
 }
 \usage{
 CDA.test(X, fact, ncomp = NULL, ...)
