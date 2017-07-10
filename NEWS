@@ -1,3 +1,7 @@
+version 0.9-66 (10-07-2017)
+  - argument thresh of MVA.corplot improved
+  - few linguistic improvements
+
 version 0.9-65 (03-05-2017)
   - MVA.synt extended to DIABLO
   - MVA.scores, MVA.cor, MVA.load (hence MVA.plot) extended to DIABLO

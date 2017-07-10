@@ -3,10 +3,10 @@
 \alias{perm.t.test.default}
 \alias{perm.t.test.formula}
 \title{
-Permutational Student's t-test
+permutation Student's t-test
 }
 \description{
-Performs a permutational Student's t-test.
+Performs a permutation Student's t-test.
 }
 \usage{
 
@@ -52,7 +52,7 @@ The function deals with the limitted floating point precision, which can bias ca
 \value{
   \item{statistic}{test statistics of the parametric test.}
   \item{permutations}{number of permutations.}
-  \item{p.value}{p-value of the permutational test.}
+  \item{p.value}{p-value of the permutation test.}
   \item{estimate}{the estimated mean or difference in means depending on whether it was a paired or not paired test.}
   \item{alternative}{a character string describing the alternative hypothesis.}
   \item{method}{a character string indicating what type of t-test was performed.}

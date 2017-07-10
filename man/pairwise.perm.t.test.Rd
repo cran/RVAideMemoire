@@ -1,7 +1,7 @@
 \name{pairwise.perm.t.test}
 \alias{pairwise.perm.t.test}
 \title{
-Pairwise permutational t tests
+Pairwise permutation t tests
 }
 \description{
 Performs pairwise comparisons between group levels with corrections for multiple testing.
@@ -22,7 +22,7 @@ grouping factor.
 method for p-values correction. See help of \code{\link{p.adjust}}.
 }
   \item{paired}{
-a logical indicating whether you want paired (permutational) t-tests.
+a logical indicating whether you want paired (permutation) t-tests.
 }
   \item{alternative}{
 a character string specifying the alternative hypothesis, must be one of \code{"two.sided"} (default), \code{"greater"} or \code{"less"}.
@@ -57,7 +57,7 @@ fact <- gl(3,5,labels=LETTERS[1:3])
 
 # Not enough permutations here but it runs faster
 
-# Permutational ANOVA
+# permutation ANOVA
 perm.anova(response~fact,nperm=49)
 
 # Pairwise comparisons

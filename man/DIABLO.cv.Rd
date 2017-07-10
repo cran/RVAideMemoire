@@ -31,7 +31,7 @@ other arguments to pass to \code{\link[mixOmics]{perf}}.
 }
 }
 \details{
-The function uses the weighted predicted error rate (see \code{\link[mixOmics]{perf}}).
+The function uses the weighted predicted classification error rate (see \code{\link[mixOmics]{perf}}).
 }
 \value{
   \item{repet}{number of times the whole procedure was repeated.}
@@ -39,8 +39,8 @@ The function uses the weighted predicted error rate (see \code{\link[mixOmics]{p
   \item{validation}{kind of validation used.}
   \item{ncomp}{number of components used.}
   \item{method}{criterion used to classify individuals of the test sets.}
-  \item{NMC.mean}{mean NMC value (based on \code{repet} values).}
-  \item{NMC.se}{standard error of the mean NMC value (based on \code{repet} values).}
+  \item{NMC.mean}{mean classification error rate (based on \code{repet} values).}
+  \item{NMC.se}{standard error of the classification error rate (based on \code{repet} values).}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

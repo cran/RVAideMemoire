@@ -1,10 +1,10 @@
 \name{pairwise.perm.manova}
 \alias{pairwise.perm.manova}
 \title{
-Pairwise permutational MANOVAs
+Pairwise permutation MANOVAs
 }
 \description{
-Performs pairwise comparisons between group levels with corrections for multiple testing. These pairwise comparisons are relevant after a permutational MANOVA, such as performed by \code{\link[vegan]{adonis}}.
+Performs pairwise comparisons between group levels with corrections for multiple testing. These pairwise comparisons are relevant after a permutation MANOVA, such as performed by \code{\link[vegan]{adonis}}.
 }
 \usage{
 pairwise.perm.manova(resp, fact, test = c("Pillai", "Wilks",
@@ -52,7 +52,7 @@ Maxime Hervé <mx.herve@gmail.com>
 require(vegan)
 data(iris)
 
-# Permutational MANOVA
+# permutation MANOVA
 adonis(iris[,1:4]~Species,data=iris,method="euclidian")
 
 # Pairwise comparisons

@@ -13,7 +13,7 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
 	vegan::adonis(resp2~fact2,permutations=nperm)$aov.tab[1,"Pr(>F)"]
     }
     multcomp <- pairwise.table(fun.p,levels(fact),p.adjust.method=p.method)
-    method <- "permutational MANOVAs on a distance matrix"
+    method <- "permutation MANOVAs on a distance matrix"
   } else {
     if (nrow(resp)!=length(fact)) {
 	stop(paste("'",deparse(substitute(resp)),"' and '",deparse(substitute(fact)),
@@ -28,7 +28,7 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
 	perm.manova(resp2,fact2,test=test,nperm=nperm,progress)
     }
     multcomp <- pairwise.table(fun.p,levels(fact),p.adjust.method=p.method)
-    method <- paste0("permutational MANOVAs (test: ",test,")")
+    method <- paste0("permutation MANOVAs (test: ",test,")")
   }
   result <- list(method=method,data.name=dname,p.value=multcomp,p.adjust.method=p.method)
   class(result) <- "pairwise.htest"

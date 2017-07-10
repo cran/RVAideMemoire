@@ -4,7 +4,7 @@
 Significance test based on cross-validation
 }
 \description{
-Performs a permutational significance test based on cross-validation with DIABLO (\code{\link[mixOmics]{block.plsda}} or \code{\link[mixOmics]{block.splsda}}).
+Performs a permutation significance test based on cross-validation with DIABLO (\code{\link[mixOmics]{block.plsda}} or \code{\link[mixOmics]{block.splsda}}).
 }
 \usage{
 DIABLO.test(x, method = c("mahalanobis.dist", "max.dist", "centroids.dist"),
@@ -34,12 +34,12 @@ other arguments to pass to \code{\link[mixOmics]{perf}}.
 }
 }
 \details{
-The function uses the weighted predicted error rate (see \code{\link[mixOmics]{perf}}).
+The function uses the weighted predicted classification error rate (see \code{\link[mixOmics]{perf}}).
 }
 \value{
   \item{method}{a character string indicating the name of the test.}
   \item{data.name}{a character string giving the name of the data, plus additional information.}
-  \item{statistic}{the value of the test statistics.}
+  \item{statistic}{the value of the test statistics (classification error rate).}
   \item{permutations}{the number of permutations.}
   \item{p.value}{the p-value of the test.}
 }

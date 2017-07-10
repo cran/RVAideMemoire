@@ -1,7 +1,7 @@
 \name{adonis.II}
 \alias{adonis.II}
 \title{
-Type II permutational MANOVA using distance matrices
+Type II permutation MANOVA using distance matrices
 }
 \description{
 This function is a wrapper to \code{\link[vegan]{adonis}} but performs type II tests (whereas \code{\link[vegan]{adonis}} performs type I).

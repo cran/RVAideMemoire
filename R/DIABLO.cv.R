@@ -20,10 +20,10 @@ print.DIABLO.cv <- function(x,...) {
   cat(paste0("\nClassification criterion: ",crit," distance\n"))
   cat("\n")
   if (x$repet>1) {
-    cat(paste0("Mean (standard error) number of misclassifications (%): ",signif(100*x$NMC.mean,3)," (",
+    cat(paste0("Mean (standard error) classification error rate (%): ",signif(100*x$NMC.mean,3)," (",
 	signif(100*x$NMC.se,2),")\n"))
   } else {
-    cat(paste0("Number of misclassifications (%): ",signif(100*x$NMC.mean,3),"\n"))
+    cat(paste0("Classification error rate (%): ",signif(100*x$NMC.mean,3),"\n"))
   }
   cat("\n")
 }

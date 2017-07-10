@@ -18,11 +18,11 @@ MVA.test <- function(X,Y,cmv=FALSE,ncomp=8,kout=7,kinn=6,scale=TRUE,model=c("PLS
   dname <- paste0(deparse(substitute(X))," and ",deparse(substitute(Y)),"\nModel: ",model,
     "\n",ncomp," components",ifelse(cmv," maximum",""),"\n",nperm," permutations")
   if (!cmv) {
-    testname <- "Permutational test based on cross-validation"
+    testname <- "permutation test based on cross-validation"
     cv.ref <- MVA.cv(X,Y,repet=20,k=kout,ncomp=ncomp,scale=scale,model=model,lower=lower,upper=upper,Y.add=Y.add,
 	weights=weights,set.prior=set.prior,crit.DA=crit.DA,...)
   } else {
-    testname <- "Permutational test based on cross model validation"
+    testname <- "permutation test based on cross model validation"
     cv.ref <- MVA.cmv(X,Y,repet=20,kout=kout,kinn=kinn,ncomp=ncomp,scale=scale,model=model,crit.inn=ifelse(is.factor(Y),"NMC","Q2"),
 	Q2diff=Q2diff,lower=lower,upper=upper,Y.add=Y.add,weights=weights,set.prior=set.prior,crit.DA=crit.DA,...)
   }
@@ -31,7 +31,7 @@ MVA.test <- function(X,Y,cmv=FALSE,ncomp=8,kout=7,kinn=6,scale=TRUE,model=c("PLS
     names(ref) <- if (ncol(as.data.frame(Y))==1) {"Q2"} else {paste("Q2",colnames(Y),sep=".")}
   } else {
     ref <- mean(as.vector(cv.ref$NMC))
-    names(ref) <- "NMC"
+    names(ref) <- "CER"
   }
   if (cv.ref$type=="quant" & ncol(as.data.frame(Y))>1) {
     stat.perm <- matrix(0,nrow=nperm+1,ncol=ncol(Y))

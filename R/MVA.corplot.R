@@ -47,7 +47,8 @@ MVA.corplot <- function(x,xax=1,yax=2,thresh=0,fac=NULL,set=c(12,1,2),space=1,xl
   co <- MVA.cor(x,xax,yax,set,space)
   corr <- co$corr
   if (is.numeric(thresh) && thresh!=0) {
-    to.keep <- apply(corr,1,function(x) any(abs(x)>thresh))
+    len <- apply(corr,1,function(x) sqrt(sum(x^2)))
+    to.keep <- len>=thresh
     if (sum(to.keep)==0) {stop("too stringent threshold, no variable retained")}
     corr <- corr[to.keep,]
     if ("set" %in% names(co)) {co$set <- co$set[to.keep]}

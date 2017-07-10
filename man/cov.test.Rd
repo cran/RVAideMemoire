@@ -4,7 +4,7 @@
 Significance test for the covariance between two datasets
 }
 \description{
-Performs a permutational test based on the sum of square covariance between variables of two datasets, to test wether the (square) covariance is higher than expected under random association between the two datasets. The test is relevent parallel to a 2B-PLS.
+Performs a permutation test based on the sum of square covariance between variables of two datasets, to test wether the (square) covariance is higher than expected under random association between the two datasets. The test is relevent parallel to a 2B-PLS.
 }
 \usage{
 cov.test(X, Y, scale.X = TRUE, scale.Y = TRUE, nperm = 999, progress = TRUE)

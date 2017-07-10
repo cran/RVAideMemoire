@@ -10,9 +10,9 @@ pairwise.MVA.test <- function(X,fact,p.method="fdr",cmv=FALSE,ncomp=8,kout=7,kin
   data.name <- paste0(deparse(substitute(X))," and ",deparse(substitute(Y)),"\nModel: ",model,
     "\n",ncomp," components",ifelse(cmv," maximum",""),"\n",nperm," permutations")
   method <- if (!cmv) {
-    "permutational tests based on cross-validation"
+    "permutation tests based on cross-validation"
   } else {
-    "permutational tests based on cross model validation"
+    "permutation tests based on cross model validation"
   }
   fun.p <- function(i,j) {
     X2 <- X[as.numeric(fact)%in%c(i,j),]

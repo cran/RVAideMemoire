@@ -1,7 +1,7 @@
 \name{pairwise.MVA.test}
 \alias{pairwise.MVA.test}
 \title{
-Pairwise permutational tests based on cross (model) validation
+Pairwise permutation tests based on cross (model) validation
 }
 \description{
 Performs pairwise comparisons between group levels with corrections for multiple testing, using \code{\link[RVAideMemoire]{MVA.test}}.
@@ -26,7 +26,7 @@ method for p-values correction. See help of \code{\link{p.adjust}}.
 a logical indicating if the test statistic (NMC) should be generated through cross-validation (classical K-fold process) or cross model validation (inner + outer loops).
 }
   \item{ncomp}{
-an integer giving the number of components to be used to generate all submodels (cross-validation) or the maximal number of components to be tested in the inner loop (cross model validation).   Can be re-set internally if needed. Does not concern LDA and QDA.
+an integer giving the number of components to be used to generate all submodels (cross-validation) or the maximal number of components to be tested in the inner loop (cross model validation). Can be re-set internally if needed. Does not concern LDA and QDA.
 }
   \item{kout}{
 an integer giving the number of folds (cross-validation) or the number of folds in the outer loop (cross-model validation).  Can be re-set internally if needed.

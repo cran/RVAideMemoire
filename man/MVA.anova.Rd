@@ -1,7 +1,7 @@
 \name{MVA.anova}
 \alias{MVA.anova}
 \title{
-Type II permutational test for constrained multivariate analyses
+Type II permutation test for constrained multivariate analyses
 }
 \description{
 This function is a wrapper to \code{anova.cca(...,by="terms")} but performs type II tests (whereas \code{\link[vegan]{anova.cca}} performs type I).

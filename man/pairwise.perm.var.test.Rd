@@ -1,7 +1,7 @@
 \name{pairwise.perm.var.test}
 \alias{pairwise.perm.var.test}
 \title{
-Pairwise permutational F tests
+Pairwise permutation F tests
 }
 \description{
 Performs pairwise comparisons between group levels with corrections for multiple testing.
@@ -54,7 +54,7 @@ fact <- gl(3,10,labels=LETTERS[1:3])
 
 # Not enough permutations here but it runs faster
 
-# Permutational Bartlett test
+# permutation Bartlett test
 perm.bartlett.test(response~fact,nperm=49)
 
 # Pairwise comparisons

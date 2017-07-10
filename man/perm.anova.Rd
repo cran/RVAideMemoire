@@ -1,10 +1,10 @@
 \name{perm.anova}
 \alias{perm.anova}
 \title{
-Permutational Analysis of Variance
+permutation Analysis of Variance
 }
 \description{
-Performs a permutational analysis of variance for 1 to 3 factors. For 2 and 3 factors, experiment design must be balanced. For 2 factors, the factors can be crossed with or without interaction, or nested. The second factor can be a blocking (random) factor. For 3 factors, design is restricted to 2 fixed factors crossed (with or without interaction) inside blocks (third factor).
+Performs a permutation analysis of variance for 1 to 3 factors. For 2 and 3 factors, experiment design must be balanced. For 2 factors, the factors can be crossed with or without interaction, or nested. The second factor can be a blocking (random) factor. For 3 factors, design is restricted to 2 fixed factors crossed (with or without interaction) inside blocks (third factor).
 }
 \usage{
 perm.anova(formula, nest.f2 = c("fixed", "random"), data, nperm = 999,

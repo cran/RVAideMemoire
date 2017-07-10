@@ -1,10 +1,10 @@
 \name{perm.cor.test}
 \alias{perm.cor.test}
 \title{
-Permutational Pearson's correlation test
+permutation Pearson's correlation test
 }
 \description{
-Performs a permutational Pearson's product-moment correlation test.
+Performs a permutation Pearson's product-moment correlation test.
 }
 \usage{
 perm.cor.test(x, y, alternative = c("two.sided", "less", "greater"),
@@ -32,7 +32,7 @@ The function deals with the limitted floating point precision, which can bias ca
   \item{data.name}{a character string giving the name(s) of the data.}
   \item{statistic}{test statistics of the parametric test.}
   \item{permutations}{number of permutations.}
-  \item{p.value}{p-value of the permutational test.}
+  \item{p.value}{p-value of the permutation test.}
   \item{estimate}{the estimated correlation coefficient.}
   \item{alternative}{a character string describing the alternative hypothesis.}
   \item{null.value}{the value of the association measure under the null hypothesis, always 0.}

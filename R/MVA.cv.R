@@ -32,7 +32,7 @@ print.MVA.cv <- function(x,...) {
 	print(to.print2,quote=FALSE)
     }
   } else {
-    cat(paste0("Mean (standard error) number of misclassifications (%): ",signif(100*mean(x$NMC),3)," (",
+    cat(paste0("Mean (standard error) classification error rate (%): ",signif(100*mean(x$NMC),3)," (",
 	signif(100*se(x$NMC),2),")\n"))
   }
   cat("\n")

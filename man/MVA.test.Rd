@@ -25,7 +25,7 @@ the dependent variable(s): numeric vector, data frame of quantitative variables 
 a logical indicating if the values (Q2 or NMC) should be generated through cross-validation (classical K-fold process) or cross model validation (inner + outer loops).
 }
   \item{ncomp}{
-an integer giving the number of components to be used to generate all submodels (cross-validation) or the maximal number of components to be tested in the inner loop (cross model validation).   Can be re-set internally if needed. Does not concern LDA and QDA.
+an integer giving the number of components to be used to generate all submodels (cross-validation) or the maximal number of components to be tested in the inner loop (cross model validation). Can be re-set internally if needed. Does not concern LDA and QDA.
 }
   \item{kout}{
 an integer giving the number of folds (cross-validation) or the number of folds in the outer loop (cross-model validation).  Can be re-set internally if needed.
@@ -76,9 +76,9 @@ other arguments to pass to \code{\link[pls]{plsr}} (PLSR, PLS-DA) or \code{\link
 \details{
 When \code{Y} consists in quantitative response(s), the null hypothesis is that each response is not predicted better than what would happen by chance. In this case, Q2 is used as the test statistic. When \code{Y} contains several responses, a p-value is computed for each response and p-values are corrected for multiple testing.
 
-When \code{Y} is a factor, the null hypothesis is that the factor has no discriminant ability. In this case, the proportion of misclassified individuals (NMC) is used as the test statistic.
+When \code{Y} is a factor, the null hypothesis is that the factor has no discriminant ability. In this case, the classification error rate (NMC) is used as the test statistic.
 
-Whatever the response, the reference value of the test statistic is obtained by averaging 20 values coming from independently performed cross (model) validation on the original data.
+Whatever the response, the reference value of the test statistics is obtained by averaging 20 values coming from independently performed cross (model) validation on the original data.
 
 The function deals with the limitted floating point precision, which can bias calculation of p-values based on a discrete test statistic distribution.
 }

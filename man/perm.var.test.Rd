@@ -3,10 +3,10 @@
 \alias{perm.var.test.default}
 \alias{perm.var.test.formula}
 \title{
-Permutational F test to compare two variances
+permutation F test to compare two variances
 }
 \description{
-Performs a permutational F test to compare two variances.
+Performs a permutation F test to compare two variances.
 }
 \usage{
 
@@ -50,7 +50,7 @@ The function deals with the limitted floating point precision, which can bias ca
   \item{method}{name of the test.}
   \item{statistic}{test statistics of the parametric test.}
   \item{permutations}{number of permutations.}
-  \item{p.value}{p-value of the permutational test.}
+  \item{p.value}{p-value of the permutation test.}
   \item{estimate}{the ratio of the two variances.}
   \item{alternative}{a character string describing the alternative hypothesis.}
   \item{data.name}{a character string giving the name(s) of the data.}

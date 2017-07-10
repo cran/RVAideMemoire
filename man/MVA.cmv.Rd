@@ -73,7 +73,7 @@ Cross model validation is detailed is Szymanska et al (2012). Some more details 
 
 - \code{"PLS-DA"} is considered as PLS2 on a dummy-coded response. For a PLS-DA based on the CPPLS algorithm, use \code{"PPLS-DA"} with \code{lower} and \code{upper} limits of the power parameters set to \code{0.5}.
 
-- if a second analysis is used (\code{"PLS-DA/LDA"}, \code{"PLS-DA/QDA"}, \code{"PPLS-DA/LDA"} or \code{"PPLS-DA/QDA"}), a LDA or QDA is built on scores of the first analysis (PLS-DA or PPLS-DA) also in the inner loop. The number of misclassifications, based on this second analysis, is used to choose the number of components.
+- if a second analysis is used (\code{"PLS-DA/LDA"}, \code{"PLS-DA/QDA"}, \code{"PPLS-DA/LDA"} or \code{"PPLS-DA/QDA"}), a LDA or QDA is built on scores of the first analysis (PLS-DA or PPLS-DA) also in the inner loop. The classification error rate, based on this second analysis, is used to choose the number of components.
 
 
 If \code{scale = TRUE}, the scaling is done as this:
@@ -97,7 +97,7 @@ If \code{scale = TRUE}, the scaling is done as this:
   \item{models2.list}{list of of LDA/QDA models generated (\code{repet*kout} models), for PLS-DA/LDA, PLS-DA/QDA, PPLS-DA/LDA and PPLS-DA/QDA.}
   \item{RMSEP}{RMSEP computed from the models used in the outer loops (\code{repet} values).}
   \item{Q2}{Q2 computed from the models used in the outer loops (\code{repet} values).}
-  \item{NMC}{NMC computed from the models used in the outer loops (\code{repet} values).}
+  \item{NMC}{Classification error rate computed from the models used in the outer loops (\code{repet} values).}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

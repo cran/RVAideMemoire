@@ -8,7 +8,7 @@ pairwise.perm.var.test <- function(resp,fact,p.method="fdr",alternative=c("two.s
   if (!is.factor(fact)) {fact <- factor(fact)}
   if (length(alternative)>1) {alternative <- "two.sided"}
   data.name <- paste(deparse(substitute(resp))," and ",deparse(substitute(fact)),"\n",nperm," permutations",sep="")
-  method <- "permutational F tests to compare two variances"
+  method <- "permutation F tests to compare two variances"
   fun.p <- function(i,j) {
     resp2 <- resp[as.numeric(fact)%in%c(i,j)]
     fact2 <- droplevels(fact[as.numeric(fact)%in%c(i,j)])

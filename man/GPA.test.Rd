@@ -4,7 +4,7 @@
 Significance test for GPA
 }
 \description{
-Performs a permutational significance test based on total variance explained for Generalized Procrustes Analysis. The function uses \code{\link[FactoMineR]{GPA}}.
+Performs a permutation significance test based on total variance explained for Generalized Procrustes Analysis. The function uses \code{\link[FactoMineR]{GPA}}.
 }
 \usage{
 GPA.test(df, group, tolerance = 10^-10, nbiteration = 200, scale = TRUE,

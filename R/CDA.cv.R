@@ -8,7 +8,7 @@ print.CDA.cv <- function(x,...) {
   cat(paste0(x$repet*x$k," submodels generated (",x$ncomp," components)\n"))
   cat(paste0("\nClassification criterion:"),ifelse(x$method=="mahalanobis","Mahalanobis","Euclidian"),"distance\n")
   cat("\n")
-  cat(paste0("Mean (standard error) number of misclassifications (%): ",signif(100*mean(x$NMC),3)," (",
+  cat(paste0("Mean (standard error) classification error rate (%): ",signif(100*mean(x$NMC),3)," (",
     signif(100*se(x$NMC),2),")\n"))
   cat("\n")
 }

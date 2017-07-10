@@ -11,7 +11,7 @@ pairwise.perm.t.test <- function(resp,fact,p.method="fdr",paired=FALSE,
   }
   if (length(alternative)>1) {alternative <- "two.sided"}
   data.name <- paste(deparse(substitute(resp))," and ",deparse(substitute(fact)),"\n",nperm," permutations",sep="")
-  method <- if (!paired) {"permutational t tests"} else {"permutational paired t tests"}
+  method <- if (!paired) {"permutation t tests"} else {"permutation paired t tests"}
   fun.p <- function(i,j) {
     resp2 <- resp[as.numeric(fact)%in%c(i,j)]
     fact2 <- droplevels(fact[as.numeric(fact)%in%c(i,j)])

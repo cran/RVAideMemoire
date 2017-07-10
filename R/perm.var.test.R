@@ -37,7 +37,7 @@ perm.var.test.formula <- function(formula,data,alternative=c("two.sided","less",
     pvalue <- length(which((F.perm+.Machine$double.eps/2) >= F.ref))/(nperm+1)
   }
   if (pvalue>1) {pvalue <- 1}
-  result <- list(method="Permutational F test to compare two variances",statistic=F.ref,permutations=nperm,
+  result <- list(method="permutation F test to compare two variances",statistic=F.ref,permutations=nperm,
     p.value=pvalue,estimate=variance,null.value=ratio,alternative=alternative,data.name=dname)
   class(result) <- "htest"
   return(result)

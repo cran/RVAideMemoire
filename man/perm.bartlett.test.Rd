@@ -1,10 +1,10 @@
 \name{perm.bartlett.test}
 \alias{perm.bartlett.test}
 \title{
-Permutational Bartlett's test of homogeneity of variances
+permutation Bartlett's test of homogeneity of variances
 }
 \description{
-Performs a permutational Bartlett's test of homogeneity of k variances.
+Performs a permutation Bartlett's test of homogeneity of k variances.
 }
 \usage{
 perm.bartlett.test(formula, data, nperm = 999, progress = TRUE)
@@ -31,7 +31,7 @@ The function deals with the limitted floating point precision, which can bias ca
   \item{data.name}{a character string giving the name(s) of the data.}
   \item{statistic}{test statistics of the parametric test.}
   \item{permutations}{number of permutations.}
-  \item{p.value}{p-value of the permutational test.}
+  \item{p.value}{p-value of the permutation test.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

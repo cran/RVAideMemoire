@@ -40,7 +40,7 @@ The training sets are generated in respect to the relative proportions of the le
   \item{method}{criterion used to classify individuals of the test sets.}
   \item{groups}{levels of \code{Y}.}
   \item{models.list}{list of of models generated (\code{repet*k} models), for PLSR, CPPLS, PLS-DA, PPLS-DA, LDA and QDA.}
-  \item{NMC}{NMC values (\code{repet} values).}
+  \item{NMC}{Classification error rates (\code{repet} values).}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
