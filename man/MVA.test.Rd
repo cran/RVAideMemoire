@@ -4,7 +4,7 @@
 Significance test based on cross (model) validation
 }
 \description{
-Performs a permutational significance test based on cross (model) validation with different PLS and/or discriminant analyses. See \code{\link[RVAideMemoire]{MVA.cv}} and \code{\link[RVAideMemoire]{MVA.cmv}} for more details about how cross (model) validation is performed.
+Performs a permutation significance test based on cross (model) validation with different PLS and/or discriminant analyses. See \code{\link[RVAideMemoire]{MVA.cv}} and \code{\link[RVAideMemoire]{MVA.cmv}} for more details about how cross (model) validation is performed.
 }
 \usage{
 MVA.test(X, Y, cmv = FALSE, ncomp = 8, kout = 7, kinn = 6, scale = TRUE,

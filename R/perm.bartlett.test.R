@@ -19,7 +19,7 @@ function(formula,data,nperm=999,progress=TRUE) {
   }
   cat("\n")
   pvalue <- length(which((K.perm+.Machine$double.eps/2) >= K.ref))/(nperm+1)
-  result <- list(method="permutation Bartlett test of homogeneity of variances",data.name=dname,statistic=K.ref,
+  result <- list(method="Permutation Bartlett test of homogeneity of variances",data.name=dname,statistic=K.ref,
     permutations=nperm,p.value=pvalue)
   class(result) <- "htest"
   return(result)

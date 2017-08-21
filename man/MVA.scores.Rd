@@ -87,7 +87,7 @@ Many multivariate analyses are supported, from various packages:
 
 - db-RDA (or CAP): \code{\link[vegan]{capscale}}, \code{\link[vegan]{dbrda}}. Space 1 is constrained space, space 2 is unconstrained space.
 
-- CCA: \code{\link[ade4]{cca}}, \code{\link[vegan]{cca}}. With \code{\link[vegan]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{cca}}. Set 1 is rows, set 2 is columns. \code{scaling} can be defined for \code{\link[vegan]{cca}} (see \code{\link[vegan]{scores.cca}}).
+- CCA: \code{\link[ade4]{pcaiv}}, \code{\link[vegan]{cca}}. With \code{\link[vegan]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}. Set 1 is rows, set 2 is columns. \code{scaling} can be defined for \code{\link[vegan]{cca}} (see \code{\link[vegan]{scores.cca}}).
 
 - CCorA: \code{\link[vegan]{CCorA}}, \code{\link[mixOmics]{rcc}}. Space 1 is X, space 2 is Y. With \code{\link[mixOmics]{rcc}} a third space is available, in which coordinates are means of X and Y coordinates.
 

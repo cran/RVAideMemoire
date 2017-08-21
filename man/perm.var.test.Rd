@@ -3,7 +3,7 @@
 \alias{perm.var.test.default}
 \alias{perm.var.test.formula}
 \title{
-permutation F test to compare two variances
+Permutation F test to compare two variances
 }
 \description{
 Performs a permutation F test to compare two variances.

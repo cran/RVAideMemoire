@@ -3,7 +3,7 @@
 \alias{perm.t.test.default}
 \alias{perm.t.test.formula}
 \title{
-permutation Student's t-test
+Permutation Student's t-test
 }
 \description{
 Performs a permutation Student's t-test.

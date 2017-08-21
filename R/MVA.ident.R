@@ -19,7 +19,7 @@ MVA.class.dudi <- function(x,...) {
   if (inherits(x,"pca")) {res <- "PCA.ade4"} else
   if (inherits(x,"pco")) {res <- "PCoA.ade4"} else
   if (inherits(x,"pcaiv")) {
-    if (inherits(x,"cca")) {res <- "CCA.ade4"} else
+    if (inherits(x,"caiv")) {res <- "CCA.ade4"} else
 	{res <- "RDA.ade4"}
   } else
   if (inherits(x,"pcaivortho")) {res <- "RDAortho.ade4"} else

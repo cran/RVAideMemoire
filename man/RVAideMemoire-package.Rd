@@ -3,17 +3,17 @@
 \alias{RVAideMemoire}
 \docType{package}
 \title{
-Diverse Basic Statistical and Graphical Functions
+Testing and Plotting Procedures for Biostatistics
 }
 \description{
-Contains diverse more or less complicated functions, written to simplify user's life: simplifications of existing functions, basic but not implemented tests, easy-to-use tools, bridges between functions of different packages... All functions are presented in the French book 'Aide-memoire de statistique appliquee a la biologie', written by the same author and available on CRAN.
+Contains miscellaneous functions useful in biostatistics, mostly univariate and multivariate testing procedures with a special emphasis on permutation tests. Many functions intend to simplify user's life by shortening existing procedures or by implementing plotting functions that can be used with as much methods from different packages as possible.
 }
 \details{
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9-66\cr
-Date: \tab 2017-07-10\cr
+Version: \tab 0.9-68\cr
+Date: \tab 2017-08-21\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
@@ -21,7 +21,7 @@ LazyLoad: \tab yes\cr
 \author{
 Maxime Hervé
 
-Maintainer: Maxime Hervé <mx.herve@gmail.com>
+Maintainer: Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \references{
 Document : "Aide-memoire de statistique appliquee a la biologie - Construire son etude et analyser les resutats a l'aide du logiciel R" (available on CRAN)

@@ -16,7 +16,7 @@ DIABLO.test <- function(x,method=c("mahalanobis.dist","max.dist","centroids.dist
   }
   if (progress) {cat("\n")}
   pvalue <- length(which((stat.perm-.Machine$double.eps/2) <= ref))/(nperm+1)
-  result <- list(method="permutation test based on cross-validation",data.name=dname,statistic=ref,permutations=nperm,
+  result <- list(method="Permutation test based on cross-validation",data.name=dname,statistic=ref,permutations=nperm,
     p.value=pvalue)
   class(result) <- "htest"
   return(result)

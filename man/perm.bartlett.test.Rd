@@ -1,7 +1,7 @@
 \name{perm.bartlett.test}
 \alias{perm.bartlett.test}
 \title{
-permutation Bartlett's test of homogeneity of variances
+Permutation Bartlett's test of homogeneity of variances
 }
 \description{
 Performs a permutation Bartlett's test of homogeneity of k variances.

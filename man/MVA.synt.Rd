@@ -38,7 +38,7 @@ Many multivariate analyses are supported, from various packages.
 
 - COA: \code{\link[ade4]{dudi.coa}}, \code{\link[vegan]{cca}}: \% of total inertia explained by each axis.
 
-- CCA: \code{\link[ade4]{cca}}, \code{\link[vegan]{cca}}: \% of constrained and unconstrained total inertia, \% of constrained inertia explained by constrained axes, \% of unconstrained inertia explained by unconstrained axes (\code{\link[vegan]{cca}} only).
+- CCA: \code{\link[ade4]{pcaiv}}, \code{\link[vegan]{cca}}: \% of constrained and unconstrained total inertia, \% of constrained inertia explained by constrained axes, \% of unconstrained inertia explained by unconstrained axes (\code{\link[vegan]{cca}} only).
 
 - CPPLS: \code{\link[pls]{mvr}}: \% of X and Y variances explained by each axis.
 

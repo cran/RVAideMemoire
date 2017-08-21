@@ -24,7 +24,7 @@ perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","g
   t.perm[1] <- t.ref
   if (progress) {pb <- txtProgressBar(min=0,max=100,initial=0,style=3)}
   if (!paired) {
-    method <- "permutation Two Sample t-test"
+    method <- "Permutation Two Sample t-test"
     moy <- tapply(resp,fact,mean)
     names(moy) <- paste("mean in group ",levels(fact),sep="")
     for(i in 1:nperm) {
@@ -32,7 +32,7 @@ perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","g
 	if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
     }
   } else {
-    method <- "permutation Paired t-test"
+    method <- "Permutation Paired t-test"
     moy <- mean(resp[fact==levels(fact)[1]]-resp[fact==levels(fact)[2]])
     names(moy) <- "mean of the differences"
     resp2 <- cbind(resp[fact==levels(fact)[1]],resp[fact==levels(fact)[2]])

@@ -4,11 +4,12 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
   nperm=999,progress=TRUE,p.method="fdr") {
   call <- match.call()
   dname <- paste0(deparse(call$resp)," by ",deparse(substitute(fact)),"\n",nperm," permutations")
+  fact <- factor(fact)
   if ("dist" %in% class(resp)) {
     fun.p <- function(i,j) {
-	fact2 <- droplevels(fact[as.numeric(fact)%in%c(i,j)])
+	fact2 <- droplevels(fact[as.numeric(fact) %in% c(i,j)])
 	resp2 <- as.matrix(resp)
-	rows <- which(fact%in%levels(fact2))
+	rows <- which(fact %in% levels(fact2))
 	resp2 <- as.dist(resp2[rows,rows])
 	vegan::adonis(resp2~fact2,permutations=nperm)$aov.tab[1,"Pr(>F)"]
     }
@@ -23,8 +24,8 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
     if (!is.matrix(resp)) {resp <- as.matrix(resp)}
     if (!is.factor(fact)) {fact <- factor(fact)}
     fun.p <- function(i,j) {
-	resp2 <- resp[as.numeric(fact)%in%c(i,j),]
-	fact2 <- droplevels(fact[as.numeric(fact)%in%c(i,j)])
+	resp2 <- resp[as.numeric(fact) %in% c(i,j),]
+	fact2 <- droplevels(fact[as.numeric(fact) %in% c(i,j)])
 	perm.manova(resp2,fact2,test=test,nperm=nperm,progress)
     }
     multcomp <- pairwise.table(fun.p,levels(fact),p.adjust.method=p.method)

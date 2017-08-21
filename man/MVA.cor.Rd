@@ -60,7 +60,7 @@ Many multivariate analyses are supported, from various packages:
 
 - NSCOA: \code{\link[ade4]{dudi.nsc}}. For NSCOA there is no real correlation, but the classical representation of columns is arrows. This is why MVA.corplot was made able to deal with this analysis.
 
-- CCA: \code{\link[vegan]{cca}}, \code{\link[ade4]{cca}}. Constraints (only quantitative constraints are extracted) in constrained space only.
+- CCA: \code{\link[vegan]{cca}}, \code{\link[ade4]{pcaiv}}. Constraints (only quantitative constraints are extracted) in constrained space only.
 
 - Mix analysis: \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{dudi.hillsmith}}. Only quantitative variables are displayed.
 

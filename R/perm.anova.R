@@ -44,7 +44,7 @@ function(formula,nest.f2=c("fixed","random"),data,nperm=999,progress=TRUE) {
 	stop("only additive and multiplicative models are permitted")
     }
   }
-  h <- c("permutation Analysis of Variance Table",paste("\nResponse: ",data.name,"\n",nperm," permutations",sep=""))
+  h <- c("Permutation Analysis of Variance Table",paste("\nResponse: ",data.name,"\n",nperm," permutations",sep=""))
   structure(tab,heading=h,class=c("anova","data.frame"))
 }
 

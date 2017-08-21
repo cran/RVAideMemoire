@@ -1,7 +1,7 @@
 \name{perm.cor.test}
 \alias{perm.cor.test}
 \title{
-permutation Pearson's correlation test
+Permutation Pearson's correlation test
 }
 \description{
 Performs a permutation Pearson's product-moment correlation test.

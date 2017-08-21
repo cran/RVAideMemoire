@@ -1,19 +1,20 @@
 Encoding: latin1
 Package: RVAideMemoire
 Type: Package
-Title: Diverse Basic Statistical and Graphical Functions
-Version: 0.9-66
-Date: 2017-07-10
+Title: Testing and Plotting Procedures for Biostatistics
+Version: 0.9-68
+Date: 2017-08-21
 Author: Maxime Hervé
-Maintainer: Maxime Hervé <mx.herve@gmail.com>
-Imports: ade4, boot, car, cramer, dunn.test, FactoMineR, graphics,
-        grDevices, lme4 (>= 1.0-4), MASS, mixOmics (>= 5.0.2),
-        multcompView, nnet, pls, pspearman, stats, utils, vegan
+Maintainer: Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Imports: ade4 (>= 1.7-8), boot, car, cramer, dunn.test, FactoMineR,
+        graphics, grDevices, lme4 (>= 1.0-4), MASS, mixOmics (>=
+        5.0.2), multcompView, nnet, pls, pspearman, stats, utils, vegan
+        (>= 2.4-3)
 Suggests: dgof, EMT, lsmeans, npsm, ordinal, survival
-Description: Contains diverse more or less complicated functions, written to simplify user's life: simplifications of existing functions, basic but not implemented tests, easy-to-use tools, bridges between functions of different packages... All functions are presented in the French book 'Aide-memoire de statistique appliquee a la biologie', written by the same author and available on CRAN.
+Description: Contains miscellaneous functions useful in biostatistics, mostly univariate and multivariate testing procedures with a special emphasis on permutation tests. Many functions intend to simplify user's life by shortening existing procedures or by implementing plotting functions that can be used with as much methods from different packages as possible.
 License: GPL-2
 LazyLoad: yes
 NeedsCompilation: no
-Packaged: 2017-07-10 14:37:50 UTC; maherve
+Packaged: 2017-08-21 11:52:57 UTC; maherve
 Repository: CRAN
-Date/Publication: 2017-07-10 19:13:39 UTC
+Date/Publication: 2017-08-21 13:24:04 UTC
