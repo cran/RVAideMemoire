@@ -1,9 +1,9 @@
 test.multinom <- function(model,variable) {
   if (!"multinom" %in% class(model)) {stop("model not recognized")}
   call <- match.call()
-  var.name <- as.character(call$variable)
-  var.name <- var.name[length(var.name)]
+  var.name <- deparse(substitute(variable))
   mf <- model.frame(model)
+  variable <- mf[,var.name]
   resp <- mf[,1]
   lev <- levels(resp)
   comb <- combn(lev,2)
@@ -12,13 +12,15 @@ test.multinom <- function(model,variable) {
   cont <- apply(comb,2,function(x) paste0(x[2],"|",x[1]))
   mod.list <- list()
   mod.list[[1]] <- model
-  mod.call <- model$call
-  mod.call$trace <- FALSE
-  for (i in 2:max(n.mod)) {
-    resp.temp <- relevel(resp,ref=unique.lev[i])
-    mf[,1] <- resp.temp
-    mod.call$data <- mf
-    mod.list[[i]] <- eval(mod.call)
+  if (ncol(comb)>1) {
+    mod.call <- model$call
+    mod.call$trace <- FALSE
+    for (i in 2:max(n.mod)) {
+	resp.temp <- relevel(resp,ref=unique.lev[i])
+	mf[,1] <- resp.temp
+	mod.call$data <- mf
+	mod.list[[i]] <- eval(mod.call)
+    }
   }
   if (is.numeric(variable)) {
     if (all(variable %in% c(0,1))) {
@@ -30,8 +32,16 @@ test.multinom <- function(model,variable) {
 	for (i in 1:n) {
 	  mod.temp <- mod.list[[n.mod[i]]]
 	  summ <- summary(mod.temp)
-	  res[i,"Coeff"] <- summ$coefficients[comb[2,i],var.name]
-	  res[i,"SE"] <- summ$standard.errors[comb[2,i],var.name]
+	  res[i,"Coeff"] <- if (ncol(comb)==1) {
+	    summ$coefficients[var.name]
+	  } else {
+	    summ$coefficients[comb[2,i],var.name]
+	  }
+	  res[i,"SE"] <- if (ncol(comb)==1) {
+	    summ$standard.errors[var.name]
+	  } else {
+	    summ$standard.errors[comb[2,i],var.name]
+	  }
 	  res[i,"Odds.ratio"] <- exp(res[i,"Coeff"])
 	  res[i,"z"] <- res[i,"Coeff"]/res[i,"SE"]
 	  res[i,"Pr(>|z|)"] <- 2*min(pnorm(res[i,"z"]),pnorm(res[i,"z"],lower.tail=FALSE))
@@ -49,8 +59,16 @@ test.multinom <- function(model,variable) {
 	for (i in 1:n) {
 	  mod.temp <- mod.list[[n.mod[i]]]
 	  summ <- summary(mod.temp)
-	  res.temp[i,"Coeff"] <- summ$coefficients[comb[2,i],var.name]
-	  res.temp[i,"SE"] <- summ$standard.errors[comb[2,i],var.name]
+	  res.temp[i,"Coeff"] <- if (ncol(comb)==1) {
+	    summ$coefficients[var.name]    
+	  } else {
+	    summ$coefficients[comb[2,i],var.name]
+	  }
+	  res.temp[i,"SE"] <- if (ncol(comb)==1) {
+	    summ$standard.errors[var.name]
+	  } else {
+	    summ$standard.errors[comb[2,i],var.name]
+	  }
 	  res.temp[i,"Odds.ratio"] <- exp(res.temp[i,"Coeff"])
 	  res.temp[i,"z"] <- res.temp[i,"Coeff"]/res.temp[i,"SE"]
 	  res.temp[i,"Pr(>|z|)"] <- 2*min(pnorm(res.temp[i,"z"]),pnorm(res.temp[i,"z"],lower.tail=FALSE))
@@ -86,8 +104,16 @@ test.multinom <- function(model,variable) {
 	  for (j in 1:n) {
 	    mod.temp <- mod.list.var[[n.mod.var[i]]][[n.mod[j]]]
 	    summ <- summary(mod.temp)
-	    res.temp[j,"Coeff"] <- summ$coefficients[comb[2,j],var.name.temp]
-	    res.temp[j,"SE"] <- summ$standard.errors[comb[2,j],var.name.temp]
+	    res.temp[j,"Coeff"] <- if (ncol(comb)==1) {
+		summ$coefficients[var.name.temp]
+	    } else {
+		summ$coefficients[comb[2,j],var.name.temp]
+	    }
+	    res.temp[j,"SE"] <- if (ncol(comb)==1) {
+		summ$standard.errors[var.name.temp]
+	    } else {
+		summ$standard.errors[comb[2,j],var.name.temp]
+	    }
 	    res.temp[j,"Odds.ratio"] <- exp(res.temp[j,"Coeff"])
 	    res.temp[j,"z"] <- res.temp[j,"Coeff"]/res.temp[j,"SE"]
 	    res.temp[j,"Pr(>|z|)"] <- 2*min(pnorm(res.temp[j,"z"]),pnorm(res.temp[j,"z"],lower.tail=FALSE))
@@ -100,3 +126,4 @@ test.multinom <- function(model,variable) {
   }
   return(res)
 }
+

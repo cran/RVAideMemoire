@@ -1,21 +1,21 @@
-back.lsmeans <- function(lsm,transform=c("log","logit","sqrt","4rt","inverse"),base=exp(1),
+back.emmeans <- function(emm,transform=c("log","logit","sqrt","4rt","inverse"),base=exp(1),
   add=0,ord=FALSE,decreasing=TRUE) {
   transform <- match.arg(transform)
-  if ("list" %in% class(summary(lsm))) {
-    lsm <- summary(lsm)$lsmeans
+  if ("list" %in% class(summary(emm))) {
+    emm <- summary(emm)$emmeans
   } else {
-    lsm <- summary(lsm)
+    emm <- summary(emm)
   }
-  col <- which(colnames(lsm)=="lsmean")
+  col <- which(colnames(emm)=="emmean")
   f <- if (col>2) {
-    apply(lsm[,1:(col-1)],1,function(x) paste(x,collapse=":"))
+    apply(emm[,1:(col-1)],1,function(x) paste(x,collapse=":"))
   } else {
-    lsm[,1]
+    emm[,1]
   }
-  moy <- lsm$lsmean
-  es <- lsm$SE
-  res <- data.frame(a=f,SE.inf=moy-es,Mean=moy,SE.sup=moy+es)
-  colnames(res)[1] <- paste(colnames(lsm[1:(col-1)]),collapse=":")
+  moy <- emm$emmean
+  es <- emm$SE
+  res <- data.frame(a=f,SE.inf=moy-es,EMMean=moy,SE.sup=moy+es)
+  colnames(res)[1] <- paste(colnames(emm[1:(col-1)]),collapse=":")
   res[,-1] <- if (transform=="log") {
     base^res[,-1]-add
   } else if (transform=="logit") {
@@ -35,6 +35,6 @@ back.lsmeans <- function(lsm,transform=c("log","logit","sqrt","4rt","inverse"),b
     res$SE.inf <- SE2
     res$SE.sup <- SE1
   }
-  if (ord) {res <- res[order(res$Mean,decreasing=decreasing),]}
+  if (ord) {res <- res[order(res$EMMean,decreasing=decreasing),]}
   return(res)
 }

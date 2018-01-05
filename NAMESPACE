@@ -28,12 +28,12 @@ importFrom(utils,capture.output,combn,packageVersion,setTxtProgressBar,txtProgre
 importFrom(vegan,ordiYbar)
 
 export(
-  byf.normhist,cor.sparse,DA.confusion,DA.valid,DA.var,fc.multcomp,friedman.rating.test,kruskal.rating.test,
-    pairwise.wilcox.rating.test,plot1comp.ind,plot1comp.var,PLSDA.ncomp,PLSDA.test,s.corcircle2,scat.mix.categorical,
+  back.lsmeans,byf.normhist,cor.sparse,DA.confusion,DA.valid,DA.var,fc.multcomp,friedman.rating.test,kruskal.rating.test,
+    pairwise.wilcox.rating.test,plot1comp.ind,plot1comp.var,PLSDA.ncomp,PLSDA.test,rating.lsmeans,s.corcircle2,scat.mix.categorical,
     scat.mix.numeric,scatter.coa2,wilcox.rating.signtest,wilcox.rating.test,
   adonis.II,
   Anova.clm,Anova.clmm,
-  back.lsmeans,
+  back.emmeans,
   bootstrap,
   byf.hist,byf.mqqnorm,byf.mshapiro,byf.qqnorm,byf.shapiro,
   CDA.cv,CDA.test,
@@ -83,7 +83,7 @@ export(
   PLSDA.VIP,
   prop.bin.multcomp,prop.multcomp,
   prop.multinom,prop.multinom.test,
-  rating.lsmeans,rating.prob,
+  rating.emmeans,rating.prob,
   reg.ci,
   scat.cr,
   se,

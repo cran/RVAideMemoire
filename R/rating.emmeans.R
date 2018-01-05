@@ -1,12 +1,12 @@
-rating.lsmeans <- function(lsm,type=c("prob","cumprob","class1","class2"),level=0.9) {
-  name <- deparse(substitute(lsm))
-  if (is.list(lsm)) {lsm <- lsm$lsmeans}
-  if (!"cut" %in% names(lsm@levels)) {
+rating.emmeans <- function(emm,type=c("prob","cumprob","class1","class2"),level=0.9) {
+  name <- deparse(substitute(emm))
+  if (is.list(emm)) {emm <- emm$emmeans}
+  if (!"cut" %in% names(emm@levels)) {
     stop(paste0("no 'cut' in ",name,
-	", use  ~...|cut  as formula in lsmeans()"))
+	", use  ~...|cut  as formula in emmeans()"))
   }
   type <- match.arg(type)
-  summ <- as.data.frame(summary(lsm,type="response"))
+  summ <- as.data.frame(summary(emm,type="response"))
   levs.cut <- levels(summ$cut)
   ncut <- nlevels(summ$cut)
   levs.cut.rep <- rle(as.character(summ$cut))$lengths

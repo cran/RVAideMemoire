@@ -2,19 +2,19 @@ Encoding: latin1
 Package: RVAideMemoire
 Type: Package
 Title: Testing and Plotting Procedures for Biostatistics
-Version: 0.9-68
-Date: 2017-08-21
+Version: 0.9-69
+Date: 2018-01-03
 Author: Maxime Hervé
 Maintainer: Maxime Hervé <maxime.herve@univ-rennes1.fr>
 Imports: ade4 (>= 1.7-8), boot, car, cramer, dunn.test, FactoMineR,
         graphics, grDevices, lme4 (>= 1.0-4), MASS, mixOmics (>=
         5.0.2), multcompView, nnet, pls, pspearman, stats, utils, vegan
         (>= 2.4-3)
-Suggests: dgof, EMT, lsmeans, npsm, ordinal, survival
-Description: Contains miscellaneous functions useful in biostatistics, mostly univariate and multivariate testing procedures with a special emphasis on permutation tests. Many functions intend to simplify user's life by shortening existing procedures or by implementing plotting functions that can be used with as much methods from different packages as possible.
+Suggests: dgof, EMT, emmeans, npsm, ordinal, survival
+Description: Contains miscellaneous functions useful in biostatistics, mostly univariate and multivariate testing procedures with a special emphasis on permutation tests. Many functions intend to simplify user's life by shortening existing procedures or by implementing plotting functions that can be used with as many methods from different packages as possible.
 License: GPL-2
 LazyLoad: yes
 NeedsCompilation: no
-Packaged: 2017-08-21 11:52:57 UTC; maherve
+Packaged: 2018-01-04 13:16:51 UTC; maherve
 Repository: CRAN
-Date/Publication: 2017-08-21 13:24:04 UTC
+Date/Publication: 2018-01-05 12:56:34 UTC

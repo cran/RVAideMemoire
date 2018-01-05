@@ -1,9 +1,9 @@
 OR.multinom <- function(model,variable,conf.level=0.95) {
   if (!"multinom" %in% class(model)) {stop("model not recognized")}
   call <- match.call()
-  var.name <- as.character(call$variable)
-  var.name <- var.name[length(var.name)]
+  var.name <- deparse(substitute(variable))
   mf <- model.frame(model)
+  variable <- mf[,var.name]
   resp <- mf[,1]
   lev <- levels(resp)
   comb <- combn(lev,2)
@@ -12,13 +12,15 @@ OR.multinom <- function(model,variable,conf.level=0.95) {
   cont <- apply(comb,2,function(x) paste0(x[2],"|",x[1]))
   mod.list <- list()
   mod.list[[1]] <- model
-  mod.call <- model$call
-  mod.call$trace <- FALSE
-  for (i in 2:max(n.mod)) {
-    resp.temp <- relevel(resp,ref=unique.lev[i])
-    mf[,1] <- resp.temp
-    mod.call$data <- mf
-    mod.list[[i]] <- eval(mod.call)
+  if (ncol(comb)>1) {
+    mod.call <- model$call
+    mod.call$trace <- FALSE
+    for (i in 2:max(n.mod)) {
+	resp.temp <- relevel(resp,ref=unique.lev[i])
+	mf[,1] <- resp.temp
+	mod.call$data <- mf
+	mod.list[[i]] <- eval(mod.call)
+    }
   }
   if (is.numeric(variable)) {
     if (all(variable %in% c(0,1))) {
@@ -30,8 +32,16 @@ OR.multinom <- function(model,variable,conf.level=0.95) {
 	for (i in 1:n) {
 	  mod.temp <- mod.list[[n.mod[i]]]
 	  summ <- summary(mod.temp)
-	  res[i,"Odds.ratio"] <- exp(summ$coefficients[comb[2,i],var.name])
-	  CI <- exp(confint(mod.temp,level=conf.level,parm=var.name)[,,comb[2,i]])
+	  res[i,"Odds.ratio"] <- if (ncol(comb)==1) {
+	    exp(summ$coefficients[var.name])
+	  } else {
+	    exp(summ$coefficients[comb[2,i],var.name])
+	  }
+	  CI <- if (ncol(comb)==1) {
+	    exp(confint(mod.temp,level=conf.level,parm=var.name))
+	  } else {
+	    exp(confint(mod.temp,level=conf.level,parm=var.name)[,,comb[2,i]])
+	  }
 	  res[i,"CI.inf"] <- CI[1]
 	  res[i,"CI.sup"] <- CI[2]
 	}
@@ -47,8 +57,16 @@ OR.multinom <- function(model,variable,conf.level=0.95) {
 	for (i in 1:n) {
 	  mod.temp <- mod.list[[n.mod[i]]]
 	  summ <- summary(mod.temp)
-	  res.temp[i,"Odds.ratio"] <- exp(summ$coefficients[comb[2,i],var.name])
-	  CI <- exp(confint(mod.temp,level=conf.level,parm=var.name)[,,comb[2,i]])
+	  res.temp[i,"Odds.ratio"] <- if (ncol(comb)==1) {
+	    exp(summ$coefficients[var.name])
+	  } else {
+	    exp(summ$coefficients[comb[2,i],var.name])
+	  }
+	  CI <- if (ncol(comb)==1) {
+	    exp(confint(mod.temp,level=conf.level,parm=var.name))
+	  } else {
+	    exp(confint(mod.temp,level=conf.level,parm=var.name)[,,comb[2,i]])
+	  }
 	  res.temp[i,"CI.inf"] <- CI[1]
 	  res.temp[i,"CI.sup"] <- CI[2]
 	}
@@ -83,8 +101,16 @@ OR.multinom <- function(model,variable,conf.level=0.95) {
 	  for (j in 1:n) {
 	    mod.temp <- mod.list.var[[n.mod.var[i]]][[n.mod[j]]]
 	    summ <- summary(mod.temp)
-	    res.temp[j,"Odds.ratio"] <- exp(summ$coefficients[comb[2,j],var.name.temp])
-	    CI <- exp(confint(mod.temp,level=conf.level,parm=var.name.temp)[,,comb[2,j]])
+	    res.temp[j,"Odds.ratio"] <- if (ncol(comb)==1) {
+		exp(summ$coefficients[var.name.temp])
+	    } else {
+		exp(summ$coefficients[comb[2,j],var.name.temp])
+	    }
+	    CI <- if (ncol(comb)==1) {
+		exp(confint(mod.temp,level=conf.level,parm=var.name.temp))
+	    } else {
+		exp(confint(mod.temp,level=conf.level,parm=var.name.temp)[,,comb[2,j]])
+	    }
 	    res.temp[j,"CI.inf"] <- CI[1]
 	    res.temp[j,"CI.sup"] <- CI[2]
 	  }
@@ -96,3 +122,4 @@ OR.multinom <- function(model,variable,conf.level=0.95) {
   }
   return(res)
 }
+

@@ -6,14 +6,14 @@
 Testing and Plotting Procedures for Biostatistics
 }
 \description{
-Contains miscellaneous functions useful in biostatistics, mostly univariate and multivariate testing procedures with a special emphasis on permutation tests. Many functions intend to simplify user's life by shortening existing procedures or by implementing plotting functions that can be used with as much methods from different packages as possible.
+Contains miscellaneous functions useful in biostatistics, mostly univariate and multivariate testing procedures with a special emphasis on permutation tests. Many functions intend to simplify user's life by shortening existing procedures or by implementing plotting functions that can be used with as many methods from different packages as possible.
 }
 \details{
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9-68\cr
-Date: \tab 2017-08-21\cr
+Version: \tab 0.9-69\cr
+Date: \tab 2018-01-03\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }

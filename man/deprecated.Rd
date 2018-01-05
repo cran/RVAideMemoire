@@ -1,4 +1,5 @@
 \name{deprecated}
+\alias{back.lsmeans}
 \alias{byf.normhist}
 \alias{cor.sparse}
 \alias{DA.confusion}
@@ -13,6 +14,7 @@
 \alias{plot1comp.var}
 \alias{PLSDA.ncomp}
 \alias{PLSDA.test}
+\alias{rating.lsmeans}
 \alias{s.corcircle2}
 \alias{scat.mix.categorical}
 \alias{scat.mix.numeric}
@@ -27,6 +29,7 @@ Deprecated functions in RVAideMemoire package
 Functions that are not usable anymore, and will be entirely removed from the package in future versions.
 }
 \usage{
+back.lsmeans(...)
 byf.normhist(...)
 cor.sparse(...)
 DA.confusion(...)
@@ -41,6 +44,7 @@ plot1comp.ind(...)
 plot1comp.var(...)
 PLSDA.ncomp(...)
 PLSDA.test(...)
+rating.lsmeans(...)
 s.corcircle2(...)
 scat.mix.categorical(...)
 scat.mix.numeric(...)
@@ -55,6 +59,8 @@ previous arguments.
 }
 }
 \details{
+\code{back.lsmeans} and \code{rating.lsmeans} are replaced by \code{\link[RVAideMemoire]{back.emmeans}} and \code{\link[RVAideMemoire]{rating.emmeans}}. More generally, stop using package lsmeans and change to package emmeans, its new version.
+
 \code{byf.normhist} was not very useful and \code{\link[RVAideMemoire]{byf.hist}} does nearly the same job.
 
 \code{cor.sparse} is replaced by the more generic \code{\link[RVAideMemoire]{MVA.plot}}.

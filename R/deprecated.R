@@ -1,3 +1,7 @@
+back.lsmeans <- function(...) {
+  stop("back.lsmeans() is deprecated, use back.emmeans() of this package (more generally, stop using package lsmeans and change to package emmeans, its new version)")
+}
+
 byf.normhist <- function(...) {
   stop("byf.normhist() is deprecated, use byf.hist() of this package")
 }
@@ -52,6 +56,10 @@ PLSDA.ncomp <- function(...) {
 
 PLSDA.test <- function(...) {
   stop("PLSDA.test() is deprecated, use the more generic MVA.test() of this package")
+}
+
+rating.lsmeans <- function(...) {
+  stop("rating.lsmeans() is deprecated, use rating.emmeans() of this package (more generally, stop using package lsmeans and change to package emmeans, its new version)")
 }
 
 s.corcircle2 <- function(...) {

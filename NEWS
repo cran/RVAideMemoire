@@ -1,3 +1,8 @@
+version 0.9-69 (03-01-2018)
+  - OR.multinom and test.multinom corrected for two-level responses
+  - change from package 'lsmeans' to 'emmeans': back.lsmeans becomes back.emmeans, rating.lsmeans becomes rating.emmeans
+  - plotresid improved to deal more properly with "quasi" distributions in GLM(M)s
+
 version 0.9-68 (21-08-2017)
   - miscellaneous small improvements
 

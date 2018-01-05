@@ -14,7 +14,7 @@ OR.multinom(model, variable, conf.level = 0.95)
 object of class \code{"multinom"}.
 }
   \item{variable}{
-any predictor present in \code{model}.
+any predictor present in \code{model} (unquoted).
 }
   \item{conf.level}{
 confidence level.

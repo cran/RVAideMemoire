@@ -51,6 +51,12 @@ get.res.glm <- function(x,...) {
     } else {
 	list(residuals=rstudent(x),lab="Externally studentized residuals",norm=TRUE)
     }
+  } else if (x$family$family=="quasi") {
+    if (x$call$family$variance=="constant") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
+    } else {
+	list(residuals=rstudent(x),lab="Externally studentized residuals",norm=FALSE)
+    }
   } else {
     if (x$family$link=="identity") {
 	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=FALSE)
@@ -120,6 +126,12 @@ get.res.glmmPQL <- function(x,...) {
 	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
     } else {
 	list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=TRUE)
+    }
+  } else if (fam$family=="quasi") {
+    if (x$call$family$variance=="constant") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
+    } else {
+	list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=FALSE)
     }
   } else {
     if (fam$link=="identity") {

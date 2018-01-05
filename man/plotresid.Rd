@@ -18,9 +18,9 @@ logical. If \code{TRUE} and if \code{model} is based on a Gaussian distribution,
 }
 }
 \details{
-Response residuals are used for linear models, non linear models and generalized linear models based on an identity link. Pearson or studentized residuals are used whenever there is a link function which is not identity.
+Response residuals are used for linear models, non linear models and generalized linear models based on an identity link (except with \code{"quasi"} distributions where response residuals are used only if \code{variance="constant"}). Pearson or studentized residuals are used whenever there is a link function which is not identity (and with \code{"quasi"} distributions when \code{variance} is not \code{"constant"}).
 
-QQ-plots and Shapiro-Wilk tests are available whenever the model is based on a Gaussian distribution.
+QQ-plots and Shapiro-Wilk tests are available whenever the model is based on a Gaussian distribution (and with \code{"quasi"} distributions when \code{variance="constant"}).
 
 With a \code{mlm} or \code{\link{manova}} model, only a multivariate QQ-plot is drawn. The test performed when \code{shapiro=TRUE} is a Shapiro-Wilk test for multivariate normality.
 }

@@ -1,10 +1,10 @@
 \name{user.cont}
 \alias{user.cont}
 \title{
-User defined contrasts for LSMeans
+User defined contrasts for EMMeans
 }
 \description{
-Returns a function usable by \code{\link[lsmeans]{lsmeans}} for user defined contrasts.
+Returns a function usable by \code{\link[emmeans]{emmeans}} for user defined contrasts.
 }
 \usage{
 user.cont(cont)
@@ -14,7 +14,7 @@ user.cont(cont)
 }
 }
 \value{
-  \item{user.cont.lsmc}{the function to be called by \code{\link[lsmeans]{lsmeans}}}
+  \item{user.cont.emmc}{the function to be called by \code{\link[emmeans]{emmeans}}}
 }
 \details{
 In these matrices, each line is a comparison (= contrast) and each colum is a level of the factor. Rules for writing contrasts are:
@@ -31,18 +31,21 @@ In these matrices, each line is a comparison (= contrast) and each colum is a le
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[lsmeans]{lsmeans}}
+\code{\link[emmeans]{emmeans}}
 }
 \examples{
 require(car)
-require(lsmeans)
+require(emmeans)
 
-response <- c(rpois(30,1),rpois(30,3),rpois(30,10)) 
-fact <- gl(3,30,labels=LETTERS[1:3])
-model <- glm(response~fact,family="poisson")
+tab <- data.frame(
+  response <- c(rpois(30,1),rpois(30,3),rpois(30,10)) ,
+  fact <- gl(3,30,labels=LETTERS[1:3])
+)
+model <- glm(response~fact,family="poisson",data=tab)
 Anova(model)
 mat <- matrix(c(1,-1,0,0,1,-1,2,-1,-1),nrow=3,byrow=TRUE,dimnames=list(levels(fact),1:3))
 mat
-cont.lsmc <- user.cont(mat)
-lsmeans(model,cont~fact)
+cont.emmc <- user.cont(mat)
+EMM <- emmeans(model,~fact)
+contrast(EMM,"cont")
 }

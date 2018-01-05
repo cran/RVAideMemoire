@@ -1,5 +1,5 @@
 user.cont <- function(cont) {
-  user.cont.lsmc <- function(levs,...) {
+  user.cont.emmc <- function(levs,...) {
     M <- as.data.frame(t(cont))
     for (i in 1:ncol(M)) {
 	colnames(M)[i] <- paste(paste(rownames(M)[M[,i]>0],collapse="-"),
@@ -9,5 +9,5 @@ user.cont <- function(cont) {
     attr(M,"adjust") <- "fdr"
     M
   }
-  return(user.cont.lsmc)
+  return(user.cont.emmc)
 }
