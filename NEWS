@@ -1,3 +1,9 @@
+version 0.9-69-3 (14-05-2018)
+  - changes in help pages as requested by CRAN
+
+version 0.9-69-2 (29-01-2018)
+  - cochran.qtest corrected for pairwise comparisons with identical groups (thanks to Duncan Hedderley)
+
 version 0.9-69 (03-01-2018)
   - OR.multinom and test.multinom corrected for two-level responses
   - change from package 'lsmeans' to 'emmeans': back.lsmeans becomes back.emmeans, rating.lsmeans becomes rating.emmeans

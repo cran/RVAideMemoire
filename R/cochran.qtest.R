@@ -37,7 +37,9 @@ cochran.qtest <- function(formula,data,alpha=0.05,p.method="fdr") {
   if (p<alpha & nlevels(fact)>2) {
     fun.p <- function(i,j) {
 	signs <- apply(tab[,c(i,j)],1,diff)
-	binom.test(length(signs[signs>0]),length(signs[signs!=0]),0.5)$p.value
+	if (length(signs[signs!=0])>0) {
+	  binom.test(length(signs[signs>0]),length(signs[signs!=0]),0.5)$p.value
+	} else {1}
     }
     result$method.multcomp <- "Wilcoxon sign test"
     result$p.adjust.method <- p.method

@@ -128,11 +128,11 @@ Many multivariate analyses are supported, from various packages:
 
 - CPPLS: \code{\link[pls]{mvr}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only.
 
-- PLSR: \code{\link[pls]{mvr}}, \code{\link[mixOmics]{pls}}, \code{\link[plsRglm]{plsR}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only.
+- PLSR: \code{\link[pls]{mvr}}, \code{\link[mixOmics]{pls}}, \code{plsR} (plsRglm package). Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only.
 
 - sPLSR: \code{\link[mixOmics]{pls}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. X space only.
 
-- PLS-GLR: \code{\link[plsRglm]{plsRglm}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. Correlations are computed with Y on the link scale.
+- PLS-GLR: \code{plsRglm} (plsRglm package). Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set. Correlations are computed with Y on the link scale.
 
 - PCR: \code{\link[pls]{mvr}}. Set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set.
 

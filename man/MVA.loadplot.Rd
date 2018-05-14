@@ -128,11 +128,11 @@ Many multivariate analyses are supported, from various packages:
 
 - CPPLS: \code{\link[pls]{mvr}}. X space only.
 
-- PLSR: \code{\link[pls]{mvr}}, \code{\link[mixOmics]{pls}}, \code{\link[plsRglm]{plsR}}. X space only.
+- PLSR: \code{\link[pls]{mvr}}, \code{\link[mixOmics]{pls}}, \code{plsR} (plsRglm package). X space only.
 
 - sPLSR: \code{\link[mixOmics]{pls}}. X space only.
 
-- PLS-GLR: \code{\link[plsRglm]{plsRglm}}.
+- PLS-GLR: \code{plsRglm} (plsRglm package).
 
 - PCR: \code{\link[pls]{mvr}}.
 

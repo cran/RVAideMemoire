@@ -42,7 +42,7 @@ Many multivariate analyses are supported, from various packages.
 
 - CPPLS: \code{\link[pls]{mvr}}: \% of X and Y variances explained by each axis.
 
-- PLSR: \code{\link[pls]{mvr}}, \code{\link[plsRglm]{plsR}}: \% of X and Y variances explained by each axis (only Y for the moment with \code{\link[plsRglm]{plsR}}).
+- PLSR: \code{\link[pls]{mvr}}, \code{plsR} (plsRglm package): \% of X and Y variances explained by each axis (only Y for the moment with \code{plsR}).
 
 - 2B-PLS: \code{\link[mixOmics]{pls}}: \% of X/Y square covariance explained by each pair of axes, correlation between each pair of axes (canonical correlations).
 
