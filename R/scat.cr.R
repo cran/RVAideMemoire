@@ -1,5 +1,5 @@
 scat.cr <- function(dudi.obj,axis=1) {
-  if (!"acm"%in%class(dudi.obj) & !"mix"%in%class(dudi.obj)) {stop("unknown analysis")}
+  if (!"acm" %in% class(dudi.obj) & !"mix" %in% class(dudi.obj)) {stop("unknown analysis")}
   cr <- dudi.obj$cr
   opar <- par(no.readonly=TRUE)
   on.exit(par(opar))

@@ -1,4 +1,4 @@
-# boot : boot
+# boot: boot
 
 cramer.test <-
 function (x,y,nrep=1000,conf.level=0.95) {

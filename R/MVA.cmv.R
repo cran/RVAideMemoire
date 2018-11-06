@@ -1,5 +1,5 @@
-# pls : plsr,cppls
-# MASS : lda,qda
+# pls: plsr, cppls
+# MASS: lda, qda
 
 verif.finite <- function(tab) {
   finite <- apply(tab,2,function(x) all(is.finite(x)))

@@ -1,4 +1,4 @@
-# Fonctions ou méthodes redéfinies car non exportées par car :
+# Functions that are redefined since unexported by 'car':
 #   - df.terms.clm_m
 #   - relatives
 #   - responseName.clm_m

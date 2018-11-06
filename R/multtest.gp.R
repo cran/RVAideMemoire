@@ -1,3 +1,5 @@
+# grDevices: n2mfrow
+
 multtest.gp <- function(tab,fac,test=c("param","perm","rank"),transform=c("none","sqrt","log"),
   add=0,p.method="fdr",ordered=TRUE,...) {
   test <- match.arg(test)
@@ -134,7 +136,7 @@ plot.multtest.gp <- function(x,signif=FALSE,alpha=0.05,vars=NULL,xlab="Group",yl
   col.m <- 4:(3+length(x$labs))
   col.s <- (4+length(x$labs)):(3+2*length(x$labs))
   labs <- if (is.null(groups)) {x$labs} else {groups}
-  par(mfrow=n2mfrow(n))
+  par(mfrow=grDevices::n2mfrow(n))
   for (i in 1:n) {
     m <- unlist(tab2[i,col.m])
     names(m) <- labs

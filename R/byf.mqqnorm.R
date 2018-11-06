@@ -1,3 +1,5 @@
+# grDevices: n2mfrow
+
 byf.mqqnorm <- function(formula,data) {
   if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
   m <- match.call()
@@ -14,7 +16,7 @@ byf.mqqnorm <- function(formula,data) {
   nlev <- nlevels(fact)
   opar <- par(no.readonly=TRUE)
   on.exit(par(opar))
-  par(mfrow=n2mfrow(nlev))
+  par(mfrow=grDevices::n2mfrow(nlev))
   for (i in 1:nlev) {
     mqqnorm(resp[as.numeric(fact)==i,],main=levels(fact)[i])
   }

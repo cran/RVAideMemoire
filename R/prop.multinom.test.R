@@ -1,4 +1,4 @@
-# nnet : multinom
+# nnet: multinom
 
 prop.multinom.test <- function(x,p.method="fdr") {
   dname <- deparse(substitute(x))

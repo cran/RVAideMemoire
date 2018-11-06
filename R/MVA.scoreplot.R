@@ -1,3 +1,5 @@
+# grDevices: n2mfrow
+
 # Score plot
 #  - 1 possible plot:
 #     * PCA (dudi.pca[ade4],prcomp[stats],princomp[stats]°,pca[mixOmics],pca[labdsv],rda[vegan])
@@ -144,7 +146,7 @@ MVA.scoreplot.byfac <- function(coord,x,barycenters,stars,contours,weights,xlab,
   nf <- ncol(oritab)
   if (length(legend.col)==1) {legend.col <- rep(legend.col[1],max(apply(oritab,2,function(y) nlevels(factor(y)))))}
   oldmfrow <- par()$mfrow
-  par(mfrow=n2mfrow(nf))
+  par(mfrow=grDevices::n2mfrow(nf))
   for (i in 1:nf) {
     fac <- factor(oritab[,i])
     if (ncol(coord)==1) {
@@ -236,7 +238,7 @@ MVA.scoreplot.2comp <- function(coord,byfac,fac,barycenters,stars,contours,weigh
 	  repeat {
 	    if (long<3) {break}
 	    if (cref==0) {break}
-	    num <- chull(coordx.temp,coordy.temp)
+	    num <- grDevices::chull(coordx.temp,coordy.temp)
 	    x2 <- coordx.temp[num]
 	    y2 <- coordy.temp[num]
 	    taux <- long/longinit

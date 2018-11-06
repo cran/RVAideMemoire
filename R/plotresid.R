@@ -1,4 +1,5 @@
-# lme4 : getME, isLMM
+# car: qqPlot
+# lme4: getME, isLMM
 
 plotresid <- function(model,shapiro=FALSE) {
   res <- get.res(model)
@@ -18,7 +19,7 @@ plotresid <- function(model,shapiro=FALSE) {
 	plot(model.fit,model.res,xlab="Fitted values",ylab=res.lab,main=paste(res.lab,"vs. fitted"))
 	abline(h=0,col="grey",lty=3)
 	panel.smooth(model.fit,model.res)
-	qqPlot(model.res,lwd=1,grid=FALSE,xlab="Theoretical quantiles",ylab="Sample quantiles")
+	car::qqPlot(model.res,lwd=1,grid=FALSE,xlab="Theoretical quantiles",ylab="Sample quantiles")
 	if (shapiro) {shapiro.test(model.res)}
     }
   } else {

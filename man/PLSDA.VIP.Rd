@@ -28,9 +28,9 @@ Maxime Hervé <mx.herve@gmail.com>
 \code{\link[mixOmics]{plsda}}
 }
 \examples{
-require(mixOmics)
-data(yeast)
-
-model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond)
-PLSDA.VIP(model.PLSDA)
+if (require(mixOmics)) {
+  data(yeast)
+  model.PLSDA <- plsda(t(yeast$data),yeast$strain.cond)
+  PLSDA.VIP(model.PLSDA)
+}
 }

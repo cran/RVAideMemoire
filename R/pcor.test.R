@@ -1,5 +1,5 @@
-# boot : boot
-# pspearman : pspearman
+# boot: boot
+# pspearman: pspearman
 
 pcor.test <-
 function(x,y,z,semi=FALSE,conf.level=0.95,nrep=1000,method=c("pearson","spearman")) {

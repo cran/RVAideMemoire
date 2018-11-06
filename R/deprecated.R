@@ -1,5 +1,5 @@
 back.lsmeans <- function(...) {
-  stop("back.lsmeans() is deprecated, use back.emmeans() of this package (more generally, stop using package lsmeans and change to package emmeans, its new version)")
+  stop("back.lsmeans() is deprecated, use back.emmeans() of this package (more generally, stop using package 'lsmeans' and change to package 'emmeans', its new version)")
 }
 
 byf.normhist <- function(...) {
@@ -22,8 +22,12 @@ DA.var <- function(...) {
   stop("DA.var() is deprecated, use the more generic MVA.synt() of this package")
 }
 
+dunn.test <- function(...) {
+  stop("dunn.test() is deprecated, use dunnTest from package 'FSA' instead")
+}
+
 fc.multcomp <- function(...) {
-  stop("fc.multcomp() is deprecated, use the more powerful lstrends() (package 'lsmeans') with the 'var' argument to compare slopes")
+  stop("fc.multcomp() is deprecated, use the more powerful emtrends() (package 'emmeans') with the 'var' argument to compare slopes")
 }
 
 friedman.rating.test <- function(...) {
@@ -35,7 +39,11 @@ kruskal.rating.test <- function(...) {
 }
 
 pairwise.manova <- function(...) {
-  stop("pairwise.manova() is deprecated, use the more powerful lsmeans() (package lsmeans) on \"mlm\" objects")
+  stop("pairwise.manova() is deprecated, use the more powerful emmeans() (package 'emmeans') on \"mlm\" objects")
+}
+
+pairwise.to.groups <- function(...) {
+  stop("pairwise.to.groups() is deprecated")
 }
 
 pairwise.wilcox.rating.test <- function(...) {
@@ -59,7 +67,7 @@ PLSDA.test <- function(...) {
 }
 
 rating.lsmeans <- function(...) {
-  stop("rating.lsmeans() is deprecated, use rating.emmeans() of this package (more generally, stop using package lsmeans and change to package emmeans, its new version)")
+  stop("rating.lsmeans() is deprecated, use rating.emmeans() of this package (more generally, stop using package 'lsmeans' and change to package 'emmeans', its new version)")
 }
 
 s.corcircle2 <- function(...) {

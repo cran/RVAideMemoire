@@ -1,3 +1,5 @@
+# grDevices: col2rgb, palette, rgb
+
 dhist <- function(x,fac,col,legend,pos.legend,title.legend=NULL,lab.legend=NULL,xlab,ylab=NULL,
   drawextaxes=TRUE,drawintaxes=FALSE,xlim=NULL,...) {
   ymax <- integer(nlevels(fac))
@@ -21,9 +23,9 @@ dhist <- function(x,fac,col,legend,pos.legend,title.legend=NULL,lab.legend=NULL,
   if (!is.numeric(col)) {
     col3 <- col4 <- col
   } else {
-    col2 <- col2rgb(palette()[col])
-    col3 <- apply(col2,2,function(x) rgb(x[1],x[2],x[3],alpha=0.4*255,maxColorValue=255))
-    col4 <- apply(col2,2,function(x) rgb(x[1],x[2],x[3],alpha=255,maxColorValue=255))  
+    col2 <- grDevices::col2rgb(grDevices::palette()[col])
+    col3 <- apply(col2,2,function(x) grDevices::rgb(x[1],x[2],x[3],alpha=0.4*255,maxColorValue=255))
+    col4 <- apply(col2,2,function(x) grDevices::rgb(x[1],x[2],x[3],alpha=255,maxColorValue=255))  
   }
   for (i in 1:nlevels(fac)) {
     d <- dens[[i]]

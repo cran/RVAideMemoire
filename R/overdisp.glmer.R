@@ -1,4 +1,4 @@
-# lme4 : fixef, VarCorr
+# lme4: fixef, VarCorr
 
 overdisp.glmer <- function(model) {
   ## From http://glmm.wikidot.com/faq

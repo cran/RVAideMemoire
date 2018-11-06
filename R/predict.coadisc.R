@@ -1,4 +1,4 @@
-# ade4 : as.dudi, dist.quant
+# ade4: as.dudi, dist.quant
 
 predict.coadisc <-
 function(object,newdata,method=c("mahalanobis", "euclidian"),...) {

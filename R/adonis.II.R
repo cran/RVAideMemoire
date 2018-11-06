@@ -1,4 +1,4 @@
-# vegan : adonis
+# vegan: adonis
 
 adonis.II <- function(formula,data=NULL,...) {
   f <- formula

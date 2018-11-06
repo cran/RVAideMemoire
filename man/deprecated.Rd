@@ -5,10 +5,12 @@
 \alias{DA.confusion}
 \alias{DA.valid}
 \alias{DA.var}
+\alias{dunn.test}
 \alias{fc.multcomp}
 \alias{friedman.rating.test}
 \alias{kruskal.rating.test}
 \alias{pairwise.manova}
+\alias{pairwise.to.groups}
 \alias{pairwise.wilcox.rating.test}
 \alias{plot1comp.ind}
 \alias{plot1comp.var}
@@ -35,10 +37,12 @@ cor.sparse(...)
 DA.confusion(...)
 DA.valid(...)
 DA.var(...)
+dunn.test(...)
 fc.multcomp(...)
 friedman.rating.test(...)
 kruskal.rating.test(...)
 pairwise.manova(...)
+pairwise.to.groups(...)
 pairwise.wilcox.rating.test(...)
 plot1comp.ind(...)
 plot1comp.var(...)
@@ -59,7 +63,7 @@ previous arguments.
 }
 }
 \details{
-\code{back.lsmeans} and \code{rating.lsmeans} are replaced by \code{\link[RVAideMemoire]{back.emmeans}} and \code{\link[RVAideMemoire]{rating.emmeans}}. More generally, stop using package lsmeans and change to package emmeans, its new version.
+\code{back.lsmeans} and \code{rating.lsmeans} are replaced by \code{\link[RVAideMemoire]{back.emmeans}} and \code{\link[RVAideMemoire]{rating.emmeans}}. More generally, stop using package \code{lsmeans} and change to package \code{emmeans}, its new version.
 
 \code{byf.normhist} was not very useful and \code{\link[RVAideMemoire]{byf.hist}} does nearly the same job.
 
@@ -69,11 +73,15 @@ previous arguments.
 
 \code{DA.var} is replaced by the more generic \code{\link[RVAideMemoire]{MVA.synt}}.
 
-\code{fc.multcomp} is not useful anymore since \code{\link[lsmeans]{lstrends}} (package lsmeans) does the same job in a much more powerful manner (see argument \code{var} of \code{\link[lsmeans]{lstrends}}).
+\code{dunn.test} is not very useful, prefer \code{\link[FSA]{dunnTest}} from package \code{FSA}.
+
+\code{fc.multcomp} is not useful anymore since \code{\link[emmeans]{emtrends}} (package emmeans) does the same job in a much more powerful manner (see argument \code{var} of \code{\link[emmeans]{emtrends}}).
 
 \code{friedman.rating.test}, \code{kruskal.rating.test}, \code{wilcox.rating.test}, \code{wilcox.rating.signtest}, \code{pairwise.wilcox.rating.test} and \code{wilcox.paired.rating.multcomp} can be problematic with ratings (in which ties and zeroes are very frequent). The use of CLM(M)s (\emph{via} \code{\link[ordinal]{clm}} and \code{\link[ordinal]{clmm}}) is recommended.
 
-\code{pairwise.manova} is not useful anymore since \code{\link[lsmeans]{lsmeans}} (package lsmeans) does the same job in a much more powerful manner (on \code{"mlm"} objects, created by \code{\link{lm}} and not \code{\link{manova}})
+\code{pairwise.manova} is not useful anymore since \code{\link[emmeans]{emmeans}} (package \code{emmeans}) does the same job in a much more powerful manner (on \code{"mlm"} objects, created by \code{\link{lm}} and not \code{\link{manova}})
+
+\code{pairwise.to.groups} was not very useful.
 
 \code{plot1comp.ind}, \code{plot1comp.var}, \code{s.corcircle2}, \code{scat.mix.categorical}, \code{scat.mix.numeric} and \code{scatter.coa2} are replaced by the more generic \code{\link[RVAideMemoire]{MVA.plot}}.
 

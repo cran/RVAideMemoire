@@ -1,3 +1,6 @@
+# car: qqPlot
+# grDevices: n2mfrow
+
 byf.qqnorm <- function(formula,data,...) {
   if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
   m <- match.call(expand.dots=FALSE)
@@ -9,9 +12,9 @@ byf.qqnorm <- function(formula,data,...) {
   fact <- interaction(mf[,2:ncol(mf)],sep=":")
   opar <- par(no.readonly=TRUE)
   on.exit(par(opar))
-  par(mfrow=n2mfrow(nlevels(fact)))
+  par(mfrow=grDevices::n2mfrow(nlevels(fact)))
   for (i in 1:nlevels(fact)) {
-    qqPlot(resp[as.numeric(fact)==i],main=levels(fact)[i],lwd=1,grid=FALSE,xlab="Theoretical quantiles",
+    car::qqPlot(resp[as.numeric(fact)==i],main=levels(fact)[i],lwd=1,grid=FALSE,xlab="Theoretical quantiles",
 	ylab="Sample quantiles",...)
   }
 }

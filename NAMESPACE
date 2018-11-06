@@ -1,36 +1,18 @@
-# Importés directement dans le code des fonctions (évite de charger tous
-# les packages au chargement de RVAideMemoire) :
-#   - ade4 : as.dudi, dist.quant, discrimin.coa, dudi.coa
-#   - boot : boot
-#   - cramer : cramer.test
-#   - dunn.test : dunn.test
-#   - FactoMineR : GPA
-#   - lme4 : fixef, getME, glmer, isLMM, VarCorr
-#   - MASS : lda, qda
-#   - mixOmics : vip, perf
-#   - multcompView : multcompLetters
-#   - nnet : multinom
-#   - pls : cppls, plsr, R2
-#   - pspearman : pspearman
-#   - vegan : adonis, envfit
-
-importFrom(ade4,dudi.coa,randtest)
-importFrom(car,Anova,qqPlot)
 importFrom(graphics,abline,arrows,axis,barplot,box,hist,dotchart,legend,lines,locator,mosaicplot,mtext,panel.smooth,par,
   plot,points,polygon,rect,rug,segments,strheight,strwidth,symbols,text,title)
-importFrom(grDevices,chull,col2rgb,n2mfrow,palette,rgb)
+
 importFrom(stats,aggregate,anova,approxfun,as.dist,as.formula,bartlett.test,binom.test,chisq.test,complete.cases,confint,
   cor,cor.test,cov,delete.response,density,dist,dmultinom,family,fisher.test,fitted,formula,glm,kruskal.test,lm,lm.influence,
   logLik,mahalanobis,manova,median,model.frame,model.matrix,model.response,na.omit,p.adjust,pairwise.prop.test,pairwise.table,pbeta,
   pbinom,pchisq,pgeom,phyper,pnbinom,pnorm,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,rect.hclust,relevel,resid,
   residuals,rnorm,rstudent,runif,sd,setNames,shapiro.test,summary.manova,t.test,terms,update,update.formula,var,var.test,wilcox.test)
+
 importFrom(utils,capture.output,combn,packageVersion,setTxtProgressBar,txtProgressBar)
-importFrom(vegan,ordiYbar)
 
 export(
-  back.lsmeans,byf.normhist,cor.sparse,DA.confusion,DA.valid,DA.var,fc.multcomp,friedman.rating.test,kruskal.rating.test,
-    pairwise.wilcox.rating.test,plot1comp.ind,plot1comp.var,PLSDA.ncomp,PLSDA.test,rating.lsmeans,s.corcircle2,scat.mix.categorical,
-    scat.mix.numeric,scatter.coa2,wilcox.rating.signtest,wilcox.rating.test,
+  back.lsmeans,byf.normhist,cor.sparse,DA.confusion,DA.valid,DA.var,dunn.test,fc.multcomp,friedman.rating.test,kruskal.rating.test,
+    pairwise.to.groups,pairwise.wilcox.rating.test,plot1comp.ind,plot1comp.var,PLSDA.ncomp,PLSDA.test,rating.lsmeans,s.corcircle2,
+    scat.mix.categorical,scat.mix.numeric,scatter.coa2,wilcox.rating.signtest,wilcox.rating.test,
   adonis.II,
   Anova.clm,Anova.clmm,
   back.emmeans,
@@ -51,7 +33,6 @@ export(
   dendro.gp,
   DIABLO.cv,DIABLO.test,
   dummy,
-  dunn.test,
   fisher.bintest,fisher.multcomp,
   fp.test,
   G.bintest,G.multcomp,G.test,G.theo.multcomp,
@@ -75,7 +56,6 @@ export(
   ord.rw,
   overdisp.glmer,
   pairwise.CDA.test,pairwise.factorfit,pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.MVA.test,pairwise.perm.t.test,pairwise.var.test,pairwise.perm.var.test,
-  pairwise.to.groups,
   pcor, pcor.test,
   perm.anova,perm.bartlett.test,perm.cor.test,perm.t.test,perm.var.test,
   plotresid,

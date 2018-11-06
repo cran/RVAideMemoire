@@ -1,5 +1,5 @@
-# pls : plsr,cppls
-# MASS : lda,qda
+# pls: plsr, cppls
+# MASS: lda, qda
 
 print.MVA.cv <- function(x,...) {
   cat("\n        Cross validation\n\n")

@@ -1,3 +1,5 @@
+# vegan: ordiYbar
+
 MVA.cor <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
   if (length(set)!=1) {set <- 12}
   if (!set %in% c(12,1,2)) {stop("wrong 'set'")}
@@ -77,7 +79,7 @@ function(x,...) {as.data.frame(cor(x$X,x$x,use="pairwise"))}
 
 MVA.get.corr.PCA.vegan <- function(x,xax,yax,...) {
   sco <- MVA.scores(x,xax,yax,scaling=1)$coord
-  tab <- as.data.frame(cor(ordiYbar(x,"CA"),sco,use="pairwise"))
+  tab <- as.data.frame(cor(vegan::ordiYbar(x,"CA"),sco,use="pairwise"))
   return(tab)
 }
 
@@ -311,10 +313,10 @@ MVA.get.corr.RDA.vegan <- function(x,xax,yax,set,space,...) {
     }
     tab <- as.data.frame(tab)
   } else if (set==2) {
-    dep.var <- if (space==1) {ordiYbar(x,"partial")} else {ordiYbar(x,"CA")}
+    dep.var <- if (space==1) {vegan::ordiYbar(x,"partial")} else {vegan::ordiYbar(x,"CA")}
     tab <- as.data.frame(cor(dep.var,sco,use="pairwise"))
   } else {
-    dep.var <- if (space==1) {ordiYbar(x,"partial")} else {ordiYbar(x,"CA")}
+    dep.var <- if (space==1) {vegan::ordiYbar(x,"partial")} else {vegan::ordiYbar(x,"CA")}
     indep.var <- if ("formula" %in% names(x$call)) {
 	as.data.frame(model.frame(x))
     } else {

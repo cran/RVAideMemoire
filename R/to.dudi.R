@@ -21,7 +21,7 @@ convert.to.dudi.default <- function(x,...) {
 
 convert.to.dudi.PCA.vegan <- function(x,...) {
   res <- list()
-  tab <- ordiYbar(x,"CA")
+  tab <- vegan::ordiYbar(x,"CA")
   if (!is.null(attr(tab,"scaled:scale"))) {
     for (i in 1:ncol(tab)) {tab[,i] <- tab[,i]*attr(tab,"scaled:scale")[i]}
     tab <- scale(tab,center=FALSE,scale=apply(tab,2,function(x) sqrt(sum(x*x)/nrow(tab))))

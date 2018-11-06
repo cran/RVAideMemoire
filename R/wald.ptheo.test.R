@@ -1,4 +1,4 @@
-# lme4 : fixef, glmer, VarCorr
+# lme4: fixef, glmer, VarCorr
 
 wald.ptheo.test <-
 function(y,blocks=NULL,p=0.5) {

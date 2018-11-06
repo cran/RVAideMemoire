@@ -1,4 +1,4 @@
-# ade4 : discrimin.coa
+# ade4: discrimin.coa
 
 print.CDA.cv <- function(x,...) {
   cat("\n        Cross validation\n\n")

@@ -1,4 +1,4 @@
-# boot : boot
+# boot: boot
 
 spearman.ci <-
 function(var1,var2,nrep=1000,conf.level=0.95){

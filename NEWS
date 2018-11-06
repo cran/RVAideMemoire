@@ -1,3 +1,8 @@
+version 0.9-70 (05-11-2018)
+  - dunn.test removed (the dunnTest function of the package FSA does the same job)
+  - pairwise.to.groups removed (not very useful)
+  - package dependencies changed to follow migration of mixOmics from CRAN to Bioconductor
+
 version 0.9-69-3 (14-05-2018)
   - changes in help pages as requested by CRAN
 

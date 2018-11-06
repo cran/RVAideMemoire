@@ -1,3 +1,5 @@
+# grDevices: col2rgb, n2mfrow, palette, rgb
+
 byf.hist <- function(formula,data,sep=FALSE,density=TRUE,xlab=NULL,ylab=NULL) {
   if (missing(formula)||(length(formula)!=3)) {stop("missing or incorrect formula")}
   m <- match.call(expand.dots=FALSE)
@@ -14,7 +16,7 @@ byf.hist <- function(formula,data,sep=FALSE,density=TRUE,xlab=NULL,ylab=NULL) {
   if (sep) {
     opar <- par(no.readonly=TRUE)
     on.exit(par(opar))
-    par(mfrow=n2mfrow(nlevels(fact)))
+    par(mfrow=grDevices::n2mfrow(nlevels(fact)))
     if (density) {
 	for (i in 1:nlevels(fact)) {
 	  y <- resp[as.numeric(fact)==i]
@@ -22,11 +24,11 @@ byf.hist <- function(formula,data,sep=FALSE,density=TRUE,xlab=NULL,ylab=NULL) {
 	  plot(0,xlim=range(h$breaks),ylim=c(0,max(h$density)),xlab=xlab,
 	    ylab=ylab,main=levels(fact)[i],cex=0)
 	  dens <- density(y)
-	  col <- col2rgb(palette()[i])
-	  col2 <- rgb(col[1,],col[2,],col[3,],alpha=0.4*255,maxColorValue=255)
+	  col <- grDevices::col2rgb(grDevices::palette()[i])
+	  col2 <- grDevices::rgb(col[1,],col[2,],col[3,],alpha=0.4*255,maxColorValue=255)
 	  polygon(dens$x,dens$y,col=col2,border=NA)
 	  rug(y,col=i)
-	}	
+	}
     } else {
 	for (i in 1:nlevels(fact)) {
 	  y <- resp[as.numeric(fact)==i]

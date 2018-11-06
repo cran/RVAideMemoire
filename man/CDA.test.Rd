@@ -24,7 +24,7 @@ other arguments to pass to \code{\link{summary.manova}}. See Details.
 }
 }
 \details{
-CDA consists in two steps: building a correspondence analysis (CA) on \code{X}, then using row coordinates on all CA components as input variables for a linear discriminant analysis. \code{MVA.test} builds the intermediate CA, then uses the first \code{ncomp} components to test for an effect of \code{fact}. If 1 component is used the test is an ANOVA, if more than 1 component are used the test is a MANOVA.
+CDA consists in two steps: building a correspondence analysis (CA) on \code{X}, then using row coordinates on all CA components as input variables for a linear discriminant analysis. \code{CDA.test} builds the intermediate CA, then uses the first \code{ncomp} components to test for an effect of \code{fact}. If 1 component is used the test is an ANOVA, if more than 1 component are used the test is a MANOVA.
 }
 \value{
 An ANOVA or MANOVA table.
