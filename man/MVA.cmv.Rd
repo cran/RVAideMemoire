@@ -98,6 +98,7 @@ If \code{scale = TRUE}, the scaling is done as this:
   \item{RMSEP}{RMSEP computed from the models used in the outer loops (\code{repet} values).}
   \item{Q2}{Q2 computed from the models used in the outer loops (\code{repet} values).}
   \item{NMC}{Classification error rate computed from the models used in the outer loops (\code{repet} values).}
+  \item{confusion}{Confusion matrices computed from the models used in the outer loops (\code{repet} values).}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

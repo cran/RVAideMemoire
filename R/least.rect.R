@@ -70,7 +70,7 @@ function(formula,data,conf.level=0.95,theo=1,adj=TRUE){
     colnames(coef)[2] <- dname[2]
     res <- NULL
     fit <- NULL
-    conf.int <- array(0,c(2,3,2),dimnames=list(lev,c("inf","coeff","sup"),c("(Intercept)",dname[2])))
+    conf.int <- array(0,c(nlev,3,2),dimnames=list(lev,c("inf","coeff","sup"),c("(Intercept)",dname[2])))
     comp <- data.frame(observed=integer(nlev),theoretical=rep(theo,nlev),Df=integer(nlev),t=integer(nlev),
 	"Pr(>|t|)"=integer(nlev),row.names=lev,check.names=FALSE)
     corr <- data.frame(inf=integer(nlev),r=rep(theo,nlev),sup=integer(nlev),Df=integer(nlev),t=integer(nlev),

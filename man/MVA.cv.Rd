@@ -78,6 +78,7 @@ If \code{scale = TRUE}, the scaling is done as this: for each step of the valida
   \item{RMSEP}{RMSEP vales (\code{repet} values).}
   \item{Q2}{Q2 values (\code{repet} values).}
   \item{NMC}{Classification error rates (\code{repet} values).}
+  \item{confusion}{Confusion matrices (\code{repet} values).}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

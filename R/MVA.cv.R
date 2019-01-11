@@ -154,6 +154,9 @@ MVA.cv.qual1 <- function(X,Y,Yfac,groups,repet,k,ncomp,scale,model,lower,upper,Y
   models.list <- list()
   length(models.list) <- repet*k
   names(models.list) <- paste(rep(1:repet,each=k),rep(1:k,repet),sep=":")
+  confusion.list <- list()
+  length(confusion.list) <- repet
+  names(confusion.list) <- 1:repet
   NMC <- numeric(repet)
   for (i in 1:repet) {
     test.sets.list.k <- test.sets.list.repet[[i]]
@@ -215,12 +218,16 @@ MVA.cv.qual1 <- function(X,Y,Yfac,groups,repet,k,ncomp,scale,model,lower,upper,Y
 	}
 	pred[as.numeric(rownames(test.set))] <- pred.lev
     }
+    pred.level <- factor(pred,levels=levels(factor(trueclass)))
+    trueclass.level <- factor(trueclass)
+    levels(pred.level) <- levels(trueclass.level) <- groups
+    confusion.list[[i]] <- table(pred.level,trueclass.level,dnn=c("Predicted","Real"))
     pred.correct <- pred==trueclass
     rate <- 1-sum(pred.correct)/length(pred.correct)
     NMC[i] <- rate
   }
   return(list(model=model,type="qual1",repet=repet,k=k,ncomp=ncomp2,crit.DA=crit.DA,groups=groups,
-    models.list=models.list,NMC=NMC))
+    models.list=models.list,NMC=NMC,confusion=confusion.list))
 }
 
 MVA.cv.qual2 <- function(X,Y,Yfac,groups,repet,k,ncomp,scale,model,lower,upper,Y.add,weights,prior,crit.DA,...) {
@@ -240,6 +247,9 @@ MVA.cv.qual2 <- function(X,Y,Yfac,groups,repet,k,ncomp,scale,model,lower,upper,Y
   models.list1 <- models.list2 <- list()
   length(models.list1) <- length(models.list2) <- repet*k
   names(models.list1) <- names(models.list2) <- paste(rep(1:repet,each=k),rep(1:k,repet),sep=":")
+  confusion.list <- list()
+  length(confusion.list) <- repet
+  names(confusion.list) <- 1:repet
   NMC <- numeric(repet)
   for (i in 1:repet) {
     test.sets.list.k <- test.sets.list.repet[[i]]
@@ -294,11 +304,15 @@ MVA.cv.qual2 <- function(X,Y,Yfac,groups,repet,k,ncomp,scale,model,lower,upper,Y
 	pred[as.numeric(rownames(test.set))] <- as.character(predict(model.k,predict(model.k.temp,test.set.X,
 	  type="scores"),method=crit.DA)$class)
     }
+    pred.level <- factor(pred,levels=levels(factor(trueclass)))
+    trueclass.level <- factor(trueclass)
+    levels(pred.level) <- levels(trueclass.level) <- groups
+    confusion.list[[i]] <- table(pred.level,trueclass.level,dnn=c("Predicted","Real"))
     pred.correct <- pred==trueclass
     rate <- 1-sum(pred.correct)/length(pred.correct)
     NMC[i] <- rate
   }
   return(list(model=model,type="qual2",repet=repet,k=k,ncomp=ncomp2,crit.DA=crit.DA,groups=groups,
-    models1.list=models.list1,models2.list=models.list2,NMC=NMC))
+    models1.list=models.list1,models2.list=models.list2,NMC=NMC,confusion=confusion.list))
 }
 

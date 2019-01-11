@@ -39,7 +39,7 @@ print.RVtest <- function (x,digits=4,quote=TRUE,prefix="",...) {
     print(x$estimate,...)
   }
   cat("\n")
-  if (x$p.value<x$alpha) {
+  if (x$p.value<x$alpha & exists("p.value.multcomp",where=x)) {
     cat(paste("        Pairwise comparisons ",ifelse(exists("method.multcomp",where=x),
 	paste("using ",x$method.multcomp,sep=""),""),"\n\n",sep=""))
     print(x$p.value.multcomp,digits=digits,na.print="-",row.names=FALSE)
