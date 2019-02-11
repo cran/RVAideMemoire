@@ -13,41 +13,46 @@ MVA.load <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
     "DIABLO.mixOmics","sDIABLO.mixOmics"))) {MVA.get.loads(x,space)} else
     {MVA.get.loads(x)}
   loads <- if (is.data.frame(loads.temp)) {loads.temp} else {loads.temp[[1]]}
-  keep <- apply(abs(as.data.frame(loads[,c(xax,yax)])),1,sum)>0
-  loads <- loads[keep,]
-  if (!is.data.frame(loads.temp)) {loads.temp[[2]] <- loads.temp[[2]][keep]}
-  if (!xax %in% c(1:ncol(loads))) {stop("wrong 'xax'")}
-  if (ncol(loads)==1) {
-    xax <- 1
-    yax <- NULL
-  }
+  if (length(xax)>1) {yax <- NULL}
   if (!is.null(yax) && !yax %in% c(1:ncol(loads))) {
     warning("wrong 'yax', only 'xax' used")
     yax <- NULL
   }
+  keep <- apply(abs(as.data.frame(loads[,c(xax,yax)])),1,sum)>0
+  loads <- loads[keep,]
+  if (!is.data.frame(loads.temp)) {loads.temp[[2]] <- loads.temp[[2]][keep]}
+  if (!all(xax %in% c(1:ncol(loads)))) {stop("wrong 'xax'")}
+  if (ncol(loads)==1) {
+    xax <- 1
+    yax <- NULL
+  }
   loadsx <- loads[,xax]
   loadsy <- NULL
-  if (!is.null(yax) && ncol(loads)>1) {loadsy <- loads[,yax]}
-  res.temp <- as.data.frame(cbind(loadsx,loadsy))
+  if (!is.null(yax)) {loadsy <- loads[,yax]}
+  res.temp <- if (length(xax)==1) {
+    as.data.frame(cbind(loadsx,loadsy))
+  } else {
+    as.data.frame(loadsx)
+  }
   rownames(res.temp) <- rownames(loads)
   if (inherits(x,c("RDA.vegan"))) {
-    colnames(res.temp)[1] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),yax)}
+    colnames(res.temp)[1:length(xax)] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),yax)}
   } else if (inherits(x,c("RDA.ade4"))) {
-    colnames(res.temp)[1] <- paste("Constr. comp.",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Constr. comp.",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Constr. comp.",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Constr. comp.",yax)}
   } else if (inherits(x,"RDAortho.ade4")) {
-    colnames(res.temp)[1] <- paste("Unconstr. comp.",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Unconstr. comp.",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Unconstr. comp.",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Unconstr. comp.",yax)}
   } else if (inherits(x,c("rCCorA.mixOmics"))) {
-    colnames(res.temp)[1] <- paste("Canonical axis",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Canonical axis",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Canonical axis",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Canonical axis",yax)}
   } else if (inherits(x,c("CIA.ade4"))) {
-    colnames(res.temp)[1] <- paste("Coinertia axis",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Coinertia axis",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Coinertia axis",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Coinertia axis",yax)}
   } else {
-    colnames(res.temp)[1] <- paste("Comp.",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Comp.",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Comp.",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Comp.",yax)}
   }
   res <- list(loads=res.temp)
   if (!is.data.frame(loads.temp)) {

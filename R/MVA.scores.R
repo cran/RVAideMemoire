@@ -22,9 +22,11 @@ MVA.scores <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,...) {
     {MVA.get.scores(x)}
   coord <- if (is.data.frame(coord.temp)) {coord.temp} else {coord.temp[[1]]}
   if (!inherits(x,c("PCA.vegan","COA.vegan","RDA.vegan","dbRDA.vegan","CCA.vegan"))) {
-    if (!xax %in% c(1:ncol(coord))) {stop("wrong 'xax'")}
+    if (!all(xax %in% c(1:ncol(coord)))) {stop("wrong 'xax'")}
     if (ncol(coord)==1) {
 	xax <- 1
+	yax <- NULL
+    } else if (ncol(coord)>1 & length(xax)>1) {
 	yax <- NULL
     }
     if (!is.null(yax) && !yax %in% c(1:ncol(coord))) {
@@ -33,35 +35,44 @@ MVA.scores <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,...) {
     }
     coordx <- coord[,xax]
     coordy <- NULL
-    if (!is.null(yax) && ncol(coord)>1) {coordy <- coord[,yax]}
+    if (!is.null(yax)) {coordy <- coord[,yax]}
   } else {
-    coordx <- coord[,1]
+    if (length(xax)>1) {yax <- NULL}
+    coordx <- coord[,1:length(xax)]
     coordy <- NULL
-    if (!is.null(yax) && ncol(coord)>1) {coordy <- coord[,2]}
+    if (!is.null(yax) && length(xax)==1 && ncol(coord)==2) {
+	coordy <- coord[,2]
+    } else {
+	yax <- NULL
+    }
   }
-  res.temp <- as.data.frame(cbind(coordx,coordy))
+  res.temp <- if (length(xax)==1) {
+    as.data.frame(cbind(coordx,coordy))
+  } else {
+    as.data.frame(coordx)
+  }
   rownames(res.temp) <- rownames(coord)
   if (inherits(x,c("RDA.vegan","dbRDA.vegan","CCA.vegan"))) {
-    colnames(res.temp)[1] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),yax)}
+    colnames(res.temp)[1:length(xax)] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),yax)}
   } else if (inherits(x,c("RDA.ade4","CCA.ade4"))) {
-    colnames(res.temp)[1] <- paste("Constr. comp.",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Constr. comp.",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Constr. comp.",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Constr. comp.",yax)}
   } else if (inherits(x,"RDAortho.ade4")) {
-    colnames(res.temp)[1] <- paste("Unconstr. comp.",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Unconstr. comp.",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Unconstr. comp.",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Unconstr. comp.",yax)}
   } else if (inherits(x,c("CCorA.vegan","rCCorA.mixOmics"))) {
-    colnames(res.temp)[1] <- paste("Canonical axis",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Canonical axis",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Canonical axis",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Canonical axis",yax)}
   } else if (inherits(x,c("CIA.ade4"))) {
-    colnames(res.temp)[1] <- paste("Coinertia axis",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Coinertia axis",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Coinertia axis",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Coinertia axis",yax)}
   } else if (inherits(x,c("Procrustes.vegan"))) {
-    colnames(res.temp)[1] <- paste("Comp.",xax,"(X)")
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Comp.",yax,"(X)")}
+    colnames(res.temp)[1:length(xax)] <- paste("Comp.",xax,"(X)")
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Comp.",yax,"(X)")}
   } else {
-    colnames(res.temp)[1] <- paste("Comp.",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Comp.",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Comp.",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Comp.",yax)}
   }
   res <- list(coord=res.temp)
   if (!is.data.frame(coord.temp)) {
@@ -101,6 +112,11 @@ MVA.get.scores.IPCA.mixOmics <- MVA.get.scores.sIPCA.mixOmics <- function(x,...)
 MVA.get.scores.PCA.labdsv <- function(x,...) {as.data.frame(x$scores)}
 
 MVA.get.scores.PCA.vegan <- function(x,xax,yax,scaling,...) {
+  if (length(xax)>1) {yax <- NULL}
+  if (!is.null(yax) && !yax %in% c(1:length(x$CA$eig))) {
+    warning("wrong 'yax', only 'xax' used")
+    yax <- NULL
+  }
   sumev <- x$tot.chi
   slam <- sqrt(x$CA$eig[c(xax,yax)]/sumev)
   nr <- nrow(x$CA$u)
@@ -179,6 +195,11 @@ MVA.get.scores.DPCoA.ade4 <- function(x,set,...) {
 }
 
 MVA.get.scores.COA.vegan <- function(x,xax,yax,scaling,set,...) {
+  if (length(xax)>1) {yax <- NULL}
+  if (!is.null(yax) && !yax %in% c(1:length(x$CA$eig))) {
+    warning("wrong 'yax', only 'xax' used")
+    yax <- NULL
+  }
   slam <- sqrt(x$CA$eig[c(xax,yax)])
   wa <- x$CA$u[,c(xax,yax),drop=FALSE]
   scal <- list(slam,1,sqrt(slam))[[abs(scaling)]]
@@ -254,9 +275,11 @@ MVA.get.scores.RDA.vegan <- MVA.get.scores.dbRDA.vegan <- function(x,xax,yax,sca
   if (!space%in%c(1,2)) {stop("wrong 'space'")}
   if (length(space)!=1) {space <- 1}
   tab <- if (space==1) {x$CCA$eig} else {x$CA$eig}
-  if (!xax %in% 1:length(tab)) {stop("wrong 'xax'")}
+  if (!all(xax %in% 1:length(tab))) {stop("wrong 'xax'")}
   if (length(tab)==1) {
     xax <- 1
+    yax <- NULL
+  } else if (length(tab)>1 & length(xax)>1) {
     yax <- NULL
   }
   if (!is.null(yax) && !yax%in%c(1:length(tab))) {
@@ -283,9 +306,15 @@ MVA.get.scores.CCA.vegan <- function(x,xax,yax,scaling,set,space,...) {
   if (!space%in%c(1,2)) {stop("wrong 'space'")}
   if (length(space)!=1) {space <- 1}
   tab <- if (space==1) {x$CCA$eig} else {x$CA$eig}
-  if (!xax %in% 1:length(tab)) {stop("wrong 'xax'")}
+  if (!all(xax %in% 1:length(tab))) {stop("wrong 'xax'")}
   if (length(tab)==1) {
     xax <- 1
+    yax <- NULL
+  } else if (length(tab)>1 & length(xax)>1) {
+    yax <- NULL
+  }
+  if (!is.null(yax) && !yax%in%c(1:length(tab))) {
+    warning("wrong 'yax', only 'xax' used")
     yax <- NULL
   }
   slam <- sqrt(tab[c(xax,yax)])

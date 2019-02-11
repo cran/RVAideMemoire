@@ -239,6 +239,7 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,
   length(confusion.list) <- repet
   names(confusion.list) <- 1:repet
   NMC <- numeric(repet)
+  pred.class <- matrix("",nrow=nrow(X),ncol=repet,dimnames=list(rownames(X),1:repet))
   for (i in 1:repet) {
     test.sets.list.out <- test.sets.list.repet[[i]]
     pred.out <- character(nrow(Y))
@@ -322,12 +323,18 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,
     trueclass.level <- factor(trueclass)
     levels(pred.out.level) <- levels(trueclass.level) <- groups
     confusion.list[[i]] <- table(pred.out.level,trueclass.level,dnn=c("Predicted","Real"))
+    pred.class[,i] <- as.character(pred.out.level)
     pred.out.correct <- pred.out==trueclass
     rate.out <- 1-sum(pred.out.correct)/length(pred.out.correct)
     NMC[i] <- rate.out
   }
+  pred.prob <- t(apply(pred.class,1,function(x) {
+    x <- factor(x,levels=groups)
+    table(x)
+  }))
+  pred.prob <- prop.table(pred.prob,margin=1)
   return(list(model=model,type="qual1",repet=repet,kout=kout,kinn=kinn,crit.inn=crit.inn,groups=groups,
-    models.list=models.list,NMC=NMC,confusion=confusion.list))
+    models.list=models.list,NMC=NMC,confusion=confusion.list,pred.prob=pred.prob))
 }
 
 MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,lower,upper,Y.add,weights,prior,crit.DA,...) {
@@ -351,6 +358,7 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit
   length(confusion.list) <- repet
   names(confusion.list) <- 1:repet
   NMC <- numeric(repet)
+  pred.class <- matrix("",nrow=nrow(X),ncol=repet,dimnames=list(rownames(X),1:repet))
   for (i in 1:repet) {
     test.sets.list.out <- test.sets.list.repet[[i]]
     pred.out <- character(nrow(Y))
@@ -465,11 +473,17 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit
     trueclass.level <- factor(trueclass)
     levels(pred.out.level) <- levels(trueclass.level) <- groups
     confusion.list[[i]] <- table(pred.out.level,trueclass.level,dnn=c("Predicted","Real"))
+    pred.class[,i] <- as.character(pred.out.level)
     pred.out.correct <- pred.out==trueclass
     rate.out <- 1-sum(pred.out.correct)/length(pred.out.correct)
     NMC[i] <- rate.out
   }
+  pred.prob <- t(apply(pred.class,1,function(x) {
+    x <- factor(x,levels=groups)
+    table(x)
+  }))
+  pred.prob <- prop.table(pred.prob,margin=1)
   return(list(model=model,type="qual2",repet=repet,kout=kout,kinn=kinn,crit.inn=crit.inn,crit.DA=crit.DA,groups=groups,
-    models1.list=models.list1,models2.list=models.list2,NMC=NMC,confusion=confusion.list))
+    models1.list=models.list1,models2.list=models.list2,NMC=NMC,confusion=confusion.list,pred.prob=pred.prob))
 }
 

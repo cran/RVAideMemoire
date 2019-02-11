@@ -44,6 +44,8 @@ MVA.corplot <- function(x,xax=1,yax=2,thresh=0,fac=NULL,set=c(12,1,2),space=1,xl
   circle=TRUE,intcircle=0.5,points=TRUE,ident=TRUE,arrows=TRUE,labels=NULL,main.pos=c("bottomleft","topleft",
   "bottomright","topright"),main.cex=1.3,legend=FALSE,legend.pos=c("topleft","topright","bottomleft","bottomright"),
   legend.title=NULL,legend.lab=NULL,pch=16,cex=1,col=1,lwd=1,drawintaxes=TRUE,add=FALSE,add.const=1,keepmar=FALSE) {
+  xax <- xax[1]
+  yax <- yax[1]
   co <- MVA.cor(x,xax,yax,set,space)
   corr <- co$corr
   if (is.numeric(thresh) && thresh!=0) {

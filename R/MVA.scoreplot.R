@@ -58,6 +58,8 @@ MVA.scoreplot <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,byfac=TR
   labels=NULL,main.pos=c("bottomleft","topleft","bottomright","topright"),main.cex=1.3,fac.lab=NULL,fac.cex=1,
   legend=FALSE,legend.pos=c("topleft","topright","bottomleft","bottomright"),legend.title=NULL,legend.lab=NULL,
   legend.cex=1,drawextaxes=TRUE,drawintaxes=TRUE,xlim=NULL,ylim=NULL,keepmar=FALSE) {
+  xax <- xax[1]
+  yax <- yax[1]
   sco <- MVA.scores(x,xax,yax,scaling,set,space)
   coord <- sco$coord
   if (length(weights)!=nrow(coord)) {

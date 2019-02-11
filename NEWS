@@ -1,3 +1,9 @@
+version 0.9-72 (10-02-2019)
+  - MVA.cv and MVA.cmv improved to return individual prediction probabilities
+  - MVA.cor corrected for PCIA and CIA based on at least one mix analysis
+  - MVA.scores, MVA.cor and MVA.load improved to return more than 2 axes
+  - fourth-root transformation added to multtest.gp
+
 version 0.9-71 (10-01-2019)
   - least.rect() corrected for >2 levels (printing error)
   - MVA.cv and MVA.cmv improved to return confusion matrices

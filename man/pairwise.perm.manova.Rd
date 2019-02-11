@@ -53,12 +53,12 @@ require(vegan)
 data(iris)
 
 # permutation MANOVA
-adonis(iris[,1:4]~Species,data=iris,method="euclidian")
+adonis(iris[,1:4]~Species,data=iris,method="euclidean")
 
 # Pairwise comparisons
 # (not enough permutations here but faster to run)
 pairwise.perm.manova(iris[,1:4],iris$Species,nperm=49)
 
 # or
-pairwise.perm.manova(dist(iris[,1:4],"euclidian"),iris$Species,nperm=49)
+pairwise.perm.manova(dist(iris[,1:4],"euclidean"),iris$Species,nperm=49)
 }

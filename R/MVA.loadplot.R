@@ -40,6 +40,8 @@ MVA.loadplot <- function(x,xax=1,yax=2,fac=NULL,set=c(12,1,2),space=1,map=TRUE,x
   points=TRUE,ident=TRUE,links=TRUE,line=TRUE,labels=NULL,main.pos=c("bottomleft","topleft","bottomright","topright"),
   main.cex=1.3,legend=FALSE,legend.pos=c("topleft","topright","bottomleft","bottomright"),legend.title=NULL,
   legend.lab=NULL,pch=16,cex=1,col=1,lwd=1,lty=1,drawextaxes=TRUE,drawintaxes=TRUE,xlim=NULL,ylim=NULL) {
+  xax <- xax[1]
+  yax <- yax[1]
   lo <- MVA.load(x,xax,yax,set,space)
   loads <- lo$loads
   if (ncol(loads)<2) {map <- FALSE}

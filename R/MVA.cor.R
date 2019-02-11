@@ -18,9 +18,11 @@ MVA.cor <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
     {MVA.get.corr(x)}
   corr <- if (is.data.frame(corr.temp)) {corr.temp} else {corr.temp[[1]]}
   if (!inherits(x,c("PCA.vegan","CCA.vegan","RDA.vegan"))) {
-    if (!xax %in% c(1:ncol(corr))) {stop("wrong 'xax'")}
+    if (!all(xax %in% c(1:ncol(corr)))) {stop("wrong 'xax'")}
     if (ncol(corr)==1) {
 	xax <- 1
+	yax <- NULL
+    } else if (ncol(corr)>1 & length(xax)>1) {
 	yax <- NULL
     }
     if (!is.null(yax) && !yax %in% c(1:ncol(corr))) {
@@ -29,32 +31,37 @@ MVA.cor <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
     }
     corrx <- corr[,xax]
     corry <- NULL
-    if (!is.null(yax) && ncol(corr)>1) {corry <- corr[,yax]}
+    if (!is.null(yax)) {corry <- corr[,yax]}
   } else {
-    corrx <- corr[,1]
+    if (length(xax)>1) {yax <- NULL}
+    corrx <- corr[,1:length(xax)]
     corry <- NULL
-    if (!is.null(yax) && ncol(corr)>1) {corry <- corr[,2]}
+    if (!is.null(yax) && length(xax)==1) {corry <- corr[,2]}
   }
-  res.temp <- as.data.frame(cbind(corrx,corry))
+  res.temp <- if (length(xax)==1) {
+    as.data.frame(cbind(corrx,corry))
+  } else {
+    as.data.frame(corrx)
+  }
   rownames(res.temp) <- rownames(corr)
   if (inherits(x,c("RDA.vegan"))) {
-    colnames(res.temp)[1] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),yax)}
+    colnames(res.temp)[1:length(xax)] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste(ifelse(space==1,"Constr. comp.","Unconstr. comp."),yax)}
   } else if (inherits(x,c("CCA.vegan","CCA.ade4","RDA.ade4"))) {
-    colnames(res.temp)[1] <- paste("Constr. comp.",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Constr. comp.",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Constr. comp.",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Constr. comp.",yax)}
   } else if (inherits(x,"RDAortho.ade4")) {
-    colnames(res.temp)[1] <- paste("Unconstr. comp.",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Unconstr. comp.",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Unconstr. comp.",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Unconstr. comp.",yax)}
   } else if (inherits(x,c("CCorA.vegan","rCCorA.mixOmics"))) {
-    colnames(res.temp)[1] <- paste("Canonical axis",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Canonical axis",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Canonical axis",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Canonical axis",yax)}
   } else if (inherits(x,c("CIA.ade4"))) {
-    colnames(res.temp)[1] <- paste("Coinertia axis",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Coinertia axis",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Coinertia axis",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Coinertia axis",yax)}
   } else {
-    colnames(res.temp)[1] <- paste("Comp.",xax)
-    if (ncol(res.temp)==2) {colnames(res.temp)[2] <- paste("Comp.",yax)}
+    colnames(res.temp)[1:length(xax)] <- paste("Comp.",xax)
+    if (!is.null(yax)) {colnames(res.temp)[2] <- paste("Comp.",yax)}
   }
   res <- list(corr=res.temp)
   if (!is.data.frame(corr.temp)) {
@@ -416,17 +423,35 @@ MVA.get.corr.CIA.ade4 <- function(x,set,space,...) {
   if (!space %in% c(1,2,3)) {stop("wrong 'space'")}
   if (length(space)!=1) {space <- 1}
   if (space==1) {
-    tab <- as.data.frame(cor(eval(eval(x$call$dudiX)$call$df),x$lX,use="pairwise"))
+    tab.raw <- eval(eval(x$call$dudiX)$call$df)
+    type <- logical(ncol(tab.raw))
+    for (i in 1:ncol(tab.raw)) {type[i] <- !is.factor(tab.raw[,i])}
+    tab <- as.data.frame(cor(tab.raw[,type],x$lX,use="pairwise"))
   } else if (space==2) {
-    tab <- as.data.frame(cor(eval(eval(x$call$dudiY)$call$df),x$lY,use="pairwise"))
+    tab.raw <- eval(eval(x$call$dudiY)$call$df)
+    type <- logical(ncol(tab.raw))
+    for (i in 1:ncol(tab.raw)) {type[i] <- !is.factor(tab.raw[,i])}
+    tab <- as.data.frame(cor(tab.raw[,type],x$lY,use="pairwise"))
   } else {
     if (set==1) {
-	tab <- as.data.frame(cor(eval(eval(x$call$dudiX)$call$df),x$mX,use="pairwise"))
+	tab.raw <- eval(eval(x$call$dudiX)$call$df)
+	type <- logical(ncol(tab.raw))
+	for (i in 1:ncol(tab.raw)) {type[i] <- !is.factor(tab.raw[,i])}
+	tab <- as.data.frame(cor(tab.raw[,type],x$mX,use="pairwise"))
     } else if (set==2) {
-	tab <- as.data.frame(cor(eval(eval(x$call$dudiY)$call$df),x$mY,use="pairwise"))
+	tab.raw <- eval(eval(x$call$dudiY)$call$df)
+	type <- logical(ncol(tab.raw))
+	for (i in 1:ncol(tab.raw)) {type[i] <- !is.factor(tab.raw[,i])}
+	tab <- as.data.frame(cor(tab.raw[,type],x$mY,use="pairwise"))
     } else {
-	X <- cor(eval(eval(x$call$dudiX)$call$df),x$mX,use="pairwise")
-	Y <- cor(eval(eval(x$call$dudiY)$call$df),x$mY,use="pairwise")
+	X.raw <- eval(eval(x$call$dudiX)$call$df)
+	X.type <- logical(ncol(X.raw))
+	for (i in 1:ncol(X.raw)) {X.type[i] <- !is.factor(X.raw[,i])}
+	X <- cor(X.raw[,type],x$mX,use="pairwise")
+	Y.raw <- eval(eval(x$call$dudiY)$call$df)
+	Y.type <- logical(ncol(Y.raw))
+	for (i in 1:ncol(Y.raw)) {Y.type[i] <- !is.factor(Y.raw[,i])}
+	Y <- cor(Y.raw[,Y.type],x$mY,use="pairwise")
 	colnames(Y) <- colnames(X)
 	if (any(rownames(X) %in% rownames(Y))) {
 	  rownames(X) <- paste0("X.",rownames(X))
@@ -455,6 +480,10 @@ MVA.get.corr.PCIA.ade4 <- function(x,set,...) {
     tab.X <- cor(X,sco.X,use="pairwise")
     tab.Y <- cor(Y,sco.Y,use="pairwise")
     colnames(tab.Y) <- colnames(tab.X)
+    if (any(rownames(tab.X) %in% rownames(tab.Y))) {
+	rownames(tab.X) <- paste0("X.",rownames(tab.X))
+	rownames(tab.Y) <- paste0("Y.",rownames(tab.Y))
+    }
     tab <- as.data.frame(rbind(tab.X,tab.Y))
   }
   if (set==12) {

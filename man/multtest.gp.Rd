@@ -9,7 +9,7 @@ Performs group comparisons for multiple variables using parametric, permutationa
 }
 \usage{
 multtest.gp(tab, fac, test = c("param", "perm", "rank"),
-  transform = c("none", "sqrt", "log"), add = 0, p.method = "fdr",
+  transform = c("none", "sqrt", "4rt", "log"), add = 0, p.method = "fdr",
   ordered = TRUE, ...)
 
 \method{plot}{multtest.gp}(x, signif = FALSE, alpha = 0.05,
@@ -27,7 +27,7 @@ factor defining groups to compare.
 type of test to use: parametric (default), permutational (non parametric) or rank-based (non parametric). See Details.
 }
   \item{transform}{
-transformation to apply to response variables before testing (none by default). Only used for parametric and permutational tests.
+transformation to apply to response variables before testing (none by default; \code{"4rt"} is fourth-root). Only used for parametric and permutational tests.
 }
   \item{add}{
 value to add to response variables before a log-transformation.

@@ -5,6 +5,8 @@ MVA.trajplot <- function(x,xax=1,yax=2,trajects,trajlab=NULL,scaling=2,set=c(12,
   drawintaxes=TRUE,xlim=NULL,ylim=NULL) {
   if (!is.list(trajects)) {trajects <- list(trajects)}
   if (ncol(as.data.frame(trajects[[1]]))!=1) {stop("wrong 'trajects', must be a vector or a list of vectors")}
+  xax <- xax[1]
+  yax <- yax[1]
   coord <- MVA.scores(x,xax,yax,scaling,set,space)$coord
   if (ncol(coord)==1) {stop("choose a second axis")}
   ntraj <- length(trajects)

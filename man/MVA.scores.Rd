@@ -14,10 +14,10 @@ MVA.scores(x, xax = 1, yax = 2, scaling = 2, set = c(12, 1, 2), space = 1, ...)
   a multivariate analysis (see Details).
 }
   \item{xax}{
-  the horizontal axis.
+  axis or axes for which to extract scores.
 }
   \item{yax}{
-  the vertical axis.
+  axis for which to extract scores (ignored if \code{length(xax) > 1}).
 }
   \item{scaling}{
   type of scaling. Only available with some analyses performed with the \code{vegan} package. See Details.

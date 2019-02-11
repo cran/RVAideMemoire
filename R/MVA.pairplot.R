@@ -2,6 +2,8 @@ MVA.pairplot <- function(x,xax=1,yax=2,pairs=NULL,scaling=2,space=1,fac=NULL,xla
   ident=TRUE,labels=NULL,cex=0.7,col=1,lwd=1,main.pos=c("bottomleft","topleft","bottomright","topright"),
   main.cex=1.3,legend=FALSE,legend.pos=c("topleft","topright","bottomleft","bottomright"),legend.title=NULL,
   legend.lab=NULL,drawextaxes=TRUE,drawintaxes=TRUE,xlim=NULL,ylim=NULL) {
+  xax <- xax[1]
+  yax <- yax[1]
   sco <- MVA.scores(x,xax,yax,scaling,set=12,space)
   coord <- sco$coord
   if (ncol(coord)==1) {stop("choose a second axis")}

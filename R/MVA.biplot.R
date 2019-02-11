@@ -1,6 +1,8 @@
 MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
   cor.set=c(12,1,2),space=1,ratio=0.9,weights=1,constraints=c("nf","n","f",NULL),
   sco.args=list(),cor.args=list(),f.col=1,f.cex=1) {
+  xax <- xax[1]
+  yax <- yax[1]
   coord <- MVA.scores(x,xax,yax,scaling,sco.set,space)$coord
   if (ncol(coord)==1) {stop("biplots cannot be drawn with only one dimension")}
   x <- MVA.ident(x)

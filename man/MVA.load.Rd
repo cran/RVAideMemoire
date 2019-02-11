@@ -14,10 +14,10 @@ MVA.load(x, xax = 1, yax = 2, set = c(12, 1, 2), space = 1, ...)
   a multivariate analysis (see Details).
 }
   \item{xax}{
-  the horizontal axis.
+  axis or axes for which to extract loadings.
 }
   \item{yax}{
-  the vertical axis.
+  axis for which to extract loadings (ignored if \code{length(xax) > 1}).
 }
   \item{set}{
   variables to be displayed, when several sets are available (see Details). \code{12} (default) for both sets, \code{1} for X, \code{2} for Y.

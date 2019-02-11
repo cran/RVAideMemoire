@@ -1,6 +1,6 @@
 # grDevices: n2mfrow
 
-multtest.gp <- function(tab,fac,test=c("param","perm","rank"),transform=c("none","sqrt","log"),
+multtest.gp <- function(tab,fac,test=c("param","perm","rank"),transform=c("none","sqrt","4rt","log"),
   add=0,p.method="fdr",ordered=TRUE,...) {
   test <- match.arg(test)
   transform <- match.arg(transform)
@@ -16,6 +16,7 @@ multtest.gp <- function(tab,fac,test=c("param","perm","rank"),transform=c("none"
   mode(gp.se) <- "numeric"
   if (test %in% c("param","perm")) {
     if (transform=="sqrt") {tab <- apply(tab,2,sqrt)}
+    if (transform=="4rt") {tab <- apply(tab,2,function(x) x^(1/4))}
     if (transform=="log") {tab <- apply(tab,2,function(x) log(x+add))}    
   }
   test <- if (test=="param") {
