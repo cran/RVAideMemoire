@@ -36,7 +36,11 @@ MVA.cor <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
     if (length(xax)>1) {yax <- NULL}
     corrx <- corr[,1:length(xax)]
     corry <- NULL
-    if (!is.null(yax) && length(xax)==1) {corry <- corr[,2]}
+    if (!is.null(yax) && length(xax)==1 && ncol(corr)==2) {
+	corry <- corr[,2]
+    } else {
+	yax <- NULL
+    }
   }
   res.temp <- if (length(xax)==1) {
     as.data.frame(cbind(corrx,corry))

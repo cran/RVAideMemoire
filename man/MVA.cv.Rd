@@ -79,7 +79,7 @@ If \code{scale = TRUE}, the scaling is done as this: for each step of the valida
   \item{Q2}{Q2 values (\code{repet} values).}
   \item{NMC}{Classification error rates (\code{repet} values).}
   \item{confusion}{Confusion matrices (\code{repet} values).}
-  \item{pred.prob}{Probability of each individual of being of each level of \code{Y} (based on \code{repet} values).}
+  \item{pred.prob}{Probability of each individual of being of each level of \code{Y}.}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>

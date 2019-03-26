@@ -1,3 +1,7 @@
+version 0.9-73 (26-03-2019)
+  - new argument 'type.DA' in predict.MVA.cv and predict.MVA.cmv (probability for the most probable class or for each class)
+  - new argument 'type' in predict.CDA.cv (probability for the most probable class or for each class)
+
 version 0.9-72 (10-02-2019)
   - MVA.cv and MVA.cmv improved to return individual prediction probabilities
   - MVA.cor corrected for PCIA and CIA based on at least one mix analysis

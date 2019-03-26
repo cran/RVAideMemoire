@@ -1,6 +1,6 @@
-51386db22afd694b82a0f491f6b5e220 *DESCRIPTION
+6a12007eb54a579b4549ac74fee15043 *DESCRIPTION
 194fe667444f18c38e8a7c593dde3d52 *NAMESPACE
-04a371e7a06bba99192db58449736053 *NEWS
+d0981ba0ea22fa1d9cc6551078f7a3cf *NEWS
 9e0495b8d6ce4e8db53c7be49782d115 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
 14714afe8af68a1fc9aa9370429a072d *R/CDA.cv.R
@@ -16,12 +16,12 @@ ed6ea511bc3a7cba845f7b0faecb9d03 *R/GPA.test.R
 3317ec0cffa282202b1d39e2b3f284b8 *R/LDA.format.R
 395211d52fb7fece131acf345f413b96 *R/MVA.anova.R
 322f1b672493508cd1d9000781cc8943 *R/MVA.biplot.R
-502c22e68085e4d004b7f90889041f7d *R/MVA.cmv.R
-a0e27a7d572033fb2beb2468a963daf5 *R/MVA.cor.R
+cb0ad07f200874377a2bbc5705ec01de *R/MVA.cmv.R
+019d9dcd747c27340a2ddfa3e34d524f *R/MVA.cor.R
 f545e2a448b8631d38e7892729c8eacf *R/MVA.corplot.R
-fd83323cfe12f267a9c53fc9f09ef67f *R/MVA.cv.R
+2a3b9c631bebade1e80c01b2ddfa8ca9 *R/MVA.cv.R
 5e526d04708aa4c9692d32451fda54ef *R/MVA.ident.R
-dc58d4729f96591cdae61fe6e805f8f7 *R/MVA.load.R
+6b02d3737d57ab969648239091ca7ce2 *R/MVA.load.R
 7315fc7ee3ba92fb9d820fedf4aa6ae9 *R/MVA.loadplot.R
 c869bdd64b93ba8fbc9363842a211a41 *R/MVA.pairplot.R
 25c13f45c3a816bae8882c12b8a419ce *R/MVA.plot.R
@@ -103,8 +103,8 @@ c41a616c8adb55d25a4f735bdb0b8cd5 *R/perm.t.test.R
 4332693bd817a0909a1b78ece9da1a48 *R/perm.var.test.R
 b80282acdca79f5b2212d81dfc760310 *R/plotresid.R
 6d962e640f9497378963d1018e0c74fe *R/plotsurvivors.R
-a709a98039c131117b720ab3f59bcc6a *R/predict.CDA.cv.R
-386c7d76b0b5d8f283d704108d0fd430 *R/predict.MVA.cv.R
+edf93bb21510ccb7b6c36fba44d8d5d8 *R/predict.CDA.cv.R
+5e432f3033a7cc848132c6791ef93e1a *R/predict.MVA.cv.R
 52911d1ed3097c31b735d78fca6e0fd0 *R/predict.coadisc.R
 d219905f70e32c4496aad8f781847ab2 *R/predict.least.rect.R
 dd236fbcf6e75d8cb95a798d54147090 *R/print.RV.multcomp.R
@@ -133,7 +133,7 @@ fc3e8159ab743a16219ae06b674fd298 *R/wald.ptheo.test.R
 cf56ef4e0793a3f61ded7833859984ce *R/wilcox.paired.multcomp.R
 588714546f5b57bac4243ca8558b4b37 *R/wilcox.signtest.R
 3de4ac014037119e5dfe8a02e809f7ef *R/wmean.R
-ed3448f78134a80547dd114b7805f412 *R/zzz.R
+22dd8cda214c59286e07985d44c4191b *R/zzz.R
 a3ed2ef2d85eac6e18d6f925f5e607c0 *man/Anova.clm.Rd
 c75a045b39f3688050bc36ed4f948562 *man/CDA.cv.Rd
 93195cd4a4e10f6130cabc296eadcd8f *man/CDA.test.Rd
@@ -147,10 +147,10 @@ b8fc9e22252221ecd1ba737bad3e4603 *man/CvM.test.Rd
 fbd35692f190a333816b81d9c63b0cd2 *man/GPA.test.Rd
 d667374bd4c620d200275bda1717b386 *man/MVA.anova.Rd
 791574f1e1c529432248a8de1396d2d1 *man/MVA.biplot.Rd
-aa282de1900c97fa4f83e3292c04ea8c *man/MVA.cmv.Rd
+fe53abd62c3366bd95233ba9b460f4d0 *man/MVA.cmv.Rd
 833c16837f6db262dc0b60ff82cc3116 *man/MVA.cor.Rd
 504c08af27d247ad4a5a0486f704c9e9 *man/MVA.corplot.Rd
-bddc6839f310c5cf0aaf8c2d73364b1c *man/MVA.cv.Rd
+6ae37242319a812bcc567c89b527e93d *man/MVA.cv.Rd
 41927ad6cbacc8a25e9bb15d987b4d74 *man/MVA.load.Rd
 7ac5477b20296df41ce7f434ab8f4a72 *man/MVA.loadplot.Rd
 618bdfd6e381a7694fd967e5863839af *man/MVA.pairplot.Rd
@@ -162,7 +162,7 @@ bd9893c6cfd37a00df836fc9d8ef42af *man/MVA.synt.Rd
 852071741a6e65fd0f8f3ab641f3ac9b *man/MVA.trajplot.Rd
 c77f2c785274b184ee3a67107aefecea *man/OR.multinom.Rd
 18c0f359874c0639e51f83cde436b3e6 *man/PLSDA.VIP.Rd
-13203a55dc295abcb68b996989123f09 *man/RVAideMemoire-package.Rd
+74f178b8e5cef1f177db5e20b3b8387e *man/RVAideMemoire-package.Rd
 ae86ecd236121ac154e9c270cd947105 *man/adonis.II.Rd
 03ea1ee2dae7ab039525870c1e83f700 *man/back.emmeans.Rd
 b72310e5677570de6d202e63f5c9a435 *man/bootstrap.Rd
@@ -189,7 +189,7 @@ d5c4aaaed3cb52510fbf81eeb028729e *man/cor.conf.Rd
 f7a1b1f0bf97e6c937fb350b9774d5e8 *man/cramer.Rd
 0e9d08e2d93752049a02631e270e5ceb *man/cramer.test.Rd
 becf5a3460e4bb039945fe600f18779e *man/cv.Rd
-38c78a372bdae65c3e5546181a9b4dd8 *man/dendro.gp.Rd
+0087e4aa56806c53527ba2b2567cabbf *man/dendro.gp.Rd
 ce76d07822723fad72b50429d5f61b8f *man/deprecated.Rd
 764dd3cfaf9788ae4f0279fdd0a3589c *man/dummy.Rd
 29683385f35f40018de80006b9ff31fd *man/fisher.bintest.Rd
@@ -229,8 +229,8 @@ ae9d7232d0dfd3f5341ed8447cff07b2 *man/perm.t.test.Rd
 0765d5bafbc88f9e407a2971d0753611 *man/perm.var.test.Rd
 845b94518c766acf97b913051d6ba5ef *man/plotresid.Rd
 c8ba06ce20fdeac88098efa0aac78db3 *man/plotsurvivors.Rd
-c1d9d495eacbddf316746c044f2a8ede *man/predict.CDA.cv.Rd
-aae042c9c2125f0e59cb0cbf956b0c30 *man/predict.MVA.cv.Rd
+a4fff47d7e5807e73b881501b1daceaa *man/predict.CDA.cv.Rd
+882c6409df5344d5699109795840ccef *man/predict.MVA.cv.Rd
 a8746a4e359d372a5b1308c8070545b0 *man/predict.coadisc.Rd
 26baa2cb58207513665f080c2de48e23 *man/prop.bin.multcomp.Rd
 343e7043e996e452e22e7526974e7ff2 *man/prop.multcomp.Rd

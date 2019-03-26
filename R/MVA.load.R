@@ -19,7 +19,9 @@ MVA.load <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
     yax <- NULL
   }
   keep <- apply(abs(as.data.frame(loads[,c(xax,yax)])),1,sum)>0
-  loads <- loads[keep,]
+  cn <- colnames(loads)
+  loads <- as.data.frame(loads[keep,])
+  colnames(loads) <- cn
   if (!is.data.frame(loads.temp)) {loads.temp[[2]] <- loads.temp[[2]][keep]}
   if (!all(xax %in% c(1:ncol(loads)))) {stop("wrong 'xax'")}
   if (ncol(loads)==1) {

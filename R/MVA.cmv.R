@@ -236,8 +236,12 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,
   length(models.list) <- repet*kout
   names(models.list) <- paste(rep(1:repet,each=kout),rep(1:kout,repet),sep=":")
   confusion.list <- list()
-  length(confusion.list) <- repet
-  names(confusion.list) <- 1:repet
+  pred.prob.list <- list()
+  length(confusion.list) <- length(pred.prob.list) <- repet
+  names(confusion.list) <- names(pred.prob.list) <- 1:repet
+  for (i in 1:length(pred.prob.list)) {
+    pred.prob.list[[i]] <- matrix(0,nrow=nrow(whole.set),ncol=length(groups),dimnames=list(1:nrow(whole.set),groups))
+  }
   NMC <- numeric(repet)
   pred.class <- matrix("",nrow=nrow(X),ncol=repet,dimnames=list(rownames(X),1:repet))
   for (i in 1:repet) {
@@ -316,6 +320,10 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,
 	}
 	models.list[[i*kout-(kout-j)]] <- model.kout
 	pred.out.dummy <- predict(model.kout,newdata=test.set.X,ncomp=ncomp.kept)
+	wmax <- apply(pred.out.dummy,1,which.max)
+	for (z in 1:nrow(test.set.X)) {
+	  pred.prob.list[[i]][as.numeric(rownames(test.set.X))[z],wmax[z]] <- 1 
+	}
 	pred.out.lev <- apply(pred.out.dummy,1,function(x) {colnames(Y)[which.max(x)]})
 	pred.out[as.numeric(rownames(test.set))] <- pred.out.lev
     }
@@ -328,11 +336,10 @@ MVA.cmv.qual1 <- function(X,Y,groups,repet,kout,kinn,ncomp,scale,model,crit.inn,
     rate.out <- 1-sum(pred.out.correct)/length(pred.out.correct)
     NMC[i] <- rate.out
   }
-  pred.prob <- t(apply(pred.class,1,function(x) {
-    x <- factor(x,levels=groups)
-    table(x)
-  }))
-  pred.prob <- prop.table(pred.prob,margin=1)
+  pred.prob <- matrix(0,nrow=nrow(whole.set),ncol=length(groups),dimnames=list(1:nrow(whole.set),groups))
+  for (i in 1:nrow(pred.prob)) {
+    pred.prob[i,] <- colMeans(do.call("rbind",lapply(pred.prob.list,function(x) x[i,])))
+  }
   return(list(model=model,type="qual1",repet=repet,kout=kout,kinn=kinn,crit.inn=crit.inn,groups=groups,
     models.list=models.list,NMC=NMC,confusion=confusion.list,pred.prob=pred.prob))
 }
@@ -355,8 +362,12 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit
   length(models.list1) <- length(models.list2) <- repet*kout
   names(models.list1) <- names(models.list2) <- paste(rep(1:repet,each=kout),rep(1:kout,repet),sep=":")
   confusion.list <- list()
-  length(confusion.list) <- repet
-  names(confusion.list) <- 1:repet
+  pred.prob.list <- list()
+  length(confusion.list) <- length(pred.prob.list) <- repet
+  names(confusion.list) <- names(pred.prob.list) <- 1:repet
+  for (i in 1:length(pred.prob.list)) {
+    pred.prob.list[[i]] <- matrix(0,nrow=nrow(whole.set),ncol=length(groups),dimnames=list(1:nrow(whole.set),groups))
+  }
   NMC <- numeric(repet)
   pred.class <- matrix("",nrow=nrow(X),ncol=repet,dimnames=list(rownames(X),1:repet))
   for (i in 1:repet) {
@@ -466,8 +477,9 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit
 	  }
 	}
 	models.list2[[i*kout-(kout-j)]] <- model.kout
-	pred.out[as.numeric(rownames(test.set))] <- as.character(predict(model.kout,predict(model.kout.temp,test.set.X,
-	  type="scores"),method=crit.DA)$class)
+	p <- predict(model.kout,predict(model.kout.temp,test.set.X,type="scores"),method=crit.DA)
+	pred.out[as.numeric(rownames(test.set))] <- as.character(p$class)
+	pred.prob.list[[i]][as.numeric(rownames(test.set)),] <- p$posterior
     }
     pred.out.level <- factor(pred.out,levels=levels(factor(trueclass)))
     trueclass.level <- factor(trueclass)
@@ -478,11 +490,10 @@ MVA.cmv.qual2 <- function(X,Y,Yfac,groups,repet,kout,kinn,ncomp,scale,model,crit
     rate.out <- 1-sum(pred.out.correct)/length(pred.out.correct)
     NMC[i] <- rate.out
   }
-  pred.prob <- t(apply(pred.class,1,function(x) {
-    x <- factor(x,levels=groups)
-    table(x)
-  }))
-  pred.prob <- prop.table(pred.prob,margin=1)
+  pred.prob <- matrix(0,nrow=nrow(whole.set),ncol=length(groups),dimnames=list(1:nrow(whole.set),groups))
+  for (i in 1:nrow(pred.prob)) {
+    pred.prob[i,] <- colMeans(do.call("rbind",lapply(pred.prob.list,function(x) x[i,])))
+  }
   return(list(model=model,type="qual2",repet=repet,kout=kout,kinn=kinn,crit.inn=crit.inn,crit.DA=crit.DA,groups=groups,
     models1.list=models.list1,models2.list=models.list2,NMC=NMC,confusion=confusion.list,pred.prob=pred.prob))
 }

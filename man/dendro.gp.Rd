@@ -23,6 +23,6 @@ Maxime Hervé <mx.herve@gmail.com>
 \examples{
 data(iris)
 distances <- dist(iris[,1:4],method="euclidian")
-dendro <- hclust(distances,method="ward")
+dendro <- hclust(distances,method="ward.D2")
 dendro.gp(dendro)
 }

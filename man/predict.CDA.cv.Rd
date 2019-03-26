@@ -8,7 +8,8 @@ Predicts response based on CDA (correspondence discriminant analysis) submodels 
 }
 \usage{
 
-\method{predict}{CDA.cv}(object, newdata, method = c("mahalanobis", "euclidian"), ...)
+\method{predict}{CDA.cv}(object, newdata, type = c("max", "all"), method = c("mahalanobis",
+  "euclidian"), ...)
 
 }
 \arguments{
@@ -17,6 +18,9 @@ object of class inheriting from \code{"CDA.cv"}.
 }
   \item{newdata}{
 vector, matrix or data frame giving new individuals (one row per individual).
+}
+  \item{type}{
+should the probability of the most probable class be given (\code{"max"}, the default) or the probability of each class (\code{"all"})?
 }
   \item{method}{
 criterion used to predict class membership. See \code{\link[RVAideMemoire]{predict.coadisc}}.
