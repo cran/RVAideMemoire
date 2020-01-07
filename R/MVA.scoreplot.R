@@ -2,7 +2,7 @@
 
 # Score plot
 #  - 1 possible plot:
-#     * PCA (dudi.pca[ade4],prcomp[stats],princomp[stats]°,pca[mixOmics],pca[labdsv],rda[vegan])
+#     * PCA (dudi.pca[ade4],prcomp[stats],princomp[stats],pca[mixOmics],pca[labdsv],rda[vegan])
 #		° if scores=TRUE
 #     * sPCA (spca[mixOmics])
 #     * IPCA (ipca[mixOmics])
@@ -211,8 +211,10 @@ MVA.scoreplot.2comp <- function(coord,byfac,fac,barycenters,stars,contours,weigh
   coordy <- coord[,2]
   if (is.null(xlab)) {xlab <- colnames(coord)[1]}
   if (is.null(ylab)) {ylab <- colnames(coord)[2]}
-  if (is.null(xlim)) {xlim <- range(coordx)}
-  if (is.null(ylim)) {ylim <- range(coordy)}
+  xy.min <- min(min(coordx),min(coordy))
+  xy.max <- max(max(coordx),max(coordy))
+  if (is.null(xlim)) {xlim <- c(xy.min,xy.max)}
+  if (is.null(ylim)) {ylim <- c(xy.min,xy.max)}
   plot(coordx,coordy,xlab="",ylab="",xlim=xlim,ylim=ylim,axes=FALSE,type="n")
   if(drawextaxes) {
     axis(1)

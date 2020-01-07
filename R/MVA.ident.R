@@ -98,8 +98,13 @@ MVA.class.discrimin <- function(x,...) {
 }
 
 MVA.class.plsda <- function(x,...) {"PLSDA.mixOmics"}
+MVA.class.mixo_plsda <- function(x,...) {"PLSDA.mixOmics"}
 
 MVA.class.splsda <- function(x,...) {
+  if (inherits(x,c("splsda1fact","splsda2fact"))) {res <- "Multilevel.sPLSDA.mixOmics"} else {res <- "sPLSDA.mixOmics"}
+  return(res)
+}
+MVA.class.mixo_splsda <- function(x,...) {
   if (inherits(x,c("splsda1fact","splsda2fact"))) {res <- "Multilevel.sPLSDA.mixOmics"} else {res <- "sPLSDA.mixOmics"}
   return(res)
 }
@@ -119,8 +124,24 @@ MVA.class.pls <- function(x,...) {
   }
   return(res)
 }
+MVA.class.mixo_pls <- function(x,...) {
+  if (inherits(x,"spls")) {
+    res <- MVA.class.mixo_spls(x)
+  } else {
+    if (x$mode=="canonical") {res <- "2BPLS.mixOmics"} else {res <- "PLSR.mixOmics"}
+  }
+  return(res)
+}
 
 MVA.class.spls <- function(x,...) {
+  if (inherits(x,"mlspls")) {
+    if (x$mode=="canonical") {res <- "Multilevel.2BsPLS.mixOmics"} else {res <- "Multilevel.sPLSR.mixOmics"}
+  } else {
+    if (x$mode=="canonical") {res <- "2BsPLS.mixOmics"} else {res <- "sPLSR.mixOmics"}
+  }
+  return(res)
+}
+MVA.class.mixo_spls <- function(x,...) {
   if (inherits(x,"mlspls")) {
     if (x$mode=="canonical") {res <- "Multilevel.2BsPLS.mixOmics"} else {res <- "Multilevel.sPLSR.mixOmics"}
   } else {

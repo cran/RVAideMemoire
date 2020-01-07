@@ -53,8 +53,10 @@ MVA.pairplot <- function(x,xax=1,yax=2,pairs=NULL,scaling=2,space=1,fac=NULL,xla
   coordy2 <- coord[,2][as.numeric(pairs)==2]
   if (is.null(xlab)) {xlab <- colnames(coord)[1]}
   if (is.null(ylab)) {ylab <- colnames(coord)[2]}
-  if (is.null(xlim)) {xlim <- range(coord[,1])}
-  if (is.null(ylim)) {ylim <- range(coord[,2])}
+  xy.min <- min(min(coordx1),min(coordx2),min(coordy1),min(coordy2))
+  xy.max <- max(max(coordx1),max(coordx2),max(coordy1),max(coordy2))
+  if (is.null(xlim)) {xlim <- c(xy.min,xy.max)}
+  if (is.null(ylim)) {ylim <- c(xy.min,xy.max)}
   plot(coord[,1],coord[,2],xlab="",ylab="",xlim=xlim,ylim=ylim,axes=FALSE,type="n")
   if(drawextaxes) {
     axis(1)

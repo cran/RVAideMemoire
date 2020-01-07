@@ -10,9 +10,9 @@ importFrom(stats,aggregate,anova,approxfun,as.dist,as.formula,bartlett.test,bino
 importFrom(utils,capture.output,combn,packageVersion,setTxtProgressBar,txtProgressBar)
 
 export(
-  back.lsmeans,byf.normhist,cor.sparse,DA.confusion,DA.valid,DA.var,dunn.test,fc.multcomp,friedman.rating.test,kruskal.rating.test,
-    pairwise.to.groups,pairwise.wilcox.rating.test,plot1comp.ind,plot1comp.var,PLSDA.ncomp,PLSDA.test,rating.lsmeans,s.corcircle2,
-    scat.mix.categorical,scat.mix.numeric,scatter.coa2,wilcox.rating.signtest,wilcox.rating.test,
+  back.lsmeans,byf.normhist,cor.sparse,CvM.test,DA.confusion,DA.valid,DA.var,dunn.test,fc.multcomp,friedman.rating.test,kruskal.rating.test,
+    pairwise.to.groups,pairwise.wilcox.rating.test,plot1comp.ind,plot1comp.var,PLSDA.ncomp,PLSDA.test,PLSDA.VIP,rating.lsmeans,
+    s.corcircle2,scat.mix.categorical,scat.mix.numeric,scatter.coa2,wilcox.rating.signtest,wilcox.rating.test,
   adonis.II,
   Anova.clm,Anova.clmm,
   back.emmeans,
@@ -29,7 +29,6 @@ export(
   cox.resid,
   cramer,cramer.test,
   cv,
-  CvM.test,
   dendro.gp,
   DIABLO.cv,DIABLO.test,
   dummy,
@@ -46,7 +45,7 @@ export(
   mqqnorm,
   mshapiro.test,
   multinomial.multcomp,multinomial.test,multinomial.theo.multcomp,
-  multtest.gp,multtest.cor,
+  multtest.gp,multtest.gp.bin,multtest.cor,
   MVA.anova,
   MVA.cmv,MVA.cv,MVA.test,
   MVA.cor,MVA.load,MVA.scores,
@@ -60,7 +59,6 @@ export(
   perm.anova,perm.bartlett.test,perm.cor.test,perm.t.test,perm.var.test,
   plotresid,
   plotsurvivors,
-  PLSDA.VIP,
   prop.bin.multcomp,prop.multcomp,
   prop.multinom,prop.multinom.test,
   rating.emmeans,rating.prob,
@@ -90,6 +88,7 @@ S3method(perm.t.test,formula)
 S3method(perm.var.test,default)
 S3method(perm.var.test,formula)
 S3method(plot,multtest.gp)
+S3method(plot,multtest.gp.bin)
 S3method(plot,multtest.cor)
 S3method(predict,coadisc)
 S3method(predict,CDA.cv)

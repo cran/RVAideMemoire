@@ -2,6 +2,7 @@
 \alias{back.lsmeans}
 \alias{byf.normhist}
 \alias{cor.sparse}
+\alias{CvM.test}
 \alias{DA.confusion}
 \alias{DA.valid}
 \alias{DA.var}
@@ -34,6 +35,7 @@ Functions that are not usable anymore, and will be entirely removed from the pac
 back.lsmeans(...)
 byf.normhist(...)
 cor.sparse(...)
+CvM.test(...)
 DA.confusion(...)
 DA.valid(...)
 DA.var(...)
@@ -68,6 +70,8 @@ previous arguments.
 \code{byf.normhist} was not very useful and \code{\link[RVAideMemoire]{byf.hist}} does nearly the same job.
 
 \code{cor.sparse} is replaced by the more generic \code{\link[RVAideMemoire]{MVA.plot}}.
+
+\code{CvM.test} did actually not perform a Cramer-von Mises test but an alternative Cramer test. Use \code{\link[cramer]{cramer.test}} directly, on which \code{CvM.test} was based.
 
 \code{DA.confusion} and \code{DA.valid} are replaced by the more generic \code{\link[RVAideMemoire]{MVA.cmv}} and \code{\link[RVAideMemoire]{MVA.cv}}.
 

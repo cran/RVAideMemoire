@@ -10,6 +10,10 @@ cor.sparse <- function(...) {
   stop("cor.sparse() is deprecated, use the more generic MVA.cor() of this package")
 }
 
+CvM.test <- function(...) {
+  stop("CvM.test() is deprecated, use cramer.test() from package 'cramer' instead (additionally, CvM.test() did not perform a Cramer-von Mises test but an alternative Cramer test)")
+}
+
 DA.confusion <- function(...) {
   stop("DA.confusion() is deprecated, use the more generic MVA.cmv() or MVA.cv() of this package")
 }
@@ -23,7 +27,7 @@ DA.var <- function(...) {
 }
 
 dunn.test <- function(...) {
-  stop("dunn.test() is deprecated, use dunnTest from package 'FSA' instead")
+  stop("dunn.test() is deprecated, use dunnTest() from package 'FSA' instead")
 }
 
 fc.multcomp <- function(...) {

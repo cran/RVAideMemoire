@@ -7,7 +7,8 @@ Histogram for factor levels
 Draws a histogram of a numeric variable per level of a factor.
 }
 \usage{
-byf.hist(formula, data, sep = FALSE, density = TRUE, xlab = NULL, ylab = NULL)
+byf.hist(formula, data, sep = FALSE, density = TRUE, xlab = NULL, ylab = NULL,
+  col = NULL)
 }
 \arguments{
   \item{formula}{
@@ -27,6 +28,9 @@ label for x-axis (name of the response variable as default).
 }
   \item{ylab}{
 label for y-axis ("Density" or "Frequency" as default, depending on the type of histogram).
+}
+  \item{col}{
+color(s) used for density curves or bars.
 }
 }
 \author{

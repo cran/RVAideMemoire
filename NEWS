@@ -1,3 +1,10 @@
+version 0.9-74 (04-01-2020)
+  - MVA.plot now uses the same default scale for x and y axes
+  - pairwise.perm.manova can now return F values and R2 values
+  - new functions multtest.gp.bin (and associated plotting method) for univariate comparison of groups for multiple binary variables
+  - CvM.test removed (the cramer.test function of the package cramer does the same job)
+  - new argument 'col' in byf.hist
+
 version 0.9-73 (26-03-2019)
   - new argument 'type.DA' in predict.MVA.cv and predict.MVA.cmv (probability for the most probable class or for each class)
   - new argument 'type' in predict.CDA.cv (probability for the most probable class or for each class)

@@ -9,7 +9,7 @@ Performs pairwise comparisons between group levels with corrections for multiple
 \usage{
 pairwise.perm.manova(resp, fact, test = c("Pillai", "Wilks",
   "Hotelling-Lawley", "Roy", "Spherical"), nperm = 999, 
-  progress = TRUE, p.method = "fdr")
+  progress = TRUE, p.method = "fdr", F = FALSE, R2 = FALSE)
 }
 \arguments{
   \item{resp}{
@@ -30,6 +30,12 @@ logical indicating if the progress bar should be displayed.
   \item{p.method}{
 method for p-values correction. See help of \code{\link{p.adjust}}.
 }
+  \item{F}{
+should the table of F values be returned?
+}
+  \item{R2}{
+should the table of R2 values be returned? For tests based on distance matrices only.
+}
 }
 \details{
 If \code{resp} is a matrix, a classical MANOVA is performed and the distribution of the (pseudo-)F is computed through permutations. The function deals with the limitted floating point precision, which can bias calculation of p-values based on a discrete test statistic distribution.
@@ -41,6 +47,8 @@ If \code{resp} is a distance matrix, \code{\link[vegan]{adonis}} is used to perf
   \item{data.name}{a character string giving the name(s) of the data and the number of permutations.}
   \item{p.value}{table of results.}
   \item{p.adjust.method}{method for p-values correction.}
+  \item{F.value}{table of F values (if required).}
+  \item{R2.value}{table of R2 values (if required).}
 }
 \author{
 Maxime Hervé <mx.herve@gmail.com>
