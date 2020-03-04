@@ -1,3 +1,6 @@
+version 0.9-75 (04-03-2020)
+  - small technical changes following CRAN request
+
 version 0.9-74 (04-01-2020)
   - MVA.plot now uses the same default scale for x and y axes
   - pairwise.perm.manova can now return F values and R2 values
