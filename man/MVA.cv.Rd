@@ -54,7 +54,7 @@ only used when a LDA or QDA is performed (coupled or not with a PLS model). If \
 criterion used to predict class membership when a LDA or QDA is used. See \code{\link[MASS]{predict.lda}}.
 }
   \item{...}{
-other arguments to pass to \code{\link[pls]{plsr}} (PLSR, PLS-DA) or \code{\link[pls]{cppls}} (CPPLS, PPLS-DA).
+other arguments to pass to \code{\link[pls:mvr]{plsr}} (PLSR, PLS-DA) or \code{\link[pls:mvr]{cppls}} (CPPLS, PPLS-DA).
 }
 }
 \details{
@@ -85,7 +85,7 @@ If \code{scale = TRUE}, the scaling is done as this: for each step of the valida
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[RVAideMemoire]{predict.MVA.cmv}}, \code{\link[pls]{mvr}}, \code{\link[MASS]{lda}}, \code{\link[MASS]{qda}}
+\code{\link[RVAideMemoire:predict.MVA.cv]{predict.MVA.cmv}}, \code{\link[pls]{mvr}}, \code{\link[MASS]{lda}}, \code{\link[MASS]{qda}}
 }
 \examples{
 require(pls)

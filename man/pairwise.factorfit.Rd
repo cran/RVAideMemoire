@@ -4,7 +4,7 @@
 Pairwise comparisons of groups displayed on a factorial map
 }
 \description{
-Performs pairwise comparisons between group levels with corrections for multiple testing. Tests are computed using \code{\link[vegan]{factorfit}}.
+Performs pairwise comparisons between group levels with corrections for multiple testing. Tests are computed using \code{\link[vegan:envfit]{factorfit}}.
 }
 \usage{
 pairwise.factorfit(ord, fact, xax = 1, yax = 2, nperm = 999,
@@ -43,7 +43,7 @@ optional further agruments to \code{\link[RVAideMemoire]{MVA.scores}}.
 Maxime Hervé <mx.herve@gmail.com>
 }
 \seealso{
-\code{\link[vegan]{factorfit}}
+\code{\link[vegan:envfit]{factorfit}}
 }
 \examples{
 require(vegan)

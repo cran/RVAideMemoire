@@ -32,7 +32,7 @@ MVA.load(x, xax = 1, yax = 2, set = c(12, 1, 2), space = 1, ...)
 \details{
 Many multivariate analyses are supported, from various packages:
 
-- PCA: \code{\link{prcomp}}, \code{\link{princomp}}, \code{\link[ade4]{dudi.pca}}, \code{\link[vegan]{rda}}, \code{\link[mixOmics]{pca}}, \code{\link[labdsv]{pca}}.
+- PCA: \code{\link{prcomp}}, \code{\link{princomp}}, \code{\link[ade4]{dudi.pca}}, \code{\link[vegan:cca]{rda}}, \code{\link[mixOmics]{pca}}, \code{\link[labdsv]{pca}}.
 
 - sPCA: \code{\link[mixOmics]{spca}}.
 
@@ -66,7 +66,7 @@ Many multivariate analyses are supported, from various packages:
 
 - PCIA: \code{\link[ade4]{procuste}}. Set 1 is X, set 2 is Y.
 
-- RDA (or PCAIV): \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan]{rda}}. With \code{\link[vegan]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}, the opposite for \code{\link[ade4]{pcaivortho}}.
+- RDA (or PCAIV): \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan:cca]{rda}}. With \code{\link[vegan:cca]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}, the opposite for \code{\link[ade4]{pcaivortho}}.
 
 - CCorA: \code{\link[mixOmics]{rcc}}. Space 1 is X, space 2 is Y.
 

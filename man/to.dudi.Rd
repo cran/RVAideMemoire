@@ -17,9 +17,9 @@ to.dudi(ord)
 \details{
 The function supports:
 
-- PCA computed from \code{\link[vegan]{rda}}. If data were scaled (prior to the analysis or using \code{scale} of \code{\link[vegan]{rda}}) it is assumed that is was with the standard deviation using \code{n-1}; As in \code{\link[ade4]{dudi.pca}}, \code{to.dudi} rescales the data with the standard deviation using \code{n}.
+- PCA computed from \code{\link[vegan:cca]{rda}}. If data were scaled (prior to the analysis or using \code{scale} of \code{\link[vegan:cca]{rda}}) it is assumed that is was with the standard deviation using \code{n-1}; As in \code{\link[ade4]{dudi.pca}}, \code{to.dudi} rescales the data with the standard deviation using \code{n}.
 
-- PCoA computed from \code{\link[vegan]{wcmdscale}}, \code{\link[vegan]{capscale}} or \code{\link[vegan]{dbrda}}.
+- PCoA computed from \code{\link[vegan]{wcmdscale}}, \code{\link[vegan]{capscale}} or \code{\link[vegan:capscale]{dbrda}}.
 
 - CA computed from \code{\link[vegan]{cca}}.
 }

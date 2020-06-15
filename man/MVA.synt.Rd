@@ -20,7 +20,7 @@ MVA.synt(x, rows = 5)
 \details{
 Many multivariate analyses are supported, from various packages.
 
-- PCA: \code{\link{prcomp}}, \code{\link{princomp}}, \code{\link[ade4]{dudi.pca}}, \code{\link[vegan]{rda}}, \code{\link[mixOmics]{pca}}, \code{\link[labdsv]{pca}}: \% of total variance explained by each axis.
+- PCA: \code{\link{prcomp}}, \code{\link{princomp}}, \code{\link[ade4]{dudi.pca}}, \code{\link[vegan:cca]{rda}}, \code{\link[mixOmics]{pca}}, \code{\link[labdsv]{pca}}: \% of total variance explained by each axis.
 
 - sPCA: \code{\link[mixOmics]{spca}}: \% of total variance explained by each axis.
 
@@ -32,9 +32,9 @@ Many multivariate analyses are supported, from various packages.
 
 - nMDS: \code{\link[vegan]{monoMDS}}, \code{\link[vegan]{metaMDS}}, \code{\link[labdsv]{nmds}}, \code{\link[MASS]{isoMDS}}: stress.
 
-- RDA: \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan]{rda}}: \% of constrained and unconstrained total variance, \% of constrained variance explained by constrained axes (\code{\link[ade4]{pcaiv}} and \code{\link[vegan]{rda}}), \% of unconstrained variance explained by unconstrained axes (\code{\link[ade4]{pcaivortho}} and \code{\link[vegan]{rda}}).
+- RDA: \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan:cca]{rda}}: \% of constrained and unconstrained total variance, \% of constrained variance explained by constrained axes (\code{\link[ade4]{pcaiv}} and \code{\link[vegan:cca]{rda}}), \% of unconstrained variance explained by unconstrained axes (\code{\link[ade4]{pcaivortho}} and \code{\link[vegan:cca]{rda}}).
 
-- db-RDA (or CAP): \code{\link[vegan]{capscale}}, \code{\link[vegan]{dbrda}}:  \% of constrained and unconstrained total variance, \% of constrained variance explained by constrained axes, \% of unconstrained variance explained by unconstrained axes.
+- db-RDA (or CAP): \code{\link[vegan]{capscale}}, \code{\link[vegan:capscale]{dbrda}}:  \% of constrained and unconstrained total variance, \% of constrained variance explained by constrained axes, \% of unconstrained variance explained by unconstrained axes.
 
 - COA: \code{\link[ade4]{dudi.coa}}, \code{\link[vegan]{cca}}: \% of total inertia explained by each axis.
 
@@ -56,7 +56,7 @@ Many multivariate analyses are supported, from various packages.
 
 - Mix analysis: \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{dudi.hillsmith}}: \% of total inertia explained by each axis.
 
-- GPA: \code{\link[FactoMineR]{GPA}}: \% of consensus and residual variance, \% of total variance exlained by each axis, \% of consensus variance explained by each axis, \% of residual variance coming from each group of variables.
+- GPA: \code{\link{GPA}}: \% of consensus and residual variance, \% of total variance exlained by each axis, \% of consensus variance explained by each axis, \% of residual variance coming from each group of variables.
 
 - RGCCA: \code{\link[RGCCA]{rgcca}}, \code{\link[mixOmics]{wrapper.rgcca}}: \% of total intra-block variance explained by each axis, correlation between each pair of axes (canonical correlations).
 

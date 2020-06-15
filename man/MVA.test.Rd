@@ -70,7 +70,7 @@ number of permutations.
 logical indicating if the progress bar should be displayed.
 }
   \item{...}{
-other arguments to pass to \code{\link[pls]{plsr}} (PLSR, PLS-DA) or \code{\link[pls]{cppls}} (CPPLS, PPLS-DA).
+other arguments to pass to \code{\link[pls:mvr]{plsr}} (PLSR, PLS-DA) or \code{\link[pls:mvr]{cppls}} (CPPLS, PPLS-DA).
 }
 }
 \details{

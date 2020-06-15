@@ -32,6 +32,7 @@ export(
   dendro.gp,
   DIABLO.cv,DIABLO.test,
   dummy,
+  elogis,
   fisher.bintest,fisher.multcomp,
   fp.test,
   G.bintest,G.multcomp,G.test,G.theo.multcomp,

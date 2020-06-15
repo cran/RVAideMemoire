@@ -63,7 +63,7 @@ only used when a second analysis (LDA or QDA) is performed. If \code{TRUE}, the 
 criterion used to predict class membership when a second analysis (LDA or QDA) is used. See \code{\link[MASS]{predict.lda}}.
 }
   \item{...}{
-other arguments to pass to \code{\link[pls]{plsr}} (PLSR, PLS-DA) or \code{\link[pls]{cppls}} (CPPLS, PPLS-DA).
+other arguments to pass to \code{\link[pls:mvr]{plsr}} (PLSR, PLS-DA) or \code{\link[pls:mvr]{cppls}} (CPPLS, PPLS-DA).
 }
 }
 \details{
@@ -108,7 +108,7 @@ Maxime Hervé <mx.herve@gmail.com>
 Szymanska E, Saccenti E, Smilde AK and Westerhuis J (2012) Double-check: validation of diagnostic statistics for PLS-DA models in metabolomics studies. Metabolomics (2012) 8:S3-S16.
 }
 \seealso{
-\code{\link[RVAideMemoire]{predict.MVA.cmv}}, \code{\link[pls]{mvr}}, \code{\link[MASS]{lda}}, \code{\link[MASS]{qda}}
+\code{\link[RVAideMemoire:predict.MVA.cv]{predict.MVA.cmv}}, \code{\link[pls]{mvr}}, \code{\link[MASS]{lda}}, \code{\link[MASS]{qda}}
 }
 \examples{
 require(pls)

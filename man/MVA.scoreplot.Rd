@@ -129,7 +129,7 @@ This function should not be use directly. Prefer the general \code{\link[RVAideM
 
 Many multivariate analyses are supported, from various packages:
 
-- PCA: \code{\link{prcomp}}, \code{\link{princomp}} (if \code{scores=TRUE}), \code{\link[ade4]{dudi.pca}}, \code{\link[vegan]{rda}}, \code{\link[mixOmics]{pca}}, \code{\link[labdsv]{pca}}. \code{scaling} can be defined for \code{\link[vegan]{rda}} (see \code{\link[vegan]{scores.rda}}).
+- PCA: \code{\link{prcomp}}, \code{\link{princomp}} (if \code{scores=TRUE}), \code{\link[ade4]{dudi.pca}}, \code{\link[vegan:cca]{rda}}, \code{\link[mixOmics]{pca}}, \code{\link[labdsv]{pca}}. \code{scaling} can be defined for \code{\link[vegan:cca]{rda}} (see \code{\link[vegan:plot.cca]{scores.rda}}).
 
 - sPCA: \code{\link[mixOmics]{spca}}.
 
@@ -165,7 +165,7 @@ Many multivariate analyses are supported, from various packages:
 
 - Mix analysis: \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{dudi.hillsmith}}.
 
-- COA: \code{\link[ade4]{dudi.coa}}, \code{\link[vegan]{cca}}. Set 1 is rows, set 2 is columns. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set. \code{scaling} can be defined for \code{\link[vegan]{cca}} (see \code{\link[vegan]{scores.cca}}).
+- COA: \code{\link[ade4]{dudi.coa}}, \code{\link[vegan]{cca}}. Set 1 is rows, set 2 is columns. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set. \code{scaling} can be defined for \code{\link[vegan]{cca}} (see \code{\link[vegan:plot.cca]{scores.cca}}).
 
 - DCOA: \code{\link[ade4]{dudi.dec}}. Set 1 is rows, set 2 is columns. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set.
 
@@ -173,15 +173,15 @@ Many multivariate analyses are supported, from various packages:
 
 - Procrustean superimposition: \code{\link[vegan]{procrustes}}. Set 1 is X, set 2 is Y.  If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set.
 
-- GPA: \code{\link[FactoMineR]{GPA}}. Only the consensus ordination can be displayed.
+- GPA: \code{\link{GPA}}. Only the consensus ordination can be displayed.
 
 - DPCoA: \code{\link[ade4]{dpcoa}}. Set 1 is categories, set 2 is collections.  If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set.
 
-- RDA (or PCAIV): \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan]{rda}}. With \code{\link[vegan]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}, the opposite for \code{\link[ade4]{pcaivortho}}. \code{scaling} can be defined for \code{\link[vegan]{rda}} (see \code{\link[vegan]{scores.rda}}).
+- RDA (or PCAIV): \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan:cca]{rda}}. With \code{\link[vegan:cca]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}, the opposite for \code{\link[ade4]{pcaivortho}}. \code{scaling} can be defined for \code{\link[vegan:cca]{rda}} (see \code{\link[vegan:plot.cca]{scores.rda}}).
 
-- db-RDA (or CAP): \code{\link[vegan]{capscale}}, \code{\link[vegan]{dbrda}}. Space 1 is constrained space, space 2 is unconstrained space.
+- db-RDA (or CAP): \code{\link[vegan]{capscale}}, \code{\link[vegan:capscale]{dbrda}}. Space 1 is constrained space, space 2 is unconstrained space.
 
-- CCA: \code{\link[ade4]{pcaiv}}, \code{\link[vegan]{cca}}. With \code{\link[vegan]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}. Set 1 is rows, set 2 is columns. \code{scaling} can be defined for \code{\link[vegan]{cca}} (see \code{\link[vegan]{scores.cca}}).
+- CCA: \code{\link[ade4]{pcaiv}}, \code{\link[vegan]{cca}}. With \code{\link[vegan:cca]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}. Set 1 is rows, set 2 is columns. \code{scaling} can be defined for \code{\link[vegan]{cca}} (see \code{\link[vegan:plot.cca]{scores.cca}}).
 
 - CCorA: \code{\link[vegan]{CCorA}}, \code{\link[mixOmics]{rcc}}. Space 1 is X, space 2 is Y. With \code{\link[mixOmics]{rcc}} a third space is available, in which coordinates are means of X and Y coordinates.
 

@@ -71,7 +71,7 @@ previous arguments.
 
 \code{cor.sparse} is replaced by the more generic \code{\link[RVAideMemoire]{MVA.plot}}.
 
-\code{CvM.test} did actually not perform a Cramer-von Mises test but an alternative Cramer test. Use \code{\link[cramer]{cramer.test}} directly, on which \code{CvM.test} was based.
+\code{CvM.test} did actually not perform a Cramer-von Mises test but an alternative Cramer test. Use \code{cramer.test} from package \code{cramer} directly, on which \code{CvM.test} was based.
 
 \code{DA.confusion} and \code{DA.valid} are replaced by the more generic \code{\link[RVAideMemoire]{MVA.cmv}} and \code{\link[RVAideMemoire]{MVA.cv}}.
 

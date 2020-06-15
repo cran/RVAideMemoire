@@ -11,7 +11,7 @@ MVA.anova(object, ...)
 }
 \arguments{
   \item{object}{
-  a result object from \code{\link[vegan]{cca}}, \code{\link[vegan]{rda}}, \code{\link[vegan]{capscale}} or \code{\link[vegan]{dbrda}}.
+  a result object from \code{\link[vegan]{cca}}, \code{\link[vegan:cca]{rda}}, \code{\link[vegan]{capscale}} or \code{\link[vegan:capscale]{dbrda}}.
 }
   \item{\dots}{
   additional arguments to \code{\link[vegan]{anova.cca}} (can be \code{permutations}, \code{model}, \code{parallel} and/or \code{strata}). See help of this function.

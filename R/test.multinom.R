@@ -1,6 +1,8 @@
 test.multinom <- function(model,variable) {
   if (!"multinom" %in% class(model)) {stop("model not recognized")}
   call <- match.call()
+  mod.call <- model$call
+  mod.call$trace <- FALSE
   var.name <- deparse(substitute(variable))
   mf <- model.frame(model)
   variable <- mf[,var.name]
@@ -13,8 +15,6 @@ test.multinom <- function(model,variable) {
   mod.list <- list()
   mod.list[[1]] <- model
   if (ncol(comb)>1) {
-    mod.call <- model$call
-    mod.call$trace <- FALSE
     for (i in 2:max(n.mod)) {
 	resp.temp <- relevel(resp,ref=unique.lev[i])
 	mf[,1] <- resp.temp
@@ -48,6 +48,9 @@ test.multinom <- function(model,variable) {
 	}
 	class(res) <- c("anova","data.frame")
     }
+  }
+  if (is.logical(variable)) {
+    variable <- as.factor(variable)
   }
   if (is.factor(variable)) {
     res <- list()

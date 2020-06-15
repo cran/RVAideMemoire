@@ -1,3 +1,7 @@
+version 0.9-77 (15-06-2020)
+  - test.multinom corrected for a small bug
+  - new function elogis (empirical logit link) for quasi-logistic models
+
 version 0.9-75 (04-03-2020)
   - small technical changes following CRAN request
 

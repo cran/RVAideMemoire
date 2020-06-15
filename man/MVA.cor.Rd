@@ -32,7 +32,7 @@ MVA.cor(x, xax = 1, yax = 2, set = c(12, 1, 2), space = 1, ...)
 \details{
 Many multivariate analyses are supported, from various packages:
 
-- PCA: \code{\link[ade4]{dudi.pca}}, \code{\link[vegan]{rda}}.
+- PCA: \code{\link[ade4]{dudi.pca}}, \code{\link[vegan:cca]{rda}}.
 
 - sPCA: \code{\link[mixOmics]{spca}}.
 
@@ -64,7 +64,7 @@ Many multivariate analyses are supported, from various packages:
 
 - Mix analysis: \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{dudi.hillsmith}}. Only quantitative variables are displayed.
 
-- RDA (or PCAIV): \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan]{rda}}. With \code{\link[vegan]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}, the opposite for \code{\link[ade4]{pcaivortho}}. Set 1 is constraints (only quantitative constraints are extracted), set 2 is dependent variables (only set 2 is available for \code{\link[ade4]{pcaivortho}}). If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set.
+- RDA (or PCAIV): \code{\link[ade4]{pcaiv}}, \code{\link[ade4]{pcaivortho}}, \code{\link[vegan:cca]{rda}}. With \code{\link[vegan:cca]{rda}}, space 1 is constrained space, space 2 is unconstrained space. Only constrained space is available with \code{\link[ade4]{pcaiv}}, the opposite for \code{\link[ade4]{pcaivortho}}. Set 1 is constraints (only quantitative constraints are extracted), set 2 is dependent variables (only set 2 is available for \code{\link[ade4]{pcaivortho}}). If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set.
 
 - CCorA: \code{\link[vegan]{CCorA}}, \code{\link[mixOmics]{rcc}}. Space 1 is X, space 2 is Y. With \code{\link[mixOmics]{rcc}} a third space is available, in which coordinates are means of X and Y coordinates. In this third space, set 1 is X, set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set.
 
@@ -72,7 +72,7 @@ Many multivariate analyses are supported, from various packages:
 
 - CIA: \code{\link[ade4]{coinertia}}. Space 1 is X, space 2 is Y, space 3 is a "common" space where X and Y scores are normed. In space 3, set 1 is X and set 2 is Y. If \code{set=12} in space 3 (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lws} can be defined differently for each set.
 
-- GPA: \code{\link[FactoMineR]{GPA}}. Only the consensus ordination can be displayed.
+- GPA: \code{\link{GPA}}. Only the consensus ordination can be displayed.
 
 - 2B-PLS: \code{\link[mixOmics]{pls}}. Space 1 is X, space 2 is Y, space 3 is a "common" space in which coordinates are means of X and Y coordinates. In space 3, set 1 is X and set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set.
 
