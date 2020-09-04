@@ -24,5 +24,5 @@ The function supports:
 - CA computed from \code{\link[vegan]{cca}}.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }

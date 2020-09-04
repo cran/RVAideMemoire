@@ -40,7 +40,7 @@ If the reponse is a vector and no blocking factor is present, the exact binomial
   \item{parameter}{the degrees of freedom for the t-statistic, only whith overdispersion and no blocks.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{binom.test}}, \code{\link{glm}}, \code{\link[lme4]{glmer}}

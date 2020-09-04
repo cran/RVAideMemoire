@@ -34,7 +34,7 @@ If the response is a 0/1 variable, the probability of the '1' group is tested. I
   \item{p.value}{p-value of the test.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{prop.test}}, \code{\link[RVAideMemoire]{chisq.bin.exp}}, \code{\link[RVAideMemoire]{prop.bin.multcomp}}

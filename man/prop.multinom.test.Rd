@@ -28,7 +28,7 @@ The function builds multinomial log-linear models (using \code{\link[nnet]{multi
   \item{z.tab}{table of z values.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[nnet]{multinom}}, \code{\link{binom.test}}

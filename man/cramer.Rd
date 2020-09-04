@@ -18,7 +18,7 @@ ignored if \code{x} is a contingency table. If not, \code{y} should be a vector 
 }
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 var1 <- sample(LETTERS[1:3],30,replace=TRUE)

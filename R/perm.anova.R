@@ -53,8 +53,9 @@ function(resp,fact1,variables,nperm,progress) {
   anova.ref <- anova(lm(resp~fact1))
   F.ref <- anova.ref[1,"F value"]
   tab <- data.frame("Sum Sq"=anova.ref[,"Sum Sq"],"Df"=anova.ref[,"Df"],"Mean Sq"=anova.ref[,"Mean Sq"],
-    "F value"=c(anova.ref[1,"F value"]," "),"Pr(>F)"=NA,stringsAsFactors=FALSE,check.names=FALSE)
+    "F value"=c(anova.ref[1,"F value"],0),"Pr(>F)"=numeric(2),stringsAsFactors=FALSE,check.names=FALSE)
   rownames(tab) <- c(variables[2],"Residuals")
+  tab[2,c("F value","Pr(>F)")] <- NA
   F.perm <- numeric(nperm+1)
   F.perm[1] <- anova.ref[1,"F value"]
   if (progress) {pb <- txtProgressBar(min=0,max=100,initial=0,style=3)}
@@ -64,8 +65,7 @@ function(resp,fact1,variables,nperm,progress) {
     if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
   }
   cat("\n")
-  pvalue <- length(which((F.perm+.Machine$double.eps/2) >= F.ref))/(nperm+1)
-  tab[1,"Pr(>F)"] <- format(pvalue,digits=5,nsmall=5)
+  tab[1,"Pr(>F)"] <- length(which((F.perm+.Machine$double.eps/2) >= F.ref))/(nperm+1)
   return(list(tab=tab))
 }
 
@@ -76,8 +76,9 @@ function(resp,fact1,fact2,variables,nperm,progress) {
   F1.ref <- anova.ref[1,"F value"]
   F2.ref <- anova.ref[2,"F value"]
   tab <- data.frame("Sum Sq"=anova.ref[,"Sum Sq"],"Df"=anova.ref[,"Df"],"Mean Sq"=anova.ref[,"Mean Sq"],
-    "F value"=c(anova.ref[1:2,"F value"]," "),"Pr(>F)"=NA,stringsAsFactors=FALSE,check.names=FALSE)
+    "F value"=c(anova.ref[1:2,"F value"],0),"Pr(>F)"=numeric(3),stringsAsFactors=FALSE,check.names=FALSE)
   rownames(tab) <- c(variables[2],variables[3],"Residuals")
+  tab[3,c("F value","Pr(>F)")] <- NA
   F1.perm <- numeric(nperm+1)
   F2.perm <- numeric(nperm+1)
   F1.perm[1] <- F1.ref
@@ -90,9 +91,8 @@ function(resp,fact1,fact2,variables,nperm,progress) {
     if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
   }
   cat("\n")
-  pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
-  pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
-  tab[1:2,"Pr(>F)"] <- format(c(pvalue1,pvalue2),digits=5,nsmall=5)
+  tab[1,"Pr(>F)"] <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+  tab[2,"Pr(>F)"] <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
   return(list(tab=tab))
 }
 
@@ -108,8 +108,9 @@ function(resp,fact1,fact2,variables,nperm,progress) {
     F2.ref <- anova.ref[2,"F value"]
     F3.ref <- anova.ref[3,"F value"]
     tab <- data.frame("Sum Sq"=anova.ref[,"Sum Sq"],"Df"=anova.ref[,"Df"],"Mean Sq"=anova.ref[,"Mean Sq"],
-	"F value"=c(anova.ref[1:3,"F value"]," "),"Pr(>F)"=NA,stringsAsFactors=FALSE,check.names=FALSE)
+	"F value"=c(anova.ref[1:3,"F value"],0),"Pr(>F)"=numeric(4),stringsAsFactors=FALSE,check.names=FALSE)
     rownames(tab) <- c(variables[2],variables[3],paste(variables[2],variables[3],sep=":"),"Residuals")
+    tab[4,c("F value","Pr(>F)")] <- NA
     F1.perm <- numeric(nperm+1)
     F2.perm <- numeric(nperm+1)
     F3.perm <- numeric(nperm+1)
@@ -125,10 +126,9 @@ function(resp,fact1,fact2,variables,nperm,progress) {
 	if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
     }
     cat("\n")
-    pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
-    pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
-    pvalue3 <- length(which((F3.perm+.Machine$double.eps/2) >= F3.ref))/(nperm+1)
-    tab[1:3,"Pr(>F)"] <- format(c(pvalue1,pvalue2,pvalue3),digits=5,nsmall=5)
+    tab[1,"Pr(>F)"] <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+    tab[2,"Pr(>F)"] <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
+    tab[3,"Pr(>F)"] <- length(which((F3.perm+.Machine$double.eps/2) >= F3.ref))/(nperm+1)
   }
   return(list(tab=tab))
 }
@@ -141,8 +141,9 @@ function(resp,fact1,fact2,nest.f2,variables,nperm,progress) {
   F1.ref <- anova.ref[1,"F value"]
   F2.ref <- anova.ref[2,"F value"]
   tab <- data.frame("Sum Sq"=anova.ref[,"Sum Sq"],"Df"=anova.ref[,"Df"],"Mean Sq"=anova.ref[,"Mean Sq"],
-    "F value"=c(anova.ref[1:2,"F value"]," "),"Pr(>F)"=NA,stringsAsFactors=FALSE,check.names=FALSE)
+    "F value"=c(anova.ref[1:2,"F value"],0),"Pr(>F)"=integer(3),stringsAsFactors=FALSE,check.names=FALSE)
   rownames(tab) <- c(variables[2],paste(variables[2],variables[3],sep=":"),"Residuals")
+  tab[3,c("F value","Pr(>F)")] <- NA
   F1.perm <- numeric(nperm+1)
   F2.perm <- numeric(nperm+1)
   F1.perm[1] <- F1.ref
@@ -162,12 +163,11 @@ function(resp,fact1,fact2,nest.f2,variables,nperm,progress) {
     if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
   }
   cat("\n")
-  pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
-  pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
-  tab[1:2,"Pr(>F)"] <- format(c(pvalue1,pvalue2),digits=5,nsmall=5)
+  tab[1,"Pr(>F)"] <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+  tab[1,"Pr(>F)"] <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
   if (tapply(resp,fact2,length)[1]==1) {
     warning("only 1 observation per level of '",variables[3],"', permutation of '",variables[2],"' only")
-    tab[2,"Pr(>F)"] <- "NA"
+    tab[2,"Pr(>F)"] <- NA
   }
   if (nest.f2=="random") {tab <- tab[-2,]}
   return(list(tab=tab))
@@ -181,8 +181,9 @@ function(resp,fact1,fact2,variables,nperm,progress) {
   anova.ref[1,"F value"] <- anova.ref[1,"Mean Sq"]/anova.ref[3,"Mean Sq"]
   F1.ref <- anova.ref[1,"F value"]
   tab <- data.frame("Sum Sq"=anova.ref[c(1,4),"Sum Sq"],"Df"=anova.ref[c(1,4),"Df"],"Mean Sq"=anova.ref[c(1,4),"Mean Sq"],
-    "F value"=c(anova.ref[1,"F value"]," "),"Pr(>F)"=NA,stringsAsFactors=FALSE,check.names=FALSE)
+    "F value"=c(anova.ref[1,"F value"],0),"Pr(>F)"=numeric(2),stringsAsFactors=FALSE,check.names=FALSE)
   rownames(tab) <- c(variables[2],"Residuals")
+  tab[2,c("F value","Pr(>F)")] <- NA
   F1.perm <- numeric(nperm+1)
   F1.perm[1] <- F1.ref
   if (progress) {pb <- txtProgressBar(min=0,max=100,initial=0,style=3)}
@@ -192,8 +193,7 @@ function(resp,fact1,fact2,variables,nperm,progress) {
     if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
   }
   cat("\n")
-  pvalue <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
-  tab[1,"Pr(>F)"] <- format(pvalue,digits=5,nsmall=5)
+  tab[1,"Pr(>F)"] <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
   return(list(tab=tab))
 }
 
@@ -205,8 +205,9 @@ function(resp,fact1,fact2,fact3,variables,nperm,progress) {
   F1.ref <- anova.ref[1,"Mean Sq"]/MSres
   F2.ref <- anova.ref[3,"Mean Sq"]/MSres
   tab <- data.frame("Sum Sq"=anova.ref[c(1,3,6),"Sum Sq"],"Df"=anova.ref[c(1,3,6),"Df"],"Mean Sq"=anova.ref[c(1,3,6),"Mean Sq"],
-    "F value"=c(c(F1.ref,F2.ref)," "),"Pr(>F)"=NA,stringsAsFactors=FALSE,check.names=FALSE)
+    "F value"=c(F1.ref,F2.ref,0),"Pr(>F)"=integer(3),stringsAsFactors=FALSE,check.names=FALSE)
   rownames(tab) <- c(variables[2],variables[3],"Residuals")
+  tab[3,c("F value","Pr(>F)")] <- NA
   F1.perm <- numeric(nperm+1)
   F2.perm <- numeric(nperm+1)
   F1.perm[1] <- F1.ref
@@ -220,9 +221,8 @@ function(resp,fact1,fact2,fact3,variables,nperm,progress) {
     if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
   }
   cat("\n")
-  pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
-  pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
-  tab[1:2,"Pr(>F)"] <- format(c(pvalue1,pvalue2),digits=5,nsmall=5)
+  tab[1,"Pr(>F)"] <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+  tab[1,"Pr(>F)"] <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
   return(list(tab=tab))
 }
 
@@ -236,8 +236,9 @@ function(resp,fact1,fact2,fact3,variables,nperm,progress) {
   F2.ref <- anova.ref[2,"Mean Sq"]/MSres
   F1F2.ref <- anova.ref[4,"Mean Sq"]/MSres
   tab <- data.frame("Sum Sq"=anova.ref[c(1,2,4,8),"Sum Sq"],"Df"=anova.ref[c(1,2,4,8),"Df"],"Mean Sq"=anova.ref[c(1,2,4,8),"Mean Sq"],
-    "F value"=c(c(F1.ref,F2.ref,F1F2.ref)," "),"Pr(>F)"=NA,stringsAsFactors=FALSE,check.names=FALSE)
+    "F value"=c(F1.ref,F2.ref,F1F2.ref,0),"Pr(>F)"=numeric(4),stringsAsFactors=FALSE,check.names=FALSE)
   rownames(tab) <- c(variables[2],variables[3],paste(variables[2],":",variables[3],sep=""),"Residuals")
+  tab[4,c("F value","Pr(>F)")] <- NA
   F1.perm <- numeric(nperm+1)
   F2.perm <- numeric(nperm+1)
   F1F2.perm <- numeric(nperm+1)
@@ -254,9 +255,8 @@ function(resp,fact1,fact2,fact3,variables,nperm,progress) {
     if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
   }
   cat("\n")
-  pvalue1 <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
-  pvalue2 <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
-  pvalue3 <- length(which((F1F2.perm+.Machine$double.eps/2) >= F1F2.ref))/(nperm+1)
-  tab[1:3,"Pr(>F)"] <- format(c(pvalue1,pvalue2,pvalue3),digits=5,nsmall=5)
+  tab[1,"Pr(>F)"] <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
+  tab[2,"Pr(>F)"] <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
+  tab[3,"Pr(>F)"] <- length(which((F1F2.perm+.Machine$double.eps/2) >= F1F2.ref))/(nperm+1)
   return(list(tab=tab))
 }

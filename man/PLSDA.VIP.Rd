@@ -22,7 +22,7 @@ logical: should VIP scores be displayed?
   \item{sup1}{name of X-variables having a VIP score > 1.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[mixOmics]{plsda}}

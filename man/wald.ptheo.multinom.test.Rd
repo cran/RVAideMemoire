@@ -34,7 +34,7 @@ The function builds K logistic regressions (in each case considering one class v
   \item{p.value}{data frame of results.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{wald.ptheo.test}}, \code{\link[RVAideMemoire]{prop.multinom}}

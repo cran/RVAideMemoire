@@ -30,7 +30,7 @@ The function works as \code{\link{chisq.test}} :
 
 - if \code{x} is a vector and theoretical proportions are given, equality of counts to theoretical counts (given by theoretical proportions) is tested
 
-- if \code{x} is a matrix with two coloums, equality of proportion of successes between populations is tested.
+- if \code{x} is a matrix with two columns, equality of proportion of successes between populations is tested.
 
 - if \code{x} is a matrix with more than two columns, independence of rows and columns is tested.
 
@@ -46,7 +46,7 @@ Since a G-test is an approximate test, an exact test is preferable when the numb
   \item{expected}{the expected counts under the null hypothesis.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{chisq.test}}, \code{\link[RVAideMemoire]{multinomial.test}}, \code{\link{fisher.test}} \code{\link{G.multcomp}}, \code{\link{G.theo.multcomp}}, \code{\link{pairwise.G.test}}

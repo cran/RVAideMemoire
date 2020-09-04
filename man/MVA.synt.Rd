@@ -67,7 +67,7 @@ Many multivariate analyses are supported, from various packages.
 - PCIA: \code{\link[ade4]{procuste}}: m2.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 data(iris)

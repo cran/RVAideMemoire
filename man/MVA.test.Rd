@@ -91,7 +91,7 @@ The function deals with the limitted floating point precision, which can bias ca
   \item{p.adjust.method}{a character string giving the method for p-values correction.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \references{
 Westerhuis J, Hoefsloot HCJ, Smit S, Vis DJ, Smilde AK, van Velzen EJJ, van Duijnhoven JPM and van Dorsten FA (2008) Assessment of PLSDA cross validation. Metabolomics 4:81-89.

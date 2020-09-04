@@ -38,7 +38,7 @@ An exact multinomial test with two groups is strictly the same as an exact binom
   \item{expected}{the expected counts under the null hypothesis.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com> based on \code{\link[EMT]{multinomial.test}}
+Maxime Hervé <maxime.herve@univ-rennes1.fr> based on \code{\link[EMT]{multinomial.test}}
 }
 \seealso{
 \code{\link{chisq.test}}, \code{\link[RVAideMemoire]{G.test}}, \code{\link{binom.test}}, \code{\link[RVAideMemoire]{multinomial.multcomp}}, \code{\link[RVAideMemoire]{multinomial.theo.multcomp}}

@@ -102,7 +102,7 @@ If \code{scale = TRUE}, the scaling is done as this:
   \item{pred.prob}{Probability of each individual of being of each level of \code{Y}.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \references{
 Szymanska E, Saccenti E, Smilde AK and Westerhuis J (2012) Double-check: validation of diagnostic statistics for PLS-DA models in metabolomics studies. Metabolomics (2012) 8:S3-S16.

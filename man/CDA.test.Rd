@@ -30,7 +30,7 @@ CDA consists in two steps: building a correspondence analysis (CA) on \code{X}, 
 An ANOVA or MANOVA table.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[ade4]{discrimin.coa}}, \code{\link{summary.manova}}

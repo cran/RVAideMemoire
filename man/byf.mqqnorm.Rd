@@ -18,7 +18,7 @@ an optional data frame containing the variables in the formula \code{formula}. B
 }
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{mqqnorm}}, \code{\link[RVAideMemoire]{byf.mshapiro}}, \code{\link[car]{qqPlot}}

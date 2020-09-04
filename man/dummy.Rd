@@ -18,7 +18,7 @@ logical indicating if the last column of the response matrix should be removed (
 }
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 fac <- gl(3,5,labels=LETTERS[1:3])

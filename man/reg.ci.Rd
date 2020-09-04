@@ -24,7 +24,7 @@ other agruments. See help of \code{\link{lines}}.
 }
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{lm}}

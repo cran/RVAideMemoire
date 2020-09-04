@@ -43,7 +43,7 @@ Since a G-test is an approximate test, an exact test is preferable when the numb
   \item{method.multcomp}{a character string giving the name of the test computed for pairwise comparisons.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{chisq.bintest}}, \code{\link[RVAideMemoire]{fisher.bintest}}

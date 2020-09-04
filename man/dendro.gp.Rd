@@ -15,7 +15,7 @@ a dendrogram obtained from \code{\link{hclust}}.
 }
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{hclust}}

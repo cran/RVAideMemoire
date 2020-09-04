@@ -31,7 +31,7 @@ same as \code{method} of \code{\link{cor}}.
 }
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{pcor.test}} for confidence intervals (and tests).

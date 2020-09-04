@@ -21,7 +21,7 @@ axis to be represented (the first by default).
 For quantitative variables, the squared correlation coefficient is displayed. For ordered factors, the squared multiple correlation coefficient is displayed. For unordered factors, the correlation ratio is displayed.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>, based on an idea of Stéphane Champely.
+Maxime Hervé <maxime.herve@univ-rennes1.fr>, based on an idea of Stéphane Champely.
 }
 \seealso{
 \code{\link[ade4]{dudi.acm}}, \code{\link[ade4]{dudi.hillsmith}}, \code{\link[ade4]{dudi.mix}}

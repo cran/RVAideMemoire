@@ -31,7 +31,7 @@ If \code{ref.tab} is \code{NULL}, values of \code{center} and \code{scale} are u
 If \code{ref.tab} and \code{center} are \code{NULL}, means of \code{tab}'s columns are used for centering. If \code{ref.tab} and \code{scale} are \code{NULL}, standard deviations of \code{tab}'s columns are used for scaling.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{scale}}

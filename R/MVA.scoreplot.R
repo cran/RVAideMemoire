@@ -222,7 +222,7 @@ MVA.scoreplot.2comp <- function(coord,byfac,fac,barycenters,stars,contours,weigh
   }
   if (drawintaxes) {abline(v=0,h=0,col="grey")}
   lab.line <- c(ifelse(drawextaxes,3,1),ifelse(drawextaxes,2.3,0.8))
-  mtext(c(xlab,ylab),side=c(1,2),line=lab.line,at=c(mean(range(coordx)),mean(range(coordy))))
+  mtext(c(xlab,ylab),side=c(1,2),line=lab.line,at=c(mean(xlim),mean(ylim)))
   if (!is.null(fac)) {
     fac.col <- legend.col
     if (length(fac.col)==1) {fac.col <- rep(fac.col,nlevels(fac))}

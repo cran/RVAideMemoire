@@ -41,7 +41,7 @@ If the response is a 0/1 variable, the probability of the '1' group is tested. I
   \item{method.multcomp}{a character string giving the name of the test computed for pairwise comparisons.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 response <- c(0,1,1,0,0,1,0,1,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,0,1,1,0,0,1)

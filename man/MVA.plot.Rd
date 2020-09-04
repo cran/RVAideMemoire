@@ -27,5 +27,5 @@ Different subfunctions are used depending on the type of plot to be displayed: \
 Warning: the use of \code{attach} before running a multivariate analysis can prevent \code{MVA.plot} to get the values it needs, and make it fail.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }

@@ -26,5 +26,5 @@ See example of \code{\link[RVAideMemoire]{adonis.II}} for the difference between
   a data frame of class \code{"anova"}.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }

@@ -52,7 +52,7 @@ method for p-values correction. See help of\code{\link{p.adjust}}.
   \item{common}{data frame of results if the coefficients are not significantly different (common coefficient).}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{cor.test}}

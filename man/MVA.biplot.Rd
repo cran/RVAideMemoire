@@ -62,7 +62,7 @@ This function should not be use directly. Prefer the general \code{\link[RVAideM
 All multivariate analyses covered by \code{\link[RVAideMemoire]{MVA.corplot}} can be used for biplots.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 require(vegan)

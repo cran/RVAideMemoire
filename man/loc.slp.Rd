@@ -10,5 +10,5 @@ Returns the slope of a line defined by selecting two points on a graph.
 loc.slp()
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }

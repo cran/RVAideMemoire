@@ -60,7 +60,7 @@ The function deals with the limitted floating point precision, which can bias ca
   \item{null.value}{the specified hypothesized value of the mean difference, always 0.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{t.test}}

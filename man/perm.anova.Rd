@@ -50,7 +50,7 @@ The function deals with the limitted floating point precision, which can bias ca
   a data frame of class \code{"anova"}.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 set.seed(1203)

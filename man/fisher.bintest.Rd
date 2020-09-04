@@ -41,7 +41,7 @@ Since chi-squared and G tests are approximate tests, exact tests are preferable 
   \item{method.multcomp}{a character string giving the name of the test computed for pairwise comparisons.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{chisq.bintest}}, \code{\link[RVAideMemoire]{G.bintest}}

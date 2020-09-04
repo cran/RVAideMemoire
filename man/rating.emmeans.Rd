@@ -24,7 +24,7 @@ used only for type \code{"class2"} (see \code{type}).
 A factor named \code{cut} must have been called in \code{emmeans}, to compute EMMeans per cut point (i.e. rating). Additionally, the argument \code{mode} of \code{emmeans} must have been set to "linear.predictor". Finally, the call to \code{emmeans} is typically like \code{emmeans(model,~factor|cut,mode="linear.predictor")} where \code{factor} is the factor (or interaction) giving levels for which EMMeans have to be computed.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[emmeans]{emmeans}}, \code{\link[ordinal]{clm}}, \code{\link[ordinal]{clmm}}

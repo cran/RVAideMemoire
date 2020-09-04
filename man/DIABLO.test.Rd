@@ -44,7 +44,7 @@ The function uses the weighted predicted classification error rate (see \code{\l
   \item{p.value}{the p-value of the test.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[mixOmics]{block.plsda}}, \code{\link[mixOmics]{block.splsda}}, \code{\link[mixOmics]{perf}}

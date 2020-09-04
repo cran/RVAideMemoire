@@ -36,7 +36,7 @@ See \code{\link[RVAideMemoire]{CDA.test}}.
   \item{p.adjust.method}{method for p-values correction.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{CDA.test}}

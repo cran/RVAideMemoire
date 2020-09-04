@@ -70,7 +70,7 @@ additional arguments to testing functions in \code{multtest.gp} (especially for 
 In case of parametric tests, t-tests or ANOVAs are used depending on the number of groups (2 or more, respectively). In case of permutational tests: permutational t-tests or permutational ANOVAs. In case of rank-based tests: Mann-Whitney-Wilcoxon or Kruskal-Wallis tests.
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{perm.anova}}, \code{\link[RVAideMemoire]{perm.t.test}}

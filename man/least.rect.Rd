@@ -41,7 +41,7 @@ logical indicating if, in case of several regressions fitted, confidence interva
   \item{adj}{logical, \code{TRUE} if confidence intervals and p-values are corrected for multiple testing (only if several regressions are fitted).}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 x <- 1:30+rnorm(30,0,3)

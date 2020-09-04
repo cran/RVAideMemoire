@@ -18,7 +18,7 @@ intensity of the noise: lower the value, bigger the noise.
 }
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{glm}}, \code{\link{nls}}

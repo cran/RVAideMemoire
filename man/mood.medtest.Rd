@@ -50,7 +50,7 @@ If \code{exact=NULL}, a Fisher's exact test is used if the number of data values
   \item{p.value}{the p-value of the test.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 set.seed(1716)

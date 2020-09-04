@@ -8,6 +8,14 @@ function(x,status=rep(1,length(x))) {
     x <- x[-which(status==0)]
     status <- status[-which(status==0)]
   }
+  if (any(is.na(x))) {
+    x <- x[-which(is.na(x))]
+    status <- status[-which(is.na(x))]
+  }
+  if (any(is.na(status))) {
+    x <- x[-which(is.na(status))]
+    status <- status[-which(is.na(status))]
+  }
   n <- length(x)
   tri <- sort(x)
   tri2 <- unique(tri)

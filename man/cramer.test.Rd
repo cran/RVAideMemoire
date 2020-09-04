@@ -37,7 +37,7 @@ confidence level.
   \item{null.value}{the value of the association measure under the null hypothesis, always 0.}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime Hervé <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[boot]{boot}}
