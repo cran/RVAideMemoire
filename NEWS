@@ -1,3 +1,6 @@
+version 0.9-79 (27-01-2021)
+  - predict.least.rect now returns fitted values if 'newdata' omitted
+
 version 0.9-78 (04-09-2020)
   - perm.anova corrected for printing problems with R version 4
 

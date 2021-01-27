@@ -1,4 +1,4 @@
-predict.least.rect <- function(object,newdata,...) {
+predict.least.rect <- function(object,newdata=NULL,...) {
   if (class(object)!="least.rect") {stop("incorrect model")}
   pred.fun <- function(x,lev=NULL) {
     if (is.null(lev)) {
@@ -8,6 +8,11 @@ predict.least.rect <- function(object,newdata,...) {
     }
   }
   predicted <- NULL
+  if (is.null(newdata)) {
+    mf <- model.frame(object)
+    newdata <- as.data.frame(mf[,-1])
+    colnames(newdata) <- colnames(mf)[-1]
+  }
   if (class(newdata)=="list") {
     if (!all(colnames(object$model)[-1]%in%names(newdata))) {stop("incorrect variable names")}
     covar <- which(names(newdata)==colnames(object$model)[2])

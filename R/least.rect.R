@@ -29,7 +29,7 @@ function(formula,data,conf.level=0.95,theo=1,adj=TRUE){
     a.sup <- mean(y)-b.inf*mean(x)
     t.obs <- abs(b^2-theo^2)*sqrt(length(x)-2)/(2*b*theo*sqrt(1-r^2))
     p <- min(pt(t.obs,length(x)-2),pt(t.obs,length(x)-2,lower.tail=FALSE))*2
-    conf.int <- matrix(c(a.inf,b.inf,a,b,a.sup,b.sup),nrow=2,dimnames=list(c("(Intercept)","x"),
+    conf.int <- matrix(c(a.inf,b.inf,a,b,a.sup,b.sup),nrow=2,dimnames=list(c("(Intercept)",dname[2]),
 	c("inf","coeff","sup")))
     conform <- data.frame("observed"=b,"theoretical"=theo,"Df"=length(x)-2,"t"=t.obs,"Pr(>|t|)"=p,
 	row.names=" ",check.names=FALSE)
@@ -38,7 +38,7 @@ function(formula,data,conf.level=0.95,theo=1,adj=TRUE){
 	"Df"=as.numeric(corr$parameter),"t"=as.numeric(corr$statistic),"Pr(>|t|)"=p.corr,row.names=" ",
 	check.names=FALSE)
     coeffs <- c(a,b)
-    names(coeffs) <- c("(Intercept)","x")
+    names(coeffs) <- c("(Intercept)",dname[2])
     fit <- a+b*x
     names(fit) <- 1:length(x)
     res <- -(b*x-y+a)/sqrt(1+b^2)

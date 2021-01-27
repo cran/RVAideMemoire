@@ -1,6 +1,6 @@
-6493dd5ca7884b2fd3d4ed6b0f64986f *DESCRIPTION
+0d3c4de51902c5c80c8be0e95a00e590 *DESCRIPTION
 3c59a31f58fbc9cb12fe3ab590de839b *NAMESPACE
-97f57bddf7048f612a99cdaa6ecac33a *NEWS
+6cfa4fa916960c4c3f550cbdda583103 *NEWS
 9e0495b8d6ce4e8db53c7be49782d115 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
 14714afe8af68a1fc9aa9370429a072d *R/CDA.cv.R
@@ -69,7 +69,7 @@ b5467b86c5547179cc2407c66fd08972 *R/fisher.multcomp.R
 ffa51cdc89d589130691ca87f06f8d24 *R/fp.test.R
 621aa859246caf1ea5e8e3304a956ff2 *R/ind.contrib.R
 f480fd3a143ac8c15d0b806ff99ad929 *R/inertia.R
-47b1ae107c6bf36bc1ef384d2c9cc099 *R/least.rect.R
+620d08caa99abaf64c2c0a8ea18103d2 *R/least.rect.R
 8d5a265e9332e7556464920fe7b69e54 *R/loc.slp.R
 a85ceae9f1ce98046012eba40d810f90 *R/logis.fit.R
 130a831f1f39d18fbaf00164cae2a284 *R/logis.noise.R
@@ -107,7 +107,7 @@ b80282acdca79f5b2212d81dfc760310 *R/plotresid.R
 edf93bb21510ccb7b6c36fba44d8d5d8 *R/predict.CDA.cv.R
 5e432f3033a7cc848132c6791ef93e1a *R/predict.MVA.cv.R
 52911d1ed3097c31b735d78fca6e0fd0 *R/predict.coadisc.R
-d219905f70e32c4496aad8f781847ab2 *R/predict.least.rect.R
+006a805162aeb7a56d8313ae1f47e282 *R/predict.least.rect.R
 dd236fbcf6e75d8cb95a798d54147090 *R/print.RV.multcomp.R
 79a50ad67fa65124c71be59d6a317adb *R/print.RVtest.R
 2081330b12a6e7215b1628795a57d872 *R/print.byf.test.R
@@ -134,7 +134,7 @@ fc3e8159ab743a16219ae06b674fd298 *R/wald.ptheo.test.R
 cf56ef4e0793a3f61ded7833859984ce *R/wilcox.paired.multcomp.R
 588714546f5b57bac4243ca8558b4b37 *R/wilcox.signtest.R
 3de4ac014037119e5dfe8a02e809f7ef *R/wmean.R
-06603dade994072cb6276eac905020bf *R/zzz.R
+450c3cdfd344aaee92fa99b74a3c4128 *R/zzz.R
 14d54307b1056a6fd5b375be72f3e531 *man/Anova.clm.Rd
 bcd174d67f01ed063d7f6ec5fab0e9d5 *man/CDA.cv.Rd
 52f9bd66a4ab2911d614ee0ac6a62e6d *man/CDA.test.Rd
@@ -162,7 +162,7 @@ e8ac59005b16d880fb9c9d9a2892bd2c *man/MVA.pairplot.Rd
 bd269b1ee6ef3b84d8387324766f06a8 *man/MVA.trajplot.Rd
 1df5f9514e555a4752f6241a3c87b157 *man/OR.multinom.Rd
 d32391129213f672c7a65bc92028fd25 *man/PLSDA.VIP.Rd
-cb6ab989478886cb170d100a3b78f21f *man/RVAideMemoire-package.Rd
+08e68eab70a6562092d68a4483401e67 *man/RVAideMemoire-package.Rd
 61c62d4d5e756d89ae1b722a62dec6c8 *man/adonis.II.Rd
 8a15adc0a24f9ab7333f73b17e8d5ed8 *man/back.emmeans.Rd
 77542599e05977367dd096111b764d25 *man/bootstrap.Rd
@@ -195,7 +195,7 @@ efc5de6ea9e2563a86adc984630ed1ae *man/cv.Rd
 2adae631af2ddf49ae9620f39ecab0fe *man/elogis.Rd
 06dba815d893fa8593c705de202f63ef *man/fisher.bintest.Rd
 2ce9eca0f6f00358c52e9f67b5ff6ba4 *man/fisher.multcomp.Rd
-6d8b8e50a0294ba1605f89f9bf0dc505 *man/fp.test.Rd
+443d29fe780b2d76dda123a46901aaa4 *man/fp.test.Rd
 8a70bdf2b880a1a368b1e2f843752dce *man/ind.contrib.Rd
 2070f6cbcbe20d6588ab2b4f141a1ef5 *man/least.rect.Rd
 1ff5ffc8ff1b5182cd373f5836f7886b *man/loc.slp.Rd
