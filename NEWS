@@ -1,3 +1,6 @@
+version 0.9-80 (28-06-2021)
+  - fisher.bintest corrected for changing the p-value adjustment method with pairwise comparisons
+
 version 0.9-79 (27-01-2021)
   - predict.least.rect now returns fitted values if 'newdata' omitted
 

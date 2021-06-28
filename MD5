@@ -1,6 +1,6 @@
-0d3c4de51902c5c80c8be0e95a00e590 *DESCRIPTION
+c9bed43a27eaa7f8320c77a50f7e5c0c *DESCRIPTION
 3c59a31f58fbc9cb12fe3ab590de839b *NAMESPACE
-6cfa4fa916960c4c3f550cbdda583103 *NEWS
+3f90e5c05261659e1269c4b724644a93 *NEWS
 9e0495b8d6ce4e8db53c7be49782d115 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
 14714afe8af68a1fc9aa9370429a072d *R/CDA.cv.R
@@ -64,7 +64,7 @@ bf2a79f0ccd60f1a623b54c031020ada *R/deprecated.R
 6f32aa9d89c73f8a7b4a766b9c7c8cbe *R/dummy.R
 5903070f0e12f02935dadd46ac0e35d1 *R/elogis.R
 9f197fc550156ec71571727576ac9821 *R/findk.R
-e9034cead21db1f5f049e544c96dacc3 *R/fisher.bintest.R
+fcd369ab5fcb2c028a8544cdf3081baf *R/fisher.bintest.R
 b5467b86c5547179cc2407c66fd08972 *R/fisher.multcomp.R
 ffa51cdc89d589130691ca87f06f8d24 *R/fp.test.R
 621aa859246caf1ea5e8e3304a956ff2 *R/ind.contrib.R
@@ -134,7 +134,7 @@ fc3e8159ab743a16219ae06b674fd298 *R/wald.ptheo.test.R
 cf56ef4e0793a3f61ded7833859984ce *R/wilcox.paired.multcomp.R
 588714546f5b57bac4243ca8558b4b37 *R/wilcox.signtest.R
 3de4ac014037119e5dfe8a02e809f7ef *R/wmean.R
-450c3cdfd344aaee92fa99b74a3c4128 *R/zzz.R
+277910bab98833bb1c984e06d3aa20e7 *R/zzz.R
 14d54307b1056a6fd5b375be72f3e531 *man/Anova.clm.Rd
 bcd174d67f01ed063d7f6ec5fab0e9d5 *man/CDA.cv.Rd
 52f9bd66a4ab2911d614ee0ac6a62e6d *man/CDA.test.Rd
@@ -162,7 +162,7 @@ e8ac59005b16d880fb9c9d9a2892bd2c *man/MVA.pairplot.Rd
 bd269b1ee6ef3b84d8387324766f06a8 *man/MVA.trajplot.Rd
 1df5f9514e555a4752f6241a3c87b157 *man/OR.multinom.Rd
 d32391129213f672c7a65bc92028fd25 *man/PLSDA.VIP.Rd
-08e68eab70a6562092d68a4483401e67 *man/RVAideMemoire-package.Rd
+2a7355637c4e6bdfb0897f2226ecc144 *man/RVAideMemoire-package.Rd
 61c62d4d5e756d89ae1b722a62dec6c8 *man/adonis.II.Rd
 8a15adc0a24f9ab7333f73b17e8d5ed8 *man/back.emmeans.Rd
 77542599e05977367dd096111b764d25 *man/bootstrap.Rd

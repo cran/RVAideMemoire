@@ -2,8 +2,8 @@ Encoding: latin1
 Package: RVAideMemoire
 Type: Package
 Title: Testing and Plotting Procedures for Biostatistics
-Version: 0.9-79
-Date: 2021-01-27
+Version: 0.9-80
+Date: 2021-06-28
 Author: Maxime Hervé
 Maintainer: Maxime Hervé <maxime.herve@univ-rennes1.fr>
 biocViews:
@@ -16,6 +16,6 @@ Description: Contains miscellaneous functions useful in biostatistics, mostly un
 License: GPL-2
 LazyLoad: yes
 NeedsCompilation: no
-Packaged: 2021-01-27 07:43:38 UTC; maherve
+Packaged: 2021-06-28 05:30:51 UTC; maherve
 Repository: CRAN
-Date/Publication: 2021-01-27 08:00:02 UTC
+Date/Publication: 2021-06-28 06:30:05 UTC

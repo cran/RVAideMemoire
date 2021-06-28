@@ -24,7 +24,7 @@ function(formula,data,alpha=0.05,p.method="fdr") {
   result$method.test <- "Fisher's Exact Test for Count Data"
   if (test$p.value<alpha & nlevels(fact)>2) {
     result$p.adjust.method <- p.method
-    result$p.value.multcomp <- fisher.multcomp(tab.cont)$p.value
+    result$p.value.multcomp <- fisher.multcomp(tab.cont,p.method=p.method)$p.value
     result$method.multcomp <- "Fisher's exact tests for count data"
   }
   class(result) <- "RVtest"
