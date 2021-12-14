@@ -164,7 +164,7 @@ function(resp,fact1,fact2,nest.f2,variables,nperm,progress) {
   }
   cat("\n")
   tab[1,"Pr(>F)"] <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
-  tab[1,"Pr(>F)"] <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
+  tab[2,"Pr(>F)"] <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
   if (tapply(resp,fact2,length)[1]==1) {
     warning("only 1 observation per level of '",variables[3],"', permutation of '",variables[2],"' only")
     tab[2,"Pr(>F)"] <- NA
@@ -222,7 +222,7 @@ function(resp,fact1,fact2,fact3,variables,nperm,progress) {
   }
   cat("\n")
   tab[1,"Pr(>F)"] <- length(which((F1.perm+.Machine$double.eps/2) >= F1.ref))/(nperm+1)
-  tab[1,"Pr(>F)"] <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
+  tab[2,"Pr(>F)"] <- length(which((F2.perm+.Machine$double.eps/2) >= F2.ref))/(nperm+1)
   return(list(tab=tab))
 }
 

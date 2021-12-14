@@ -43,7 +43,7 @@ tab <- data.frame(
 )
 model <- glm(response~fact,family="poisson",data=tab)
 Anova(model)
-mat <- matrix(c(1,-1,0,0,1,-1,2,-1,-1),nrow=3,byrow=TRUE,dimnames=list(levels(fact),1:3))
+mat <- matrix(c(1,-1,0,0,1,-1,2,-1,-1),nrow=3,byrow=TRUE,dimnames=list(1:3,levels(fact)))
 mat
 cont.emmc <- user.cont(mat)
 EMM <- emmeans(model,~fact)

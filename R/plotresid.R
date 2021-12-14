@@ -88,6 +88,30 @@ get.res.glmmadmb <- function(x,...) {
   }
 }
 
+get.res.glmmTMB <- function(x,...) {
+  if (x$modelInfo$family$family=="gaussian") {
+    if (x$modelInfo$family$link=="identity") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
+    } else {
+	if (length(attr(x$modelInfo$terms$disp$fixed,"predvars"))>1) {
+	  list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
+	} else {
+	  list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=TRUE)
+	}
+    }
+  } else {
+    if (x$modelInfo$family$link=="identity") {
+	list(residuals=residuals(x,type="response"),lab="Response residuals",norm=FALSE)
+    } else {
+	if (length(attr(x$modelInfo$terms$disp$fixed,"predvars"))>1) {
+	  list(residuals=residuals(x,type="response"),lab="Response residuals",norm=FALSE)
+	} else {
+	  list(residuals=residuals(x,type="pearson"),lab="Pearson residuals",norm=FALSE)
+	}
+    }
+  }
+}
+
 get.res.merMod <- function(x,...) {
   if (lme4::isLMM(x)) {
     list(residuals=residuals(x,type="response"),lab="Response residuals",norm=TRUE)
@@ -149,6 +173,10 @@ get.res.survreg <- function(x,...) {
 
 get.res.least.rect <- function(x,...) {
   list(residuals=residuals(x),lab="Response residuals",norm=TRUE)
+}
+
+get.res.betareg <- function(x,...) {
+  list(residuals=resid(x,type="sweighted2"),lab="Standardized weighted residuals 2",norm=FALSE)
 }
 
 

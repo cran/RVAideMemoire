@@ -1,6 +1,6 @@
-c9bed43a27eaa7f8320c77a50f7e5c0c *DESCRIPTION
-3c59a31f58fbc9cb12fe3ab590de839b *NAMESPACE
-3f90e5c05261659e1269c4b724644a93 *NEWS
+8d73550a703bd16fd0239178b0ccb107 *DESCRIPTION
+f240cac01fd5313e97a98d0932836711 *NAMESPACE
+605467fdeeb9e9895e503fc2e7f47b35 *NEWS
 9e0495b8d6ce4e8db53c7be49782d115 *R/Anova.clm.R
 e64134dc3ca391b6f9187ddf6b993e37 *R/Anova.clmm.R
 14714afe8af68a1fc9aa9370429a072d *R/CDA.cv.R
@@ -32,7 +32,7 @@ e89d73bfd78266189bc04c490af65620 *R/MVA.trajplot.R
 d68a4a95d36a244b05a50357662e8d49 *R/OR.multinom.R
 e10e77378cb667387ed336b702ffade7 *R/PLSDA.VIP.R
 0db10b81d856568c58fc8816670d719e *R/adonis.II.R
-cd4debc97938e366cdf039efcf4927fc *R/back.emmeans.R
+9261d4aa8c5cf2923ce88dbb01a12b3a *R/back.emmeans.R
 01f4ad8b0441979147c8ee511c99148a *R/bootstrap.R
 2c21d372dc64d285be74d1cfd8192028 *R/byf.hist.R
 48a8074b1a0cc02e0f63080fd1874a79 *R/byf.mqqnorm.R
@@ -62,7 +62,7 @@ b4568849ce3ef9f4a20785fe2998041c *R/dendro.gp.R
 bf2a79f0ccd60f1a623b54c031020ada *R/deprecated.R
 78f8857720751f7914e54d1b0d87bc99 *R/dhist.R
 6f32aa9d89c73f8a7b4a766b9c7c8cbe *R/dummy.R
-5903070f0e12f02935dadd46ac0e35d1 *R/elogis.R
+a0193daa2e36a1da7a9b16098835624a *R/elogis.R
 9f197fc550156ec71571727576ac9821 *R/findk.R
 fcd369ab5fcb2c028a8544cdf3081baf *R/fisher.bintest.R
 b5467b86c5547179cc2407c66fd08972 *R/fisher.multcomp.R
@@ -86,6 +86,7 @@ f846f7dd2822b4a0e7a2a8af6536d003 *R/multinomial.test.R
 97444523b2eca05383d18415fa527ac4 *R/multtest.gp.bin.R
 f50358802e325523890d693284cae7c2 *R/ord.rw.R
 a1dc3643dc3506b480b8a840bca926fd *R/overdisp.glmer.R
+883413041cecf952b2e5b46a11ac1fb4 *R/p.beta.R
 739c15b5fdd5e288752df8424213519b *R/pairwise.CDA.test.R
 0cada605742d9277e43f6a7cf08d4a33 *R/pairwise.G.test.R
 6b00b2d56abed132ed9663057c53ecd1 *R/pairwise.MVA.test.R
@@ -97,12 +98,12 @@ a1dc3643dc3506b480b8a840bca926fd *R/overdisp.glmer.R
 ede1739488f2535703692d7f84fb7726 *R/pairwise.var.test.R
 1de9870a8549d9b14a8679dbcebe7f24 *R/pcor.R
 bd4d1f025a217bd82362f77f1264317c *R/pcor.test.R
-68d35a7943289f5dc69b2dfb97a9cd46 *R/perm.anova.R
+e229006abd01a5b91605148ce368e827 *R/perm.anova.R
 2ebe8a7b0706ab9fcb77dd4399a9145f *R/perm.bartlett.test.R
 2f69cf72522099703ed3d73894e63ea8 *R/perm.cor.test.R
 c41a616c8adb55d25a4f735bdb0b8cd5 *R/perm.t.test.R
 4332693bd817a0909a1b78ece9da1a48 *R/perm.var.test.R
-b80282acdca79f5b2212d81dfc760310 *R/plotresid.R
+5333d79ddd9e316d0985b4bda7b981d8 *R/plotresid.R
 2682ceaab6cf2c20097a6124b1707872 *R/plotsurvivors.R
 edf93bb21510ccb7b6c36fba44d8d5d8 *R/predict.CDA.cv.R
 5e432f3033a7cc848132c6791ef93e1a *R/predict.MVA.cv.R
@@ -116,6 +117,8 @@ b2d8283eb9f7168abcadc6cd295df8b1 *R/prop.multcomp.R
 68a651974784d93c41a2781eec2b9dba *R/prop.multinom.R
 3922c9fd5a70e30a03dfec3eda70fd22 *R/prop.multinom.test.R
 e7517ca9f447b36c9103872f5bd753f5 *R/psignif.R
+ebd5ffbcd7148bc002d2820d63a6fdc7 *R/quasibinomial.QAIC.R
+ef6da94dff9c59c596916220b3ff9c56 *R/quasipoisson.QAIC.R
 0c2089d76989014e2d7fcb806edc4e3f *R/rating.emmeans.R
 a9189f640ab3985871a5d5fe12e0f26c *R/rating.prob.R
 1fbce233e2ffb74de0d9626b9edb4f16 *R/reg.ci.R
@@ -134,7 +137,7 @@ fc3e8159ab743a16219ae06b674fd298 *R/wald.ptheo.test.R
 cf56ef4e0793a3f61ded7833859984ce *R/wilcox.paired.multcomp.R
 588714546f5b57bac4243ca8558b4b37 *R/wilcox.signtest.R
 3de4ac014037119e5dfe8a02e809f7ef *R/wmean.R
-277910bab98833bb1c984e06d3aa20e7 *R/zzz.R
+a0659b707b991ac9eb786546149ed5d7 *R/zzz.R
 14d54307b1056a6fd5b375be72f3e531 *man/Anova.clm.Rd
 bcd174d67f01ed063d7f6ec5fab0e9d5 *man/CDA.cv.Rd
 52f9bd66a4ab2911d614ee0ac6a62e6d *man/CDA.test.Rd
@@ -162,9 +165,9 @@ e8ac59005b16d880fb9c9d9a2892bd2c *man/MVA.pairplot.Rd
 bd269b1ee6ef3b84d8387324766f06a8 *man/MVA.trajplot.Rd
 1df5f9514e555a4752f6241a3c87b157 *man/OR.multinom.Rd
 d32391129213f672c7a65bc92028fd25 *man/PLSDA.VIP.Rd
-2a7355637c4e6bdfb0897f2226ecc144 *man/RVAideMemoire-package.Rd
+1b8bb1b77d5abbefa12af350ea283cf4 *man/RVAideMemoire-package.Rd
 61c62d4d5e756d89ae1b722a62dec6c8 *man/adonis.II.Rd
-8a15adc0a24f9ab7333f73b17e8d5ed8 *man/back.emmeans.Rd
+22d3d5f115b518c7af7b17b5ac8ddea5 *man/back.emmeans.Rd
 77542599e05977367dd096111b764d25 *man/bootstrap.Rd
 fc14027ca98d39684e5f4dea404e654b *man/byf.hist.Rd
 27a63f826615e99ec9e1960f163f8784 *man/byf.mqqnorm.Rd
@@ -213,6 +216,7 @@ c210de906e24960bab7e593ddba1e41b *man/multtest.cor.Rd
 28feec36893013ade2865e154573a047 *man/multtest.gp.bin.Rd
 d87658beb60f51bf987dee0e84ce92d8 *man/ord.rw.Rd
 fadfd6d14c5edefed6e666021903f868 *man/overdisp.glmer.Rd
+867d887dad83fb6798f2d70fa54ca42f *man/p.beta.Rd
 17a86000f47e9a7ab32502281968467b *man/pairwise.CDA.test.Rd
 397307c5368cd9943d62eef5e12cc363 *man/pairwise.G.test.Rd
 5e2f775cd23dc3f66ee2135ec02e6f89 *man/pairwise.MVA.test.Rd
@@ -229,7 +233,7 @@ ce0373adea070cbc30184e236eda97f5 *man/pcor.Rd
 230340287e49ceb2594c2e4d4bdcfb1f *man/perm.cor.test.Rd
 7686c2613549e5275fabe12a8351938d *man/perm.t.test.Rd
 eaaf72ab50c1539631ff8255e38cc705 *man/perm.var.test.Rd
-480161014f0f84a468b5a92f6fe03add *man/plotresid.Rd
+455af2edb3c831db6e3f2bc362738074 *man/plotresid.Rd
 7f0f00a1be51d1651a6c19556d126508 *man/plotsurvivors.Rd
 4107897dd9e6d20e1a6e291dadaab73a *man/predict.CDA.cv.Rd
 18812fde372e3fdf942422fed4e06cd4 *man/predict.MVA.cv.Rd
@@ -238,6 +242,7 @@ fe2cc03c729936c9bd1e36491e3ab62a *man/prop.bin.multcomp.Rd
 25734c6140cfd9108e4e4460e6b56d20 *man/prop.multcomp.Rd
 5e624762027a1ed6633936cf110f726b *man/prop.multinom.Rd
 1582b814f85176414ff92d17c35743be *man/prop.multinom.test.Rd
+fe1a841e36948c654b36645ef7d33ed9 *man/quasibinomial.QAIC.Rd
 7356a849f2e42e8249e610e3de00fa51 *man/rating.emmeans.Rd
 4f5e64a43ae287736b48a5111b4d236d *man/rating.prob.Rd
 44e437bd4bd56f19809cb9d50964fc10 *man/reg.ci.Rd
@@ -250,7 +255,7 @@ b03756eabd12954d0b2944ec6660e6ed *man/spearman.ci.Rd
 7d33b4f3e013005784dc73fc495f1a81 *man/stand.Rd
 1e1f3a8a2fa3cecfc13dd370ededb25d *man/test.multinom.Rd
 637d91bbaf54f851cfad2db4063e322e *man/to.dudi.Rd
-623b1e1b98be3729a3368dca57987cdf *man/user.cont.Rd
+5856b5d2a963e7557f2159e179519fe4 *man/user.cont.Rd
 64740ce01287c1ff9f039f3703d2e8c9 *man/wald.ptheo.multinom.test.Rd
 0d132e27afe50c9379d08211d6c16491 *man/wald.ptheo.test.Rd
 75571319ae1a418a83ac25b80c794edd *man/wilcox.paired.multcomp.Rd

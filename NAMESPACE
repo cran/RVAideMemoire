@@ -1,11 +1,12 @@
 importFrom(graphics,abline,arrows,axis,barplot,box,hist,dotchart,legend,lines,locator,mosaicplot,mtext,panel.smooth,par,
   plot,points,polygon,rect,rug,segments,strheight,strwidth,symbols,text,title)
 
-importFrom(stats,aggregate,anova,approxfun,as.dist,as.formula,bartlett.test,binom.test,chisq.test,complete.cases,confint,
+importFrom(stats,aggregate,anova,approxfun,as.dist,as.formula,bartlett.test,binom.test,binomial,chisq.test,complete.cases,confint,
   cor,cor.test,cov,delete.response,density,dist,dmultinom,family,fisher.test,fitted,formula,glm,kruskal.test,lm,lm.influence,
   logLik,mahalanobis,manova,median,model.frame,model.matrix,model.response,na.omit,p.adjust,pairwise.prop.test,pairwise.table,pbeta,
-  pbinom,pchisq,pgeom,phyper,pnbinom,pnorm,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,rect.hclust,relevel,resid,
-  residuals,rnorm,rstudent,runif,sd,setNames,shapiro.test,summary.manova,t.test,terms,update,update.formula,var,var.test,wilcox.test)
+  pbinom,pchisq,pgeom,phyper,pnbinom,pnorm,poisson,ppois,predict,printCoefmat,prop.test,pt,qnorm,qt,quasibinomial,quasipoisson,
+  rect.hclust,relevel,resid,residuals,rnorm,rstudent,runif,sd,setNames,shapiro.test,summary.manova,t.test,terms,update,update.formula,
+  var,var.test,wilcox.test)
 
 importFrom(utils,capture.output,combn,packageVersion,setTxtProgressBar,txtProgressBar)
 
@@ -55,6 +56,7 @@ export(
   OR.multinom,
   ord.rw,
   overdisp.glmer,
+  p.beta,
   pairwise.CDA.test,pairwise.factorfit,pairwise.G.test,pairwise.perm.manova,pairwise.mood.medtest,pairwise.MVA.test,pairwise.perm.t.test,pairwise.var.test,pairwise.perm.var.test,
   pcor, pcor.test,
   perm.anova,perm.bartlett.test,perm.cor.test,perm.t.test,perm.var.test,
@@ -62,6 +64,7 @@ export(
   plotsurvivors,
   prop.bin.multcomp,prop.multcomp,
   prop.multinom,prop.multinom.test,
+  quasibinomial.QAIC,quasipoisson.QAIC,
   rating.emmeans,rating.prob,
   reg.ci,
   scat.cr,

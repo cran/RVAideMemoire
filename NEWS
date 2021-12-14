@@ -1,3 +1,10 @@
+version 0.9-81 (13-12-2021)
+  - perm.anova corrected for an error in p-value reporting with some specific designs (thanks to Carlos Rivera Moreno)
+  - plotresid extended to betareg and glmmTMB models
+  - new function p.beta for rescaling of a [0,1] variable into the (0,1) interval (and vice-versa)
+  - new transformation 'p.beta' in back.emmeans (inverse of the scaling performed by p.beta)
+  - new functions quasibinomial.QAIC and quasipoisson.QAIC to allow calculation of QAIC(c) with GLMs of the quasi- family
+
 version 0.9-80 (28-06-2021)
   - fisher.bintest corrected for changing the p-value adjustment method with pairwise comparisons
 
