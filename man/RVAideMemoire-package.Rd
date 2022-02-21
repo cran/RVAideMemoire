@@ -12,8 +12,8 @@ Contains miscellaneous functions useful in biostatistics, mostly univariate and 
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9-81\cr
-Date: \tab 2021-12-13\cr
+Version: \tab 0.9-81-2\cr
+Date: \tab 2022-02-21\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }

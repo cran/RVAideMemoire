@@ -1,3 +1,6 @@
+version 0.9-81-2 (21-02-2022)
+  - small technical changes following CRAN request
+
 version 0.9-81 (13-12-2021)
   - perm.anova corrected for an error in p-value reporting with some specific designs (thanks to Carlos Rivera Moreno)
   - plotresid extended to betareg and glmmTMB models
