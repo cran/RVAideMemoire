@@ -1,21 +1,3 @@
-# La méthode model.matrix.clmm est identique à model.matrix.clm
-#   (qui est dans ordinal), mais il n'y a pas de méthode prévue
-#   pour les clmm
-model.matrix.clmm <- function(object,type=c("design","B"),...) {
-  type <- match.arg(type)
-  if (type == "design") {
-    mf <- update(object,method="model.frame")
-    keep <- c("X","NOM","S")
-    select <- match(keep,names(mf),nomatch=0)
-    return(mf[select])
-  } else {
-    env <- update(object,doFit=FALSE)
-    ans <- list(B1=env$B1,B2=env$B2)
-    ans$S <- env$S
-    return(ans)
-  }
-}
-
 Anova.clmm <- function(mod,type=c("II","III",2,3),...) {
   type <- as.character(type)
   type <- match.arg(type)
@@ -92,7 +74,7 @@ Anova.III.clmm <- function(mod,...) {
   row.names(result) <- names
   names(result) <- c("LR Chisq","Df","Pr(>Chisq)")
   class(result) <- c("anova","data.frame")
-  attr(result,"heading") <- c("Analysis of Deviance Table (Type II tests)\n", 
+  attr(result,"heading") <- c("Analysis of Deviance Table (Type III tests)\n", 
     paste("Response:",responseName.clm_m(mod)))
   result
 }

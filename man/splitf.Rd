@@ -24,7 +24,7 @@ an integer giving the number of subsets to be generated.
 A list of subsets of \code{set}.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{split}}

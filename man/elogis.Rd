@@ -10,7 +10,7 @@ Empirical logistic transformation for logistic models with data showing (quasi-)
 elogis()
 }
 \author{
-Formula from McCullagh & Nelder in their seminal book 'Generalized Linear Models'. R code from Eric Wajnberg & Jean-Sébastien Pierre.
+Formula from McCullagh & Nelder in their seminal book 'Generalized Linear Models'. R code from Eric Wajnberg & Jean-Sebastien Pierre.
 }
 \examples{
 # An example with 3 groups and complete separation (from E. Wajnberg)

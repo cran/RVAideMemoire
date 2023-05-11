@@ -37,7 +37,7 @@ logical indicating in which order back-transformed EMMeans should be ordered, if
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[emmeans]{emmeans}}

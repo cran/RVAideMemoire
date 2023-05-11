@@ -36,7 +36,7 @@ If the response is a 0/1 variable, the probability of the '1' group is tested. I
   \item{p.value}{table or results of pairwise comparisons.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{prop.multcomp}}, \code{\link[RVAideMemoire]{chisq.theo.bintest}}

@@ -51,7 +51,7 @@ If \code{resp} is a distance matrix, \code{\link[vegan]{adonis}} is used to perf
   \item{R2.value}{table of R2 values (if required).}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{anova.mlm}}, \code{\link[vegan]{adonis}}

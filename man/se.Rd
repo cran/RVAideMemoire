@@ -21,7 +21,7 @@ number of trials. If \code{NULL}, the standard error of the mean of \code{x} is 
 The function deals with missing values.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 # Standard error of a mean

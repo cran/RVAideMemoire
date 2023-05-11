@@ -46,7 +46,7 @@ The function deals with the limitted floating point precision, which can bias ca
   \item{p.value}{the p-value of the test.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \references{
 Wakeling IN, Raats MM and MacFie HJH (1992) A new significance test for consensus in Generalized Procrustes Analysis. Journal of Sensory Studies 7:91-96.

@@ -28,7 +28,7 @@ method for p-values correction. See help of \code{\link{p.adjust}}.
   \item{p.value}{table of results of pairwise comparisons.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{pairwise.wilcox.test}}, \code{\link{wilcox.test}}

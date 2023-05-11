@@ -25,7 +25,7 @@ QQ-plots and Shapiro-Wilk tests are available whenever the model is based on a G
 With a \code{mlm} or \code{\link{manova}} model, only a multivariate QQ-plot is drawn. The test performed when \code{shapiro=TRUE} is a Shapiro-Wilk test for multivariate normality.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{lm}}, \code{\link[nlme]{lmList}}, \code{\link[lme4]{lmList}}, \code{\link{glm}}, \code{\link[MASS]{glm.nb}}, \code{\link{manova}}, \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer}}, \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer.nb}}, \code{\link[nlme]{lme}}, \code{\link[MASS]{glmmPQL}}, \code{glmmadmb}, \code{\link[glmmTMB]{glmmTMB}}, \code{\link[nlme]{gls}}, \code{\link{nls}}, \code{\link[nlme]{nlsList}}, \code{\link[survival]{survreg}}, \code{\link[RVAideMemoire]{least.rect}}, \code{\link[betareg]{betareg}}, \code{\link[statmod]{qresiduals}}, \code{\link[car]{qqPlot}}, \code{\link{shapiro.test}}, \code{\link[RVAideMemoire]{mqqnorm}}, \code{\link[RVAideMemoire]{mshapiro.test}}

@@ -1,3 +1,3 @@
 .onAttach <- function(lib,pkg) {
-  packageStartupMessage("*** Package RVAideMemoire v 0.9-81-2 ***")
+  packageStartupMessage("*** Package RVAideMemoire v 0.9-82-2 ***")
 }

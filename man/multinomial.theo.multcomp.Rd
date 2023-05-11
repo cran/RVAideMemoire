@@ -39,7 +39,7 @@ An exact multinomial test with two groups is strictly the same than an exact bin
   \item{p.value}{data frame of results.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{multinomial.test}}, \code{\link{binom.test}}

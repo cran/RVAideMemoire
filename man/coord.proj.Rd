@@ -18,7 +18,7 @@ slope of the new axis.
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 data(iris)

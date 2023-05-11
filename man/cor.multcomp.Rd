@@ -6,7 +6,7 @@ Comparison of several Pearson's linear correlation coefficients
 \description{
 Performs comparisons of several Pearson's linear correlation coefficients.
 If no difference, the function returns the common correlation coefficient, its confidence interval and test for its equality to a given value.
-If difference is significative, the functions performs pairwise comparisons between coefficients.
+If the difference is significant, the functions performs pairwise comparisons between coefficients.
 }
 \usage{
 cor.multcomp(var1, var2, fact, alpha = 0.05, conf.level = 0.95, theo = 0,
@@ -52,7 +52,7 @@ method for p-values correction. See help of\code{\link{p.adjust}}.
   \item{common}{data frame of results if the coefficients are not significantly different (common coefficient).}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{cor.test}}

@@ -55,7 +55,7 @@ If zeroes (i.e. null differences with \code{mu}) are present, the median of the 
   \item{conf.int}{a confidence interval for the median tested.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{wilcox.test}}

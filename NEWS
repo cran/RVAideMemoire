@@ -1,3 +1,9 @@
+version 0.9-82-2 (05-11-2023)
+  - fp.test changed to implement the original version of the Fligner-Policello test
+  - pcor (then pcor.test) changed to implement a more relevant method to compute Spearman's partial correlation coefficients (thanks to Dave Markowitz and Seongho Kim)
+  - Anova.clm and Anova.clmm corrected for a typo in results of type III tests (thanks to Su Shen)
+  - small technical changes following CRAN request
+
 version 0.9-81-2 (21-02-2022)
   - small technical changes following CRAN request
 

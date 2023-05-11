@@ -57,7 +57,7 @@ The function deals with the limitted floating point precision, which can bias ca
   \item{null.value}{the ratio of population variances under the null hypothesis, always 1.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{var.test}}

@@ -34,7 +34,7 @@ Since a G-test is an approximate test, an exact test is preferable when the numb
   \item{p.value}{data frame of results.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{G.test}}, \code{\link[RVAideMemoire]{multinomial.test}}, \code{\link[RVAideMemoire]{multinomial.theo.multcomp}}

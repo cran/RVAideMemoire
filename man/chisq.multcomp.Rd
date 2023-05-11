@@ -27,7 +27,7 @@ Since a chi-squared test is an approximate test, an exact test is preferable whe
   \item{p.value}{table of results.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{chisq.test}}, \code{\link[RVAideMemoire]{multinomial.test}}, \code{\link[RVAideMemoire]{multinomial.multcomp}}

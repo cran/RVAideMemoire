@@ -24,7 +24,7 @@ logical. If \code{TRUE} the coefficient is expressed in percentage.
 The function deals with missing values.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 cv(rnorm(30))

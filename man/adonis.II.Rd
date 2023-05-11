@@ -27,7 +27,7 @@ See \code{\link[vegan]{adonis}} for detailed explanation of what is done. The on
   a data frame of class \code{"anova"}.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 require(vegan)

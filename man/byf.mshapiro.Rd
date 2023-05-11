@@ -23,7 +23,7 @@ an optional data frame containing the variables in the formula \code{formula}. B
   \item{tab}{table of results.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{byf.mqqnorm}}, \code{\link[RVAideMemoire]{mshapiro.test}}, \code{\link[car]{qqPlot}}

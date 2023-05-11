@@ -24,7 +24,7 @@ logical. If \code{TRUE}, back-transformation is performed rather than transforma
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr> from the following paper:
+Maxime HERVE <maxime.herve@univ-rennes1.fr> from the following paper:
 Douma JC & Weedon JT (2019) Analysing continuous proportions in ecology and evolution: A practical introduction to beta and Dirichlet regression. Methods in Ecology and Evolution, 10: 1412-1430
 }
 \examples{

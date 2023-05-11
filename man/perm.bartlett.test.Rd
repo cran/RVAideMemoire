@@ -34,7 +34,7 @@ The function deals with the limitted floating point precision, which can bias ca
   \item{p.value}{p-value of the permutation test.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{bartlett.test}}

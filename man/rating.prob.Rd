@@ -21,7 +21,7 @@ type of output to be returned: \code{"prob"} (default) gives frequency of each r
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 require(ordinal)

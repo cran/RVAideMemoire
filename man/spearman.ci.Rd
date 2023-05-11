@@ -32,7 +32,7 @@ confidence level of the interval.
   \item{conf.int}{confidence interval.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{cor.test}}, \code{\link[boot]{boot}}

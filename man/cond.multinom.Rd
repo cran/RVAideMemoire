@@ -15,5 +15,5 @@ object of class \code{"multinom"}.
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }

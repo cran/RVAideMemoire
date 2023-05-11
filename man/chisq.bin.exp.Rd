@@ -32,7 +32,7 @@ The function returns how many counts can be < 5 to respect Cochran's rule (80\% 
   \item{cochran}{number of counts which can be < 5.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{prop.test}}, \code{\link{chisq.theo.bintest}}, \code{\link{mosaicplot}}

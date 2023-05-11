@@ -4,7 +4,7 @@
 Comparison of 2 Pearson's linear correlation coefficients
 }
 \description{
-Performs the test for equality of 2 Pearson's correlation coefficients. If the difference is not significative, the function returns the common coefficient, its confidence interval and performs the test for equality to a given value.
+Performs the test for equality of 2 Pearson's correlation coefficients. If the difference is not significant, the function returns the common coefficient, its confidence interval and performs the test for equality to a given value.
 }
 \usage{
 cor.2comp(var1, var2, var3, var4, alpha = 0.05, conf.level = 0.95, theo = 0)
@@ -46,7 +46,7 @@ theoretical coefficient.
   \item{common}{data frame of results if the coefficients are not significantly different (common coefficient).}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{cor.test}}

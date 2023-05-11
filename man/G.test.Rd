@@ -46,7 +46,7 @@ Since a G-test is an approximate test, an exact test is preferable when the numb
   \item{expected}{the expected counts under the null hypothesis.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{chisq.test}}, \code{\link[RVAideMemoire]{multinomial.test}}, \code{\link{fisher.test}} \code{\link{G.multcomp}}, \code{\link{G.theo.multcomp}}, \code{\link{pairwise.G.test}}

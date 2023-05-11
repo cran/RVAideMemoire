@@ -34,7 +34,7 @@ color(s) used for density curves or bars.
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{hist}}

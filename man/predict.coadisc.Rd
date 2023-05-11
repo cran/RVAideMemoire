@@ -26,7 +26,7 @@ further arguments to be passed to or from other methods.
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[ade4]{discrimin.coa}}

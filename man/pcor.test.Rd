@@ -50,7 +50,7 @@ If \code{method} is \code{"spearman"}, the p-value is computed through the AS89 
   \item{null.value}{he value of the association measure under the null hypothesis, always 0.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{pcor}}

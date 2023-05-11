@@ -24,7 +24,7 @@ parameters of the distribution specified by \code{dist}.
 The function is intended to be used in goodness-of-fits tests for discrete distributions, such as proposed in the \code{dgof} package.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 if(require(dgof)) {

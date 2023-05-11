@@ -82,7 +82,7 @@ If \code{scale = TRUE}, the scaling is done as this: for each step of the valida
   \item{pred.prob}{Probability of each individual of being of each level of \code{Y}.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire:predict.MVA.cv]{predict.MVA.cmv}}, \code{\link[pls]{mvr}}, \code{\link[MASS]{lda}}, \code{\link[MASS]{qda}}

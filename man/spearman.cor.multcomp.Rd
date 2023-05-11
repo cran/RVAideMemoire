@@ -37,7 +37,7 @@ Confidence intervals which do not overlap indicate correlation coefficients sign
   \item{nrep}{number of replicates for bootstraping.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{spearman.ci}}

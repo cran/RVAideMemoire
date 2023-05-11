@@ -12,16 +12,16 @@ Contains miscellaneous functions useful in biostatistics, mostly univariate and 
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9-81-2\cr
-Date: \tab 2022-02-21\cr
+Version: \tab 0.9-82-2\cr
+Date: \tab 2023-05-11\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
 }
 \author{
-Maxime Hervé
+Maxime HERVE
 
-Maintainer: Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maintainer: Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \references{
 Document : "Aide-memoire de statistique appliquee a la biologie - Construire son etude et analyser les resutats a l'aide du logiciel R" (available on CRAN)

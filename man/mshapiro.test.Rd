@@ -21,7 +21,7 @@ a data frame or a matrix of numeric variables (each column giving a variable).
   \item{p.value}{p-value of the test.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr> from the work of Slawomir Jarek
+Maxime HERVE <maxime.herve@univ-rennes1.fr> from the work of Slawomir Jarek
 }
 \seealso{
 \code{\link{shapiro.test}}, \code{\link[mvnormtest]{mshapiro.test}}

@@ -18,7 +18,7 @@ a \code{\link[survival]{coxph}} model.
 Fox, J. 2002 Cox Proportional-Hazards Regression for Survival Data.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>, based on an idea of John Fox.
+Maxime HERVE <maxime.herve@univ-rennes1.fr>, based on an idea of John Fox.
 }
 \seealso{
 \code{\link[survival]{coxph}}

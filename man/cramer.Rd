@@ -4,7 +4,7 @@
 Cramer's association coefficient
 }
 \description{
-Computes the Cramér's association coefficient between 2 nominal variables.
+Computes the Cramer's association coefficient between 2 nominal variables.
 }
 \usage{
 cramer(x, y)
@@ -18,7 +18,7 @@ ignored if \code{x} is a contingency table. If not, \code{y} should be a vector 
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 var1 <- sample(LETTERS[1:3],30,replace=TRUE)

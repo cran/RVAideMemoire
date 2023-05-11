@@ -30,7 +30,7 @@ theoretical value.
   \item{estimate}{the estimated correlation coefficient.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{cor.test}}

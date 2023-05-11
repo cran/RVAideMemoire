@@ -28,7 +28,7 @@ In these matrices, each line is a comparison (= contrast) and each colum is a le
 - the sum of all values of a contrast must be null.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[emmeans]{emmeans}}

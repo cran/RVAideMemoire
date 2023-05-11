@@ -98,7 +98,7 @@ Anova.III.clm <- function(mod,...) {
   row.names(result) <- names
   names(result) <- c("LR Chisq","Df","Pr(>Chisq)")
   class(result) <- c("anova","data.frame")
-  attr(result,"heading") <- c("Analysis of Deviance Table (Type II tests)\n", 
+  attr(result,"heading") <- c("Analysis of Deviance Table (Type III tests)\n", 
     paste("Response:",responseName.clm_m(mod)))
   result
 }

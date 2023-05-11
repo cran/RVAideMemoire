@@ -19,7 +19,7 @@ number of values to be generated (\code{int} breaks).
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{seq}}

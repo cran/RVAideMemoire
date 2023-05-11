@@ -97,7 +97,7 @@ This function should not be use directly. Prefer the general \code{\link[RVAideM
 All multivariate analyses supported by \code{\link[RVAideMemoire]{MVA.scoreplot}} can be used for a paired plot.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 require(ade4)

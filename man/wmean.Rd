@@ -21,7 +21,7 @@ a logical value indicating whether \code{NA} values should be stripped before th
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 mean(1:10)

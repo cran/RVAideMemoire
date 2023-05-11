@@ -18,5 +18,5 @@ any predictor present in \code{model} (unquoted).
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }

@@ -165,7 +165,13 @@ MVA.class.GPA <- function(x,...) {"GPA.FactoMineR"}
 MVA.class.rcc <- function(x,...) {"rCCorA.mixOmics"}
 
 MVA.class.rgcca <- function(x,...) {
-  if ("variates" %in% names(x)) {res <- "rGCCA.mixOmics"} else {res <- "rGCCA.RGCCA"}
+  if ("variates" %in% names(x)) {
+    res <- "rGCCA.mixOmics"
+  } else if ("sgcca" %in% x$call$method) {
+    res <- "sGCCA.RGCCA"
+  } else {
+    res <- "rGCCA.RGCCA"
+  }
   return(res)
 }
 

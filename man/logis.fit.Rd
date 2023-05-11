@@ -21,7 +21,7 @@ other arguments. See help of \code{\link{points}} and \code{\link{segments}}.
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{glm}}

@@ -21,5 +21,5 @@ ord.rw(ord, CA = NULL, rw = NULL)
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }

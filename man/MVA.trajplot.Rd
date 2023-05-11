@@ -118,10 +118,10 @@ MVA.trajplot(x, xax = 1, yax = 2, trajects, trajlab = NULL, scaling = 2,
 \details{
 This function should not be use directly. Prefer the general \code{\link[RVAideMemoire]{MVA.plot}}, to which all arguments can be passed.
 
-All multivariate analyses supported by \code{\link[RVAideMemoire]{MVA.scoreplot}} can be used for a paired plot.\\
+All multivariate analyses supported by \code{\link[RVAideMemoire]{MVA.scoreplot}} can be used for a paired plot.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 require(ade4)

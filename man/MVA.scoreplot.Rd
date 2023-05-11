@@ -195,12 +195,12 @@ Many multivariate analyses are supported, from various packages:
 
 - rGCCA: \code{\link[RGCCA]{rgcca}}, \code{\link[mixOmics]{wrapper.rgcca}}. Space can be 1 to n, the number of blocks (i.e. datasets).
 
-- sGCCA: \code{\link[RGCCA]{sgcca}}, \code{\link[mixOmics]{wrapper.sgcca}}. Space can be 1 to n, the number of blocks (i.e. datasets).
+- sGCCA: \code{\link[RGCCA]{rgcca}}, \code{\link[mixOmics]{wrapper.sgcca}}. Space can be 1 to n, the number of blocks (i.e. datasets).
 
 - DIABLO: \code{\link[mixOmics]{block.plsda}}, \code{\link[mixOmics]{block.splsda}}. Space can be 1 to n, the number of blocks (i.e. datasets).
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 data(iris)

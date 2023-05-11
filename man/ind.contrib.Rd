@@ -29,7 +29,7 @@ level of graphical warning.
   \item{coefficients.prop}{difference in coefficients expressed in proportion of the whole regression coefficients.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{lm.influence}}, \code{\link[RVAideMemoire]{least.rect}}

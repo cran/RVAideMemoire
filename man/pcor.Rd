@@ -8,7 +8,7 @@ Computes the (semi-)partial correlation of \code{x} and \code{y}, controlling fo
 }
 \usage{
 pcor(x, y, z, semi = FALSE, use = "complete.obs", method = c("pearson",
-  "kendall", "spearman"))
+  "spearman"))
 }
 \arguments{
   \item{x}{
@@ -31,7 +31,7 @@ same as \code{method} of \code{\link{cor}}.
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{pcor.test}} for confidence intervals (and tests).

@@ -23,7 +23,7 @@ status (1: event observed, 0: event not observed).
   \item{alive}{number of survivors at each time.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
 # 'kidney' dataset of package 'survival'

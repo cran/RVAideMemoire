@@ -33,7 +33,7 @@ If \code{exact=NULL}, Fisher's exact tests are used if the number of data values
   \item{p.adjust.method}{method for p-values correction.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{mood.medtest}}

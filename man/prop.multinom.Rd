@@ -22,7 +22,7 @@ The proportions can be computed through the \code{predict} function applied on a
   \item{se}{the calculated standard errors.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[nnet]{multinom}}, \code{\link{glm}}

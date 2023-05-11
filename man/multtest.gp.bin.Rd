@@ -60,7 +60,7 @@ additional arguments to testing functions in \code{multtest.gp.bin} (especially 
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{multtest.gp}}, \code{\link[car]{Anova}}, \code{\link{fisher.test}}

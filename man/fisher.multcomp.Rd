@@ -27,7 +27,7 @@ Since chi-squared and G tests are approximate tests, exact tests are preferable 
   \item{p.value}{table of results of pairwise comparisons.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{chisq.test}}, \code{\link{prop.test}}, \code{\link{fisher.test}}

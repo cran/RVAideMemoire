@@ -43,7 +43,7 @@ The function uses the weighted predicted classification error rate (see \code{\l
   \item{NMC.se}{standard error of the classification error rate (based on \code{repet} values).}
 }
 \author{
-Maxime Hervé <mx.herve@gmail.com>
+Maxime HERVE <mx.herve@gmail.com>
 }
 \seealso{
 \code{\link[mixOmics]{block.plsda}}, \code{\link[mixOmics]{block.splsda}}, \code{\link[mixOmics]{perf}}

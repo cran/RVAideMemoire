@@ -31,7 +31,7 @@ See help of the \code{\link[car]{Anova}} for a detailed explanation of what "typ
 See \code{\link[car]{Anova}}.
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[car]{Anova}}, \code{\link[ordinal]{clm}}, \code{\link[ordinal]{clmm}}

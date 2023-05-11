@@ -54,7 +54,7 @@ The Fligner-Policello test does not assume that the shape of the distribution is
   \item{null.value}{the specified hypothesized value of the median difference.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr> based on \code{fp.test} from the \code{npsm} package
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link{wilcox.test}}

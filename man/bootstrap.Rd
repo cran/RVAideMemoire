@@ -38,7 +38,7 @@ See help of the \code{\link[boot]{boot}} function for more explanations.
   \item{conf.int}{limits of the confidence interval.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[boot]{boot}}

@@ -21,7 +21,7 @@ other arguments to pass to \code{\link[car]{qqPlot}}.
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{link[RVAideMemoire]{byf.shapiro}}, \code{\link[car]{qqPlot}}

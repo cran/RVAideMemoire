@@ -31,7 +31,7 @@ a character string specifying the alternative hypothesis, must be one of \code{"
   \item{p.adjust.method}{method for p-values correction.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{pairwise.perm.var.test}}

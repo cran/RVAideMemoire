@@ -29,7 +29,7 @@ An exact multinomial test with two groups is strictly the same than an exact bin
   \item{p.value}{table of results.}
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{multinomial.test}}, \code{\link{binom.test}}

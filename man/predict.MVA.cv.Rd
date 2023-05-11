@@ -36,7 +36,7 @@ further arguments to be passed to or from other methods.
 }
 }
 \author{
-Maxime Hervé <maxime.herve@univ-rennes1.fr>
+Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
 \code{\link[RVAideMemoire]{MVA.cv}}, \code{\link[RVAideMemoire]{MVA.cmv}}
