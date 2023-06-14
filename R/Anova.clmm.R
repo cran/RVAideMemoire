@@ -1,3 +1,24 @@
+df.terms.clmm_m <- function(model,term,...){
+  if (!missing(term) && 1==length(term)) {
+    assign <- attr(model.matrix(model),"assign")
+    which.term <- which(term==labels(terms(model)))
+    if (0==length(which.term)) {stop(paste(term,"is not in the model."))}
+    sum(assign==which.term)
+  } else {
+    terms <- if (missing(term)) {
+	labels(terms(model))
+    } else {
+	term
+    }
+    result <- numeric(0)
+    for (term in terms) {
+	result <- c(result,Recall(model,term))
+    }
+    names(result) <- terms
+    result
+  }
+}
+
 Anova.clmm <- function(mod,type=c("II","III",2,3),...) {
   type <- as.character(type)
   type <- match.arg(type)
@@ -14,7 +35,7 @@ Anova.II.clmm <- function(mod,...) {
   names <- labels(terms(mod))
   n.terms <- length(names)
   p <- LR <- rep(0,n.terms)
-  df <- df.terms.clm_m(mod)
+  df <- df.terms.clmm_m(mod)
   for (term in 1:n.terms) {
     rels <- names[relatives(names[term],names,fac)]
     exclude.1 <- if (length(rels)==0) {
@@ -55,7 +76,7 @@ Anova.III.clmm <- function(mod,...) {
   names <- labels(terms(mod))
   n.terms <- length(names)
   p <- LR <- rep(0,n.terms)
-  df <- df.terms.clm_m(mod)
+  df <- df.terms.clmm_m(mod)
   deviance <- -2*logLik(mod)
   for (term in 1:n.terms) {
     mod.1 <- if (n.terms>1) {

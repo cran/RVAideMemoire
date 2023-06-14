@@ -1,3 +1,7 @@
+version 0.9-83 (06-14-2023)
+  - Anova.clmm corrected to adapt to the model.matrix method now in the ordinal package (thanks to Henning Pohl)
+  - pairwise.perm.manova changed to build on adonis2 rather than adonis (package vegan) (thanks to Mira Grönroos)
+
 version 0.9-82-2 (05-11-2023)
   - fp.test changed to implement the original version of the Fligner-Policello test
   - pcor (then pcor.test) changed to implement a more relevant method to compute Spearman's partial correlation coefficients (thanks to Dave Markowitz and Seongho Kim)

@@ -1,8 +1,8 @@
-10985cd35f60a42e65701c4612998f48 *DESCRIPTION
+f0371e4547ca6a1d2d26b9c875618459 *DESCRIPTION
 f240cac01fd5313e97a98d0932836711 *NAMESPACE
-a8758c5c38f9dde42f5b6ec26308565f *NEWS
+247af5a1c87544ab3be2309a1002c661 *NEWS
 7903d1147eb4def3d1ef8c3ccf5d5aac *R/Anova.clm.R
-278f596013579e243ebc8cdbdca82309 *R/Anova.clmm.R
+bc948a76210dd8b9ed0c4cb53d2f5d2f *R/Anova.clmm.R
 14714afe8af68a1fc9aa9370429a072d *R/CDA.cv.R
 dfc5434f3bc49c29ebc5342a6ae433dc *R/CDA.test.R
 c577c5e645b637f7c46ff71a7c64981e *R/DIABLO.cv.R
@@ -92,7 +92,7 @@ a1dc3643dc3506b480b8a840bca926fd *R/overdisp.glmer.R
 6b00b2d56abed132ed9663057c53ecd1 *R/pairwise.MVA.test.R
 5dc9951a3afc0bdf0cf77d9f2a422658 *R/pairwise.factorfit.R
 1e0825f5d78e6a8cd75d370df94e182e *R/pairwise.mood.medtest.R
-7a0884962f0835c6abf1be98e80c5921 *R/pairwise.perm.manova.R
+1821a0d3773a77908189c4c36461abdf *R/pairwise.perm.manova.R
 9526ce1b13d161f7830eceaa7a6e2942 *R/pairwise.perm.t.test.R
 5e7a30d377d4fa6723849980f3c0f7de *R/pairwise.perm.var.test.R
 ede1739488f2535703692d7f84fb7726 *R/pairwise.var.test.R
@@ -137,7 +137,7 @@ fc3e8159ab743a16219ae06b674fd298 *R/wald.ptheo.test.R
 cf56ef4e0793a3f61ded7833859984ce *R/wilcox.paired.multcomp.R
 588714546f5b57bac4243ca8558b4b37 *R/wilcox.signtest.R
 3de4ac014037119e5dfe8a02e809f7ef *R/wmean.R
-542cc6e7f0254004c1e4ccfe5886d7f3 *R/zzz.R
+3c80920da58e1dd164d1fa719e5dae0d *R/zzz.R
 071fb34ea15f30c3bf2a98a45e3640d4 *man/Anova.clm.Rd
 edfde59be34bfe7aaaacdc2ee5ff5860 *man/CDA.cv.Rd
 4c7852b23e329bb8aa1a7de639ad00f9 *man/CDA.test.Rd
@@ -165,7 +165,7 @@ d24987c2ea86c944ed976921b3804d5e *man/MVA.scores.Rd
 3bddddfdfa3858a0f669c9b9478da43d *man/MVA.trajplot.Rd
 365b8a7bc147affba8478dc2442a9b20 *man/OR.multinom.Rd
 1f8de03526cf3e39c4039937574237da *man/PLSDA.VIP.Rd
-63366fc1c847c15f7eaa710e1761d71b *man/RVAideMemoire-package.Rd
+c3be8ebd5df1a743981763d717c7f585 *man/RVAideMemoire-package.Rd
 91a16c889bec1d517048be4757351aee *man/adonis.II.Rd
 af4219eb79916bdf490c6575bef80226 *man/back.emmeans.Rd
 3f757912d658826a5713c2e0da12ee92 *man/bootstrap.Rd
