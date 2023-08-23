@@ -3,12 +3,12 @@
 # Score plot
 #  - 1 possible plot:
 #     * PCA (dudi.pca[ade4],prcomp[stats],princomp[stats],pca[mixOmics],pca[labdsv],rda[vegan])
-#		° if scores=TRUE
+#		+ if scores=TRUE
 #     * sPCA (spca[mixOmics])
 #     * IPCA (ipca[mixOmics])
 #     * sIPCA (sipca[mixOmics])
-#     * PCoA (dudi.pco[ade4],pcoa[ape],pco[labdsv],cmdscale[stats]°,wcmdscale[vegan]°,capscale[vegan])
-#		° if computed with at least one non-default argument
+#     * PCoA (dudi.pco[ade4],pcoa[ape],pco[labdsv],cmdscale[stats]+,wcmdscale[vegan]+,capscale[vegan])
+#		+ if computed with at least one non-default argument
 #     * nMDS (isoMDS[MASS],monoMDS[vegan],metaMDS[vegan],nmds[labdsv])
 #     * LDA (lda[MASS],discrimin[ade4])
 #     * PLS-DA (plsda[mixOmics])
@@ -34,23 +34,23 @@
 #     * DPCoA (dpcoa[ade4])
 #  - Constrained/unconstrained spaces:
 #     * 1 possible plot per space:
-#	    ¤ RDA (pcaiv[ade4],pcaivortho[ade4],rda[vegan])
-#	    ¤ db-RDA (capscale[vegan])
+#	    - RDA (pcaiv[ade4],pcaivortho[ade4],rda[vegan])
+#	    - db-RDA (capscale[vegan])
 #     * Rows and/or columns per space:
-#         ¤ CCA (cca[vegan],cca[ade4])
+#         - CCA (cca[vegan],cca[ade4])
 #  - Spaces from different data sets:
 #     * 2 spaces (X and Y):
-#         ¤ CCorA (CCorA[vegan])
+#         - CCorA (CCorA[vegan])
 #     * 3 spaces (X, Y and "common"):
-#	    ¤ CCorA (rcc[mixOmics])
-#	    ¤ rCCorA (rcc[mixOmics])
-#         ¤ CIA (coinertia[ade4])
-#	    ¤ 2B-PLS (pls[mixOmics])
-#	    ¤ 2B-sPLS (spls[mixOmics])
-#	    ¤ Multilevel 2B-(s)PLS (multilevel[mixOmics]) # mixOmics >= 5.0.4
+#	    - CCorA (rcc[mixOmics])
+#	    - rCCorA (rcc[mixOmics])
+#          - CIA (coinertia[ade4])
+#	    - 2B-PLS (pls[mixOmics])
+#	    - 2B-sPLS (spls[mixOmics])
+#	    - Multilevel 2B-(s)PLS (multilevel[mixOmics]) # mixOmics >= 5.0.4
 #     * >=2 spaces (including DA)
-#	    ¤ rGCCA (rgcca[RGCCA],wrapper.rgcca[mixOmics])
-#	    ¤ sGCCA (sgcca[RGCCA],wrapper.sgcca[mixOmics])
+#	    - rGCCA (rgcca[RGCCA],wrapper.rgcca[mixOmics])
+#	    - sGCCA (sgcca[RGCCA],wrapper.sgcca[mixOmics])
 
 
 MVA.scoreplot <- function(x,xax=1,yax=2,scaling=2,set=c(12,1,2),space=1,byfac=TRUE,fac=NULL,barycenters=TRUE,

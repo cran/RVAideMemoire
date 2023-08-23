@@ -4,8 +4,8 @@
 #  - Total variance:
 #     * PCA (dudi.pca[ade4],prcomp[stats],princomp[stats],pca[mixOmics],pca[labdsv],rda[vegan])
 #     * sPCA (spca[mixOmics])
-#     * PCoA (dudi.pco[ade4],pcoa[ape],pco[labdsv],cmdscale[stats]°,wcmdscale[vegan]°,capscale[vegan])
-#		° if computed with 'eig=TRUE'
+#     * PCoA (dudi.pco[ade4],pcoa[ape],pco[labdsv],cmdscale[stats]+,wcmdscale[vegan]+,capscale[vegan])
+#		+ if computed with 'eig=TRUE'
 #	  Does not take into account imaginary axes
 #     * RDA (pcaiv[ade4],pcaivortho[ade4],rda[vegan])
 #     * db-RDA (capscale[vegan],dbrda[vegan])

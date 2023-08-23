@@ -23,17 +23,17 @@
 #	* PCIA (procuste[ade4])
 #  - Constrained/unconstrained spaces:
 #     * 1 possible plot per space:
-#	    ¤ RDA (pcaiv[ade4],pcaivortho[ade4],rda[vegan])
+#	    - RDA (pcaiv[ade4],pcaivortho[ade4],rda[vegan])
 #  - Spaces from different data sets:
 #	* 2 spaces (X and Y):
-#         ¤ CIA (coinertia[ade4])
-#	    ¤ rCCorA (rcc[mixOmics])
-#	    ¤ 2B-PLS (pls[mixOmics])
-#	    ¤ 2B-sPLS (spls[mixOmics])
-#	    ¤ Multilevel 2B-(s)PLS (multilevel[mixOmics]) # mixOmics > 5.0.4
+#         - CIA (coinertia[ade4])
+#	    - rCCorA (rcc[mixOmics])
+#	    - 2B-PLS (pls[mixOmics])
+#	    - 2B-sPLS (spls[mixOmics])
+#	    - Multilevel 2B-(s)PLS (multilevel[mixOmics]) # mixOmics > 5.0.4
 #	* >=2 spaces (including DA)
-#	    ¤ rGCCA (rgcca[RGCCA],wrapper.rgcca[mixOmics])
-#	    ¤ sGCCA (sgcca[RGCCA],wrapper.sgcca[mixOmics])
+#	    - rGCCA (rgcca[RGCCA],wrapper.rgcca[mixOmics])
+#	    - sGCCA (sgcca[RGCCA],wrapper.sgcca[mixOmics])
 
 
 MVA.loadplot <- function(x,xax=1,yax=2,fac=NULL,set=c(12,1,2),space=1,map=TRUE,xlab=NULL,ylab=NULL,main=NULL,

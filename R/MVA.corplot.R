@@ -15,7 +15,7 @@
 #     * PLS-GLR (plsRglm[plsRglm])
 #     * PCR (mvr[pls])
 #     * CDA (discrimin.coa[ade4])
-#     * Non Symmetric COA (dudi.nsc[ade4]) # Pas corrélation
+#     * Non Symmetric COA (dudi.nsc[ade4]) # Pas correlation
 #     * CCA (cca[vegan],cca[ade4])
 #     * db-RDA (capscale[vegan],dbrda[vegan])
 #     * GPA (GPA[FactoMineR])
@@ -23,21 +23,21 @@
 #     * Mix analysis (dudi.mix[ade4],dudi.hillsmith[ade4])
 #  - Constrained/unconstrained spaces:
 #     * 1 possible plot per space:
-#	    ¤ RDA (rda[vegan],pcaiv[ade4],pcaivortho[ade4])
+#	    - RDA (rda[vegan],pcaiv[ade4],pcaivortho[ade4])
 #  - Different data sets in the same space:
 #     * PCIA (procuste[ade4])
 #  - Spaces from different data sets:
 #	* 2 spaces (X and Y):
-#         ¤ CCorA (CCorA[vegan],rcc[mixOmics])
+#         - CCorA (CCorA[vegan],rcc[mixOmics])
 #	* 3 spaces (X, Y and "common"):
-#         ¤ CIA (coinertia[ade4])
-#	    ¤ rCCorA (rcc[mixOmics])
-#	    ¤ 2B-PLS (pls[mixOmics])
-#	    ¤ 2B-sPLS (spls[mixOmics])
-#	    ¤ Multilevel 2B-(s)PLS (multilevel[mixOmics]) # mixOmics > 5.0.4
+#         - CIA (coinertia[ade4])
+#	    - rCCorA (rcc[mixOmics])
+#	    - 2B-PLS (pls[mixOmics])
+#	    - 2B-sPLS (spls[mixOmics])
+#	    - Multilevel 2B-(s)PLS (multilevel[mixOmics]) # mixOmics > 5.0.4
 #	* >=2 spaces (including DA)
-#	    ¤ rGCCA (wrapper.rgcca[mixOmics])
-#	    ¤ sGCCA (wrapper.sgcca[mixOmics])
+#	    - rGCCA (wrapper.rgcca[mixOmics])
+#	    - sGCCA (wrapper.sgcca[mixOmics])
 
 
 MVA.corplot <- function(x,xax=1,yax=2,thresh=0,fac=NULL,set=c(12,1,2),space=1,xlab=NULL,ylab=NULL,main=NULL,
