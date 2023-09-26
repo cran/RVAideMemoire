@@ -19,7 +19,13 @@ perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","g
   moy <- NULL
   null.value <- 0
   names(null.value) <- "difference in means"
-  t.ref <- t.test(resp~fact,var.equal=TRUE,alternative=alternative,paired=paired)$statistic
+  t.ref <- if (paired) {
+    x <- resp[as.numeric(fact)==1]
+    y <- resp[as.numeric(fact)==2]
+    t.test(Pair(x,y)~1,var.equal=TRUE,alternative=alternative)$statistic
+  } else {
+    t.test(resp~fact,var.equal=TRUE,alternative=alternative)$statistic
+  }
   t.perm <- numeric(nperm+1)
   t.perm[1] <- t.ref
   if (progress) {pb <- txtProgressBar(min=0,max=100,initial=0,style=3)}
@@ -28,7 +34,7 @@ perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","g
     moy <- tapply(resp,fact,mean)
     names(moy) <- paste("mean in group ",levels(fact),sep="")
     for(i in 1:nperm) {
-	t.perm[i+1] <- t.test(sample(resp)~fact,var.equal=TRUE,alternative=alternative,paired=FALSE)$statistic
+	t.perm[i+1] <- t.test(sample(resp)~fact,var.equal=TRUE,alternative=alternative)$statistic
 	if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
     }
   } else {
@@ -38,7 +44,7 @@ perm.t.test.formula <- function(formula,data,alternative=c("two.sided","less","g
     resp2 <- cbind(resp[fact==levels(fact)[1]],resp[fact==levels(fact)[2]])
     for (i in 1:nperm) {
 	resp.perm <- t(apply(resp2,1,sample))
-	t.perm[i+1] <- t.test(resp.perm[,1],resp.perm[,2],alternative=alternative,paired=TRUE)$statistic
+	t.perm[i+1] <- t.test(Pair(resp.perm[,1],resp.perm[,2])~1,alternative=alternative)$statistic
 	if (progress) {setTxtProgressBar(pb,round(i*100/nperm,0))}
     }
   }
