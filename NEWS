@@ -1,3 +1,6 @@
+version 0.9-83-7 (06-11-2023)
+  - MVA.plot corrected for a minor issue (thanks to Morgane Ourry)
+
 version 0.9-83-3 (26-09-2023)
   - small technical changes following CRAN request
 

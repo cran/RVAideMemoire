@@ -6,6 +6,7 @@ MVA.biplot <- function(x,xax=1,yax=2,scaling=2,sco.set=c(12,1,2),
   coord <- MVA.scores(x,xax,yax,scaling,sco.set,space)$coord
   if (ncol(coord)==1) {stop("biplots cannot be drawn with only one dimension")}
   x <- MVA.ident(x)
+  class(x) <- unique(class(x))
   arg.sco <- c(list(as.name("MVA.scoreplot"),x=x,xax=xax,yax=yax,
     scaling=scaling,space=space,set=sco.set,keepmar=TRUE),sco.args)
   call.sco <- as.call(arg.sco)

@@ -18,7 +18,7 @@ logical. If \code{TRUE} and if \code{model} is based on a Gaussian distribution,
 }
 }
 \details{
-Response residuals are used for linear models, non linear models and generalized linear models based on an identity link (except with \code{"quasi"} distributions where response residuals are used only if \code{variance="constant"}). Pearson or studentized residuals are used whenever there is a link function which is not identity (and with \code{"quasi"} distributions when \code{variance} is not \code{"constant"}), except for code{betareg} models where standardized weighted residuals 2 are used (see \code{\link[betareg]{residuals.betareg}}).
+Response residuals are used for linear models, non linear models and generalized linear models based on an identity link (except with \code{"quasi"} distributions where response residuals are used only if \code{variance="constant"}). Pearson or studentized residuals are used whenever there is a link function which is not identity (and with \code{"quasi"} distributions when \code{variance} is not \code{"constant"}), except for \code{betareg} models where standardized weighted residuals 2 are used (see \code{\link[betareg]{residuals.betareg}}).
 
 QQ-plots and Shapiro-Wilk tests are available whenever the model is based on a Gaussian distribution (and with \code{"quasi"} distributions when \code{variance="constant"}).
 

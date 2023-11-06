@@ -1,6 +1,7 @@
 # mixOmics: vip
 
 PLSDA.VIP <- function(model,graph=FALSE) {
+  if (!requireNamespace(package="mixOmics",quietly=TRUE)) {stop("Install package 'mixOmics' first (from Bioconductor)")}
   if (packageVersion("mixOmics")<"5.0.2") {
     stop(paste("you must update 'mixOmics' to version >= 5.0.2 (actual: ",
 	packageVersion("mixOmics"),")",sep=""))

@@ -4,6 +4,7 @@ MVA.cor <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
   if (length(set)!=1) {set <- 12}
   if (!set %in% c(12,1,2)) {stop("wrong 'set'")}
   x <- MVA.ident(x)
+  class(x) <- unique(class(x))
   corr.temp <- if (inherits(x,c("PCA.ade4","PCA.mixOmics","sPCA.mixOmics","IPCA.mixOmics",
     "sIPCA.mixOmics","LDA.MASS","LDA.ade4","PLSDA.mixOmics","sPLSDA.mixOmics","Multilevel.sPLSDA.mixOmics",
     "CDA.ade4","NSCOA.ade4","CCA.ade4","Mix.ade4","RDAortho.ade4","GPA.FactoMineR"))) {MVA.get.corr(x)} else

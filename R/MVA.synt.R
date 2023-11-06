@@ -124,6 +124,7 @@ print.MVA.synt <- function(x,...) {
 
 MVA.synt <- function(x,rows=5) {
   x <- MVA.ident(x)
+  class(x) <- unique(class(x))
   res <- MVA.get.synt(x)
   res$rows <- rows
   class(res) <- "MVA.synt"

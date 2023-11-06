@@ -2,6 +2,7 @@ MVA.load <- function(x,xax=1,yax=2,set=c(12,1,2),space=1,...) {
   if (length(set)!=1) {set <- 12}
   if (!set %in% c(12,1,2)) {stop("wrong 'set'")}
   x <- MVA.ident(x)
+  class(x) <- unique(class(x))
   loads.temp <- if (inherits(x,c("PCA.ade4","PCA.prcomp","PCA.princomp","PCA.mixOmics","PCA.labdsv","PCA.vegan",
     "sPCA.mixOmics","IPCA.mixOmics","sIPCA.mixOmics","LDA.MASS","LDA.ade4","PLSDA.mixOmics","sPLSDA.mixOmics",
     "Multilevel.sPLSDA.mixOmics","CPPLS.pls","PLSR.pls","PLSR.mixOmics","PLSR.plsRglm","sPLSR.mixOmics",
