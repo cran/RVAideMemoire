@@ -24,15 +24,16 @@ type of output to be returned: \code{"prob"} (default) gives frequency of each r
 Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \examples{
-require(ordinal)
-data(wine)
+if (require("ordinal",quietly=TRUE)) {
+  data(wine,package="ordinal")
 
-# Frequencies
-rating.prob(wine$rating,wine$contact:wine$temp)
+  # Frequencies
+  rating.prob(wine$rating,wine$contact:wine$temp)
 
-# Cumulative frequencies
-rating.prob(wine$rating,wine$contact:wine$temp,type="cumprob")
+  # Cumulative frequencies
+  rating.prob(wine$rating,wine$contact:wine$temp,type="cumprob")
 
-# Most frequent rating
-rating.prob(wine$rating,wine$contact:wine$temp,type="class")
+  # Most frequent rating
+  rating.prob(wine$rating,wine$contact:wine$temp,type="class")
+}
 }

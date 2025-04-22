@@ -1,3 +1,6 @@
+version 0.9-83-11 (22-04-2025)
+  - adonis.II changed to build on adonis2 rather than adonis (package vegan) (thanks to Jari Oksanen)
+
 version 0.9-83-7 (06-11-2023)
   - MVA.plot corrected for a minor issue (thanks to Morgane Ourry)
 

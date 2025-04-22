@@ -72,7 +72,7 @@ Many multivariate analyses are supported, from various packages:
 
 - CIA: \code{\link[ade4]{coinertia}}. Space 1 is X, space 2 is Y, space 3 is a "common" space where X and Y scores are normed. In space 3, set 1 is X and set 2 is Y. If \code{set=12} in space 3 (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lws} can be defined differently for each set.
 
-- GPA: \code{\link{GPA}}. Only the consensus ordination can be displayed.
+- GPA: \code{\link[FactoMineR]{GPA}}. Only the consensus ordination can be displayed.
 
 - 2B-PLS: \code{\link[mixOmics]{pls}}. Space 1 is X, space 2 is Y, space 3 is a "common" space in which coordinates are means of X and Y coordinates. In space 3, set 1 is X and set 2 is Y. If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col}, \code{lwd} can be defined differently for each set.
 

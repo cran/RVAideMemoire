@@ -1,4 +1,4 @@
-# vegan : adonis
+# vegan : adonis2
 
 pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-Lawley","Roy","Spherical"),
   nperm=999,progress=TRUE,p.method="fdr",F=FALSE,R2=FALSE) {
@@ -11,7 +11,7 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
 	resp2 <- as.matrix(resp)
 	rows <- which(fact %in% levels(fact2))
 	resp2 <- as.dist(resp2[rows,rows])
-	vegan::adonis2(resp2~fact2,permutations=nperm)[1,"Pr(>F)"]
+	vegan::adonis2(resp2~fact2,permutations=nperm,by="terms")[1,"Pr(>F)"]
     }
     multcomp.P <- pairwise.table(fun.p,levels(fact),p.adjust.method=p.method)
     if (F) {
@@ -20,7 +20,7 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
 	  resp2 <- as.matrix(resp)
 	  rows <- which(fact %in% levels(fact2))
 	  resp2 <- as.dist(resp2[rows,rows])
-	  vegan::adonis2(resp2~fact2,permutations=nperm)[1,"F"]
+	  vegan::adonis2(resp2~fact2,permutations=nperm,by="terms")[1,"F"]
 	}
 	multcomp.F <- pairwise.table(fun.F,levels(fact),p.adjust.method="none")
     }
@@ -30,7 +30,7 @@ pairwise.perm.manova <- function(resp,fact,test=c("Pillai","Wilks","Hotelling-La
 	  resp2 <- as.matrix(resp)
 	  rows <- which(fact %in% levels(fact2))
 	  resp2 <- as.dist(resp2[rows,rows])
-	  vegan::adonis2(resp2~fact2,permutations=nperm)[1,"R2"]
+	  vegan::adonis2(resp2~fact2,permutations=nperm,by="terms")[1,"R2"]
 	}
 	multcomp.R2 <- pairwise.table(fun.R2,levels(fact),p.adjust.method="none")
     }

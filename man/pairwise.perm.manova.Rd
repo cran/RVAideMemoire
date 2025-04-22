@@ -4,7 +4,7 @@
 Pairwise permutation MANOVAs
 }
 \description{
-Performs pairwise comparisons between group levels with corrections for multiple testing. These pairwise comparisons are relevant after a permutation MANOVA, such as performed by \code{\link[vegan]{adonis}}.
+Performs pairwise comparisons between group levels with corrections for multiple testing. These pairwise comparisons are relevant after a permutation MANOVA, such as performed by \code{\link[vegan]{adonis2}}.
 }
 \usage{
 pairwise.perm.manova(resp, fact, test = c("Pillai", "Wilks",
@@ -40,7 +40,7 @@ should the table of R2 values be returned? For tests based on distance matrices 
 \details{
 If \code{resp} is a matrix, a classical MANOVA is performed and the distribution of the (pseudo-)F is computed through permutations. The function deals with the limitted floating point precision, which can bias calculation of p-values based on a discrete test statistic distribution.
 
-If \code{resp} is a distance matrix, \code{\link[vegan]{adonis}} is used to perform each comparison.
+If \code{resp} is a distance matrix, \code{\link[vegan]{adonis2}} is used to perform each comparison.
 }
 \value{
   \item{method}{a character string giving the name of the test.}
@@ -54,14 +54,14 @@ If \code{resp} is a distance matrix, \code{\link[vegan]{adonis}} is used to perf
 Maxime HERVE <maxime.herve@univ-rennes1.fr>
 }
 \seealso{
-\code{\link{anova.mlm}}, \code{\link[vegan]{adonis}}
+\code{\link{anova.mlm}}, \code{\link[vegan]{adonis2}}
 }
 \examples{
 require(vegan)
 data(iris)
 
 # permutation MANOVA
-adonis(iris[,1:4]~Species,data=iris,method="euclidean")
+adonis2(iris[,1:4]~Species,data=iris,method="euclidean")
 
 # Pairwise comparisons
 # (not enough permutations here but faster to run)

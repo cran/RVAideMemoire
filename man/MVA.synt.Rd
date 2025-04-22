@@ -56,7 +56,7 @@ Many multivariate analyses are supported, from various packages.
 
 - Mix analysis: \code{\link[ade4]{dudi.mix}}, \code{\link[ade4]{dudi.hillsmith}}: \% of total inertia explained by each axis.
 
-- GPA: \code{\link{GPA}}: \% of consensus and residual variance, \% of total variance exlained by each axis, \% of consensus variance explained by each axis, \% of residual variance coming from each group of variables.
+- GPA: \code{\link[FactoMineR]{GPA}}: \% of consensus and residual variance, \% of total variance exlained by each axis, \% of consensus variance explained by each axis, \% of residual variance coming from each group of variables.
 
 - RGCCA: \code{\link[RGCCA]{rgcca}}, \code{\link[mixOmics]{wrapper.rgcca}}: \% of total intra-block variance explained by each axis, correlation between each pair of axes (canonical correlations).
 

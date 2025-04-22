@@ -30,18 +30,17 @@ Maxime HERVE <maxime.herve@univ-rennes1.fr>
 \code{\link[emmeans]{emmeans}}, \code{\link[ordinal]{clm}}, \code{\link[ordinal]{clmm}}
 }
 \examples{
-require(ordinal)
-require(emmeans)
+if (require("ordinal",quietly=TRUE) & require("emmeans",quietly=TRUE)) {
+  model <- clm(rating~contact*temp,data=wine)
+  EMM <- emmeans(model,~contact:temp|cut,mode="linear.predictor")
 
-model <- clm(rating~contact*temp,data=wine)
-EMM <- emmeans(model,~contact:temp|cut,mode="linear.predictor")
+  # Probabilities
+  rating.emmeans(EMM)
 
-# Probabilities
-rating.emmeans(EMM)
+  # Cumulative probabilities
+  rating.emmeans(EMM,type="cumprob")
 
-# Cumulative probabilities
-rating.emmeans(EMM,type="cumprob")
-
-# Most probable rating
-rating.emmeans(EMM,type="class1")
+  # Most probable rating
+  rating.emmeans(EMM,type="class1")
+}
 }

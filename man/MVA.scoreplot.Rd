@@ -173,7 +173,7 @@ Many multivariate analyses are supported, from various packages:
 
 - Procrustean superimposition: \code{\link[vegan]{procrustes}}. Set 1 is X, set 2 is Y.  If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set.
 
-- GPA: \code{\link{GPA}}. Only the consensus ordination can be displayed.
+- GPA: \code{\link[FactoMineR]{GPA}}. Only the consensus ordination can be displayed.
 
 - DPCoA: \code{\link[ade4]{dpcoa}}. Set 1 is categories, set 2 is collections.  If \code{set=12} (default), \code{fac} is not available and \code{pch},\code{cex}, \code{col} can be defined differently for each set.
 

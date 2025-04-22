@@ -12,8 +12,8 @@ Contains miscellaneous functions useful in biostatistics, mostly univariate and 
 \tabular{ll}{
 Package: \tab RVAideMemoire\cr
 Type: \tab Package\cr
-Version: \tab 0.9-83-7\cr
-Date: \tab 2023-11-06\cr
+Version: \tab 0.9-83-11\cr
+Date: \tab 2025-04-22\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
@@ -21,7 +21,7 @@ LazyLoad: \tab yes\cr
 \author{
 Maxime HERVE
 
-Maintainer: Maxime HERVE <maxime.herve@univ-rennes1.fr>
+Maintainer: Maxime HERVE <maxime.herve@univ-rennes.fr>
 }
 \references{
 Document : "Aide-memoire de statistique appliquee a la biologie - Construire son etude et analyser les resutats a l'aide du logiciel R" (available on CRAN)
